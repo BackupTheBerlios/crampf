@@ -56,6 +56,7 @@ CommandMap::CommandMap()
       cmdmap["echo"]   	       = new Echo	    ();
       cmdmap["addplayer"]      = new AddPlayer	    ();
       cmdmap["clean"]          = new Clean	    ();
+      cmdmap["samedir"]        = new SameDir	    ();
   }
 }
 
