@@ -387,6 +387,13 @@ Config::readconfig(string filename)
         opt = &option[4];
         val.erase(val.begin());
         val.erase(val.end()-1);
+        for (map<string,string>::iterator it=opts.keytable.begin();
+            it != opts.keytable.end(); it++)
+          for (int i=0; i<val.size(); i++) {
+            if (it->second.find(val[i])!=-1) {
+              it->second.erase(it->second.find(val[i]));
+            }
+          }
         opts.keytable[opt]=val;
         continue;
       }
