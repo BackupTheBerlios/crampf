@@ -2,7 +2,7 @@ bin_PROGRAMS=crampf
 
 SUBDIRS=commands util cb player
 
-EXTRA_DIST=README COPYING INSTALL COPYRIGHT ChangeLog
+EXTRA_DIST=README COPYING INSTALL COPYRIGHT ChangeLog crampfrc-example
 
 noinst_HEADERS=autocmd.hh command.hh commandmap.hh commands.hh	\
     	       config.h config.hh crampf.hh debug.hh file.hh	\

@@ -4,9 +4,8 @@
 # all `:commands' and macros (defines) may be used in this file
 # see `:help' for more details
 
-# use theese lines to use another mp3 player (defaults to amp)
-#playercmd mpg123
-#playercmd_args -q
+# use theese lines to add another player
+# addplayer madplay /\.mp3$/ 0.9
 
 # -1 means endless
 loop -1
@@ -21,9 +20,15 @@ regexp eXtended
 # example mappings for hotkeys
 map n search
 map N rsearch
+map b prev
+map p prev
+map \012 samedir
 map \040 next
 map x exit
+map v volume
 
 # define a macro which filters the playlist
-# (invoked with :clear from within the crampf)
-define clear=nfilter Toten Hosen|Aerzte|Roten Rosen|Chopin|diverses|Festival Orchestra|Begemann|sting|\<A-Ha\>|Bruce Springsteen
+# (invoked with :wipe from within the crampf)
+define wipe=nfilter Toten Hosen|Aerzte|Roten Rosen|Chopin|diverses|Festival Orchestra|Begemann|sting|\<A-Ha\>|Bruce Springsteen|georg phillip telemann|johann sebastian bach
+
+autocommand start loadnfilter /home/logic/playlists/negativ.filter ; echo using negativ.filter on /data/mp3
