@@ -289,8 +289,9 @@ Playlist::addTrack( const std::string &path, std::string filename )
 {
   push_back(Track(path+filename));
   if (opts->generateTitles) {
-    filename.erase(filename.end()-4,filename.end());
-    (*this)[size()-1].title(filename);
+      /* strip suffix */
+      filename.erase( filename.rfind( "." ) );
+      (*this)[size()-1].title(filename);
   }
 }
 
