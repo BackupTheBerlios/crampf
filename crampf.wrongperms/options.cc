@@ -36,6 +36,9 @@ Config::initdefaults(struct options* op)
     op->cmdmap["set key p prev"];
     op->cmdmap["set key i info"];
     op->cmdmap["set key q quit"];
+    op->cmdmap["set key s status"];
+    op->cmdmap["set key + vol +5"];
+    op->cmdmap["set key - vol -5"];
   } catch (string error) {
     printf("keytable init error: `%s'\n",error.c_str());
   }

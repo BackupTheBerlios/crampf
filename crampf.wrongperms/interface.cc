@@ -24,7 +24,7 @@ Interface::Interface( void )
 {
   printf("WELCOME TO THE CRAMPF!\n");
   detectSoundCard();
-  volume = getVolume();
+  opts->volume = getVolume();
   /* save terminal settings */
   if (tcgetattr(1,&terminal_settings)==-1) {
     perror("tcgetattr");
@@ -47,27 +47,27 @@ Interface::mainloop()
     char c;
     while (1) {
       if (player_restarted()) {
-        showstatus();
+        opts->cmdmap["status"];
       }
-      c = EOF; 
-      while (c==EOF) {
-        usleep(100);
-        c = fgetc(stdin); 
-      }
-      if (c==':') {
-        rli();
-      } else {
-        try {
-          opts->cmdmap[c];
-        } catch (string error) {
-          if (error=="quit")
-            throw error;
-          printf("error: `%s'\n",error.c_str());
-        }
-      }
-    } 
-  } catch (string s) {
-    printf("%s\n",(const char*)s.c_str());
+      usleep(100);
+      c = fgetc(stdin); 
+      if (c!=EOF) {
+        if (c==':') {
+          rli();
+        } else {
+          try {
+            opts->cmdmap[c];
+          } catch (string error) {
+            if (error=="quit")
+              throw error;
+            printf("error: `%s'\n",error.c_str());
+          } 
+        } 
+      } 
+    }
+  } catch (string error) {
+    if (error!="quit")
+      printf("error: `%s'\n",error.c_str());
   }
   player_stop();
 }
@@ -116,6 +116,8 @@ Interface::rli( void )
   try {
     opts->cmdmap[cmd];
   } catch (string error) {
+    if (error=="quit")
+      throw error;
     printf("error: `%s'\n",error.c_str());
   }
   free(cmd);
@@ -185,25 +187,3 @@ Interface::getVolume()
   return ((ri+li)/2);
 }
 
-Interface::showstatus()
-{
-  if (opts->titlewidth==0) {
-  printf("\n[%d/%d] - %s\n",plist->pos()+1,plist->size(),
-      (*(*plist)).title().c_str());
-  } else {
-#define MAXTITLEWIDTH 1024
-    char title[MAXTITLEWIDTH];
-    sprintf(title,"\n[%d/%d] - %s\n",plist->pos()+1,plist->size(),
-      (*(*plist)).title().c_str());
-    if (strlen(title)>opts->titlewidth) {
-      int i;
-      for (i=0; i<opts->titlewidth/3; i++)
-        printf("%c",title[i]);
-      printf("...");
-      i=strlen(title)-i*2-1;
-      for (;i<strlen(title);i++)
-        printf("%c",title[i]);
-    } else 
-      printf("%s",title);
-  }
-}

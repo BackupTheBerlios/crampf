@@ -1,13 +1,17 @@
 GCC=g++
-OBJS=config.o crampf.o playlist.o player.o track.o interface.o command.o commandmap.o commands.o
+OBJS=config.o crampf.o playlist.o player.o track.o interface.o command.o commandmap.o 
 LIBS=-lreadline
 PROGNAME=crampf
 
-all:    $(OBJS)
-	$(GCC) $(LIBS) -o $(PROGNAME) $(OBJS)
+all:    cmds $(OBJS)
+	$(GCC) $(LIBS) -o $(PROGNAME) $(OBJS) $(wildcard commands/*.o)
+
+cmds:	
+	$(MAKE) -C commands
 
 clean:
 	@rm -f $(PROGNAME) $(OBJS) $(OBJS:.o=.d)
+	$(MAKE) clean -C commands 
 
 %.d:	%.cc
 	$(SHELL) -ec '$(GCC) -MM $(CPPFLAGS) $< \

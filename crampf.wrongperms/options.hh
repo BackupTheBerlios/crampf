@@ -1,5 +1,5 @@
 //
-// $Id: options.hh,v 1.10 2000/03/16 02:21:42 logic Exp $
+// $Id: options.hh,v 1.11 2000/03/16 06:54:34 logic Exp $
 //
 
 #ifndef config
@@ -21,6 +21,7 @@ struct options {
   bool                  generateTitles;
   int                   loop;
   int                   titlewidth;
+  int                   volume;
   char                  soundcard; /* s = UltraSound, w = SB-Clone */
   vector<string>        negativeFilterFiles;
   vector<string>        negativeFilter;
