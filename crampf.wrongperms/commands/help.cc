@@ -8,11 +8,7 @@
 #include <stdio.h>
 #include <unistd.h>
 #include "../commandmap.hh"
-#include "../player.hh"
-#include "../playlist.hh"
 #include "help.hh"
-
-extern Playlist* plist;
 
 Help::Help( CommandMap* c )
 {

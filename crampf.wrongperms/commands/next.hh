@@ -7,7 +7,6 @@
 
 #include <string>
 #include "../command.hh"
-#include "../commandmap.hh"
 
 class Next : public Command {
   public:

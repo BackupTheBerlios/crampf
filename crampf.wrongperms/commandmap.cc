@@ -10,14 +10,14 @@
 
 CommandMap::CommandMap()
 {
-  cmdmap["help"]   = new Help   (this);
-  cmdmap["set"]    = new Set    (this);
-  cmdmap["vol"]    = new Vol    ();
-  cmdmap["info"]   = new Info   ();
-  cmdmap["next"]   = new Next   ();
-  cmdmap["prev"]   = new Prev   ();
-  cmdmap["quit"]   = new Quit   ();
-  cmdmap["status"] = new Status ();
+  cmdmap["help"]       = new Help   (this);
+  cmdmap["set"]        = new Set    (this);
+  cmdmap["volume"]     = new Vol    ();
+  cmdmap["info"]       = new Info   ();
+  cmdmap["next"]       = new Next   ();
+  cmdmap["previous"]   = new Prev   ();
+  cmdmap["quit"]       = new Quit   ();
+  cmdmap["status"]     = new Status ();
 }
 
 CommandMap::~CommandMap()
@@ -34,16 +34,33 @@ CommandMap::operator[](string cmd)
   string p = args(cmd);
   if (cmdmap.count(c))
     cmdmap[c]->doit(p);
-  else
-    throw string("bad command");
+  else {
+    Command* action = findFirst(c);
+    if (action!=NULL) {
+      action->doit(p);
+      return;
+    } else
+      throw string("bad command");
+  }
+}
+
+Command*
+CommandMap::findFirst( string c )
+{
+  for (map<string, Command*>::iterator it = cmdmap.begin();
+      it != cmdmap.end(); it++)
+    if (it->first.find(c)==0) 
+      return it->second;
+  return NULL;
 }
 
 void
 CommandMap::setKey(char key, string cmd)
 {
   string c = arg0(cmd);
-  if (!cmdmap.count(c))
-    throw string("defineKey: bad commandname");
+  Command* action = findFirst(c);
+  if (action==NULL)
+    throw string("setKey: bad commandname");
   string p = args(cmd);
   keymap[key] = cmd;
 }

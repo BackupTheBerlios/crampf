@@ -21,6 +21,7 @@ class CommandMap {
     map<string, Command*> cmdmap;
     map<char, string> keymap;
   private:
+    Command* findFirst( string c );
     string arg0( string s );
     string args( string s );
 };

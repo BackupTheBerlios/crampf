@@ -7,12 +7,7 @@
 #include <string.h>
 #include <stdio.h>
 #include <unistd.h>
-#include "../commandmap.hh"
-#include "../player.hh"
-#include "../playlist.hh"
 #include "quit.hh"
-
-extern Playlist* plist;
 
 void
 Quit::doit( string s )

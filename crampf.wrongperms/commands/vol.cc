@@ -7,12 +7,10 @@
 #include <string.h>
 #include <stdio.h>
 #include <unistd.h>
-#include "../commandmap.hh"
-#include "../player.hh"
-#include "../playlist.hh"
+#include "../config.hh"
 #include "vol.hh"
 
-extern Playlist* plist;
+extern struct options* opts;
 
 void
 Vol::doit( string s )

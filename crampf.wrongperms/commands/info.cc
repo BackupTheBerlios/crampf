@@ -7,8 +7,6 @@
 #include <string.h>
 #include <stdio.h>
 #include <unistd.h>
-#include "../commandmap.hh"
-#include "../player.hh"
 #include "../playlist.hh"
 #include "info.hh"
 
