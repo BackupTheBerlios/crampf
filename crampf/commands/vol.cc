@@ -58,7 +58,7 @@ Soundcard::Soundcard()
 #ifdef HAVE_DEV_SNDSTAT
       FILE* fp = fopen("/dev/sndstat","r");
       if (fp==NULL) {
-	  perror("sndstat");
+	  //perror("sndstat");
 	  return;
       }
       char line[LINEWIDTH];
@@ -82,7 +82,7 @@ Soundcard::getVolume()
       int ri=40; /* default setting */
       int li=40;
       while (fgets(line,LINEWIDTH,fp)) {
-	  if (strncmp("synth",line,5)==0) {
+	  if (strncmp("synth ",line,6)==0||strncmp("pcm ",line,4)==0) {
 	      /*
 	      sscanf(line,"%*[a-z]%*[\t ]%[0-9]%*[, ]%[0-9]\n",ls,rs);
 	      ri=atoi(rs);
