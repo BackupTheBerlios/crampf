@@ -1,6 +1,6 @@
 GCC=g++
 OBJS=config.o crampf.o playlist.o player.o track.o interface.o
-#LIBS=-lncurses
+LIBS=-lreadline
 PROGNAME=crampf
 
 all:    $(OBJS)

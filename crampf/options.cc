@@ -55,6 +55,7 @@ Config::initdefaults(struct options* op)
   op->keytable["vol9"]="9";
   op->keytable["vol_up"]="+";
   op->keytable["vol_dn"]="-";
+  op->keytable["cli"]=":";
 }
 
 Config::setupkeys()
@@ -194,6 +195,12 @@ Config::setupkeys()
     if (it->first=="vol_dn") {
       for (int i=0; i<it->second.size(); i++) {
         opts.keys[it->second[i]]=&Interface::vol_dn;
+      }
+      continue;
+    }
+    if (it->first=="cli") {
+      for (int i=0; i<it->second.size(); i++) {
+        opts.keys[it->second[i]]=&Interface::cli;
       }
       continue;
     }

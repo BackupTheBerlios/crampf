@@ -10,6 +10,10 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 #include <fcntl.h>
+extern "C" {
+#include <readline/readline.h>
+#include <readline/history.h>
+}
 #include <string>
 #include <map>
 #include "interface.hh"
@@ -21,26 +25,17 @@ Interface::Interface( void )
   printf("WELCOME TO THE CRAMPF!\n");
   detectSoundCard();
   volume = getVolume();
-  struct termios t;
+  /* save terminal settings */
   if (tcgetattr(1,&terminal_settings)==-1) {
     perror("tcgetattr");
   }
-  t = terminal_settings;
-  t.c_lflag&=~(ICANON|ECHO);
-  if (tcsetattr(1,TCSANOW,&t)==-1) {
-    perror("tcsetattr");
-  }
-  if (fcntl(1,F_SETFL, O_NONBLOCK)==-1) {
-    perror("fcntl");
-  }
+  singlekeyTerm();
   mainloop();
 }
-
+  
 Interface::~Interface()
 {
-  if (tcsetattr(1,TCSANOW,&terminal_settings)==-1) {
-    perror("tcsettatr");
-  }
+  restoreTerm();
   printf("Thank you for using crampf!\n");
 }
 
@@ -88,6 +83,28 @@ Interface::help( void )
     }
   }
   printf("\n\n");
+}
+
+void
+Interface::singlekeyTerm() 
+{
+  struct termios t;
+  t = terminal_settings;
+  t.c_lflag&=~(ICANON|ECHO);
+  if (tcsetattr(1,TCSANOW,&t)==-1) {
+    perror("tcsetattr");
+  }
+  if (fcntl(1,F_SETFL, O_NONBLOCK)==-1) {
+    perror("fcntl");
+  }
+}
+
+void
+Interface::restoreTerm()
+{
+  if (tcsetattr(1,TCSANOW,&terminal_settings)==-1) {
+    perror("tcsettatr");
+  }
 }
 
 void
@@ -232,6 +249,16 @@ Interface::vol_dn( void )
     volume-=5;
     changevol(volume);
   }
+}
+
+void
+Interface::cli( void )
+{
+  restoreTerm();
+  char* cmd = readline(":");
+  printf("Command: `%s'\n",cmd);
+  free(cmd);
+  singlekeyTerm();
 }
 
 Interface::changevol(int vol)
