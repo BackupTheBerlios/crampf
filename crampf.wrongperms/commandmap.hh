@@ -28,6 +28,7 @@ class CommandMap {
     string findFirstDef( const string &c ) const;
     string arg0( string s ) const;
     string args( string s ) const;
+    vector<string> splitCommands( string s );
     static unsigned int objcnt; /* bad hack: counts number of CommandMap-Entities
 				    only first one initializes commands */
 };

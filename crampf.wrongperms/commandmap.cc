@@ -69,29 +69,30 @@ CommandMap::~CommandMap()
 void
 CommandMap::operator[](const string &cmd)
 {
-  string c = arg0(cmd);
-  string p = args(cmd);
-  printdebug( "CommandMap: command '%s', parameter '%s'\n", c.c_str(), p.c_str() );
-  if (cmdmap.count(c)) {
-    cmdmap[c]->doit(p);
-    return;
-  } else if (defmap.count(c)) {
-    cmdmap["calldef"]->doit(c + " " + p);
-    return;
-  } else {
-    try {
-      string macro = findFirstDef(c);
-      cmdmap["calldef"]->doit(macro + " " + p);
-      return;
-    } catch (string error) {
-    }
-    Command* action = findFirst(c);
-    if (action!=NULL) {
-      action->doit(p);
-      return;
-    } else
-      throw string("bad command");
-  }
+      vector<string> cmds = splitCommands( cmd );
+      for( vector<string>::iterator it = cmds.begin();
+	      it != cmds.end(); it++ ){
+	  string c = arg0(*it);
+	  string p = args(*it);
+	  printdebug( "CommandMap: command '%s', parameter '%s'\n", c.c_str(), p.c_str() );
+	  if (cmdmap.count(c)) {
+	      cmdmap[c]->doit(p);
+	  } else if (defmap.count(c)) {
+	      cmdmap["calldef"]->doit(c + " " + p);
+	  } else {
+	      try {
+		  string macro = findFirstDef(c);
+		  cmdmap["calldef"]->doit(macro + " " + p);
+	      } catch (string error) {
+		  Command* action = findFirst(c);
+		  if (action!=NULL) {
+		      action->doit(p);
+		      return;
+		  } else
+		      throw string("bad command");
+	      }
+	  }
+      }
 }
 
 string
@@ -151,6 +152,8 @@ CommandMap::operator[](char key)
 string
 CommandMap::arg0(string s) const
 {
+  while( s.size() > 0 && s[0] == ' ' )
+      s.erase( 0, 1 );
   int sep = s.find(" ");
   if (sep==-1) 
     return s;
@@ -161,6 +164,8 @@ CommandMap::arg0(string s) const
 string
 CommandMap::args(string s) const
 {
+  while( s.size() > 0 && s[0] == ' ' )
+      s.erase( 0, 1 );
   int sep = s.find(" ");
   if (sep==-1) 
     return "";
@@ -168,4 +173,36 @@ CommandMap::args(string s) const
   for (sep=s.size()-1; s[sep]==' '; sep--)
     s.erase(sep);
   return s;
+}
+
+vector<string>
+CommandMap::splitCommands( string s )
+{
+      vector<string> cmds;
+      size_t start = 0, end;
+      for( end = start; end < s.size(); end++ ){
+#ifdef I_KNOW_WHAT_IAM_DOING
+	  /* this breaks compatibility with \012 notation used for mapping
+	     special keys :-( */
+	  if( s[end] == '\\' ){
+	      s.erase( end, 1 );
+	      continue;
+	  }
+#endif /* I_KNOW_WHAT_IAM_DOING */
+	  if( s[end] == ';' ){
+	      cmds.push_back( s.substr( start, end-start ) );
+	      printdebug( "multicommand: '%s'\n", cmds.back().c_str() );
+	      start = end+1;
+	  }
+      }
+      cmds.push_back( s.substr( start, end-start ) );
+#ifdef DEBUG
+      if( cmds.size() != 1 )
+	  for( vector<string>::const_iterator it = cmds.begin();
+		  it != cmds.end(); it++ ){
+	      printdebug( "cmd: '%s'\n", it->c_str() );
+	  }
+#endif /* DEBUG */
+
+      return cmds;
 }
