@@ -13,7 +13,7 @@
 extern Playlist* plist;
 
 void
-Info::doit( string s )
+Info::doit( const string &s )
 {
   int pid;
   pid = fork();
@@ -25,7 +25,7 @@ Info::doit( string s )
 }
 
 void
-Info::help( string s )
+Info::help( const string &s ) const
 {
   printf("format: info\n");
   printf("description: shows information on current title\n");
@@ -33,7 +33,7 @@ Info::help( string s )
 }
 
 void 
-Info::description()
+Info::description() const
 {
   printf("shows information on current title\n");
 }

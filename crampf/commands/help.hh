@@ -12,9 +12,9 @@
 class Help : public Command {
   public:
     Help( CommandMap* c);
-    void doit( string s );
-    void help( string s );
-    void description();
+    void doit( const string &s );
+    void help( const string &s ) const;
+    void description() const;
   private:
     CommandMap* cmap;
 };

@@ -18,7 +18,7 @@
 #include "config.h"
 #include "readlineinterface.hh"
 
-Interface::Interface( void )
+Interface::Interface()
 {
   printf("welcome to the crampf %s\n", VERSION );
   detectSoundCard();
@@ -81,7 +81,7 @@ void Interface::mainloop()
 }
 
 void
-Interface::singlekeyTerm() 
+Interface::singlekeyTerm() const
 {
   struct termios t;
   t = terminal_settings;
@@ -95,7 +95,7 @@ Interface::singlekeyTerm()
 }
 
 void
-Interface::restoreTerm()
+Interface::restoreTerm() const
 {
   if (tcsetattr(1,TCSANOW,&terminal_settings)==-1) {
     perror("tcsettatr");
@@ -103,7 +103,7 @@ Interface::restoreTerm()
 }
 
 void
-Interface::use_rli( void )
+Interface::use_rli()
 {
   restoreTerm();
   rli.input();
@@ -111,7 +111,7 @@ Interface::use_rli( void )
 }
 
 void
-Interface::use_search_rli( string s )
+Interface::use_search_rli( const string &s )
 {
   restoreTerm();
   search_rli.input(s);
@@ -138,7 +138,7 @@ void Interface::detectSoundCard()
 }
 
 int
-Interface::getVolume()
+Interface::getVolume() const
 {
   FILE* fp = popen("aumix -q","r");
   char line[LINEWIDTH];

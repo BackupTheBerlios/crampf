@@ -7,9 +7,12 @@ noinst_HEADERS=autocmd.hh command.hh commandmap.hh commands.hh	\
 	       interface.hh player.hh playlist.hh		\
 	       readlineinterface.hh track.hh
 
-crampf_SOURCES=command.cc commandmap.cc config.cc crampf.cc	\
-	       file.cc interface.cc player.cc playlist.cc	\
+crampf_SOURCES=commandmap.cc config.cc crampf.cc file.cc	\
+	       interface.cc player.cc playlist.cc		\
 	       readlineinterface.cc track.cc
 
 crampf_LDADD=commands/libcmds.a util/libutil.a
-noinst_SCRIPTS=cvs2cl.pl
+
+dist-hook:
+	@echo updating ChangeLog
+	./cvs2cl.pl

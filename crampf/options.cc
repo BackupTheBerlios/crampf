@@ -200,16 +200,16 @@ void Config::getopts(int argc, char** argv)
     }
   }
   /* overwrite cmdline options over configoptions */
-  for (vector<string>::iterator it = cmdopts.mp3SearchPaths.begin();
+  for (vector<string>::const_iterator it = cmdopts.mp3SearchPaths.begin();
       it != cmdopts.mp3SearchPaths.end(); it++)
     opts.mp3SearchPaths.push_back(*it);
-  for (vector<string>::iterator it = cmdopts.negativeFilterFiles.begin();
+  for (vector<string>::const_iterator it = cmdopts.negativeFilterFiles.begin();
       it != cmdopts.negativeFilterFiles.end(); it++)
     opts.negativeFilterFiles.push_back(*it);
-  for (vector<string>::iterator it = cmdopts.positiveFilterFiles.begin();
+  for (vector<string>::const_iterator it = cmdopts.positiveFilterFiles.begin();
       it != cmdopts.positiveFilterFiles.end(); it++)
     opts.positiveFilterFiles.push_back(*it);
-  for (vector<string>::iterator it = cmdopts.playlistfiles.begin();
+  for (vector<string>::const_iterator it = cmdopts.playlistfiles.begin();
       it != cmdopts.playlistfiles.end(); it++)
     opts.playlistfiles.push_back(*it);
   if (cmdopts.playercmd!="") 
@@ -226,7 +226,7 @@ void Config::getopts(int argc, char** argv)
     opts.titlewidth=cmdopts.titlewidth;
 }
 
-void Config::readconfig(string filename) 
+void Config::readconfig( string filename ) 
 {
   filename = "source " + filename;
   opts.cmdmap[filename];
@@ -295,7 +295,7 @@ void Config::readconfig(string filename)
   */
 }
 
-void Config::readFilter(vector<string>* flt, string filename)
+void Config::readFilter( vector<string>* flt, const string &filename )
 {
   FILE* fp = fopen((const char*)filename.c_str(),"r");
   if (fp==NULL) {
@@ -312,26 +312,26 @@ void Config::readFilter(vector<string>* flt, string filename)
   fclose(fp);
 }
 
-void Config::readPositiveFilter(string filename)
+void Config::readPositiveFilter( const string &filename )
 {
   readFilter(&opts.positiveFilter, filename);
 }
 
-void Config::readPositiveFilter(vector<string> filenames)
+void Config::readPositiveFilter( const vector<string> &filenames )
 {
-  for (vector<string>::iterator it = filenames.begin();
+  for (vector<string>::const_iterator it = filenames.begin();
       it != filenames.end(); it++)
     readPositiveFilter(*it);
 }
 
-void Config::readNegativeFilter(string filename)
+void Config::readNegativeFilter( const string &filename )
 {
   readFilter(&opts.negativeFilter, filename);
 }
 
-void Config::readNegativeFilter(vector<string> filenames)
+void Config::readNegativeFilter( const vector<string> &filenames )
 {
-  for (vector<string>::iterator it = filenames.begin();
+  for (vector<string>::const_iterator it = filenames.begin();
       it != filenames.end(); it++)
     readNegativeFilter(*it);
 }

@@ -28,7 +28,7 @@ Track::Track( FILE* fp )
   }
 }
 
-Track::Track( string name )
+Track::Track( const string &name )
 {
   fullname = name;
   rating = 0;
@@ -50,7 +50,7 @@ Track::title( void ) const
 }
 
 void   
-Track::title( string s )
+Track::title( const string &s )
 {
   callsign = s;
 }

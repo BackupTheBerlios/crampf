@@ -11,7 +11,7 @@
 extern Playlist* plist;
 
 void
-Jump::doit( string s )
+Jump::doit( const string &s )
 {
   int pos;
   sscanf(s.c_str(),"%d",&pos);
@@ -32,7 +32,7 @@ Jump::doit( string s )
 }
 
 void
-Jump::help( string s )
+Jump::help( const string &s ) const
 {
   printf("format: jump <position>\n");
   printf("description: skips current track and jumps to track at\n");
@@ -41,7 +41,7 @@ Jump::help( string s )
 }
 
 void 
-Jump::description()
+Jump::description() const
 {
   printf("jump to another song\n");
 }

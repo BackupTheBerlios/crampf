@@ -53,13 +53,13 @@ CommandMap::CommandMap()
 
 CommandMap::~CommandMap()
 {
-  for (map<string, Command*>::iterator it = cmdmap.begin();
+  for (map<string, Command*>::const_iterator it = cmdmap.begin();
       it != cmdmap.end(); it++)
     delete it->second;
 }
 
 void
-CommandMap::operator[](string cmd)
+CommandMap::operator[](const string &cmd)
 {
   string c = arg0(cmd);
   string p = args(cmd);
@@ -87,9 +87,9 @@ CommandMap::operator[](string cmd)
 }
 
 string
-CommandMap::findFirstDef( string c )
+CommandMap::findFirstDef( const string &c ) const
 {
-  for (map<string, vector<string> >::iterator it = defmap.begin();
+  for (map<string, vector<string> >::const_iterator it = defmap.begin();
       it != defmap.end(); it++)
     if (it->first.find(c)==0) 
       return it->first;
@@ -97,9 +97,9 @@ CommandMap::findFirstDef( string c )
 }
 
 Command*
-CommandMap::findFirst( string c )
+CommandMap::findFirst( const string &c ) const
 {
-  for (map<string, Command*>::iterator it = cmdmap.begin();
+  for (map<string, Command*>::const_iterator it = cmdmap.begin();
       it != cmdmap.end(); it++)
     if (it->first.find(c)==0) 
       return it->second;
@@ -107,7 +107,7 @@ CommandMap::findFirst( string c )
 }
 
 void
-CommandMap::setKey(char key, string cmd)
+CommandMap::setKey(char key, const string &cmd)
 {
   try {
     string c = findFirstDef(arg0(cmd));
@@ -121,7 +121,7 @@ CommandMap::setKey(char key, string cmd)
 }
 
 void
-CommandMap::help( string cmd )
+CommandMap::help( const string &cmd )
 {
   if (cmdmap.count(arg0(cmd))) 
     cmdmap[arg0(cmd)]->help(args(cmd));
@@ -141,7 +141,7 @@ CommandMap::operator[](char key)
 }
 
 string
-CommandMap::arg0(string s)
+CommandMap::arg0(string s) const
 {
   int sep = s.find(" ");
   if (sep==-1) 
@@ -151,7 +151,7 @@ CommandMap::arg0(string s)
 }
 
 string
-CommandMap::args(string s)
+CommandMap::args(string s) const
 {
   int sep = s.find(" ");
   if (sep==-1) 

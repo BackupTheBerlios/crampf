@@ -6,7 +6,7 @@
 extern struct options* opts;
 
 void
-RandomOrder::doit( string s )
+RandomOrder::doit( const string &s )
 {
   if (s.empty()) {
     printf("randomorder: %s\n",(opts->randomOrder)?"yes":"no");
@@ -30,14 +30,14 @@ RandomOrder::doit( string s )
 }
 
 void
-RandomOrder::help( string s )
+RandomOrder::help( const string &s ) const
 {
   printf("format: randomorder [<yes|no>]\n");
   printf("description: if activated playlist is shuffled at startup.\n");
   printf("Only useful in startup (config) file\n");
 }
 
-void RandomOrder::description()
+void RandomOrder::description() const
 {
   printf("shuffle playlist at startup.\n");
 }

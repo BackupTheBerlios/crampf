@@ -17,7 +17,7 @@ RSearch::RSearch( CommandMap* c )
 }
 
 void
-RSearch::doit( string s )
+RSearch::doit( const string &s )
 {
   int newpos;
   if (!s.empty())
@@ -34,7 +34,7 @@ RSearch::doit( string s )
 }
 
 void
-RSearch::help( string s )
+RSearch::help( const string &s ) const
 {
   printf("format: rsearch [<substring>]\n");
   printf("description: searches backward for the occurence of <substring>\n");
@@ -45,13 +45,13 @@ RSearch::help( string s )
 }
 
 void
-RSearch::description()
+RSearch::description() const
 {
   printf("rsearch backward in the playlist\n");
 }
 
 int
-RSearch::rsearch( string s )
+RSearch::rsearch( const string &s ) const
 {
   if (opts->regexp || !opts->casesensivity) {
       /* new regexp part */

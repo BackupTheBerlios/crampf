@@ -1,5 +1,5 @@
 //
-// $Id: case.hh,v 1.2 2002/06/01 17:27:37 logic Exp $
+// $Id: case.hh,v 1.3 2002/06/04 12:04:18 logic Exp $
 //
 
 #ifndef CASE_HH
@@ -10,9 +10,9 @@
 
 class Case: public Command {
     public:
-	void doit( string s );
-	void help( string s );
-	void description();
+	void doit( const string &s );
+	void help( const string &s ) const;
+	void description() const;
 };
 
 #endif

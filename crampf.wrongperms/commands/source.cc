@@ -10,7 +10,7 @@ Source::Source( CommandMap* c )
 }
 
 void
-Source::doit( string s )
+Source::doit( const string &s )
 {
   File f(s);
   string cmd;
@@ -27,14 +27,14 @@ Source::doit( string s )
 }
 
 void
-Source::help( string s )
+Source::help( const string &s ) const
 {
   printf("format: source <filename>\n");
   printf("description: read and executes commands from file <filename>\n");
 }
 
 void
-Source::description()
+Source::description() const
 {
   printf("reads and executes commands from file\n");
 }

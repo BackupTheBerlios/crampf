@@ -1,5 +1,5 @@
 //
-// $Id: addpath.hh,v 1.5 2002/06/01 17:27:37 logic Exp $
+// $Id: addpath.hh,v 1.6 2002/06/04 12:04:18 logic Exp $
 //
 
 #ifndef ADDPATH_HH
@@ -10,9 +10,9 @@
 
 class AddPath : public Command {
   public:
-    void doit( string s );
-    void help( string s );
-    void description();
+    void doit( const string &s );
+    void help( const string &s ) const;
+    void description() const;
 };
 
 #endif

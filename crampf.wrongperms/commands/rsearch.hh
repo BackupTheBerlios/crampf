@@ -1,5 +1,5 @@
 //
-// $Id: rsearch.hh,v 1.3 2002/06/01 17:27:37 logic Exp $
+// $Id: rsearch.hh,v 1.4 2002/06/04 12:04:18 logic Exp $
 //
 
 #ifndef RSEARCH_HH
@@ -13,11 +13,11 @@
 class RSearch : public Command {
   public: 
     RSearch( CommandMap* c );
-    void doit( string s );
-    void help( string s );
-    void description();
+    void doit( const string &s );
+    void help( const string &s ) const;
+    void description() const;
   private:
-    int rsearch( string s );
+    int rsearch( const string &s ) const;
     CommandMap* cmap;
 };
 

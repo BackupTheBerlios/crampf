@@ -16,7 +16,7 @@ Map::Map( CommandMap* c ) : Command()
 }
 
 void
-Map::doit( string s )
+Map::doit( const string &s )
 {
   if (s=="list" || s=="all" || s=="show" || s=="") {
     printf("---Special-Keys-(always-avaible)---\n");
@@ -24,7 +24,7 @@ Map::doit( string s )
     printf("key '/' -> search forward\n");
     printf("key '?' -> search backward\n");
     printf("---Keymap-(user-definable)---\n");
-    for (map<char,string>::iterator it = cmap->keymap.begin();
+    for (map<char,string>::const_iterator it = cmap->keymap.begin();
         it != cmap->keymap.end(); it++)
      printf("key '%c' -> '%s'\n",it->first,it->second.c_str()); 
   } else {
@@ -40,7 +40,7 @@ Map::doit( string s )
 }
 
 void
-Map::help( string s )
+Map::help( const string &s ) const
 {
   printf("format: map <keyname> <command> [<parameter>]\n");
   printf("    or: map\n");
@@ -53,7 +53,7 @@ Map::help( string s )
 
 
 void 
-Map::description()
+Map::description() const
 {
   printf("binds commands to keystrokes\n");
 }

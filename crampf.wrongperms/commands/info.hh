@@ -10,9 +10,9 @@
 
 class Info : public Command {
   public:
-    void doit( string s );
-    void help( string s );
-    void description();
+    void doit( const string &s );
+    void help( const string &s ) const;
+    void description() const;
 };
 
 #endif

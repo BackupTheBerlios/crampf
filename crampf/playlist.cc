@@ -23,7 +23,7 @@ Playlist::Playlist()
 }
 
 void 
-Playlist::addPath(string path)
+Playlist::addPath( const string &path )
 {
   struct stat buf;
   stat((const char*)path.c_str(),&buf);
@@ -48,9 +48,9 @@ Playlist::addPath(string path)
 }
 
 void 
-Playlist::addPath(vector<string> path)
+Playlist::addPath( const vector<string> &path )
 {
-  for (vector<string>::iterator it = path.begin();
+  for (vector<string>::const_iterator it = path.begin();
       it != path.end(); it++)
     addPath(*it);
 }
@@ -74,7 +74,7 @@ Playlist::savePlaylist( string filename )
 }
 
 void
-Playlist::addPlaylist(string filename)
+Playlist::addPlaylist( string filename )
 {
   if (filename[0]=='~') { // replace ~ with users home
     filename.erase(filename.begin());
@@ -94,15 +94,15 @@ Playlist::addPlaylist(string filename)
 }
 
 void
-Playlist::addPlaylist(vector<string> filenames)
+Playlist::addPlaylist( const vector<string> &filenames )
 {
-  for (vector<string>::iterator it = filenames.begin();
+  for (vector<string>::const_iterator it = filenames.begin();
       it != filenames.end(); it++)
     addPlaylist(*it);
 }
 
 void 
-Playlist::positiveFilter(string flt)
+Playlist::positiveFilter( const string &flt )
 {
       int flags = REG_NOSUB;
       if (!opts->casesensivity)
@@ -117,15 +117,15 @@ Playlist::positiveFilter(string flt)
 }
 
 void 
-Playlist::positiveFilter(vector<string> flt)
+Playlist::positiveFilter( const vector<string> &flt )
 {
-  for (vector<string>::iterator it = flt.begin();
+  for (vector<string>::const_iterator it = flt.begin();
       it != flt.end(); it++)
     positiveFilter(*it);
 }
 
 void 
-Playlist::negativeFilter(string flt)
+Playlist::negativeFilter( const string &flt )
 {
       int flags = REG_NOSUB;
       if (!opts->casesensivity)
@@ -140,9 +140,9 @@ Playlist::negativeFilter(string flt)
 }
 
 void 
-Playlist::negativeFilter(vector<string> flt)
+Playlist::negativeFilter( const vector<string> &flt )
 {
-  for (vector<string>::iterator it = flt.begin();
+  for (vector<string>::const_iterator it = flt.begin();
       it != flt.end(); it++) {
     negativeFilter(*it);
   }
@@ -177,13 +177,13 @@ Playlist::operator--()
 }
     
 Track 
-Playlist::operator*()
+Playlist::operator*() const
 {
   return (*this)[current];
 }
 
 int 
-Playlist::pos()
+Playlist::pos() const
 {
   return current;
 }
@@ -208,7 +208,7 @@ Playlist::jump(int newpos)
 }
 
 void 
-Playlist::addTrack( string path, string filename )
+Playlist::addTrack( const string &path, string filename )
 {
   this->push_back(Track(path+filename));
   if (opts->generateTitles) {

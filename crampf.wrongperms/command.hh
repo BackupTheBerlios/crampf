@@ -10,11 +10,10 @@
 
 class Command {
   public:
-    Command();
-    ~Command();
-    virtual void doit( string s ) = 0;
-    virtual void help( string s ) = 0;
-    virtual void description() = 0;
+    virtual ~Command() {}
+    virtual void doit( const string &s ) = 0;
+    virtual void help( const string &s ) const = 0;
+    virtual void description() const = 0;
 };
 
 #endif

@@ -6,7 +6,7 @@
 extern struct options* opts;
 
 void
-RegExp::doit( string s )
+RegExp::doit( const string &s )
 {
       if (s.empty()) {
 	  printf("regexp: ");
@@ -41,7 +41,7 @@ RegExp::doit( string s )
 }
 
 void
-RegExp::help( string s )
+RegExp::help( const string &s ) const
 {
   printf("format: regexp [<value>]\n");
   printf("description: Specifies what kind of regular expressions to use\n");
@@ -55,7 +55,7 @@ RegExp::help( string s )
 }
 
 void
-RegExp::description()
+RegExp::description() const
 {
       printf("specify regular expression syntax\n");
 }

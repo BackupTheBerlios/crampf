@@ -1,13 +1,17 @@
 FEATURE WISHLIST
-	Change the hardcoded defaults to something more useful
-	Change options-struct into a map with fixed keys, initialized by the
-	    constructor
-	Simple and flexible way to execute external commands
-	Integrate slang scripting language
-	Support for MODs, S3Ms, etc.
-
+	* Change the hardcoded defaults to something more useful
+	* Change options-struct into a map with fixed keys, initialized by the
+	      constructor
+	* Simple and flexible way to execute external commands
+	* More generic player interface (e.g. alsaplayer + alsaremotectrl)
+	    * create abstract player interface
+	    * probably using plugins?
+	* id3v2tag support (e.g. libid3, id3v2)
+	* create a real exception class (get rid of throwing strings)
+	* Support for MODs, S3Ms, etc.
+	* Integrate slang scripting language
 
 KNOWN BUGS
-	When loop is set to infinitive and the playlist (or the playercommand)
-	    is invalid the program hangs in an endless loop (don't know how to
-	    handle this probably).
+	* When loop is set to infinitive and the playlist (or the playercommand)
+	      is invalid the program hangs in an endless loop (don't know how to
+	      handle this probably).

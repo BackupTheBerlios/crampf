@@ -6,7 +6,7 @@
 extern Playlist* plist;
 
 void
-NFilter::doit( string s )
+NFilter::doit( const string &s )
 {
   if (s.empty())
     throw string("filter: parameter missing!");
@@ -14,7 +14,7 @@ NFilter::doit( string s )
 }
 
 void
-NFilter::help( string s )
+NFilter::help( const string &s ) const
 {
   printf("format: nfilter <word>\n");
   printf("description: filters all tracks out of the playlist which\n");
@@ -23,7 +23,7 @@ NFilter::help( string s )
 }
 
 void 
-NFilter::description()
+NFilter::description() const
 {
   printf("filters current playlist\n");
 }

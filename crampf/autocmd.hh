@@ -1,5 +1,5 @@
 //
-// $Id: autocmd.hh,v 1.3 2002/04/28 01:31:36 logic Exp $
+// $Id: autocmd.hh,v 1.4 2002/06/04 12:04:15 logic Exp $
 //
 
 #ifndef __AUTOCMD_HH
@@ -20,12 +20,12 @@ class AutocmdHandler {
 	AutocmdHandler(){} // dummy constructor
 	AutocmdHandler( const string &event, const string &descr )
 	    : name(event), description(descr) {}
-	void registerCB( AutoCB cb )
+	void registerCB( const AutoCB &cb )
 	  { printdebug( "registered callback on event '%s'\n", name.c_str() );
 	    cbs.push_back( cb ); }
-	const string& getDescription( const string &event )
+	const string& getDescription( const string &event ) const
 	  { return description; }
-	void trigger()
+	void trigger() const
 	  {
 	    printdebug("AutocmdHandler::trigger\n");
 	    for( list<AutoCB>::const_iterator it = cbs.begin();

@@ -68,7 +68,7 @@ void player_play( void )
       char *argv[ args.size() + 3 ];
       argv[0] = (char*)opts->playercmd.c_str();
       p=1;
-      for (vector<string>::iterator it = args.begin();
+      for (vector<string>::const_iterator it = args.begin();
 	      it != args.end(); it++)
 	  argv[p++] = (char*)(it->c_str());
       argv[p++] = (char*)(*(*plist)).filename().c_str();

@@ -1,5 +1,5 @@
 //
-// $Id: define.hh,v 1.3 2002/06/01 17:27:37 logic Exp $
+// $Id: define.hh,v 1.4 2002/06/04 12:04:18 logic Exp $
 //
 
 #ifndef DEFINE_HH
@@ -14,12 +14,12 @@
 class Define : public Command {
   public:
     Define( CommandMap* c );
-    void doit( string s );
-    void help( string s );
-    void description();
+    void doit( const string &s );
+    void help( const string &s ) const;
+    void description() const;
   protected:
-    void showdefine( string s );
-    void showdefines();
+    void showdefine( const string &s ) const;
+    void showdefines() const;
     void adddef( string s );
     CommandMap* cmap;
 };

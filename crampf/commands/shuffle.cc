@@ -9,20 +9,20 @@
 extern Playlist* plist;
 
   void
-Shuffle::doit( string s )
+Shuffle::doit( const string &s )
 {
   plist->shuffle();
 }
 
 void
-Shuffle::help( string s )
+Shuffle::help( const string &s ) const
 {
   printf("format: shuffle\n");
   printf("description: scrambles the playlist\n");
 }
 
 void 
-Shuffle::description()
+Shuffle::description() const
 {
   printf("scrambles the playlist\n");
 }

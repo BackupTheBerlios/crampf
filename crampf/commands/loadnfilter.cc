@@ -6,7 +6,7 @@
 extern Playlist* plist;
 
 void
-LoadNFilter::doit( string s )
+LoadNFilter::doit( const string &s )
 {
   printf("not yet implemented\n");
   /* es gibt noch keine allgemeine Funktion zum laden eines
@@ -14,7 +14,7 @@ LoadNFilter::doit( string s )
 }
 
 void
-LoadNFilter::help( string s )
+LoadNFilter::help( const string &s ) const
 {
   printf("format: loadnfilter <filterfile>\n");
   printf("description: does a nfilter command with each line of the\n");
@@ -23,7 +23,7 @@ LoadNFilter::help( string s )
 }
 
 void 
-LoadNFilter::description()
+LoadNFilter::description() const
 {
   printf("loads negative filters from file\n");
 }

@@ -1,5 +1,5 @@
 //
-// $Id: interface.hh,v 1.19 2002/06/01 17:27:35 logic Exp $
+// $Id: interface.hh,v 1.20 2002/06/04 12:04:16 logic Exp $
 //
 
 #ifndef INTERFACE_HH
@@ -14,21 +14,20 @@ extern struct options* opts;
 
 class Interface {
   public:
-    Interface( void );
+    Interface();
     ~Interface();
     void init();
     void shutdown();
   private:
     ReadLineInterface rli;
     ReadLineInterface search_rli;
-    void use_rli( void );
-    void use_search_rli( string s );
-    void singlekeyTerm();
-    void restoreTerm();
+    void use_rli();
+    void use_search_rli( const string &s );
+    void singlekeyTerm() const;
+    void restoreTerm() const;
     void detectSoundCard();
-    int getVolume();
+    int getVolume() const;
     void mainloop();
-    void changevol(int vol);
     struct termios terminal_settings; 
 };
 

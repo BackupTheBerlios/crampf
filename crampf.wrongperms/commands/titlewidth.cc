@@ -8,7 +8,7 @@
 extern struct options* opts;
 
 void
-TitleWidth::doit( string s )
+TitleWidth::doit( const string &s )
 {
   if (s.empty()) {
     printf("titlewidth: %d\n",opts->titlewidth);
@@ -18,7 +18,7 @@ TitleWidth::doit( string s )
 }
 
 void
-TitleWidth::help( string s )
+TitleWidth::help( const string &s ) const
 {
   printf("format: titlewidth <width>\n");
   printf("description: gets/sets linewidth of status command\n");
@@ -26,7 +26,7 @@ TitleWidth::help( string s )
 }
 
 void
-TitleWidth::description()
+TitleWidth::description() const
 {
   printf("gets/sets linewidth of status command\n");
 }

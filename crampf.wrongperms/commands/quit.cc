@@ -10,20 +10,20 @@
 #include "quit.hh"
 
 void
-Quit::doit( string s )
+Quit::doit( const string &s )
 {
   throw string("quit");
 }
 
 void
-Quit::help( string s )
+Quit::help( const string &s ) const
 {
   printf("quit -- guess what it does :-)\n");
   printf("see also: exit\n");
 }
 
 void 
-Quit::description()
+Quit::description() const
 {
   printf("guess what it does :-)\n");
 }

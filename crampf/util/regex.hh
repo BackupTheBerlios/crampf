@@ -1,5 +1,5 @@
 //
-// $Id: regex.hh,v 1.3 2002/06/01 17:27:39 logic Exp $
+// $Id: regex.hh,v 1.4 2002/06/04 12:04:21 logic Exp $
 //
 
 #ifndef REGEX_HH
@@ -14,9 +14,9 @@
 
 class RegEx {
     public:
-	RegEx( string re, int flags );
+	RegEx( const string &re, int flags );
 	~RegEx();
-	bool match( string s );
+	bool match( const string &s ) const;
     private:
 	regex_t preg;	/* compiled regexp */
 	int cflags;

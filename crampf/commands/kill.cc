@@ -8,7 +8,7 @@
 extern Playlist* plist;
 
 void
-Kill::doit( string s )
+Kill::doit( const string &s )
 {
   if (s.empty()) {
     plist->erase(&(*plist)[plist->pos()]);
@@ -21,14 +21,14 @@ Kill::doit( string s )
 }
 
 void
-Kill::help( string s )
+Kill::help( const string &s ) const
 {
   printf("format: kill [<tracknumber>]\n");
   printf("description: removes current track or track <tracknumber>\n");
 }
 
 void
-Kill::description()
+Kill::description() const
 {
   printf("removes tracks\n");
 }

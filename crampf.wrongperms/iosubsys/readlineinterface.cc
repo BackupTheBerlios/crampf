@@ -49,7 +49,7 @@ ReadLineInterface::input()
 }
 
 void
-ReadLineInterface::input( string s )
+ReadLineInterface::input( const string &s )
 {
   string cmd;
   char prompt[ s.length() ];

@@ -1,5 +1,5 @@
 //
-// $Id: calldef.hh,v 1.3 2002/06/01 17:27:37 logic Exp $
+// $Id: calldef.hh,v 1.4 2002/06/04 12:04:18 logic Exp $
 //
 
 #ifndef CALLDEF_HH
@@ -12,11 +12,11 @@
 class CallDef : public Command {
   public:
     CallDef( CommandMap* c );
-    void doit( string s );
-    void help( string s );
-    void description();
+    void doit( const string &s );
+    void help( const string &s ) const;
+    void description() const;
   private:
-    void execute( string s );
+    void execute( const string &s );
     CommandMap* cmap;
 };
 

@@ -11,7 +11,7 @@
 #include "set.hh"
 
 void
-Set::doit( string s )
+Set::doit( const string &s )
 {
   if (s=="list" || s=="all" || s=="show") {
     printf("---Options---\n");
@@ -21,7 +21,7 @@ Set::doit( string s )
 }
 
 void
-Set::help( string s )
+Set::help( const string &s ) const
 {
   printf("format: set <optionname>\n");
   printf("    or: set <optionname>=<value>\n");
@@ -36,7 +36,7 @@ Set::help( string s )
 
 
 void 
-Set::description()
+Set::description() const
 {
   printf("change/view runtime options\n");
 }

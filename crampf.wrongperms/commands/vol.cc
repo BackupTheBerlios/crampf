@@ -13,7 +13,7 @@
 extern struct options* opts;
 
 void
-Vol::doit( string s )
+Vol::doit( const string &s )
 {
   int value;
   if (s.empty()) {
@@ -49,7 +49,7 @@ Vol::doit( string s )
 }
 
 void
-Vol::help( string s )
+Vol::help( const string &s ) const
 {
   printf("format: volume <value>\n");
   printf("description: changes volume to the value <value>\n");
@@ -59,7 +59,7 @@ Vol::help( string s )
 
 
 void 
-Vol::description()
+Vol::description() const
 {
   printf("changes playback volume\n");
 }

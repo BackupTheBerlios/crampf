@@ -20,7 +20,7 @@ Autocommand::Autocommand()
 }
 
 void
-Autocommand::doit( string s )
+Autocommand::doit( const string &s )
 {
   unsigned int p = s.find(" ");
   if( p == -1 || s.empty() ){
@@ -56,7 +56,7 @@ Autocommand::evtcb( const string &event )
 }
 
 void
-Autocommand::help( string s )
+Autocommand::help( const string &s ) const
 {
   printf("format: autocommand [<Event> <Action>]\n");
   printf("description: command action is executed whenever event occurs\n");
@@ -69,7 +69,7 @@ Autocommand::help( string s )
 }
 
 void 
-Autocommand::description()
+Autocommand::description() const
 {
   printf("bind commands on events\n");
 }

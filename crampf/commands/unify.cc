@@ -7,12 +7,12 @@
 extern Playlist* plist;
 
 void
-Unify::doit( string s )
+Unify::doit( const string &s )
 {
   stack<Playlist::iterator> stck;
   for (Playlist::iterator it = plist->begin();
       it != plist->end(); it++) {
-    Playlist::iterator at = it;
+    Playlist::const_iterator at = it;
     for ( at++; at != plist->end(); at++)
       if (it->filename() == at->filename()) {
           stck.push(it);
@@ -24,8 +24,8 @@ Unify::doit( string s )
   }
 }
   /*
-  map<string,Playlist::iterator> cmp;
-  for (Playlist::iterator it = plist->begin();
+  map<string,Playlist::const_iterator> cmp;
+  for (Playlist::const_iterator it = plist->begin();
       it != plist->end(); it++)
     if (cmp.count(it->filename())>0) {
       printf("removing %s (=%s)\n",it->title().c_str(),cmp[it->filename()]->title().c_str());
@@ -36,14 +36,14 @@ Unify::doit( string s )
       */
 
 void
-Unify::help( string s )
+Unify::help( const string &s ) const
 {
   printf("format: unify\n");
   printf("description: removes multiple entries in playlist\n");
 }
 
 void
-Unify::description()
+Unify::description() const
 {
   printf("removes multiple entries in playlist\n");
 }

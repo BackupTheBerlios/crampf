@@ -1,5 +1,5 @@
 //
-// $Id: track.hh,v 1.6 2002/06/01 17:27:35 logic Exp $
+// $Id: track.hh,v 1.7 2002/06/04 12:04:16 logic Exp $
 //
 
 #ifndef TRACK_HH
@@ -11,9 +11,9 @@
 class Track {
   public:
            Track( FILE* fp );
-           Track( string name );
+           Track( const string &name );
     string title( void ) const;
-    void   title( string s );
+    void   title( const string &s );
     int    rate( void ) const;
     void   rate( int r );
     string filename( void ) const;

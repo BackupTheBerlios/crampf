@@ -16,7 +16,7 @@ Search::Search( CommandMap* c )
 }
 
 void
-Search::doit( string s )
+Search::doit( const string &s )
 {
   int newpos;
   if (!s.empty())
@@ -33,7 +33,7 @@ Search::doit( string s )
 }
 
 void
-Search::help( string s )
+Search::help( const string &s ) const
 {
   printf("format: search [<substring>]\n");
   printf("description: searches for the next occurence of <substring>\n");
@@ -44,13 +44,13 @@ Search::help( string s )
 }
 
 void
-Search::description()
+Search::description() const
 {
   printf("search forward in the playlist\n");
 }
 
 int
-Search::search( string s )
+Search::search( const string &s ) const
 {
   if (opts->regexp || !opts->casesensivity) {
       /* new regexp part */

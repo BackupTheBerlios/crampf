@@ -2,7 +2,7 @@
 #include <string>
 #include <regex.h>
 
-RegEx::RegEx( string re, int flags )
+RegEx::RegEx( const string &re, int flags )
 {
       cflags = flags;
       int error = regcomp( &preg, re.c_str(), cflags );
@@ -19,7 +19,7 @@ RegEx::~RegEx()
 }
 
 bool 
-RegEx::match( string s )
+RegEx::match( const string &s ) const
 {
       return (regexec( &preg, s.c_str(), 0, NULL, cflags )
 	      != REG_NOMATCH);
