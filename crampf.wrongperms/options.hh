@@ -1,5 +1,5 @@
 //
-// $Id: options.hh,v 1.2 2000/03/10 07:16:58 logic Exp $
+// $Id: options.hh,v 1.3 2000/03/10 07:38:39 logic Exp $
 //
 
 #ifndef config
@@ -7,6 +7,7 @@
 
 #include <string>
 #include <vector>
+#include <map>
 
 #define FILELINEWIDTH 128    /* max config and filter file linewidth */
 
@@ -23,28 +24,7 @@ struct options {
   string                playercmd;
   string                playercmd_args;
   vector<string>        mp3SearchPaths;
-  struct keys {
-    string      next;
-    string      prev;
-    string      pause;
-    string      cont;
-    string      info;
-    string      list;
-    string      help;
-    string      quit;
-    string      vol0;
-    string      vol1;
-    string      vol2;
-    string      vol3;
-    string      vol4;
-    string      vol5;
-    string      vol6;
-    string      vol7;
-    string      vol8;
-    string      vol9;
-    string      vol_up;
-    string      vol_down;
-  } key;
+  map<string, string>   keys;
 };
 
 class Config {

@@ -25,26 +25,10 @@ Config::initdefaults(struct options* op)
   op->loop=0;
   op->playercmd="amp";
   op->playercmd_args="-q";
-  op->key.next="n";
-  op->key.prev="p";
-  op->key.pause=" ";
-  op->key.cont=" ";
-  op->key.info="i";
-  op->key.list="l";
-  op->key.help="h";
-  op->key.quit="q";
-  op->key.vol0="0";
-  op->key.vol1="1";
-  op->key.vol2="2";
-  op->key.vol3="3";
-  op->key.vol4="4";
-  op->key.vol5="5";
-  op->key.vol6="6";
-  op->key.vol7="7";
-  op->key.vol8="8";
-  op->key.vol9="9";
-  op->key.vol_up="u";
-  op->key.vol_down="d";
+  op->keys["quit"]="q";
+  op->keys["next"]="n +";
+  op->keys["prev"]="p-";
+  op->keys["help"]="h";
 }
 
 Config::getopts(int argc, char** argv)

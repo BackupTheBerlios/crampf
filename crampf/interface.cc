@@ -32,13 +32,13 @@ Interface::mainloop()
   do {
     showstatus();
     c = fgetc(stdin); 
-    if (opts->key.next.find(c)!=-1)
+    if (opts->keys["next"].find(c)!=-1)
       ++(*plist);
-    else if (opts->key.prev.find(c)!=-1)
+    else if (opts->keys["prev"].find(c)!=-1)
       --(*plist);
-    else if (opts->key.help.find(c)!=-1)
-      printf("HELP\n");
-  } while (opts->key.quit.find(c)==-1);
+    else if (opts->keys["help"].find(c)!=-1)
+      printf("\nHELP\n");
+  } while (opts->keys["quit"].find(c)==-1);
 }
 
 Interface::showstatus()
