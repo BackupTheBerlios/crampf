@@ -23,7 +23,7 @@ Playlist::Playlist()
 }
 
 void 
-Playlist::addPath( const string &path )
+Playlist::addPath( const std::string &path )
 {
   struct stat buf;
   stat((const char*)path.c_str(),&buf);
@@ -33,7 +33,7 @@ Playlist::addPath( const string &path )
     return;
   }
   FILE* fp;
-  string findcmd = "find \"" + path + "\" -iname \"*.mp3\" -type f -follow";
+  std::string findcmd = "find \"" + path + "\" -iname \"*.mp3\" -type f -follow";
   fp = popen((const char*)findcmd.c_str(),"r");
   if (fp==NULL) {
     perror((const char*)path.c_str());
@@ -48,15 +48,15 @@ Playlist::addPath( const string &path )
 }
 
 void 
-Playlist::addPath( const vector<string> &path )
+Playlist::addPath( const std::vector<std::string> &path )
 {
-  for (vector<string>::const_iterator it = path.begin();
+  for (std::vector<std::string>::const_iterator it = path.begin();
       it != path.end(); it++)
     addPath(*it);
 }
 
 void
-Playlist::savePlaylist( string filename )
+Playlist::savePlaylist( std::string filename )
 {
   if (filename[0]=='~') { // replace ~ with users home
     filename.erase(filename.begin());
@@ -74,7 +74,7 @@ Playlist::savePlaylist( string filename )
 }
 
 void
-Playlist::addPlaylist( string filename )
+Playlist::addPlaylist( std::string filename )
 {
   if (filename[0]=='~') { // replace ~ with users home
     filename.erase(filename.begin());
@@ -88,21 +88,21 @@ Playlist::addPlaylist( string filename )
   try {
     while (1)
       addTrack(fp);
-  } catch (string error) {
+  } catch (std::string error) {
   }
   fclose(fp);
 }
 
 void
-Playlist::addPlaylist( const vector<string> &filenames )
+Playlist::addPlaylist( const std::vector<std::string> &filenames )
 {
-  for (vector<string>::const_iterator it = filenames.begin();
+  for (std::vector<std::string>::const_iterator it = filenames.begin();
       it != filenames.end(); it++)
     addPlaylist(*it);
 }
 
 void 
-Playlist::positiveFilter( const string &flt )
+Playlist::positiveFilter( const std::string &flt )
 {
       int flags = REG_NOSUB, c=current, i=0;
       if (!opts->casesensivity)
@@ -120,15 +120,15 @@ Playlist::positiveFilter( const string &flt )
 }
 
 void 
-Playlist::positiveFilter( const vector<string> &flt )
+Playlist::positiveFilter( const std::vector<std::string> &flt )
 {
-  for (vector<string>::const_iterator it = flt.begin();
+  for (std::vector<std::string>::const_iterator it = flt.begin();
       it != flt.end(); it++)
     positiveFilter(*it);
 }
 
 void 
-Playlist::negativeFilter( const string &flt )
+Playlist::negativeFilter( const std::string &flt )
 {
       int flags = REG_NOSUB, c=current, i=0;
       if (!opts->casesensivity)
@@ -146,22 +146,22 @@ Playlist::negativeFilter( const string &flt )
 }
 
 void 
-Playlist::negativeFilter( const vector<string> &flt )
+Playlist::negativeFilter( const std::vector<std::string> &flt )
 {
-  for (vector<string>::const_iterator it = flt.begin();
+  for (std::vector<std::string>::const_iterator it = flt.begin();
       it != flt.end(); it++) {
     negativeFilter(*it);
   }
 }
 
-vector<string>
-Playlist::loadFilterFile( const string &filename )
+std::vector<std::string>
+Playlist::loadFilterFile( const std::string &filename )
 {
-  vector<string> flt;
+  std::vector<std::string> flt;
   FILE* fp = fopen((const char*)filename.c_str(),"r");
   if (fp==NULL) {
     perror((const char*)filename.c_str());
-    throw string("cannot open filterfile");
+    throw std::string("cannot open filterfile");
   }
   char line[FILELINEWIDTH];
   while (fgets(line,FILELINEWIDTH,fp)) {
@@ -175,29 +175,29 @@ Playlist::loadFilterFile( const string &filename )
 }
 
 void
-Playlist::loadNegativeFilter( const string &filename )
+Playlist::loadNegativeFilter( const std::string &filename )
 {
   negativeFilter( loadFilterFile( filename ) );
 }
 
 void
-Playlist::loadPositiveFilter( const string &filename )
+Playlist::loadPositiveFilter( const std::string &filename )
 {
   positiveFilter( loadFilterFile( filename ) );
 }
 
 void
-Playlist::loadNegativeFilter( const vector<string> &filenames )
+Playlist::loadNegativeFilter( const std::vector<std::string> &filenames )
 {
-  for( vector<string>::const_iterator it = filenames.begin();
+  for( std::vector<std::string>::const_iterator it = filenames.begin();
 	  it != filenames.end(); it++ )
       negativeFilter( loadFilterFile( *it ) );
 }
 
 void
-Playlist::loadPositiveFilter( const vector<string> &filenames )
+Playlist::loadPositiveFilter( const std::vector<std::string> &filenames )
 {
-  for( vector<string>::const_iterator it = filenames.begin();
+  for( std::vector<std::string>::const_iterator it = filenames.begin();
 	  it != filenames.end(); it++ )
       positiveFilter( loadFilterFile( *it  ) );
 }
@@ -242,11 +242,33 @@ Playlist::pos() const
   return current;
 }
 
+Playlist::const_iterator
+Playlist::ConstIterator( int pos ) const
+{
+      if( pos == -1 )
+	  pos = current;
+      const_iterator it = begin();
+      for( int i=0; i < pos; i++ )
+	  it++;
+      return it;
+}
+
+Playlist::iterator
+Playlist::Iterator( int pos )
+{
+      if( pos == -1 )
+	  pos = current;
+      iterator it = begin();
+      for( int i=0; i < pos; i++ )
+	  it++;
+      return it;
+}
+
 void 
 Playlist::jump(int newpos)
 {
   if (size() == 0) 
-      throw string("empty playlist");
+      throw std::string("empty playlist");
   while (newpos<0) {
     opts->loop--;
     newpos+=size();
@@ -255,14 +277,14 @@ Playlist::jump(int newpos)
     if (opts->loop>0)
       opts->loop-=(int)ceil((double)newpos/(double)size());
     if (opts->loop<=0)
-      throw string("end of playlist");
+      throw std::string("end of playlist");
     newpos%=(size());
   }
   current=newpos;
 }
 
 void 
-Playlist::addTrack( const string &path, string filename )
+Playlist::addTrack( const std::string &path, std::string filename )
 {
   push_back(Track(path+filename));
   if (opts->generateTitles) {

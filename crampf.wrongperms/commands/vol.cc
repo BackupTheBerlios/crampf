@@ -14,7 +14,7 @@
 extern struct options* opts;
 
 void
-Vol::doit( const string &s )
+Vol::doit( const std::string &s )
 {
   int value;
   if (s.empty()) {
@@ -50,7 +50,7 @@ Vol::doit( const string &s )
 }
 
 void
-Vol::help( const string &s ) const
+Vol::help( const std::string &s ) const
 {
   printf("format: volume <value>\n");
   printf("description: changes volume to the value <value>\n");

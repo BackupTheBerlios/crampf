@@ -20,18 +20,18 @@ Autocommand::Autocommand()
 }
 
 void
-Autocommand::doit( const string &s )
+Autocommand::doit( const std::string &s )
 {
   unsigned int p = s.find(" ");
   if( (signed)p == -1 || s.empty() ){
       printf( "current autocommands:\n" );
-      for( map<string,string>::const_iterator it = actionmap.begin();
+      for( std::map<std::string,std::string>::const_iterator it = actionmap.begin();
 	      it != actionmap.end(); it++ )
 	  printf( "\t%s\t%s\n", it->first.c_str(), it->second.c_str() );
       return;
   }
-  string evt = s.substr(0,s.find(" "));
-  string act = s.substr(s.find(" ")+1);
+  std::string evt = s.substr(0,s.find(" "));
+  std::string act = s.substr(s.find(" ")+1);
   if( autocmdmap.count( evt ) != 1 ){
       printf( "autocmdmap: no such event %s\n", evt.c_str() );
       return;
@@ -44,7 +44,7 @@ Autocommand::doit( const string &s )
 }
 
 bool
-Autocommand::evtcb( const string &event )
+Autocommand::evtcb( const std::string &event )
 {
   printdebug( "autocmdmap: received event %s\n", event.c_str() );
   if( actionmap.count( event ) != 1 ){
@@ -57,7 +57,7 @@ Autocommand::evtcb( const string &event )
 }
 
 void
-Autocommand::help( const string &s ) const
+Autocommand::help( const std::string &s ) const
 {
   printf("format: autocommand [<Event> <Action>]\n");
   printf("description: command action is executed whenever event occurs\n");

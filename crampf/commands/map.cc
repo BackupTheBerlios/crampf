@@ -16,7 +16,7 @@ Map::Map( CommandMap* c ) : Command()
 }
 
 void
-Map::doit( const string &s )
+Map::doit( const std::string &s )
 {
   if (s=="list" || s=="all" || s=="show" || s=="") {
     printf("---Special-Keys-(always-avaible)---\n");
@@ -24,7 +24,7 @@ Map::doit( const string &s )
     printf("key '/' -> search forward\n");
     printf("key '?' -> search backward\n");
     printf("---Keymap-(user-definable)---\n");
-    for (map<char,string>::const_iterator it = cmap->keymap.begin();
+    for (std::map<char,std::string>::const_iterator it = cmap->keymap.begin();
         it != cmap->keymap.end(); it++)
      printf("key '%c' -> '%s'\n",it->first,it->second.c_str()); 
   } else {
@@ -36,13 +36,13 @@ Map::doit( const string &s )
 	keyname = keyname_numeric;
     else if (sscanf(s.c_str(),"%c%*[ \t=]%[^\n]",
 		&keyname,functionname)!=2)  
-	throw string("map: parsing error");
+	throw std::string("map: parsing error");
     cmap->setKey(keyname, functionname);
   }
 }
 
 void
-Map::help( const string &s ) const
+Map::help( const std::string &s ) const
 {
   printf("format: map <keyname> <command> [<parameter>]\n");
   printf("    or: map\n");

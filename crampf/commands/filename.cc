@@ -7,13 +7,13 @@
 extern Playlist* plist;
 
 void
-Filename::doit( const string &s )
+Filename::doit( const std::string &s )
 {
   printf("filename: \"%s\"\n",(*(*plist)).filename().c_str());
 }
 
 void
-Filename::help( const string &s ) const
+Filename::help( const std::string &s ) const
 {
   printf("format: filename\n");
   printf("description: shows full filename (with path) of current\n");

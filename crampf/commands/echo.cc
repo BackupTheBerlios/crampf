@@ -9,13 +9,13 @@
  */
 
 void
-Echo::doit( const string &s )
+Echo::doit( const std::string &s )
 {
   printf( "%s\n", s.c_str() );
 }
 
 void
-Echo::help( const string &s ) const
+Echo::help( const std::string &s ) const
 {
   printf("format: echo <text>\n");
   printf("description: prints out given arguments\n");

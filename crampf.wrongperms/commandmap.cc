@@ -61,19 +61,19 @@ CommandMap::CommandMap()
 
 CommandMap::~CommandMap()
 {
-  for (map<string, Command*>::const_iterator it = cmdmap.begin();
+  for (std::map<std::string, Command*>::const_iterator it = cmdmap.begin();
       it != cmdmap.end(); it++)
     delete it->second;
 }
 
 void
-CommandMap::operator[](const string &cmd)
+CommandMap::operator[](const std::string &cmd)
 {
-      vector<string> cmds = splitCommands( cmd );
-      for( vector<string>::iterator it = cmds.begin();
+      std::vector<std::string> cmds = splitCommands( cmd );
+      for( std::vector<std::string>::iterator it = cmds.begin();
 	      it != cmds.end(); it++ ){
-	  string c = arg0(*it);
-	  string p = args(*it);
+	  std::string c = arg0(*it);
+	  std::string p = args(*it);
 	  printdebug( "CommandMap: command '%s', parameter '%s'\n", c.c_str(), p.c_str() );
 	  if (cmdmap.count(c)) {
 	      cmdmap[c]->doit(p);
@@ -81,34 +81,34 @@ CommandMap::operator[](const string &cmd)
 	      cmdmap["calldef"]->doit(c + " " + p);
 	  } else {
 	      try {
-		  string macro = findFirstDef(c);
+		  std::string macro = findFirstDef(c);
 		  cmdmap["calldef"]->doit(macro + " " + p);
-	      } catch (string error) {
+	      } catch (std::string error) {
 		  Command* action = findFirst(c);
 		  if (action!=NULL) {
 		      action->doit(p);
 		      return;
 		  } else
-		      throw string("bad command");
+		      throw std::string("bad command");
 	      }
 	  }
       }
 }
 
-string
-CommandMap::findFirstDef( const string &c ) const
+std::string
+CommandMap::findFirstDef( const std::string &c ) const
 {
-  for (map<string, vector<string> >::const_iterator it = defmap.begin();
+  for (std::map<std::string, std::vector<std::string> >::const_iterator it = defmap.begin();
       it != defmap.end(); it++)
     if (it->first.find(c)==0) 
       return it->first;
-  throw string("bad command");
+  throw std::string("bad command");
 }
 
 Command*
-CommandMap::findFirst( const string &c ) const
+CommandMap::findFirst( const std::string &c ) const
 {
-  for (map<string, Command*>::const_iterator it = cmdmap.begin();
+  for (std::map<std::string, Command*>::const_iterator it = cmdmap.begin();
       it != cmdmap.end(); it++)
     if (it->first.find(c)==0) 
       return it->second;
@@ -116,21 +116,21 @@ CommandMap::findFirst( const string &c ) const
 }
 
 void
-CommandMap::setKey(char key, const string &cmd)
+CommandMap::setKey(char key, const std::string &cmd)
 {
   try {
-    string c = findFirstDef(arg0(cmd));
+    std::string c = findFirstDef(arg0(cmd));
     keymap[key] = cmd;
-  } catch (string error) {
+  } catch (std::string error) {
     Command* action = findFirst(arg0(cmd));
     if (action==NULL)
-      throw string("setKey: bad commandname");
+      throw std::string("setKey: bad commandname");
     keymap[key] = cmd;
   }
 }
 
 void
-CommandMap::help( const string &cmd )
+CommandMap::help( const std::string &cmd )
 {
   if (cmdmap.count(arg0(cmd))) 
     cmdmap[arg0(cmd)]->help(args(cmd));
@@ -139,7 +139,7 @@ CommandMap::help( const string &cmd )
     if (action!=NULL)
       action->help(args(cmd));
     else
-      throw string("help: no such topic");
+      throw std::string("help: no such topic");
   }
 }
 
@@ -149,8 +149,8 @@ CommandMap::operator[](char key)
   (*this)[keymap[key]];
 }
 
-string
-CommandMap::arg0(string s) const
+std::string
+CommandMap::arg0( std::string s ) const
 {
   while( s.size() > 0 && s[0] == ' ' )
       s.erase( 0, 1 );
@@ -161,8 +161,8 @@ CommandMap::arg0(string s) const
     return s.erase(sep,s.size());
 }
 
-string
-CommandMap::args(string s) const
+std::string
+CommandMap::args( std::string s ) const
 {
   while( s.size() > 0 && s[0] == ' ' )
       s.erase( 0, 1 );
@@ -175,10 +175,10 @@ CommandMap::args(string s) const
   return s;
 }
 
-vector<string>
-CommandMap::splitCommands( string s )
+std::vector<std::string>
+CommandMap::splitCommands( std::string s )
 {
-      vector<string> cmds;
+      std::vector<std::string> cmds;
       size_t start = 0, end;
       for( end = start; end < s.size(); end++ ){
 #ifdef I_KNOW_WHAT_IAM_DOING
@@ -198,7 +198,7 @@ CommandMap::splitCommands( string s )
       cmds.push_back( s.substr( start, end-start ) );
 #ifdef DEBUG
       if( cmds.size() != 1 )
-	  for( vector<string>::const_iterator it = cmds.begin();
+	  for( std::vector<std::string>::const_iterator it = cmds.begin();
 		  it != cmds.end(); it++ ){
 	      printdebug( "cmd: '%s'\n", it->c_str() );
 	  }

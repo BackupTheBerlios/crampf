@@ -12,7 +12,7 @@
 extern Playlist* plist;
 
 void
-ListTracks::doit( const string &s )
+ListTracks::doit( const std::string &s )
 {
   unsigned int pos;
   if( s.empty() )
@@ -34,7 +34,7 @@ ListTracks::doit( const string &s )
 }
 
 void
-ListTracks::help( const string &s ) const
+ListTracks::help( const std::string &s ) const
 {
   printf("format: list [<position>]\n");
   printf("description: list 20 tracks starting at position\n");

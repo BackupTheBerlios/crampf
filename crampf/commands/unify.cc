@@ -7,9 +7,9 @@
 extern Playlist* plist;
 
 void
-Unify::doit( const string &s )
+Unify::doit( const std::string &s )
 {
-  stack<Playlist::iterator> stck;
+  std::stack<Playlist::iterator> stck;
   for (Playlist::iterator it = plist->begin();
       it != plist->end(); it++) {
     Playlist::const_iterator at = it;
@@ -36,7 +36,7 @@ Unify::doit( const string &s )
       */
 
 void
-Unify::help( const string &s ) const
+Unify::help( const std::string &s ) const
 {
   printf("format: unify\n");
   printf("description: removes multiple entries in playlist\n");

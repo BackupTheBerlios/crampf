@@ -55,7 +55,7 @@ void Config::initdefaults(struct options* op)
     op->cmdmap["map 0 vol 00"];
     op->cmdmap["map f filename"];
     op->cmdmap["map \040 next"];
-  } catch (string error) {
+  } catch (std::string error) {
     printf("keytable init error: `%s'\n",error.c_str());
   }
 }
@@ -186,28 +186,28 @@ void Config::getopts(int argc, char** argv)
     if (!cmdopts.configfile.empty()) {
       try {
         readconfig(cmdopts.configfile);
-      } catch (string error) {
+      } catch (std::string error) {
         fprintf(stderr,"config-error: %s\n", error.c_str());
       }
     } else { // using default
       try {
         readconfig("~/.crampfrc");
-      } catch (string error) {
+      } catch (std::string error) {
         fprintf(stderr,"config-error: %s\n", error.c_str());
       }
     }
   }
   /* overwrite cmdline options over configoptions */
-  for (vector<string>::const_iterator it = cmdopts.mp3SearchPaths.begin();
+  for (std::vector<std::string>::const_iterator it = cmdopts.mp3SearchPaths.begin();
       it != cmdopts.mp3SearchPaths.end(); it++)
     opts.mp3SearchPaths.push_back(*it);
-  for (vector<string>::const_iterator it = cmdopts.negativeFilterFiles.begin();
+  for (std::vector<std::string>::const_iterator it = cmdopts.negativeFilterFiles.begin();
       it != cmdopts.negativeFilterFiles.end(); it++)
     opts.negativeFilterFiles.push_back(*it);
-  for (vector<string>::const_iterator it = cmdopts.positiveFilterFiles.begin();
+  for (std::vector<std::string>::const_iterator it = cmdopts.positiveFilterFiles.begin();
       it != cmdopts.positiveFilterFiles.end(); it++)
     opts.positiveFilterFiles.push_back(*it);
-  for (vector<string>::const_iterator it = cmdopts.playlistfiles.begin();
+  for (std::vector<std::string>::const_iterator it = cmdopts.playlistfiles.begin();
       it != cmdopts.playlistfiles.end(); it++)
     opts.playlistfiles.push_back(*it);
   if (cmdopts.playercmd!="") 
@@ -224,7 +224,7 @@ void Config::getopts(int argc, char** argv)
     opts.titlewidth=cmdopts.titlewidth;
 }
 
-void Config::readconfig( string filename ) 
+void Config::readconfig( std::string filename ) 
 {
   filename = "source " + filename;
   opts.cmdmap[filename];

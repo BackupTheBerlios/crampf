@@ -11,13 +11,13 @@
 
 class Autocommand : public Command {
   private:
-      map<string,string> actionmap;
+      std::map<std::string,std::string> actionmap;
   public:
     Autocommand();
-    void doit( const string &s );
-    void help( const string &s ) const;
+    void doit( const std::string &s );
+    void help( const std::string &s ) const;
     void description() const;
-    bool evtcb( const string &msg );
+    bool evtcb( const std::string &msg );
 };
 
 #endif

@@ -1,5 +1,5 @@
 //
-// $Id: playlist.hh,v 1.15 2002/07/02 16:28:54 logic Exp $
+// $Id: playlist.hh,v 1.16 2002/12/24 19:51:48 logic Exp $
 //
 
 #ifndef PLAYLIST_HH
@@ -12,33 +12,36 @@
 
 #define MAXFILENAMELENGTH 1024
 
-class Playlist : public vector<Track>
+class Playlist : public std::vector<Track>
 {
   public:
     Playlist();
-    void addPath( const string &path );
-    void addPath( const vector<string> &path );
-    void addPlaylist( string filename );
-    void addPlaylist( const vector<string> &filenames );
-    void savePlaylist( string filename );
-    void positiveFilter( const string &flt );
-    void positiveFilter( const vector<string> &flt );
-    void negativeFilter( const string &flt );
-    void negativeFilter( const vector<string> &flt );
-    void loadNegativeFilter( const string &filename );
-    void loadPositiveFilter( const string &filename );
-    void loadNegativeFilter( const vector<string> &filenames );
-    void loadPositiveFilter( const vector<string> &filenames );
+    void addPath( const std::string &path );
+    void addPath( const std::vector<std::string> &path );
+    void addPlaylist( std::string filename );
+    void addPlaylist( const std::vector<std::string> &filenames );
+    void savePlaylist( std::string filename );
+    void positiveFilter( const std::string &flt );
+    void positiveFilter( const std::vector<std::string> &flt );
+    void negativeFilter( const std::string &flt );
+    void negativeFilter( const std::vector<std::string> &flt );
+    void loadNegativeFilter( const std::string &filename );
+    void loadPositiveFilter( const std::string &filename );
+    void loadNegativeFilter( const std::vector<std::string> &filenames );
+    void loadPositiveFilter( const std::vector<std::string> &filenames );
     void shuffle();
     Track operator++();
     Track operator++( int ) { return ++(*this); }
     Track operator--();
     Track operator*() const;
     unsigned int pos() const;
+    /* position defaults to current track */
+    const_iterator ConstIterator( int pos = -1 ) const;
+    iterator Iterator( int pos = -1 );
     void jump(int newpos);
   private:
-    vector<string> loadFilterFile( const string &filename );
-    void addTrack( const string &path, string filename );
+    std::vector<std::string> loadFilterFile( const std::string &filename );
+    void addTrack( const std::string &path, std::string filename );
     void addTrack(FILE* fp);
     int current;
 };

@@ -10,13 +10,13 @@
 #include "quit.hh"
 
 void
-Quit::doit( const string &s )
+Quit::doit( const std::string &s )
 {
-  throw string("quit");
+  throw std::string("quit");
 }
 
 void
-Quit::help( const string &s ) const
+Quit::help( const std::string &s ) const
 {
   printf("quit -- guess what it does :-)\n");
   printf("see also: exit\n");

@@ -6,7 +6,7 @@
 extern struct options* opts;
 
 void
-GenerateTitles::doit( const string &s )
+GenerateTitles::doit( const std::string &s )
 {
   if (s.empty())
     printf("generatetitles: %s\n",(opts->generateTitles)?"Yes":"No");
@@ -27,7 +27,7 @@ GenerateTitles::doit( const string &s )
 }
 
 void
-GenerateTitles::help( const string &s ) const
+GenerateTitles::help( const std::string &s ) const
 {
   printf("format: generatetitles [<value>]\n");
   printf("description: When turned on strips off search path from track\n");

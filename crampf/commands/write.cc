@@ -8,7 +8,7 @@
 extern Playlist* plist;
 
 void
-Write::doit( const string &s )
+Write::doit( const std::string &s )
 {
   if (s.empty()) {
     if (filename.empty()) {
@@ -31,7 +31,7 @@ Write::doit( const string &s )
 }
 
 void
-Write::help( const string &s ) const
+Write::help( const std::string &s ) const
 {
   printf("format: write [<filename>]\n");
   printf("description: write contents of playlist to file <filename>\n");

@@ -1,5 +1,5 @@
 //
-// $Id: echo.hh,v 1.1 2002/07/01 14:38:46 logic Exp $
+// $Id: echo.hh,v 1.2 2002/12/24 19:51:50 logic Exp $
 //
 
 #ifndef __ECHO_HH
@@ -10,8 +10,8 @@
 
 class Echo : public Command {
   public:
-    void doit( const string &s );
-    void help( const string &s ) const;
+    void doit( const std::string &s );
+    void help( const std::string &s ) const;
     void description() const;
 };
 

@@ -10,7 +10,7 @@ class ReadLineInterface {
     ReadLineInterface();
     ~ReadLineInterface();
     void input();
-    void input( const string &s );
+    void input( const std::string &s );
   private:
     void initialize_readline();
 };

@@ -4,7 +4,7 @@
 #include <string>
 #include "file.hh"
 
-File::File( string filename )
+File::File( std::string filename )
 {
   if (filename[0]=='~') { // replace ~ with users home
     filename.erase(filename.begin());
@@ -12,7 +12,7 @@ File::File( string filename )
   }
   fp = fopen(filename.c_str(), "r");
   if (fp==NULL)
-    throw string(string("file:") + " " + string(strerror(errno)));
+    throw std::string(std::string("file:") + " " + std::string(strerror(errno)));
   linenumber = 0;
 }
 
@@ -22,7 +22,7 @@ File::linenum()
   return linenumber;
 }
 
-string
+std::string
 File::operator++()
 {
 #define MAXLINEWIDTH 1024
@@ -35,7 +35,7 @@ File::operator++()
     } else 
       return ++(*this);
   } else
-    throw string("end of file");
+    throw std::string("end of file");
 }
 
 File::~File()

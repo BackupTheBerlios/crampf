@@ -9,13 +9,13 @@
 extern Playlist* plist;
 
   void
-Shuffle::doit( const string &s )
+Shuffle::doit( const std::string &s )
 {
   plist->shuffle();
 }
 
 void
-Shuffle::help( const string &s ) const
+Shuffle::help( const std::string &s ) const
 {
   printf("format: shuffle\n");
   printf("description: scrambles the playlist\n");

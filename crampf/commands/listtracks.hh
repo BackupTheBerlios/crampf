@@ -1,5 +1,5 @@
 //
-// $Id: listtracks.hh,v 1.3 2002/06/04 12:04:18 logic Exp $
+// $Id: listtracks.hh,v 1.4 2002/12/24 19:51:50 logic Exp $
 //
 
 #ifndef LISTTRACKS_HH
@@ -10,8 +10,8 @@
 
 class ListTracks : public Command {
   public:
-    void doit( const string &s );
-    void help( const string &s ) const;
+    void doit( const std::string &s );
+    void help( const std::string &s ) const;
     void description() const;
 };
 

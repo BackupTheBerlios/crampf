@@ -1,5 +1,5 @@
 //
-// $Id: interface.hh,v 1.22 2002/07/01 14:35:30 logic Exp $
+// $Id: interface.hh,v 1.23 2002/12/24 19:51:48 logic Exp $
 //
 
 #ifndef INTERFACE_HH
@@ -22,7 +22,7 @@ class Interface {
     ReadLineInterface rli;
     ReadLineInterface search_rli;
     void use_rli();
-    void use_search_rli( const string &s );
+    void use_search_rli( const std::string &s );
     void singlekeyTerm() const;
     void restoreTerm() const;
     void detectSoundCard();

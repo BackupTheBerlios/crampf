@@ -8,7 +8,7 @@
 extern struct options* opts;
 
 void
-Loop::doit( const string &s )
+Loop::doit( const std::string &s )
 {
   if (s.empty()) {
     printf("loop: %d\n",opts->loop);
@@ -18,7 +18,7 @@ Loop::doit( const string &s )
 }
 
 void
-Loop::help( const string &s ) const
+Loop::help( const std::string &s ) const
 {
   printf("format: loop <number>\n");
   printf("description: whenever the playlist reaches the end the value\n");

@@ -16,7 +16,7 @@ Help::Help( CommandMap* c )
 }
 
 void
-Help::doit( const string &s )
+Help::doit( const std::string &s )
 {
   if (!s.empty())
     cmap->help(s);
@@ -24,7 +24,7 @@ Help::doit( const string &s )
     printf("crampf readline interface online help\n");
     printf("-------------------------------------\n");
     printf("avaible commands:\n");
-    for (map<string,Command*>::const_iterator it = cmap->cmdmap.begin();
+    for (std::map<std::string,Command*>::const_iterator it = cmap->cmdmap.begin();
         it != cmap->cmdmap.end(); it++) {
       for (int len = printf("\t%s",it->first.c_str()); len<20; len++)
         printf(" ");
@@ -35,7 +35,7 @@ Help::doit( const string &s )
 }
 
 void
-Help::help( const string &s ) const
+Help::help( const std::string &s ) const
 {
   printf("format: help [<command>]\n");
   printf("description: list all commands avaible, or specific help\n");

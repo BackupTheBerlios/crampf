@@ -6,7 +6,7 @@
 extern struct options* opts;
 
 void
-PlayerCMD::doit( const string &s )
+PlayerCMD::doit( const std::string &s )
 {
   if (s.empty()) {
     printf("playercmd: %s\n",opts->playercmd.c_str());
@@ -16,7 +16,7 @@ PlayerCMD::doit( const string &s )
 }
 
 void
-PlayerCMD::help( const string &s ) const
+PlayerCMD::help( const std::string &s ) const
 {
   printf("format: playercmd [<playercmd>]\n");
   printf("description: gets/set the mp3player command.\n");

@@ -6,13 +6,13 @@
 extern struct options* opts;
 
 void
-Exit::doit( const string &s )
+Exit::doit( const std::string &s )
 {
-      throw string("exit");
+      throw std::string("exit");
 }
 
 void
-Exit::help( const string &s ) const
+Exit::help( const std::string &s ) const
 {
   printf("format: exit\n");
   printf("description: Simmilar to quit. Exits the userinterface and\n");

@@ -1,5 +1,5 @@
 //
-// $Id: file.hh,v 1.4 2002/06/01 17:27:35 logic Exp $
+// $Id: file.hh,v 1.5 2002/12/24 19:51:48 logic Exp $
 //
 
 #ifndef FILE_HH
@@ -10,10 +10,10 @@
 
 class File {
   public:
-    File( string filename );
+    File( std::string filename );
     ~File();
     int linenum();
-    string operator++();
+    std::string operator++();
   private:
     FILE* fp;
     int linenumber;

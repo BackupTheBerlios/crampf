@@ -18,24 +18,24 @@ RSearch::RSearch( CommandMap* c )
 }
 
 void
-RSearch::doit( const string &s )
+RSearch::doit( const std::string &s )
 {
   int newpos;
   if (!s.empty())
     cmap->searchstr = s;
   if (cmap->searchstr.empty())
-    throw string("rsearch: no searchstring");
+    throw std::string("rsearch: no searchstring");
   try {
     newpos = rsearch(cmap->searchstr);
     plist->jump(newpos);
     player->play();
-  } catch (string error) {
+  } catch (std::string error) {
     printf("rsearch: %s\n",error.c_str());
   }
 }
 
 void
-RSearch::help( const string &s ) const
+RSearch::help( const std::string &s ) const
 {
   printf("format: rsearch [<substring>]\n");
   printf("description: searches backward for the occurence of <substring>\n");
@@ -52,7 +52,7 @@ RSearch::description() const
 }
 
 int
-RSearch::rsearch( const string &s ) const
+RSearch::rsearch( const std::string &s ) const
 {
   if (opts->regexp || !opts->casesensivity) {
       /* new regexp part */
@@ -87,5 +87,5 @@ RSearch::rsearch( const string &s ) const
 	      }
       }
   }
-  throw string("pattern not found");
+  throw std::string("pattern not found");
 }

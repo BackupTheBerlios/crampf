@@ -6,7 +6,7 @@
 extern struct options* opts;
 
 void
-PlayerCMD_Args::doit( const string &s )
+PlayerCMD_Args::doit( const std::string &s )
 {
   if (s.empty()) {
     printf("playercmd_args: %s\n",opts->playercmd_args.c_str());
@@ -17,7 +17,7 @@ PlayerCMD_Args::doit( const string &s )
 }
 
 void
-PlayerCMD_Args::help( const string &s ) const
+PlayerCMD_Args::help( const std::string &s ) const
 {
   printf("format: playercmd_args [<args>]\n");
   printf("description: gets/sets mp3play arguments.\n");

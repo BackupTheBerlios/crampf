@@ -10,15 +10,15 @@ Source::Source( CommandMap* c )
 }
 
 void
-Source::doit( const string &s )
+Source::doit( const std::string &s )
 {
   File f(s);
-  string cmd;
+  std::string cmd;
   while (1) {
     try {
       cmd = ++f;
       (*cmap)[cmd];
-    } catch (string error) {
+    } catch (std::string error) {
       if (error=="end of file")
         return;
       printf("source(%s,line %d): %s \"%s\"\n", s.c_str(),f.linenum(),error.c_str(), cmd.c_str());
@@ -27,7 +27,7 @@ Source::doit( const string &s )
 }
 
 void
-Source::help( const string &s ) const
+Source::help( const std::string &s ) const
 {
   printf("format: source <filename>\n");
   printf("description: read and executes commands from file <filename>\n");

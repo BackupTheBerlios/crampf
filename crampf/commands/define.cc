@@ -13,7 +13,7 @@ Define::Define( CommandMap* c )
 }
 
 void
-Define::doit( const string &s )
+Define::doit( const std::string &s )
 {
   if (s.empty())
     showdefines();
@@ -27,7 +27,7 @@ Define::doit( const string &s )
 }
 
 void
-Define::help( const string &s ) const
+Define::help( const std::string &s ) const
 {
   printf("format: define\n");
   printf("    or: define <macroname>\n");
@@ -44,11 +44,11 @@ Define::description() const
 }
 
 void
-Define::adddef(string s)
+Define::adddef( std::string s )
 {
   char pstr[s.size()];
   sscanf(s.c_str(),"%[^=]",pstr);
-  string defname = pstr;
+  std::string defname = pstr;
   s.erase(0,s.find('=')+1);
   if (cmap->defmap.count(defname)>0) {
     cmap->defmap[defname].erase(cmap->defmap[defname].begin(),cmap->defmap[defname].end());
@@ -60,10 +60,10 @@ Define::adddef(string s)
 }
 
 void
-Define::showdefine( const string &s ) const
+Define::showdefine( const std::string &s ) const
 {
   printf("define: %s\n",s.c_str());
-  for (vector<string>::const_iterator it = cmap->defmap[s].begin();
+  for (std::vector<std::string>::const_iterator it = cmap->defmap[s].begin();
       it != cmap->defmap[s].end(); it++)
     printf("\t%s\n",it->c_str());
 }
@@ -72,7 +72,7 @@ void
 Define::showdefines() const
 {
   printf("--defined-macros--\n");
-  for (map<string,vector<string> >::const_iterator it = cmap->defmap.begin();
+  for (std::map<std::string,std::vector<std::string> >::const_iterator it = cmap->defmap.begin();
       it != cmap->defmap.end(); it++)
     printf("\t%s\n",it->first.c_str());
 }

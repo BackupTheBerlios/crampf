@@ -6,13 +6,13 @@
 extern Playlist* plist;
 
 void
-LoadPlaylist::doit( const string &s )
+LoadPlaylist::doit( const std::string &s )
 {
   plist->addPlaylist(s);
 }
 
 void
-LoadPlaylist::help( const string &s ) const
+LoadPlaylist::help( const std::string &s ) const
 {
   printf("format: loadplaylist <filename>\n");
   printf("description: adds contents of playlist <filename> to the\n");

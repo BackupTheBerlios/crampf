@@ -15,7 +15,7 @@ extern Playlist* plist;
 extern struct options* opts;
 
 void
-Status::doit( const string &s )
+Status::doit( const std::string &s )
 {
       if( plist->size() <= plist->pos() )
 	  plist->jump( plist->pos() );
@@ -44,7 +44,7 @@ Status::doit( const string &s )
 }
 
 void
-Status::help( const string &s ) const
+Status::help( const std::string &s ) const
 {
   printf("format: status\n");
   printf("description: shows track number and title\n");

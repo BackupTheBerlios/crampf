@@ -17,24 +17,24 @@ Search::Search( CommandMap* c )
 }
 
 void
-Search::doit( const string &s )
+Search::doit( const std::string &s )
 {
   int newpos;
   if (!s.empty())
     cmap->searchstr = s;
   if (cmap->searchstr.empty())
-    throw string("search: no searchstring");
+    throw std::string("search: no searchstring");
   try {
     newpos = search(cmap->searchstr);
     plist->jump(newpos);
     player->play();
-  } catch (string error) {
+  } catch (std::string error) {
     printf("search: %s\n",error.c_str());
   }
 }
 
 void
-Search::help( const string &s ) const
+Search::help( const std::string &s ) const
 {
   printf("format: search [<substring>]\n");
   printf("description: searches for the next occurence of <substring>\n");
@@ -51,7 +51,7 @@ Search::description() const
 }
 
 int
-Search::search( const string &s ) const
+Search::search( const std::string &s ) const
 {
   if (opts->regexp || !opts->casesensivity) {
       /* new regexp part */
@@ -85,5 +85,5 @@ Search::search( const string &s ) const
 	      }
       }
   }
-  throw string("pattern not found");
+  throw std::string("pattern not found");
 }

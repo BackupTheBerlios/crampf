@@ -11,7 +11,7 @@
 #include "set.hh"
 
 void
-Set::doit( const string &s )
+Set::doit( const std::string &s )
 {
   if (s=="list" || s=="all" || s=="show") {
     printf("---Options---\n");
@@ -21,7 +21,7 @@ Set::doit( const string &s )
 }
 
 void
-Set::help( const string &s ) const
+Set::help( const std::string &s ) const
 {
   printf("format: set <optionname>\n");
   printf("    or: set <optionname>=<value>\n");

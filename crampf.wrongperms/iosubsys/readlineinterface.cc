@@ -6,19 +6,29 @@
 #include <string.h>
 #include <stdio.h>
 #include <stdlib.h>
-extern "C" {
-#include <readline/readline.h>
-#undef CTRL
-#include <readline/history.h>
-}
+#include <config.h>
+#ifdef HAVE_RL_COMPLETION_MATCHES
+#  include <readline/readline.h>
+#  include <readline/history.h>
+#else
+  /* Backwards compatibility hack for rh6.0 systems :( */
+  extern "C" {
+#  include <readline/readline.h>
+#  define rl_completion_matches completion_matches
+#  undef CTRL
+#  include <readline/history.h>
+  }
+#endif
+
 #include "config.hh"
 #include "readlineinterface.hh"
 
+
 extern struct options* opts;
 
-char *crampf_command_generator( char *text, int state ){
-    static map<string,Command*>::const_iterator cmd_it;
-    static map<string,vector<string> >::const_iterator def_it;
+char *crampf_command_generator( const char *text, int state ){
+    static std::map<std::string,Command*>::const_iterator cmd_it;
+    static std::map<std::string,std::vector<std::string> >::const_iterator def_it;
     static int count, len;
     if( !state ){
 	count = 0;
@@ -39,10 +49,10 @@ char *crampf_command_generator( char *text, int state ){
     return (char*)NULL;
 }
 
-char **crampf_completion( char *text, int start, int end ){
+char **crampf_completion( const char *text, int start, int end ){
     char **matches = (char**)NULL;
     if( start == 0 )
-	matches = completion_matches( text, crampf_command_generator );
+	matches = rl_completion_matches( text, crampf_command_generator );
     return matches;
 }
 
@@ -56,7 +66,12 @@ void
 ReadLineInterface::initialize_readline()
 {
   rl_readline_name = "crampf";
+#if !defined (_RL_FUNCTION_TYPEDEF)
+  /* Backwards compatibility hack for rh6.0 systems :( */
   rl_attempted_completion_function = (CPPFunction*)crampf_completion;
+#else
+  rl_attempted_completion_function = (rl_completion_func_t*)crampf_completion;
+#endif
 }
 
 ReadLineInterface::~ReadLineInterface()
@@ -71,7 +86,7 @@ ReadLineInterface::input()
     add_history(cmd);
     try {
       opts->cmdmap[cmd];
-    } catch (string error) {
+    } catch (std::string error) {
       if (error=="quit" || error=="exit")
         throw error;
       printf("error: `%s'\n",error.c_str());
@@ -81,22 +96,22 @@ ReadLineInterface::input()
 }
 
 void
-ReadLineInterface::input( const string &s )
+ReadLineInterface::input( const std::string &s )
 {
-  string cmd;
+  std::string cmd;
   char prompt[ s.length() ];
   strcpy( prompt, s.c_str() );
   char *searchstr = readline( prompt );
   if (searchstr && *searchstr) 
     add_history(searchstr);
   try {
-    string cmd = string(searchstr);;
+    std::string cmd = std::string(searchstr);;
     if (s[0]=='/')
-      cmd=string("search ") + cmd;
+      cmd=std::string("search ") + cmd;
     if (s[0]=='?')
       cmd="rsearch " + cmd;
     opts->cmdmap[cmd];
-  } catch (string error) {
+  } catch (std::string error) {
     if (error=="quit" || error=="exit")
       throw error;
     printf("error: `%s'\n",error.c_str());
@@ -104,3 +119,7 @@ ReadLineInterface::input( const string &s )
   free(searchstr);
 }
 
+#ifndef HAVE_RL_COMPLETION_MATCHES
+  /* Backwards compatibility hack for rh6.0 systems :( */
+#  undef rl_completion_matches
+#endif

@@ -5,14 +5,14 @@
 #include <stdio.h>
 
 void
-Version::doit( const string &s )
+Version::doit( const std::string &s )
 {
   printf("crampf %s (C) 1999 by logic@tzi.org under GPL2\n",VERSION);
   printf("please send bugreports to logic@tzi.org\n");
 }
 
 void
-Version::help( const string &s ) const
+Version::help( const std::string &s ) const
 {
   printf("format: version\n");
   printf("description: prints out version information\n");

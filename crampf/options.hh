@@ -1,5 +1,5 @@
 //
-// $Id: options.hh,v 1.20 2002/07/02 16:28:54 logic Exp $
+// $Id: options.hh,v 1.21 2002/12/24 19:51:48 logic Exp $
 //
 
 #ifndef CONFIG_HH
@@ -14,25 +14,25 @@
 #define FILELINEWIDTH 128    /* max config and filter file linewidth */
 
 struct options {
-  string                configfile;
-  bool                  readconfig;
-  vector<string>        playlistfiles;
-  bool                  randomOrder;
-  bool                  generateTitles;
-  int                   loop;
-  unsigned int          titlewidth;
-  unsigned int          volume;
-  int			regexp;	/* regexp level (0=no, 1=std, 2=extended)*/
-  bool			casesensivity;
-  char                  soundcard; /* s = UltraSound, w = SB-Clone */
-  vector<string>        negativeFilterFiles;
-  vector<string>        negativeFilter;
-  vector<string>        positiveFilterFiles;
-  vector<string>        positiveFilter;
-  string                playercmd;
-  string                playercmd_args;
-  vector<string>        mp3SearchPaths;
-  CommandMap            cmdmap;
+  std::string              configfile;
+  bool                     readconfig;
+  std::vector<std::string> playlistfiles;
+  bool                     randomOrder;
+  bool                     generateTitles;
+  int                      loop;
+  unsigned int             titlewidth;
+  unsigned int             volume;
+  int                      regexp;	/* regexp level (0=no, 1=std, 2=extended)*/
+  bool                     casesensivity;
+  char                     soundcard; /* s = UltraSound, w = SB-Clone */
+  std::vector<std::string> negativeFilterFiles;
+  std::vector<std::string> negativeFilter;
+  std::vector<std::string> positiveFilterFiles;
+  std::vector<std::string> positiveFilter;
+  std::string              playercmd;
+  std::string              playercmd_args;
+  std::vector<std::string> mp3SearchPaths;
+  CommandMap               cmdmap;
 };
 
 class Config {
@@ -42,7 +42,7 @@ class Config {
   private:
     void getopts(int argc, char** argv);
     /* Achtung: Eventuell noch '\n' beim parsen beachten! */
-    void readconfig( string filename );
+    void readconfig( std::string filename );
     void initdefaults(struct options* op);
   
     struct options opts;

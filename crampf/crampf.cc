@@ -34,7 +34,7 @@ int main(int argc, char** argv)
 	  autocmdmap["start"].trigger();
 	  iface.mainloop();
 	  autocmdmap["exit"].trigger();
-      } catch (string m) {
+      } catch (std::string m) {
 	  printf("%s\n",(const char*)m.c_str());
       }
       return 0;

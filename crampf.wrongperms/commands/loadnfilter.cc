@@ -6,13 +6,13 @@
 extern Playlist* plist;
 
 void
-LoadNFilter::doit( const string &s )
+LoadNFilter::doit( const std::string &s )
 {
   plist->loadNegativeFilter( s );
 }
 
 void
-LoadNFilter::help( const string &s ) const
+LoadNFilter::help( const std::string &s ) const
 {
   printf("format: loadnfilter <filterfile>\n");
   printf("description: does a nfilter command with each line of the\n");

@@ -30,6 +30,7 @@ dnl Checks for libraries.
 dnl Replace `main' with a function in -lreadline:
 AC_CHECK_LIB(termcap, tgetnum,,exit 1)
 AC_CHECK_LIB(readline, readline,,exit 1)
+AC_CHECK_FUNCS(rl_completion_matches)
 
 dnl Checks for header files.
 AC_HEADER_STDC

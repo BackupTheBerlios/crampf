@@ -6,7 +6,7 @@
 extern struct options* opts;
 
 void
-RandomOrder::doit( const string &s )
+RandomOrder::doit( const std::string &s )
 {
   if (s.empty()) {
     printf("randomorder: %s\n",(opts->randomOrder)?"yes":"no");
@@ -24,13 +24,13 @@ RandomOrder::doit( const string &s )
         opts->randomOrder = false;
         break;
       default:
-        throw string("randomorder: bad parameter");
+        throw std::string("randomorder: bad parameter");
     }
   }
 }
 
 void
-RandomOrder::help( const string &s ) const
+RandomOrder::help( const std::string &s ) const
 {
   printf("format: randomorder [<yes|no>]\n");
   printf("description: if activated playlist is shuffled at startup.\n");

@@ -11,12 +11,12 @@ Track::Track( FILE* fp )
 #define MAXLINEWIDTH 8192
   char line[MAXLINEWIDTH];
   if (fgets(line,MAXLINEWIDTH,fp)==NULL)
-    throw string("error reading playlist");
+    throw std::string("error reading playlist");
   char f[MAXLINEWIDTH];
   char c[MAXLINEWIDTH];
   if (sscanf(line,"\"%[^\"]\";\"%[^\"]\";\"%d\"",f,c,&rating) == 0) {
       /* playlist has bad format, try to load it in the `old' way */
-      string trackname = string(line);
+      std::string trackname = std::string(line);
       /* strip '\n' */
       trackname.erase(trackname.length()-1,trackname.length());
       fullname=trackname;
@@ -28,7 +28,7 @@ Track::Track( FILE* fp )
   }
 }
 
-Track::Track( const string &name )
+Track::Track( const std::string &name )
 {
   fullname = name;
   rating = 0;
@@ -40,7 +40,7 @@ Track::write( FILE* fp )
   fprintf(fp,"\"%s\";\"%s\";\"%d\"\n",fullname.c_str(),callsign.c_str(),rating);
 }
 
-string 
+std::string 
 Track::title( void ) const
 {
   if (!callsign.empty())
@@ -50,7 +50,7 @@ Track::title( void ) const
 }
 
 void   
-Track::title( const string &s )
+Track::title( const std::string &s )
 {
   callsign = s;
 }
@@ -67,7 +67,7 @@ Track::rate( int r )
   rating = r;
 }
 
-string 
+std::string 
 Track::filename( void ) const
 {
   return fullname;
@@ -83,4 +83,10 @@ bool
 Track::operator==( const Track &other ) const
 {
       return filename() == other.filename();
+}
+
+bool
+Track::operator!=( const Track &other ) const
+{
+      return filename() != other.filename();
 }

@@ -1,5 +1,5 @@
 //
-// $Id: search.hh,v 1.5 2002/06/04 12:04:18 logic Exp $
+// $Id: search.hh,v 1.6 2002/12/24 19:51:50 logic Exp $
 //
 
 #ifndef SEARCH_HH
@@ -12,12 +12,12 @@
 class Search : public Command {
   public: 
     Search( CommandMap *c );
-    void doit( const string &s );
-    void help( const string &s ) const;
+    void doit( const std::string &s );
+    void help( const std::string &s ) const;
     void description() const;
   private:
     CommandMap* cmap;
-    int search( const string &s ) const;
+    int search( const std::string &s ) const;
 };
 
 #endif

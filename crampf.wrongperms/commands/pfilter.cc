@@ -6,15 +6,15 @@
 extern Playlist* plist;
 
 void
-PFilter::doit( const string &s )
+PFilter::doit( const std::string &s )
 {
   if (s.empty())
-    throw string("filter: parameter missing!");
+    throw std::string("filter: parameter missing!");
   plist->positiveFilter(s);
 }
 
 void
-PFilter::help( const string &s ) const
+PFilter::help( const std::string &s ) const
 {
   printf("format: pfilter <word>\n");
   printf("description: filters all tracks out of the playlist which\n");

@@ -15,20 +15,20 @@ class CommandMap {
   public:
     CommandMap();
     ~CommandMap();
-    void operator[](const string &cmd);
-    void setKey(char key, const string &cmd);
-    void help(const string &cmd);
+    void operator[](const std::string &cmd);
+    void setKey(char key, const std::string &cmd);
+    void help(const std::string &cmd);
     void operator[](char key);
-    map<string, Command*> cmdmap;
-    map<char, string> keymap;
-    map< string , vector<string> > defmap;
-    string searchstr;
+    std::map<std::string, Command*> cmdmap;
+    std::map<char, std::string> keymap;
+    std::map< std::string , std::vector<std::string> > defmap;
+    std::string searchstr;
   private:
-    Command* findFirst( const string &c ) const;
-    string findFirstDef( const string &c ) const;
-    string arg0( string s ) const;
-    string args( string s ) const;
-    vector<string> splitCommands( string s );
+    Command* findFirst( const std::string &c ) const;
+    std::string findFirstDef( const std::string &c ) const;
+    std::string arg0( std::string s ) const;
+    std::string args( std::string s ) const;
+    std::vector<std::string> splitCommands( std::string s );
     static unsigned int objcnt; /* bad hack: counts number of CommandMap-Entities
 				    only first one initializes commands */
 };

@@ -9,7 +9,7 @@
 extern Playlist* plist;
 
 void
-Sort::doit( const string &s )
+Sort::doit( const std::string &s )
 {
       Track t( *(*plist) );
       sort( plist->begin(), plist->end() );
@@ -19,7 +19,7 @@ Sort::doit( const string &s )
 }
 
 void
-Sort::help( const string &s ) const
+Sort::help( const std::string &s ) const
 {
   printf("format: sort\n");
   printf("description: sorts the playlist alphabetically\n");

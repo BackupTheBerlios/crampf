@@ -12,7 +12,7 @@ CallDef::CallDef( CommandMap* c )
 }
 
 void
-CallDef::doit( const string &s )
+CallDef::doit( const std::string &s )
 {
   char c[s.size()];
   sscanf(s.c_str(),"%s",c);
@@ -24,7 +24,7 @@ CallDef::doit( const string &s )
 }
 
 void 
-CallDef::help( const string &s ) const
+CallDef::help( const std::string &s ) const
 {
   printf("format: calldef <macroname>\n");
   printf("description: explicitly call the macro <macroname>\n");
@@ -38,9 +38,9 @@ CallDef::description() const
 }
 
 void
-CallDef::execute( const string &s )
+CallDef::execute( const std::string &s )
 {
-  for (vector<string>::const_iterator it = cmap->defmap[s].begin();
+  for (std::vector<std::string>::const_iterator it = cmap->defmap[s].begin();
       it != cmap->defmap[s].end(); it++) 
     (*cmap)[(*it)];
 }

@@ -6,7 +6,7 @@
 extern struct options* opts;
 
 void
-Case::doit( const string &s )
+Case::doit( const std::string &s )
 {
       if (s.empty()) {
 	  printf("case: %s\n",(opts->casesensivity)?"respect":"ignore");
@@ -20,7 +20,7 @@ Case::doit( const string &s )
 }
 
 void
-Case::help( const string &s ) const
+Case::help( const std::string &s ) const
 {
   printf("format: case [<value>]\n");
   printf("description: Specifies wether to ignore case in searches or not\n");

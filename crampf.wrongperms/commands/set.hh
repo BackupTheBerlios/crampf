@@ -11,8 +11,8 @@
 
 class Set : public Command {
   public:
-    void doit( const string &s );
-    void help( const string &s ) const;
+    void doit( const std::string &s );
+    void help( const std::string &s ) const;
     void description() const;
 };
 

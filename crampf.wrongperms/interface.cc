@@ -64,7 +64,7 @@ void Interface::mainloop()
 		      default:
 			  try {
 			      opts->cmdmap[c];
-			  } catch (string error) {
+			  } catch (std::string error) {
 			      if (error=="quit" || error=="exit")
 				  throw error;
 			      printf("error: `%s'\n",error.c_str());
@@ -72,7 +72,7 @@ void Interface::mainloop()
 		  } 
 	      } 
 	  }
-      } catch (string error) {
+      } catch (std::string error) {
 	  if (error!="quit" && error!="exit")
 	      printf("error: `%s'\n",error.c_str());
 	  if (error!="exit")
@@ -111,7 +111,7 @@ Interface::use_rli()
 }
 
 void
-Interface::use_search_rli( const string &s )
+Interface::use_search_rli( const std::string &s )
 {
   restoreTerm();
   search_rli.input(s);
@@ -128,7 +128,7 @@ void Interface::detectSoundCard()
   }
 #define LINEWIDTH 128
   char line[LINEWIDTH];
-  string l;
+  std::string l;
   while (fgets(line,LINEWIDTH,fp)) {
     l=line;
     if ((signed)(l.find("UltraSound"))!=-1)

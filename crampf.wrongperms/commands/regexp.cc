@@ -6,7 +6,7 @@
 extern struct options* opts;
 
 void
-RegExp::doit( const string &s )
+RegExp::doit( const std::string &s )
 {
       if (s.empty()) {
 	  printf("regexp: ");
@@ -35,13 +35,13 @@ RegExp::doit( const string &s )
 	      case 'x':			  /* e`x'tended regexps */
 	      case 'X':	opts->regexp = 2;
 			break;
-	      default: throw string("regexp: unknown option");
+	      default: throw std::string("regexp: unknown option");
 	  }
       }
 }
 
 void
-RegExp::help( const string &s ) const
+RegExp::help( const std::string &s ) const
 {
   printf("format: regexp [<value>]\n");
   printf("description: Specifies what kind of regular expressions to use\n");

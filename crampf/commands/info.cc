@@ -108,7 +108,7 @@ void show_frame( struct id3_frame *frame )
 extern Playlist* plist;
 
 void
-Info::doit( const string &s )
+Info::doit( const std::string &s )
 {
 #ifdef LIBID3TAG
   struct id3_file *file = id3_file_open( (*(*plist)).filename().c_str(), ID3_FILE_MODE_READONLY );
@@ -142,7 +142,7 @@ Info::doit( const string &s )
 }
 
 void
-Info::help( const string &s ) const
+Info::help( const std::string &s ) const
 {
   printf("format: info\n");
   printf("description: shows information on current title\n");

@@ -12,7 +12,7 @@ extern Playlist *plist;
 extern PlayerInterface *player;
 
 void
-Jump::doit( const string &s )
+Jump::doit( const std::string &s )
 {
   int pos;
   sscanf(s.c_str(),"%d",&pos);
@@ -22,18 +22,18 @@ Jump::doit( const string &s )
     pos--; /* first track is 1 for the user, 0 intern */
   try {
     plist->jump(pos);
-  } catch (string error) {
+  } catch (std::string error) {
     if (error=="empty playlist") 
-      throw string("quit");
+      throw std::string("quit");
     if (error=="end of playlist") 
-      throw string("quit");
+      throw std::string("quit");
     printf("jump error: %s\n",error.c_str());
   }
   player->play();
 }
 
 void
-Jump::help( const string &s ) const
+Jump::help( const std::string &s ) const
 {
   printf("format: jump <position>\n");
   printf("description: skips current track and jumps to track at\n");

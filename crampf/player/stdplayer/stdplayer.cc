@@ -54,10 +54,10 @@ StdPlayer::play()
 	  if (pid == 0) {
 	      perror((const char*)(*(*plist)).filename().c_str());
 	  } else {
-	      plist->erase(&(*plist)[plist->pos()]);
+	      plist->erase( plist->Iterator() );
 	      try {
 		  --(*plist);
-	      } catch (string e) {
+	      } catch (std::string e) {
 		  first_track_damaged = true;
 	      }
 	      return;
@@ -70,7 +70,7 @@ StdPlayer::play()
 	      || strcmp( PLAYER_CMD, "amp" ) == 0
 	      || strcmp( PLAYER_CMD, "alsaplayer" ) == 0)
 	  fclose(stderr); /* TODO how to redirect stderr to /dev/null? */
-      vector<string> args;
+      std::vector<std::string> args;
       int p=0;
       for (unsigned int i=opts->playercmd_args.find(" ",p); 
 	      i < opts->playercmd_args.length(); 
@@ -80,7 +80,7 @@ StdPlayer::play()
       char *argv[ args.size() + 3 ];
       argv[0] = (char*)opts->playercmd.c_str();
       p=1;
-      for (vector<string>::const_iterator it = args.begin();
+      for (std::vector<std::string>::const_iterator it = args.begin();
 	      it != args.end(); it++)
 	  argv[p++] = (char*)(it->c_str());
       argv[p++] = (char*)(*(*plist)).filename().c_str();
@@ -187,7 +187,7 @@ StdPlayer::signalHandler( int status )
   try {
     printdebug( "%s\n", "sending 'next' event"); //++(*plist);
     autocmdmap["next"].trigger();
-  } catch( string error )
+  } catch( std::string error )
   {
     printf( "%s\n", error.c_str() );
     has_finished = true;

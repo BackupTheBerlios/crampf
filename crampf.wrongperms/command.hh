@@ -11,8 +11,8 @@
 class Command {
   public:
     virtual ~Command() {}
-    virtual void doit( const string &s ) = 0;
-    virtual void help( const string &s ) const = 0;
+    virtual void doit( const std::string &s ) = 0;
+    virtual void help( const std::string &s ) const = 0;
     virtual void description() const = 0;
 };
 
