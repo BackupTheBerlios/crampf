@@ -7,7 +7,7 @@ noinst_HEADERS=addpath.hh autocommand.hh calldef.hh case.hh define.hh	 \
 	       quit.hh randomorder.hh regexp.hh rsearch.hh search.hh	 \
 	       set.hh shuffle.hh sort.hh source.hh status.hh		 \
 	       titlewidth.hh unify.hh version.hh vol.hh write.hh	 \
-	       commands.hh
+	       commands.hh genre.dat
 
 libcmds_a_SOURCES=addpath.cc autocommand.cc calldef.cc case.cc		\
 		  define.cc exit.cc filename.cc generatetitles.cc	\
@@ -20,7 +20,7 @@ libcmds_a_SOURCES=addpath.cc autocommand.cc calldef.cc case.cc		\
 		  version.cc vol.cc write.cc
 
 noinst_SCRIPTS=commands.sh
-EXTRA_DIST=commands.sh
+EXTRA_DIST=commands.sh genre.dat
 BUILT_SOURCES=commands.hh
 
 commands.hh:	commands.sh
