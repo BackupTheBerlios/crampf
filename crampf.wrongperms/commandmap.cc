@@ -10,14 +10,17 @@
 
 CommandMap::CommandMap()
 {
-  cmdmap["help"]       = new Help   (this);
-  cmdmap["set"]        = new Set    (this);
-  cmdmap["volume"]     = new Vol    ();
-  cmdmap["info"]       = new Info   ();
-  cmdmap["next"]       = new Next   ();
-  cmdmap["previous"]   = new Prev   ();
-  cmdmap["quit"]       = new Quit   ();
-  cmdmap["status"]     = new Status ();
+  cmdmap["help"]       = new Help    (this);
+  cmdmap["set"]        = new Set     (this);
+  cmdmap["volume"]     = new Vol     ();
+  cmdmap["info"]       = new Info    ();
+  cmdmap["next"]       = new Next    ();
+  cmdmap["previous"]   = new Prev    ();
+  cmdmap["quit"]       = new Quit    ();
+  cmdmap["status"]     = new Status  ();
+  cmdmap["jump"]       = new Jump    ();
+  cmdmap["addpath"]    = new AddPath ();
+  cmdmap["shuffle"]    = new Shuffle ();
 }
 
 CommandMap::~CommandMap()
@@ -70,8 +73,14 @@ CommandMap::help( string cmd )
 {
   if (cmdmap.count(arg0(cmd)))
     cmdmap[arg0(cmd)]->help(args(cmd));
-  else
-    throw string("help: no such topic");
+  else {
+    try {
+      findFirst(arg0(cmd))->help(args(cmd));
+    } catch (string error) {
+      //  else
+      throw string("help: no such topic");
+    }
+  }
 }
 
 void

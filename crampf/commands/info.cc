@@ -15,7 +15,13 @@ extern Playlist* plist;
 void
 Info::doit( string s )
 {
-  printf("not yet implemented\n");
+  int pid;
+  pid = fork();
+  if (pid==0) {
+    execlp("mp3info","mp3info",(*(*plist)).filename().c_str(),"-F 2",NULL);
+    perror("execlp(mp3info)");
+    exit(1);
+  }
 }
 
 void

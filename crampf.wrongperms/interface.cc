@@ -10,15 +10,12 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 #include <fcntl.h>
-extern "C" {
-#include <readline/readline.h>
-#include <readline/history.h>
-}
 #include <string>
 #include <map>
 #include "interface.hh"
 #include "player.hh"
 #include "config.hh"
+#include "readlineinterface.hh"
 
 Interface::Interface( void )
 {
@@ -53,7 +50,7 @@ Interface::mainloop()
       c = fgetc(stdin); 
       if (c!=EOF) {
         if (c==':') {
-          rli();
+          use_rli();
         } else {
           try {
             opts->cmdmap[c];
@@ -94,59 +91,13 @@ Interface::restoreTerm()
   }
 }
 
-/*
-void 
-Interface::info( void )
-{
-  int pid;
-  pid = fork();
-  if (pid==0) {
-    execlp("mp3info","mp3info",(*(*plist)).filename().c_str(),"-F 2",NULL);
-    perror("execlp(mp3info)");
-    exit(1);
-  }
-}
-*/
-
 void
-Interface::rli( void )
+Interface::use_rli( void )
 {
   restoreTerm();
-  char* cmd = readline(":");
-  try {
-    opts->cmdmap[cmd];
-  } catch (string error) {
-    if (error=="quit")
-      throw error;
-    printf("error: `%s'\n",error.c_str());
-  }
-  free(cmd);
+  rli.input();
   singlekeyTerm();
 }
-
-/*
-Interface::changevol(int vol)
-{
-  int pid;
-  char arg[6];
-  if (vol<0 || vol>100)
-    return -1;
-  volume = vol;
-  arg[0]='-';
-  arg[1]=opts->soundcard;
-  arg[2]=48+vol%1000/100;
-  arg[3]=48+vol%100/10;
-  arg[4]=48+vol%10;
-  arg[5]='\0';
-  pid = fork();
-  if (pid==0) {
-    execlp("aumix","aumix",arg,NULL);
-    perror("execlp(aumix)");
-    exit(1);
-  } 
-  // player will reap the child 
-}
-*/
 
 Interface::detectSoundCard()
 {
