@@ -11,7 +11,7 @@ noinst_HEADERS=autocmd.hh command.hh commandmap.hh commands.hh	\
 crampf_SOURCES=commandmap.cc options.cc crampf.cc file.cc	\
 	       playlist.cc track.cc
 
-crampf_LDADD=commands/libcmds.a util/libutil.a player/libgenplayer.a player/backends/execplayer/libexecplayer.a iosubsys/libiosubsys.a
+crampf_LDADD=commands/libcmds.a player/libgenplayer.a player/backends/execplayer/libexecplayer.a iosubsys/libiosubsys.a util/libutil.a 
 
 dist-hook:
 	@echo updating ChangeLog
