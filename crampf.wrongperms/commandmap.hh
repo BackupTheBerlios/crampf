@@ -18,11 +18,11 @@ class CommandMap {
     void setKey(char key, string cmd);
     void help(string cmd);
     void operator[](char key);
+    map<string, Command*> cmdmap;
+    map<char, string> keymap;
   private:
     string arg0( string s );
     string args( string s );
-    map<string, Command*> cmdmap;
-    map<char, string> keymap;
 };
     
 #endif

@@ -1,10 +1,11 @@
 GCC=g++
 OBJS=config.o crampf.o playlist.o player.o track.o interface.o command.o commandmap.o 
-LIBS=-lreadline
+CMDOBJS=commands/*.o
+LIBS=-lreadline -s
 PROGNAME=crampf
 
 all:    cmds $(OBJS)
-	$(GCC) $(LIBS) -o $(PROGNAME) $(OBJS) $(wildcard commands/*.o)
+	$(GCC) $(LIBS) -o $(PROGNAME) $(OBJS) $(CMDOBJS)
 
 cmds:	
 	$(MAKE) -C commands

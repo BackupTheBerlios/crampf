@@ -22,7 +22,17 @@ Help::Help( CommandMap* c )
 void
 Help::doit( string s )
 {
-  cmap->help(s);
+  if (!s.empty())
+    cmap->help(s);
+  else {
+    printf("crampf readline interface online help\n");
+    printf("-------------------------------------\n");
+    printf("avaible commands:\n");
+    for (map<string,Command*>::iterator it = cmap->cmdmap.begin();
+        it != cmap->cmdmap.end(); it++)
+      printf("\t%s\n",it->first.c_str());
+    printf("for detailed help type `:help <commandname>'\n");
+  }
 }
 
 void
