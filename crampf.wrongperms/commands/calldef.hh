@@ -1,9 +1,9 @@
 //
-// $Id: calldef.hh,v 1.1 2000/03/18 17:33:14 logic Exp $
+// $Id: calldef.hh,v 1.2 2000/07/16 23:00:56 logic Exp $
 //
 
-#ifndef calldef
-#define calldef calldef
+#ifndef CALLDEF
+#define CALLDEF CALLDEF
 
 #include "../command.hh"
 #include "../commandmap.hh"

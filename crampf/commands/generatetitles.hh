@@ -1,9 +1,9 @@
 //
-// $Id: generatetitles.hh,v 1.1 2000/03/18 13:48:07 logic Exp $
+// $Id: generatetitles.hh,v 1.2 2000/07/16 23:00:56 logic Exp $
 //
 
-#ifndef generatetitles
-#define generatetitles generatetitles
+#ifndef GENERATETITLES
+#define GENERATETITLES GENERATETITLES
 
 #include "../command.hh"
 #include <string>

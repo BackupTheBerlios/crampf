@@ -2,7 +2,6 @@
  * Jump to position in playlist
  */
 
-#include "../version_info.hh"
 #include <stdlib.h>
 #include <string>
 #include "../playlist.hh"

@@ -1,11 +1,10 @@
 //
-// $Id: version.hh,v 1.2 2000/03/18 08:14:17 logic Exp $
+// $Id: version.hh,v 1.3 2000/07/16 23:00:57 logic Exp $
 //
 
-#ifndef version
-#define version version
+#ifndef VERSION
+#define VERSION VERSION
 
-#include "../version_info.hh"
 #include "../command.hh"
 #include <string>
 

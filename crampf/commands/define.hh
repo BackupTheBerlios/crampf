@@ -1,9 +1,9 @@
 //
-// $Id: define.hh,v 1.1 2000/03/18 17:33:15 logic Exp $
+// $Id: define.hh,v 1.2 2000/07/16 23:00:56 logic Exp $
 //
 
-#ifndef define
-#define define define
+#ifndef DEFINE
+#define DEFINE DEFINE
 
 #include <string>
 #include <vector>

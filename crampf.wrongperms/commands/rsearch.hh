@@ -1,9 +1,9 @@
 //
-// $Id: rsearch.hh,v 1.1 2000/03/19 06:58:24 logic Exp $
+// $Id: rsearch.hh,v 1.2 2000/07/16 23:00:57 logic Exp $
 //
 
-#ifndef rsearch
-#define rsearch rsearch
+#ifndef RSEARCH
+#define RSEARCH RSEARCH
 
 #include "../command.hh"
 #include "../commandmap.hh"

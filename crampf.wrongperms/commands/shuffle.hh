@@ -1,11 +1,10 @@
 //
-// $Id: shuffle.hh,v 1.3 2000/03/18 08:14:17 logic Exp $
+// $Id: shuffle.hh,v 1.4 2000/07/16 23:00:57 logic Exp $
 //
 
-#ifndef shuffle
-#define shuffle shuffle
+#ifndef SHUFFLE
+#define SHUFFLE SHUFFLE
 
-#include "../version_info.hh"
 #include <string>
 #include "../command.hh"
 

@@ -1,9 +1,9 @@
 //
-// $Id: source.hh,v 1.1 2000/03/19 04:18:50 logic Exp $
+// $Id: source.hh,v 1.2 2000/07/16 23:00:57 logic Exp $
 //
 
-#ifndef source
-#define source source
+#ifndef SOURCE
+#define SOURCE SOURCE
 
 #include "../command.hh"
 #include "../commandmap.hh"

@@ -2,7 +2,6 @@
  * scramble the playlist
  */
 
-#include "../version_info.hh"
 #include <string>
 #include "../playlist.hh"
 #include "shuffle.hh"

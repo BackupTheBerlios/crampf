@@ -2,10 +2,9 @@
 // One class for each command. doit method called by commandmap
 //
 
-#ifndef quit
-#define quit
+#ifndef QUIT
+#define QUIT QUIT
 
-#include "../version_info.hh"
 #include <string>
 #include "../command.hh"
 

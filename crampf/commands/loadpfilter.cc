@@ -1,4 +1,3 @@
-#include "../version_info.hh"
 #include "../command.hh"
 #include <string>
 #include "../playlist.hh"

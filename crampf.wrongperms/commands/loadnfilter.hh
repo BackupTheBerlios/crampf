@@ -1,11 +1,10 @@
 //
-// $Id: loadnfilter.hh,v 1.1 2000/03/18 08:14:16 logic Exp $
+// $Id: loadnfilter.hh,v 1.2 2000/07/16 23:00:56 logic Exp $
 //
 
-#ifndef loadnfilter
-#define loadnfilter loadnfilter
+#ifndef LOADNFILTER
+#define LOADNFILTER LOADNFILTER
 
-#include "../version_info.hh"
 #include "../command.hh"
 #include <string>
 

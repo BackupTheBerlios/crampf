@@ -3,7 +3,6 @@
  */
 
 
-#include "../version_info.hh"
 #include <string>
 #include <string.h>
 #include <stdio.h>

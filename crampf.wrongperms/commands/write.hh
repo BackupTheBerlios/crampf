@@ -1,9 +1,9 @@
 //
-// $Id: write.hh,v 1.1 2000/03/19 12:44:21 logic Exp $
+// $Id: write.hh,v 1.2 2000/07/16 23:00:57 logic Exp $
 //
 
-#ifndef write
-#define write write
+#ifndef WRITE
+#define WRITE WRITE
 
 #include "../command.hh"
 #include <string>

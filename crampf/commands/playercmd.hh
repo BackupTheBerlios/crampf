@@ -1,9 +1,9 @@
 //
-// $Id: playercmd.hh,v 1.1 2000/03/19 09:00:25 logic Exp $
+// $Id: playercmd.hh,v 1.2 2000/07/16 23:00:57 logic Exp $
 //
 
-#ifndef playercmd
-#define playercmd playercmd
+#ifndef PLAYERCMD
+#define PLAYERCMD PLAYERCMD
 
 #include "../command.hh"
 #include <string>
