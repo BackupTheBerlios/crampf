@@ -81,7 +81,7 @@ AC_MSG_RESULT( [
 
 AC_MSG_RESULT( [MP3-Player      : ${PLAYER_CMD}] )
 AC_MSG_RESULT( [Mixer program   : ${MIXER_CMD}] )
-if test "${HAS_LIBID3TAG}"; then
+if test "${HAS_LIBID3TAG}" = "yes"; then
     AC_MSG_RESULT( [ID3 Support     : libid3tag] )
 else
     AC_MSG_RESULT( [ID3 Support     : ${MP3INFO_CMD}] )
