@@ -37,7 +37,7 @@ Interface::~Interface()
   printf("Thank you for using crampf!\n");
 }
 
-Interface::mainloop()
+void Interface::mainloop()
 {
       player_init();
       player_play();
@@ -118,13 +118,13 @@ Interface::use_search_rli( string s )
   singlekeyTerm();
 }
 
-Interface::detectSoundCard()
+void Interface::detectSoundCard()
 {
   opts->soundcard='w'; /* default */
   FILE* fp = fopen("/dev/sndstat","r");
   if (fp==NULL) {
     perror("sndstat");
-    return -1;
+    return;
   }
 #define LINEWIDTH 128
   char line[LINEWIDTH];

@@ -12,6 +12,7 @@ AC_PROG_INSTALL
 
 dnl Checks for libraries.
 dnl Replace `main' with a function in -lreadline:
+AC_CHECK_LIB(termcap, tgetnum,,exit 1)
 AC_CHECK_LIB(readline, readline,,exit 1)
 
 dnl Checks for header files.

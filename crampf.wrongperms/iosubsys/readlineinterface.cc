@@ -52,7 +52,9 @@ void
 ReadLineInterface::input( string s )
 {
   string cmd;
-  char* searchstr = readline(s.c_str());
+  char prompt[ s.length() ];
+  strcpy( prompt, s.c_str() );
+  char *searchstr = readline( prompt );
   if (searchstr && *searchstr) 
     add_history(searchstr);
   try {

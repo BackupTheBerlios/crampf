@@ -22,7 +22,7 @@ Config::configure(int argc, char** argv)
   readNegativeFilter(opts.negativeFilterFiles);
 }
 
-Config::initdefaults(struct options* op)
+void Config::initdefaults(struct options* op)
 {
   op->randomOrder=true;
   op->readconfig=true;
@@ -62,7 +62,7 @@ Config::initdefaults(struct options* op)
   }
 }
 
-Config::getopts(int argc, char** argv)
+void Config::getopts(int argc, char** argv)
 {
   int option_index = 0;
   int c;
@@ -187,7 +187,7 @@ Config::getopts(int argc, char** argv)
   if (cmdopts.readconfig) {
     if (!cmdopts.configfile.empty()) {
       try {
-        readconfig(cmdopts.configfile)==-1;
+        readconfig(cmdopts.configfile);
       } catch (string error) {
         fprintf(stderr,"config-error: %s\n", error.c_str());
       }
@@ -226,7 +226,7 @@ Config::getopts(int argc, char** argv)
     opts.titlewidth=cmdopts.titlewidth;
 }
 
-Config::readconfig(string filename) 
+void Config::readconfig(string filename) 
 {
   filename = "source " + filename;
   opts.cmdmap[filename];
@@ -295,7 +295,7 @@ Config::readconfig(string filename)
   */
 }
 
-Config::readFilter(vector<string>* flt, string filename)
+void Config::readFilter(vector<string>* flt, string filename)
 {
   FILE* fp = fopen((const char*)filename.c_str(),"r");
   if (fp==NULL) {
@@ -312,24 +312,24 @@ Config::readFilter(vector<string>* flt, string filename)
   fclose(fp);
 }
 
-Config::readPositiveFilter(string filename)
+void Config::readPositiveFilter(string filename)
 {
   readFilter(&opts.positiveFilter, filename);
 }
 
-Config::readPositiveFilter(vector<string> filenames)
+void Config::readPositiveFilter(vector<string> filenames)
 {
   for (vector<string>::iterator it = filenames.begin();
       it != filenames.end(); it++)
     readPositiveFilter(*it);
 }
 
-Config::readNegativeFilter(string filename)
+void Config::readNegativeFilter(string filename)
 {
   readFilter(&opts.negativeFilter, filename);
 }
 
-Config::readNegativeFilter(vector<string> filenames)
+void Config::readNegativeFilter(vector<string> filenames)
 {
   for (vector<string>::iterator it = filenames.begin();
       it != filenames.end(); it++)

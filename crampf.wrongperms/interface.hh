@@ -1,5 +1,5 @@
 //
-// $Id: interface.hh,v 1.17 2000/07/16 23:10:19 logic Exp $
+// $Id: interface.hh,v 1.18 2000/12/09 15:52:30 logic Exp $
 //
 
 #ifndef INTERFACE
@@ -16,8 +16,8 @@ class Interface {
   public:
     Interface( void );
     ~Interface();
-    init();
-    shutdown();
+    void init();
+    void shutdown();
   private:
     ReadLineInterface rli;
     ReadLineInterface search_rli;
@@ -25,10 +25,10 @@ class Interface {
     void use_search_rli( string s );
     void singlekeyTerm();
     void restoreTerm();
-    detectSoundCard();
+    void detectSoundCard();
     int getVolume();
-    mainloop();
-    changevol(int vol);
+    void mainloop();
+    void changevol(int vol);
     struct termios terminal_settings; 
 };
 
