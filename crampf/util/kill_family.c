@@ -7,6 +7,7 @@
 #include <assert.h>
 #include <sys/types.h>
 #include <signal.h>
+#include "../debug.hh"
 
 /* array of all process, first elem is pid, second is ppid */
 static int ppids[BUFSIZ][2];
@@ -58,8 +59,12 @@ void kill_family( int pid )
 		      break;
 		  }
       }
+#ifdef DEBUG
       for( i=0; i<children_pids_max; i++ )
-	  kill( SIGTERM, children_pids[i] );
+	  printdebug( "KILLING %d\n", children_pids[i] );
+#endif /* DEBUG */
       for( i=0; i<children_pids_max; i++ )
-	  kill( SIGKILL, children_pids[i] );
+	  kill( children_pids[i], SIGTERM );
+      for( i=0; i<children_pids_max; i++ )
+	  kill( children_pids[i], SIGKILL );
 }

@@ -7,6 +7,8 @@
 #include "player/player-interface.hh"
 #include "iosubsys/mainloop.hh"
 #include "iosubsys/tcpio.hh"
+#include "iosubsys/terminal.hh"
+#include "iosubsys/stdout.hh"
 
 int main( int argc, char **argv )
 {
