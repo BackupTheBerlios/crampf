@@ -228,11 +228,8 @@ Config::getopts(int argc, char** argv)
 
 Config::readconfig(string filename) 
 {
-  opts.cmdmap["source ~/.crampfrc"];
-  /*
   filename = "source " + filename;
   opts.cmdmap[filename];
-  */
   /*
   if (filename[0]=='~') { // replace ~ with users home
     filename.erase(filename.begin());

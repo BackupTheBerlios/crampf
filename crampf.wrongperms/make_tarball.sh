@@ -8,6 +8,6 @@ ln -s . $DISTNAME
 find $DISTNAME/ -name '*.hh' -or -name '*.cc' -or -name 'README*'\
 	-or -name '*.sh' -or -name '*.in' -or -name 'configure' \
 	-or -name 'install-sh' -or -name 'COPY*' -or -name 'TODO' \
-	-or -name 'INSTALL*' \
+	-or -name 'INSTALL*' -or -name 'crampfrc-example' \
         | xargs tar -hvczf $DISTNAME.tar.gz 
 rm -f $DISTNAME
