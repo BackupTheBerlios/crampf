@@ -113,7 +113,7 @@ Playlist::positiveFilter(string flt)
       RegEx re = RegEx( flt, flags );
       for (Playlist::iterator it = this->begin();
 	      it != this->end(); it++) 
-	  if ( re.match( it->title().c_str() ) ) 
+	  if ( !re.match( it->title().c_str() ) ) 
 	      this->erase(it--);
 }
 
