@@ -13,7 +13,8 @@ crampf_SOURCES=commandmap.cc options.cc crampf.cc file.cc	\
 
 crampf_LDADD=commands/libcmds.a util/libutil.a player/libgenplayer.a player/backends/execplayer/libexecplayer.a iosubsys/libiosubsys.a
 
-ChangeLog:
+dist-hook:
+	@echo updating ChangeLog
 	./cvs2cl.pl --prune
 
 README:	generate_readme.sh
