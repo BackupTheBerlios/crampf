@@ -31,6 +31,8 @@ Config::initdefaults(struct options* op)
   op->key.cont=" ";
   op->key.info="i";
   op->key.list="l";
+  op->key.help="h";
+  op->key.quit="q";
   op->key.vol0="0";
   op->key.vol1="1";
   op->key.vol2="2";
@@ -43,7 +45,6 @@ Config::initdefaults(struct options* op)
   op->key.vol9="9";
   op->key.vol_up="u";
   op->key.vol_down="d";
-  op->key.quit="q";
 }
 
 Config::getopts(int argc, char** argv)
