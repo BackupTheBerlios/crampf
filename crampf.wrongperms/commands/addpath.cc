@@ -11,12 +11,14 @@ extern Playlist* plist;
 void
 AddPath::doit( string s )
 {
+  for (int i=s.size()-1; s[i]==' '; i--)
+    s.erase(i);
   plist->addPath(s);
 }
 
 void
 AddPath::help( string s )
 {
-  printf("addPath <path>\n");
-  printf("adds a path or file to current playlist\n");
+  printf("format: addPath <path>\n");
+  printf("description: adds a path or file to current playlist\n");
 }

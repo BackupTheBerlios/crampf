@@ -49,9 +49,9 @@ Vol::doit( string s )
 void
 Vol::help( string s )
 {
-  printf("volume <value>\n");
-  printf("changes the volume to the absolute value <value>\n");
-  printf("if value is preceeded by a '-' or '+' the change is\n");
-  printf("relative\n");
+  printf("format: volume <value>\n");
+  printf("description: changes volume to the value <value>\n");
+  printf("if <value> is preceeded with a + ord - the change is\n");
+  printf("done relative to the current volume\n");
 }
 

@@ -10,39 +10,27 @@
 #include "../commandmap.hh"
 #include "set.hh"
 
-Set::Set( CommandMap* c ) : Command()
-{
-  cmap = c;
-}
-
 void
 Set::doit( string s )
 {
-  if (s=="list") {
-    printf("current keybindings:\n");
-    for (map<char,string>::iterator it = cmap->keymap.begin();
-        it != cmap->keymap.end(); it++)
-     printf("key '%c' -> '%s'\n",it->first,it->second.c_str()); 
-  } else if (s.find("key")==0) {
-    char functionname[255]; 
-    char keyname;
-    if (sscanf(s.c_str(),"key%*[ \t]\\%o%*[ \t]%[^\n]",
-          &keyname,functionname)!=2)
-      if (sscanf(s.c_str(),"key%*[ \t]%c%*[ \t]%[^\n]",
-            &keyname,functionname)!=2)  
-        throw string("set: parsing error");
-    cmap->setKey(keyname, functionname);
+  if (s=="list" || s=="all" || s=="show") {
+    printf("---Options---\n");
+    return;
+    printf("not yet implemented :-(\n");
   }
 }
 
 void
 Set::help( string s )
 {
-  printf("format:\t\"set key <keyname> <command> [<parameters>]\"\n");
-  printf("binds the inputcharacter <keyname> to command <command>\n");
-  printf("optional parameters may be specified\n");
-  printf("keyname may be an ascii character or its octal value\n");
-  printf("in the notation \\xxx\n");
-  printf("to show current bindings enter `set list'\n");
+  printf("format: set <optionname>\n");
+  printf("    or: set <optionname>=<value>\n");
+  printf("    or: set <optionname> <value>\n");
+  printf("    or: set all\n");
+  printf("    or: set list\n");
+  printf("    or: set show\n");
+  printf("description: prints setting of option <optionname>,\n");
+  printf("sets option <optionname> to value <value> or lists out\n");
+  printf("all current settings\n");
 }
 

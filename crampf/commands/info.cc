@@ -27,6 +27,7 @@ Info::doit( string s )
 void
 Info::help( string s )
 {
-  printf("shows information on current title\n");
+  printf("format: info\n");
+  printf("description: shows information on current title\n");
 }
 

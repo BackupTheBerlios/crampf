@@ -169,6 +169,10 @@ Playlist::pos()
 void 
 Playlist::jump(int newpos)
 {
+  while (newpos<0)
+    newpos+=this->size();
+  if (newpos>this->size()-1)
+    newpos%=(this->size());
   current=newpos;
 }
 

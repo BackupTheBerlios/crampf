@@ -21,6 +21,7 @@
 #include "shuffle.hh"
 #include "status.hh"
 #include "vol.hh"
+#include "map.hh"
 
 #endif
 

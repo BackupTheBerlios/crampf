@@ -1,19 +1,22 @@
 //
-// One class for each command. doit method called by commandmap
+// $Id: map.hh,v 1.1 2000/03/18 02:17:15 logic Exp $
 //
 
-#ifndef set
-#define set
+#ifndef map
+#define map map
 
 #include <string>
 #include "../command.hh"
 #include "../commandmap.hh"
 
-class Set : public Command {
+class Map : public Command {
   public:
+    Map( CommandMap* c );
     void doit( string s );
     void help( string s );
   private:
+    CommandMap* cmap;
 };
 
 #endif
+

@@ -34,6 +34,8 @@ Help::doit( string s )
 void
 Help::help( string s )
 {
-  printf("help [command] -- displays short help (on command)\n");
+  printf("format: help [<command>]\n");
+  printf("description: list all commands avaible, or specific help\n");
+  printf("on command <command>.\n");
 }
 

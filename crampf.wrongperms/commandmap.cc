@@ -11,7 +11,8 @@
 CommandMap::CommandMap()
 {
   cmdmap["help"]       = new Help    (this);
-  cmdmap["set"]        = new Set     (this);
+  cmdmap["map"]        = new Map     (this);
+  cmdmap["set"]        = new Set     ();
   cmdmap["volume"]     = new Vol     ();
   cmdmap["info"]       = new Info    ();
   cmdmap["next"]       = new Next    ();

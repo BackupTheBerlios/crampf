@@ -31,14 +31,14 @@ Config::initdefaults(struct options* op)
   op->playercmd="amp";
   op->playercmd_args="-q";
   try {
-    op->cmdmap["set key h help"];
-    op->cmdmap["set key n next"];
-    op->cmdmap["set key p prev"];
-    op->cmdmap["set key i info"];
-    op->cmdmap["set key q quit"];
-    op->cmdmap["set key s status"];
-    op->cmdmap["set key + vol +5"];
-    op->cmdmap["set key - vol -5"];
+    op->cmdmap["map h help"];
+    op->cmdmap["map n next"];
+    op->cmdmap["map p prev"];
+    op->cmdmap["map i info"];
+    op->cmdmap["map q quit"];
+    op->cmdmap["map s status"];
+    op->cmdmap["map + vol +5"];
+    op->cmdmap["map - vol -5"];
   } catch (string error) {
     printf("keytable init error: `%s'\n",error.c_str());
   }
