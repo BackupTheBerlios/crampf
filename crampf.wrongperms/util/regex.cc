@@ -2,9 +2,9 @@
 #include <string>
 #include <regex.h>
 
-RegEx::RegEx( const std::string &re, int flags )
+RegEx::RegEx( const std::string &re, int cflags )
 {
-      cflags = flags | REG_NEWLINE;
+      cflags |= REG_NEWLINE | REG_NOSUB;
       int error = regcomp( &preg, re.c_str(), cflags );
       if (error != 0) {
 	  char errmsg[REGEXP_MAXERRLEN];
@@ -19,8 +19,8 @@ RegEx::~RegEx()
 }
 
 bool 
-RegEx::match( const std::string &s ) const
+RegEx::match( const std::string &s, int eflags ) const
 {
-      return (regexec( &preg, s.c_str(), 0, NULL, cflags )
+      return (regexec( &preg, s.c_str(), 0, NULL, eflags )
 	      != REG_NOMATCH);
 }
