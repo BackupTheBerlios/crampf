@@ -58,10 +58,16 @@ void player_stop( void )
     while (player_isrunning()) {
       kill(player_pid,SIGKILL);
     }
-    int f;   /* just to be sure /dev/dsp is not used anymore */
-    while ((f=open("/dev/dsp",O_WRONLY))==-1) ;
-    close(f);
+    int pid = fork();
+    if (pid==0) {
+      execlp("fuser","fuser","-k","/dev/dsp","&>/dev/null",NULL);
+      perror("execlp(fuser)");
+      exit(1);
+    } 
   }
+  int f;
+  while ((f=open("/dev/dsp",O_WRONLY))==-1);
+  close(f);
   player_sigignore = false;
 }
 
