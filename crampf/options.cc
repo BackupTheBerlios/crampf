@@ -39,6 +39,16 @@ Config::initdefaults(struct options* op)
     op->cmdmap["map s status"];
     op->cmdmap["map + vol +5"];
     op->cmdmap["map - vol -5"];
+    op->cmdmap["map 1 vol 10"];
+    op->cmdmap["map 2 vol 20"];
+    op->cmdmap["map 3 vol 30"];
+    op->cmdmap["map 4 vol 40"];
+    op->cmdmap["map 5 vol 50"];
+    op->cmdmap["map 6 vol 60"];
+    op->cmdmap["map 7 vol 70"];
+    op->cmdmap["map 8 vol 80"];
+    op->cmdmap["map 9 vol 90"];
+    op->cmdmap["map 0 vol 00"];
   } catch (string error) {
     printf("keytable init error: `%s'\n",error.c_str());
   }
