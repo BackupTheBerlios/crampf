@@ -8,6 +8,7 @@
 #include "iosubsys/output.hh"
 #include "iosubsys/input.hh"
 #include "iosubsys/mainloop.hh"
+#include "iosubsys/tcpio.hh"
 
 int main( int argc, char **argv )
 {
@@ -21,6 +22,7 @@ int main( int argc, char **argv )
 	  plist = new Playlist();
 	  Config cfg;
 	  opts=cfg.returnopts();
+	  player = new PlayerInterface();
 	  cfg.configure(argc, argv);
 	  plist->addPath(opts->mp3SearchPaths);
 	  plist->addPlaylist(opts->playlistfiles);
@@ -35,10 +37,14 @@ int main( int argc, char **argv )
 	      fprintf(stderr,"No mp3s found!\n");
 	      exit(2);
 	  }
-	  player = new PlayerInterface();
 	  player->play( (**plist).filename() );
 	  input = new Input();
 	  input->push_back( new TermInput() );
+#if 0
+	  TcpIO *t = new TcpIO();
+	  input->push_back( t );
+	  output->push_back( t ); /* FIXME ~Input and ~Output delete their contents !! */
+#endif
 	  autocmdmap["init"].trigger();
 	  mainloop();
 	  autocmdmap["exit"].trigger();
