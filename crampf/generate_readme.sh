@@ -70,20 +70,17 @@ Default hotkeys:
 Key:	Command:
 EOF
 
-sed -ne '/op->cmdmap."map/{
-	    s/^[^"]*"map //
-	    s/".*//
-	    s/\\"/"/g
-	    s/\\t/	/g
-	    s/\\\\/\\/g
-	    s/ /	/
-	    /^\\0[0-9][0-9]/{
-		s/\\040/<space>/
-		s/\\012/<enter>/
-		s/\\011/<tab>/
-	    }
+sed -ne '/hotkeys\[...*.\] *=.*"/{
+	    s/.*hotkeys\[.\(..*\).\][^"]*"\([^"]*\)".*/\1	\2/
+	    s/^	/<tab>/
+	    s/^\\t/<tab>/
+	    s/^ /<space>/
+	    s/^/<esc>/
+	    s/^\\e/<esc>/
+	    s/^/<enter>/
+	    s/^\\n/<enter>/
 	    p
-	}' options.cc
+	}' iosubsys/input.cc
 
 cat <<-EOF
 
@@ -100,7 +97,7 @@ EOF
 
 for i in commands/*.cc ; do
     sed -ne '/::help( const std::string &s ) const/,/^}/{
-		/".*"/{
+		/output->printf( *".*" *);/{
 		    s/^[^"]*"//
 		    s/\\n".*//
 		    /format: /{
