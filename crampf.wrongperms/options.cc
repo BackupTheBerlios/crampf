@@ -13,7 +13,8 @@
 #include "interface.hh"
 #include <errno.h>
 
-Config::Config(int argc, char** argv)
+void
+Config::configure(int argc, char** argv)
 {
   initdefaults(&opts);
   getopts(argc, argv);
@@ -223,13 +224,19 @@ Config::getopts(int argc, char** argv)
 
 Config::readconfig(string filename) 
 {
+  opts.cmdmap["source ~/.crampfrc"];
+  /*
+  filename = "source " + filename;
+  opts.cmdmap[filename];
+  */
+  /*
   if (filename[0]=='~') { // replace ~ with users home
     filename.erase(filename.begin());
     filename = getenv("HOME") + filename;
   }
   FILE* fp = fopen((const char*)filename.c_str(), "r");
   if (fp == NULL) {
-    /* perror((const char*)filename.c_str()); */
+    //perror((const char*)filename.c_str()); 
     throw strerror(errno);
   }
   char line[FILELINEWIDTH];
@@ -284,6 +291,7 @@ Config::readconfig(string filename)
     }
   }
   fclose(fp);
+  */
 }
 
 Config::readFilter(vector<string>* flt, string filename)

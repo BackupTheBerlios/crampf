@@ -12,8 +12,9 @@
 
 int main(int argc, char** argv)
 {
-  Config cfg(argc, argv);
+  Config cfg;
   opts=cfg.returnopts();
+  cfg.configure(argc, argv);
   plist = new Playlist();
   plist->addPath(opts->mp3SearchPaths);
   plist->addPlaylist(opts->playlistfiles);

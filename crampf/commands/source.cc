@@ -12,13 +12,17 @@ Source::Source( CommandMap* c )
 void
 Source::doit( string s )
 {
-  try {
-    File f(s);
-    while (1)
-      (*cmap)[++f];
-  } catch (string error) {
-    if (error!="end of file")
-      printf("source: %s\n",error.c_str());
+  File f(s);
+  string cmd;
+  while (1) {
+    try {
+      cmd = ++f;
+      (*cmap)[cmd];
+    } catch (string error) {
+      if (error=="end of file")
+        return;
+      printf("source(%s,line %d): %s \"%s\"\n", s.c_str(),f.linenum(),error.c_str(), cmd.c_str());
+    }
   }
 }
 
