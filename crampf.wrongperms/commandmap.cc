@@ -41,6 +41,7 @@ CommandMap::CommandMap()
   cmdmap["unify"]          = new Unify          ();
   cmdmap["case"]	   = new Case		();
   cmdmap["regexp"]	   = new RegExp		();
+  cmdmap["exit"]   	   = new Exit		();
 }
 
 CommandMap::~CommandMap()

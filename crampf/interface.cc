@@ -39,44 +39,45 @@ Interface::~Interface()
 
 Interface::mainloop()
 {
-  player_init();
-  player_play();
-  try {
-    char c;
-    while (!player_finished()) {
-      if (player_restarted()) {
-        opts->cmdmap["status"];
+      player_init();
+      player_play();
+      try {
+	  char c;
+	  while (!player_finished()) {
+	      if (player_restarted()) {
+		  opts->cmdmap["status"];
+	      }
+	      usleep(100);
+	      c = fgetc(stdin); 
+	      if (c!=EOF) {
+		  switch (c) {
+		      case ':':
+			  use_rli();
+			  break;
+		      case '/':
+		      case '?':
+			  char xx[2];
+			  xx[0]=c;
+			  xx[1]='\0';
+			  use_search_rli(xx);
+			  break;
+		      default:
+			  try {
+			      opts->cmdmap[c];
+			  } catch (string error) {
+			      if (error=="quit" || error=="exit")
+				  throw error;
+			      printf("error: `%s'\n",error.c_str());
+			  } 
+		  } 
+	      } 
+	  }
+      } catch (string error) {
+	  if (error!="quit" && error!="exit")
+	      printf("error: `%s'\n",error.c_str());
+	  if (error!="exit")
+	      player_stop();
       }
-      usleep(100);
-      c = fgetc(stdin); 
-      if (c!=EOF) {
-        switch (c) {
-          case ':':
-            use_rli();
-            break;
-          case '/':
-          case '?':
-            char xx[2];
-            xx[0]=c;
-            xx[1]='\0';
-            use_search_rli(xx);
-            break;
-          default:
-          try {
-            opts->cmdmap[c];
-          } catch (string error) {
-            if (error=="quit")
-              throw error;
-            printf("error: `%s'\n",error.c_str());
-          } 
-        } 
-      } 
-    }
-  } catch (string error) {
-    if (error!="quit")
-      printf("error: `%s'\n",error.c_str());
-  }
-  player_stop();
 }
 
 void
