@@ -1,5 +1,5 @@
 //
-// $Id: playlist.hh,v 1.16 2002/12/24 19:51:48 logic Exp $
+// $Id: playlist.hh,v 1.17 2002/12/30 16:07:43 logic Exp $
 //
 
 #ifndef PLAYLIST_HH
@@ -10,7 +10,7 @@
 #include <stdio.h>
 #include "track.hh"
 
-#define MAXFILENAMELENGTH 1024
+#define MAXFILENAMELENGTH BUFSIZ
 
 class Playlist : public std::vector<Track>
 {
@@ -41,7 +41,7 @@ class Playlist : public std::vector<Track>
     void jump(int newpos);
   private:
     std::vector<std::string> loadFilterFile( const std::string &filename );
-    void addTrack( const std::string &path, std::string filename );
+    void addTrack( const std::string &path, const std::string filename );
     void addTrack(FILE* fp);
     int current;
 };

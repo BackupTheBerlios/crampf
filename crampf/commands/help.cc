@@ -23,7 +23,7 @@ Help::doit( const std::string &s )
   else {
     printf("crampf readline interface online help\n");
     printf("-------------------------------------\n");
-    printf("avaible commands:\n");
+    printf("available commands:\n");
     for (std::map<std::string,Command*>::const_iterator it = cmap->cmdmap.begin();
         it != cmap->cmdmap.end(); it++) {
       for (int len = printf("\t%s",it->first.c_str()); len<20; len++)

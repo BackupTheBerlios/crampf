@@ -136,6 +136,7 @@ void Config::getopts(int argc, char** argv)
         break;
       case 'h':
         printf("    crampf %s\n", VERSION);
+        printf("usage: crampf [<options>] <mp3s>\n");
         printf("---------------------------------------\n");
         printf("[ -p | --playlist <playlist>          ]\n");
         printf("[ -r | --random                       ]\n");

@@ -32,20 +32,26 @@ Playlist::addPath( const std::string &path )
     if (S_ISREG(buf.st_mode)) addTrack("",path);
     return;
   }
-  FILE* fp;
   //std::string findcmd = "find \"" + path + "\" -iname \"*.mp3\" -type f -follow";
   std::string findcmd = "find \"" + path + "\" -type f -follow";
-  fp = popen((const char*)findcmd.c_str(),"r");
+  FILE *fp = popen((const char*)findcmd.c_str(),"r");
   if (fp==NULL) {
     perror((const char*)path.c_str());
     return;
   }
-  char cbuf[MAXFILENAMELENGTH];
-  while (fgets(cbuf,MAXFILENAMELENGTH,fp)) {
-    cbuf[strlen(cbuf)-1]='\0'; /* strip ending '\n' */
-    addTrack(path,&cbuf[path.size()]);
+  try {
+    char cbuf[MAXFILENAMELENGTH];
+    while (fgets(cbuf,MAXFILENAMELENGTH,fp)) {
+      cbuf[strlen(cbuf)-1]='\0'; /* strip ending '\n' */
+      addTrack(path,&cbuf[path.size()]);
+    }
+  } catch( std::string error ){
+    printf( "EXCEPTION: caught '%s'\n", error.c_str() );
+  } catch(...){
+    printf( "EXCEPTION: caught something\n" );
   }
-  pclose(fp);
+  if( fp )
+    pclose(fp);
 }
 
 void 
@@ -285,13 +291,16 @@ Playlist::jump(int newpos)
 }
 
 void 
-Playlist::addTrack( const std::string &path, std::string filename )
+Playlist::addTrack( const std::string &path, const std::string filename )
 {
   push_back(Track(path+filename));
   if (opts->generateTitles) {
       /* strip suffix */
-      filename.erase( filename.rfind( "." ) );
-      (*this)[size()-1].title(filename);
+      static char buf[BUFSIZ];
+      assert( filename.size() < BUFSIZ );
+      memcpy( buf, filename.c_str(), filename.size() );
+      buf[filename.rfind( "." )] = '\0';
+      (*this)[size()-1].title(buf);
   }
 }
 

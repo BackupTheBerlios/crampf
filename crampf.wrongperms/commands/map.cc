@@ -19,7 +19,7 @@ void
 Map::doit( const std::string &s )
 {
   if (s=="list" || s=="all" || s=="show" || s=="") {
-    printf("---Special-Keys-(always-avaible)---\n");
+    printf("---Special-Keys-(always-available)---\n");
     printf("key ':' -> enter command\n");
     printf("key '/' -> search forward\n");
     printf("key '?' -> search backward\n");
