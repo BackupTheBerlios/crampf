@@ -6,6 +6,5 @@ FEATURE WISHLIST
 
 KNOWN BUGS
 	When loop is set to infinitive and the playlist (or the playercommand)
-	    is invalid the program hangs in an endless loop
-	Sometimes the player skips to the next song after executing another
-	    command (couldn't reproduce this one clearly)
+	    is invalid the program hangs in an endless loop (don't know how to
+	    handle this probably).
