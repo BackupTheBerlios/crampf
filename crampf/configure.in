@@ -27,6 +27,17 @@ AC_ARG_ENABLE(debug,
     *) AC_MSG_ERROR(bad value ${enableval} for --enable-debug) ;;
 esac],AC_DEFINE(NODEBUG))
 
+AC_ARG_ENABLE(static,
+[ --enable-static	generate static binary],
+[case "${enableval}" in
+    yes) LDFLAGS="${LDFLAGS} -static"
+	LINK_STATIC=yes
+	;;
+    no) LINK_STATIC=no
+	;;
+    *) AC_MSG_ERROR(bad value ${enableval} for --enable-static) ;;
+esac],LINK_STATIC=no)
+
 dnl Checks for programs.
 AC_LANG_CPLUSPLUS
 AC_PROG_CC
@@ -76,6 +87,8 @@ AC_CHECK_LIB(id3tag,id3_tag_new,
     LIBS="${LIBS} -lid3tag",
     LIBS=${LIBS_BAK}
 )
+
+test "${HAS_LIBID3TAG}" = "yes" -a "${LINK_STATIC}" = "yes" && LIBS="${LIBS} -lz"
 
 dnl Checks for library functions.
 AC_TYPE_SIGNAL
