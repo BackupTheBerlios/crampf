@@ -1,39 +1,34 @@
 FEATURE WISHLIST
+	* add printf command which should support many %x directives
+	  (e.g. CurrentTrackNum, Playlistlength, Current-Track-Name etc.)
+	  this could supersede the status-command 
 	* add more information to info command:
 	    * information from track database:
 		* times played, times skipped, last time played
 	    * length of song (e.g. madtime for .mp3)
-	* add command to remove unsupported tracks
-	* add title and artist search (first and second directory above mp3)
+	    * probably add addinfo command similiar to addplayer
 	* Change options-struct into a map with fixed keys, initialized by the
 	      constructor
 	    * this map could be read and set by the user through set command
 	* add score command: if called with no args it shows the score
 	    of the current track, a relative or absolute numeric argument can
 	    be given to adjust current score
-	    score should be a value between 0 and 100 initialized with 50
-	    (a random playlist could probably be sorteb by score?)
-	* add autocommand thats triggered after skipping a song
-	    (by default it could be mapped to score -5)
-	* add autocommand thats triggered when volume is increased, and one thats
-	    triggered when volume is decreased (could be mapped to score +1)
+	    score could be a value between 0.0 and 100.0 initialized with 50.0
+	    (a random playlist could probably be sorted by score?)
+	    * add score filter command to filter out tracks with a score
+	      within a given range
+	    * add autocommand thats triggered after skipping a song
+		(by default it could be mapped to score -5)
+	    * add autocommand thats triggered when volume is increased, and one thats
+		triggered when volume is decreased (could be mapped to score +1)
 	* add generic function for relative / absolute changes on a number
 	    should be able to parse +x, -x, *x, /x and handle floats and ints
-	* Change the hardcoded defaults to something more useful
+	* Change the hardcoded defaults to something more useful (my config? :)
 	* remove global objects ('extern bla...')
-	* Simple and flexible way to execute external commands
-	    * make aumix, mpg3info, amp better configurable
-	    * let configure check at least for amp, mpg123, mpg321, freeamp, alsaplayer
-	      and choose a default that exists on the target system
-	* More generic player interface (e.g. alsaplayer + alsaremotectrl)
-	    * probably using plugins?
 	* create a real exception class (get rid of throwing strings)
-	* Support for MODs, S3Ms, etc.
 	* Integrate slang scripting language
 
 KNOWN BUGS
-	* stop /dev/dsp busy waiting in player/stdplayer
 	* When loop is set to infinitive and the playlist (or the playercommand)
 	      is invalid the program hangs in an endless loop (don't know how to
 	      handle this probably).
-	* doesn't compile with gcc 2.95.3 (but works with egcs 2.91.66)
