@@ -7,15 +7,16 @@
 #include <stdio.h>
 #include <string>
 #include <vector>
+#include <map>
 #include "config.hh"
 #include "interface.hh"
 #include <errno.h>
 
 Config::Config(int argc, char** argv)
 {
-  printf("geht ab, ey!\n");
   initdefaults(&opts);
   getopts(argc, argv);
+  setupkeys();
   readPositiveFilter(opts.positiveFilterFiles);
   readNegativeFilter(opts.negativeFilterFiles);
 }
@@ -24,11 +25,151 @@ Config::initdefaults(struct options* op)
 {
   op->randomOrder=true;
   op->readconfig=true;
-  op->loop=0;
+  op->loop=1;
   op->playercmd="amp";
   op->playercmd_args="-q";
-  op->keys['h']=&Interface::help;
-  op->keys['q']=&Interface::quit;
+  op->keytable["help"]="h";
+  op->keytable["quit"]="q";
+  op->keytable["next"]="n";
+  op->keytable["prev"]="p";
+  op->keytable["info"]="i";
+  op->keytable["list"]="l";
+  op->keytable["jump"]="j";
+  op->keytable["vol0"]="0";
+  op->keytable["vol1"]="1";
+  op->keytable["vol2"]="2";
+  op->keytable["vol3"]="3";
+  op->keytable["vol4"]="4";
+  op->keytable["vol5"]="5";
+  op->keytable["vol6"]="6";
+  op->keytable["vol7"]="7";
+  op->keytable["vol8"]="8";
+  op->keytable["vol9"]="9";
+  op->keytable["vol_up"]="+";
+  op->keytable["vol_down"]="-";
+}
+
+Config::setupkeys()
+{
+  struct options* op;
+  op = &opts;
+  for (map<string, string>::iterator it = opts.keytable.begin();
+      it != opts.keytable.end(); it++) {
+    if (it->first=="help") {
+      for (int i=0; i<it->second.size(); i++) {
+        opts.keys[it->second[i]]=&Interface::help;
+      }
+      continue;
+    }
+    if (it->first=="quit") {
+      for (int i=0; i<it->second.size(); i++) {
+        opts.keys[it->second[i]]=&Interface::quit;
+      }
+      continue;
+    }
+    if (it->first=="next") {
+      for (int i=0; i<it->second.size(); i++) {
+        opts.keys[it->second[i]]=&Interface::next;
+      }
+      continue;
+    }
+    if (it->first=="prev") {
+      for (int i=0; i<it->second.size(); i++) {
+        opts.keys[it->second[i]]=&Interface::prev;
+      }
+      continue;
+    }
+    if (it->first=="info") {
+      for (int i=0; i<it->second.size(); i++) {
+        opts.keys[it->second[i]]=&Interface::info;
+      }
+      continue;
+    }
+    if (it->first=="list") {
+      for (int i=0; i<it->second.size(); i++) {
+        opts.keys[it->second[i]]=&Interface::list;
+      }
+      continue;
+    }
+    if (it->first=="jump") {
+      for (int i=0; i<it->second.size(); i++) {
+        opts.keys[it->second[i]]=&Interface::list;
+      }
+      continue;
+    }
+    if (it->first=="vol0") {
+      for (int i=0; i<it->second.size(); i++) {
+        opts.keys[it->second[i]]=&Interface::vol0;
+      }
+      continue;
+    }
+    if (it->first=="vol1") {
+      for (int i=0; i<it->second.size(); i++) {
+        opts.keys[it->second[i]]=&Interface::vol1;
+      }
+      continue;
+    }
+    if (it->first=="vol2") {
+      for (int i=0; i<it->second.size(); i++) {
+        opts.keys[it->second[i]]=&Interface::vol2;
+      }
+      continue;
+    }
+    if (it->first=="vol3") {
+      for (int i=0; i<it->second.size(); i++) {
+        opts.keys[it->second[i]]=&Interface::vol3;
+      }
+      continue;
+    }
+    if (it->first=="vol4") {
+      for (int i=0; i<it->second.size(); i++) {
+        opts.keys[it->second[i]]=&Interface::vol4;
+      }
+      continue;
+    }
+    if (it->first=="vol5") {
+      for (int i=0; i<it->second.size(); i++) {
+        opts.keys[it->second[i]]=&Interface::vol5;
+      }
+      continue;
+    }
+    if (it->first=="vol6") {
+      for (int i=0; i<it->second.size(); i++) {
+        opts.keys[it->second[i]]=&Interface::vol6;
+      }
+      continue;
+    }
+    if (it->first=="vol7") {
+      for (int i=0; i<it->second.size(); i++) {
+        opts.keys[it->second[i]]=&Interface::vol7;
+      }
+      continue;
+    }
+    if (it->first=="vol8") {
+      for (int i=0; i<it->second.size(); i++) {
+        opts.keys[it->second[i]]=&Interface::vol8;
+      }
+      continue;
+    }
+    if (it->first=="vol9") {
+      for (int i=0; i<it->second.size(); i++) {
+        opts.keys[it->second[i]]=&Interface::vol9;
+      }
+      continue;
+    }
+    if (it->first=="vol_up") {
+      for (int i=0; i<it->second.size(); i++) {
+        opts.keys[it->second[i]]=&Interface::vol_up;
+      }
+      continue;
+    }
+    if (it->first=="vol_down") {
+      for (int i=0; i<it->second.size(); i++) {
+        opts.keys[it->second[i]]=&Interface::vol_down;
+      }
+      continue;
+    }
+  }
 }
 
 Config::getopts(int argc, char** argv)
@@ -179,19 +320,44 @@ Config::readconfig(string filename)
   while (fgets(line,FILELINEWIDTH,fp)) {
     if (line[0]!='#' && line[0]!='\n') {
       option[0]='\0'; value[0]='\0';
-      sscanf(line,"%[a-zA-Z]%*[= ]%s",option,value);
+      sscanf(line,"%[a-zA-Z_]%*[=\t ]%s\n",option,value);
       string opt = option; string val = value;   
       if (opt == "playercmd") {
-        printf("player: %s\n", value);
         opts.playercmd = value;
         continue;
       } 
       if (opt == "playercmd_args") {
-        printf("playercmd_firstArgs: %s\n", value);
         opts.playercmd_args = value;
         continue;
       } 
-      fprintf(stderr,"configfile: options unknown: %s\n",line);
+      if (opt == "random") {
+        if (value[0]=='y' || value[0]=='Y') {
+          opts.randomOrder = true;
+        } else if (value[0]=='n' || value[0]=='N') {
+          opts.randomOrder = false;
+        } else {
+          fprintf(stderr,"unknown option `random %s'\n",value);
+        }
+        continue;
+      }
+      if (opt == "loop") {
+        if (value[0]=='y' || value[0]=='Y') {
+          opts.loop = -1;
+        } else if (value[0]=='n' || value[0]=='N') {
+          opts.loop = 1;
+        } else {
+          opts.loop = atoi(value);
+        }
+        continue;
+      }
+      if (strncmp(option,"key_",4)==0) {
+        opt = &option[4];
+        val.erase(val.begin());
+        val.erase(val.end()-1);
+        opts.keytable[opt]=val;
+        continue;
+      }
+      fprintf(stderr,"configfile: unknown option: %s\n",line);
     }
   }
   fclose(fp);
