@@ -157,14 +157,14 @@ ExecPlayer::addPlayer( const std::string & cfgstr )
 	      case CMDNAME:
 		  cmd.cmdname = word;
 		  printdebug( "PlayerCmd: %s\n", cmd.cmdname.c_str() );
-		  cfgline = buf;
+		  memcpy( cfgline, buf, BUFSIZ );
 		  state = CMDARGS;
 		  break;
 	      case CMDARGS:
 		  if( *word != '/' ){
 		      cmd.cmdargs.push_back( word );
 		      printdebug( "PlayerArgs: %s\n", word );
-		      cfgline = buf;
+		      memcpy( cfgline, buf, BUFSIZ );
 		      break;
 		  }
 	      case REGEXP:
@@ -216,7 +216,7 @@ ExecPlayer::addPlayer( const std::string & cfgstr )
 			  SupportedFilesRegExpAsStrings( regexp, score ) );
 		  printdebug( "PlayerRegExp/Score: %3.3f '%s'\n", score, regexp );
 		  *regexp = '\0';
-		  cfgline = buf;
+		  memcpy( cfgline, buf, BUFSIZ );
 		  state = REGEXP;
 		  break;
 	      default:
@@ -264,7 +264,7 @@ ExecPlayer::play( const std::string &filename )
       double bestscore = 0;
       std::list<struct PlayCmds>::const_iterator bestplayer = playCmds.end();
 
-      string myfile( filename );
+      std::string myfile( filename );
       if( myfile[myfile.size()] != '\n' )
 	  myfile += '\n';
 
@@ -336,7 +336,7 @@ ExecPlayer::supportedFormat( const std::string &filename ) const
       double bestscore = 0;
       std::list<struct PlayCmds>::const_iterator bestplayer = playCmds.end();
 
-      string myfile( filename );
+      std::string myfile( filename );
       if( myfile[myfile.size()] != '\n' )
 	  myfile += '\n';
 

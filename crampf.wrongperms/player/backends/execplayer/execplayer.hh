@@ -16,7 +16,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  * 
- * $Id: execplayer.hh,v 1.2 2002/12/29 00:27:51 logic Exp $
+ * $Id: execplayer.hh,v 1.3 2002/12/29 01:23:27 logic Exp $
  */
 
 #ifndef __EXECPLAYER_HH
@@ -41,7 +41,7 @@ class ExecPlayer : public GenericPlayer {
 	~ExecPlayer();
 	virtual bool play( const std::string &filename );
 	virtual bool stop();
-	virtual double supportedFormat( const string &filename ) const;
+	virtual double supportedFormat( const std::string &filename ) const;
 	bool addPlayer( const std::string &cmdname,
 		const std::list<std::string> &cmdargs, 
 		const std::list<SupportedFilesRegExp> &supportedFilesRegExp,

@@ -38,6 +38,9 @@ int main( int argc, char **argv )
 	  autocmdmap["exit"].trigger();
       } catch (std::string m) {
 	  printf("%s\n",(const char*)m.c_str());
+      } catch( ... ){
+	  fprintf( stderr, "caught unknown exception: shutting down...\n" );
+	  return 1;
       }
       return 0;
 }

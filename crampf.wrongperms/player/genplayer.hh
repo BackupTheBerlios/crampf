@@ -16,7 +16,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  * 
- * $Id: genplayer.hh,v 1.1 2002/12/28 23:11:59 logic Exp $
+ * $Id: genplayer.hh,v 1.2 2002/12/29 01:23:26 logic Exp $
  */
 
 #ifndef __GENPLAYER_HH
@@ -25,7 +25,7 @@
 #include <string>
 #include "../cb/tcalback.hh"
 
-typedef TCallBack<void,const string &> StopCB;
+typedef TCallBack<void,const std::string &> StopCB;
 
 class GenericPlayer {
     protected:
@@ -39,7 +39,7 @@ class GenericPlayer {
 	    (0.0 means i cannot play this song, 1.0 means i am the best backend
 	     for this)
 	 */
-	virtual double supportedFormat( const string &filename ) const = 0;
+	virtual double supportedFormat( const std::string &filename ) const = 0;
 	/* this method should be *very* fast 'cause it gets called OFTEN! */
 	virtual bool isPlaying() const = 0;
 	/*

@@ -1,5 +1,5 @@
 //
-// $Id: player-interface.hh,v 1.2 2002/12/28 23:11:59 logic Exp $
+// $Id: player-interface.hh,v 1.3 2002/12/29 01:23:26 logic Exp $
 //
 
 #ifndef __PLAYER_INTERFACE_HH
@@ -21,7 +21,7 @@ class PlayerInterface : public std::vector< GenericPlayer* >, public GenericPlay
 	bool stop();
 	double supportedFormat( const std::string &filename ) const;
 	bool isPlaying() const;
-	void backendStopped( const string &msg );
+	void backendStopped( const std::string &msg );
 	/*
 	virtual void pause() = 0;
 	virtual void cont() = 0;

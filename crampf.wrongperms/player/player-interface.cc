@@ -71,7 +71,7 @@ PlayerInterface::supportedFormat( const std::string &filename ) const
 bool
 PlayerInterface::stop()
 {
-      if( curPlayer && curPlayer != end() && curPlayer_isPlaying ){
+      if( curPlayer != end() && curPlayer_isPlaying ){
 	  if( (*curPlayer)->stop() )
 	      curPlayer = end();
 	  else
@@ -83,11 +83,11 @@ PlayerInterface::stop()
 bool
 PlayerInterface::isPlaying() const
 {
-      return curPlayer && curPlayer != end() && curPlayer_isPlaying;
+      return curPlayer != end() && curPlayer_isPlaying;
 }
 
 void
-PlayerInterface::backendStopped( const string &msg )
+PlayerInterface::backendStopped( const std::string &msg )
 {
       curPlayer = end();
       curPlayer_isPlaying = false;
