@@ -1,9 +1,9 @@
 //
-// $Id: crampf.hh,v 1.4 2002/04/28 00:01:20 logic Exp $
+// $Id: crampf.hh,v 1.5 2002/06/01 17:27:35 logic Exp $
 //
 
-#ifndef CRAMPF
-#define CRAMPF CRAMPF
+#ifndef CRAMPF_HH
+#define CRAMPF_HH CRAMPF_HH
 
 #include "playlist.hh"
 #include "config.hh"

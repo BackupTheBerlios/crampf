@@ -1,9 +1,9 @@
 //
-// $Id: regex.hh,v 1.2 2000/07/16 23:01:43 logic Exp $
+// $Id: regex.hh,v 1.3 2002/06/01 17:27:39 logic Exp $
 //
 
-#ifndef REGEX
-#define REGEX REGEX
+#ifndef REGEX_HH
+#define REGEX_HH REGEX_HH
 
 #include <string>
 #include <regex.h>

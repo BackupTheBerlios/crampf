@@ -2,7 +2,6 @@
  * Config Class -- reads and holds gobal config data
  */
 
-#include "version_info.hh"
 #include <string.h>
 #include <getopt.h>
 #include <stdio.h>
@@ -10,6 +9,7 @@
 #include <vector>
 #include <map>
 #include "config.hh"
+#include "config.h"
 #include "interface.hh"
 #include <errno.h>
 
@@ -147,7 +147,7 @@ void Config::getopts(int argc, char** argv)
         cmdtitlewidth = true;
         break;
       case 'h':
-        printf("    crampf %s %s\n", RELEASENAME, VERSION_INFO);
+        printf("    crampf %s\n", VERSION);
         printf("---------------------------------------\n");
         printf("[ -p | --playlist <playlist>          ]\n");
         printf("[ -r | --random                       ]\n");
@@ -166,7 +166,7 @@ void Config::getopts(int argc, char** argv)
         printf("[ -v | --version                      ]\n");
         exit(0);
       case 'v':
-        printf("crampf %s %s\n", RELEASENAME, VERSION_INFO);
+        printf("crampf %s\n", VERSION);
         exit(0);
       case '?':
         // missing parameter (getopts generates the output)

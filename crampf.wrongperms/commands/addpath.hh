@@ -1,9 +1,9 @@
 //
-// $Id: addpath.hh,v 1.4 2000/07/16 23:00:56 logic Exp $
+// $Id: addpath.hh,v 1.5 2002/06/01 17:27:37 logic Exp $
 //
 
-#ifndef ADDPATH
-#define ADDPATH ADDPATH
+#ifndef ADDPATH_HH
+#define ADDPATH_HH ADDPATH_HH
 
 #include <string>
 #include "../command.hh"

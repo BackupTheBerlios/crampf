@@ -1,9 +1,9 @@
 //
-// $Id: exit.hh,v 1.1 2000/07/15 23:00:52 logic Exp $
+// $Id: exit.hh,v 1.2 2002/06/01 17:27:37 logic Exp $
 //
 
-#ifndef EXIT
-#define EXIT EXIT
+#ifndef EXIT_HH
+#define EXIT_HH EXIT_HH
 
 #include "../command.hh"
 #include <string>

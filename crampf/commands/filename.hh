@@ -1,9 +1,9 @@
 //
-// $Id: filename.hh,v 1.3 2000/07/16 23:00:56 logic Exp $
+// $Id: filename.hh,v 1.4 2002/06/01 17:27:37 logic Exp $
 //
 
-#ifndef FILENAME
-#define FILENAME FILENAME
+#ifndef FILENAME_HH
+#define FILENAME_HH FILENAME_HH
 
 #include "../command.hh"
 #include <string>

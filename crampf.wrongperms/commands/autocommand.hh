@@ -2,8 +2,8 @@
 // One class for each command. doit method called by commandmap
 //
 
-#ifndef AUTOCOMMAND
-#define AUTOCOMMAND AUTOCOMMAND
+#ifndef AUTOCOMMAND_HH
+#define AUTOCOMMAND_HH AUTOCOMMAND_HH
 
 #include <string>
 #include <map>

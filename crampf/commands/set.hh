@@ -2,8 +2,8 @@
 // One class for each command. doit method called by commandmap
 //
 
-#ifndef SET
-#define SET SET
+#ifndef SET_HH
+#define SET_HH SET_HH
 
 #include <string>
 #include "../command.hh"

@@ -1,9 +1,9 @@
 //
-// $Id: commands.hh,v 1.3 2000/07/16 23:10:19 logic Exp $
+// $Id: commands.hh,v 1.4 2002/06/01 17:27:35 logic Exp $
 //
 
-#ifndef __COMMANDS
-#define __COMMANDS __COMMANDS
+#ifndef __COMMANDS_HH
+#define __COMMANDS_HH __COMMANDS_HH
 
 #include "commands/commands.hh"
 

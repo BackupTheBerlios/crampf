@@ -2,7 +2,6 @@
  * Standard textmode interface
  */
 
-#include "version_info.hh"
 #include <unistd.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -16,11 +15,12 @@
 #include "interface.hh"
 #include "player.hh"
 #include "config.hh"
+#include "config.h"
 #include "readlineinterface.hh"
 
 Interface::Interface( void )
 {
-  printf("welcome to the crampf %s (%s)\n", VERSION_INFO, RELEASENAME);
+  printf("welcome to the crampf %s\n", VERSION );
   detectSoundCard();
   opts->volume = getVolume();
   /* save terminal settings */

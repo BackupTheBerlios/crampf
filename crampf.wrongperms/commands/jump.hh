@@ -1,9 +1,9 @@
 //
-// $Id: jump.hh,v 1.4 2000/07/16 23:00:56 logic Exp $
+// $Id: jump.hh,v 1.5 2002/06/01 17:27:37 logic Exp $
 //
 
-#ifndef JUMP
-#define JUMP JUMP
+#ifndef JUMP_HH
+#define JUMP_HH JUMP_HH
 
 #include <string>
 #include "../command.hh"

@@ -1,9 +1,9 @@
 //
-// $Id: player.hh,v 1.6 2000/07/16 23:10:19 logic Exp $
+// $Id: player.hh,v 1.7 2002/06/01 17:27:35 logic Exp $
 //
 
-#ifndef PLAYER
-#define PLAYER PLAYER
+#ifndef PLAYER_HH
+#define PLAYER_HH PLAYER_HH
 
 #include <string>
 #include "playlist.hh"

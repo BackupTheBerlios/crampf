@@ -1,9 +1,9 @@
 //
-// $Id: playlist.hh,v 1.10 2000/07/16 23:10:19 logic Exp $
+// $Id: playlist.hh,v 1.11 2002/06/01 17:27:35 logic Exp $
 //
 
-#ifndef PLAYLIST
-#define PLAYLIST PLAYLIST
+#ifndef PLAYLIST_HH
+#define PLAYLIST_HH PLAYLIST_HH
 
 #include <string>
 #include <vector>

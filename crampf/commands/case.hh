@@ -1,9 +1,9 @@
 //
-// $Id: case.hh,v 1.1 2000/07/03 02:02:40 logic Exp $
+// $Id: case.hh,v 1.2 2002/06/01 17:27:37 logic Exp $
 //
 
-#ifndef CASE
-#define CASE CASE
+#ifndef CASE_HH
+#define CASE_HH CASE_HH
 
 #include "../command.hh"
 #include <string>

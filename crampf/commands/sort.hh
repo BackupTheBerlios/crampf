@@ -1,9 +1,9 @@
 //
-// $Id: sort.hh,v 1.1 2002/04/28 00:41:24 logic Exp $
+// $Id: sort.hh,v 1.2 2002/06/01 17:27:37 logic Exp $
 //
 
-#ifndef SORT
-#define SORT SORT
+#ifndef SORT_HH
+#define SORT_HH SORT_HH
 
 #include "../command.hh"
 #include <string>

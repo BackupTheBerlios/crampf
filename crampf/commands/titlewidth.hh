@@ -1,9 +1,9 @@
 //
-// $Id: titlewidth.hh,v 1.2 2000/07/16 23:00:57 logic Exp $
+// $Id: titlewidth.hh,v 1.3 2002/06/01 17:27:37 logic Exp $
 //
 
-#ifndef TITLEWIDTH
-#define TITLEWIDTH TITLEWIDTH
+#ifndef TITLEWIDTH_HH
+#define TITLEWIDTH_HH TITLEWIDTH_HH
 
 #include "../command.hh"
 #include <string>

@@ -1,9 +1,9 @@
 //
-// $Id: kill.hh,v 1.1 2000/03/21 14:29:34 logic Exp $
+// $Id: kill.hh,v 1.2 2002/06/01 17:27:37 logic Exp $
 //
 
-#ifndef KILL
-#define KILL KILL
+#ifndef KILL_HH
+#define KILL_HH KILL_HH
 
 #include "../command.hh"
 #include <string>

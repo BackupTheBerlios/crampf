@@ -1,9 +1,9 @@
 //
-// $Id: track.hh,v 1.5 2002/04/28 00:41:23 logic Exp $
+// $Id: track.hh,v 1.6 2002/06/01 17:27:35 logic Exp $
 //
 
-#ifndef TRACK
-#define TRACK TRACK
+#ifndef TRACK_HH
+#define TRACK_HH TRACK_HH
 
 #include <string>
 #include <stdio.h>

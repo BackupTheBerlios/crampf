@@ -2,8 +2,8 @@
  * This Class provides the ex-like interface
  */
 
-#ifndef READLINEINTERFACE
-#define READLINEINTERFACE READLINEINTERFACE
+#ifndef READLINEINTERFACE_HH
+#define READLINEINTERFACE_HH READLINEINTERFACE_HH
 
 class ReadLineInterface {
   public:

@@ -1,5 +1,5 @@
-#include "../version_info.hh"
 #include "../command.hh"
+#include "../config.h"
 #include "version.hh"
 #include <string>
 #include <stdio.h>
@@ -7,7 +7,7 @@
 void
 Version::doit( string s )
 {
-  printf("crampf %s %s\n",RELEASENAME,VERSION_INFO);
+  printf("crampf %s\n",VERSION);
   printf("please send bugreports to logic@tzi.de\n");
 }
 

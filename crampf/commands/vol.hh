@@ -2,8 +2,8 @@
 // One class for each command. doit method called by commandmap
 //
 
-#ifndef VOL
-#define VOL VOL
+#ifndef VOL_HH
+#define VOL_HH VOL_HH
 
 #include <string>
 #include "../command.hh"

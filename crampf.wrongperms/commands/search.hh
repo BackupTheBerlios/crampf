@@ -1,9 +1,9 @@
 //
-// $Id: search.hh,v 1.3 2000/07/16 23:00:57 logic Exp $
+// $Id: search.hh,v 1.4 2002/06/01 17:27:37 logic Exp $
 //
 
-#ifndef SEARCH
-#define SEARCH SEARCH
+#ifndef SEARCH_HH
+#define SEARCH_HH SEARCH_HH
 
 #include "../command.hh"
 #include "../commandmap.hh"

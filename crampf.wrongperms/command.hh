@@ -2,8 +2,8 @@
 // all commands are derived from this base class
 //
 
-#ifndef COMMAND
-#define COMMAND COMMAND
+#ifndef COMMAND_HH
+#define COMMAND_HH COMMAND_HH
 
 #include <string>
 #include <stdio.h>

@@ -1,9 +1,9 @@
 //
-// $Id: pfilter.hh,v 1.2 2000/07/16 23:00:57 logic Exp $
+// $Id: pfilter.hh,v 1.3 2002/06/01 17:27:37 logic Exp $
 //
 
-#ifndef PFILTER
-#define PFILTER PFILTER
+#ifndef PFILTER_HH
+#define PFILTER_HH PFILTER_HH
 
 #include <string>
 #include "../command.hh"

@@ -1,9 +1,9 @@
 //
-// $Id: map.hh,v 1.4 2000/07/16 23:00:57 logic Exp $
+// $Id: map.hh,v 1.5 2002/06/01 17:27:37 logic Exp $
 //
 
-#ifndef MAP
-#define MAP MAP
+#ifndef MAP_HH
+#define MAP_HH MAP_HH
 
 #include <string>
 #include "../command.hh"

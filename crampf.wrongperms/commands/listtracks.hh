@@ -1,9 +1,9 @@
 //
-// $Id: listtracks.hh,v 1.1 2002/04/28 01:19:10 logic Exp $
+// $Id: listtracks.hh,v 1.2 2002/06/01 17:27:37 logic Exp $
 //
 
-#ifndef LISTTRACKS
-#define LISTTRACKS LISTTRACKS
+#ifndef LISTTRACKS_HH
+#define LISTTRACKS_HH LISTTRACKS_HH
 
 #include <string>
 #include "../command.hh"

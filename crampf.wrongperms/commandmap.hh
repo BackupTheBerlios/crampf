@@ -2,8 +2,8 @@
 // CommandoMap -- maps Functionsnames/Hotkeys -> Functions
 //
 
-#ifndef COMMANDMAP
-#define COMMANDMAP COMMANDMAP
+#ifndef COMMANDMAP_HH
+#define COMMANDMAP_HH COMMANDMAP_HH
 
 #include <string>
 #include <map>

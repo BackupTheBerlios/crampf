@@ -2,8 +2,8 @@
 // One class for each command. doit method called by commandmap
 //
 
-#ifndef INFO
-#define INFO INFO
+#ifndef INFO_HH
+#define INFO_HH INFO_HH
 
 #include <string>
 #include "../command.hh"
