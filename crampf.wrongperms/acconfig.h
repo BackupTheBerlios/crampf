@@ -1,5 +1,5 @@
 //
-// $Id: acconfig.h,v 1.4 2003/01/05 12:53:29 logic Exp $
+// $Id: acconfig.h,v 1.5 2003/01/11 18:33:08 logic Exp $
 //
 
 #ifndef __ACCONFIG_H
@@ -19,6 +19,8 @@
 #undef MP3INFO_CMD_ARGS
 
 #undef HAVE_DEV_SNDSTAT
+
+#undef HAVE_PROC_STAT
 
 #endif
 
