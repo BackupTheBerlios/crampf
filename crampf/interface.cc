@@ -7,6 +7,8 @@
 #include <stdlib.h>
 #include <string.h>
 #include <termios.h>
+#include <sys/types.h>
+#include <sys/wait.h>
 #include <fcntl.h>
 #include <string>
 #include <map>
@@ -223,17 +225,23 @@ Interface::vol_dn( void )
 
 Interface::changevol(int vol)
 {
-  printf("volume changing is broken :-(\n");
-  return -1;
-  char cmd[] = "aumix -s     ";
+  int pid;
+  char arg[6];
   if (vol<0 || vol>100)
     return -1;
-  cmd[9]=48+vol%1000/100;
-  cmd[10]=48+vol%100/10;
-  cmd[11]=48+vol%10;
-  printf("exec: `%s'\n",cmd);
-  if (system(cmd)==-1)
-    perror("aumix");
+  arg[0]='-';
+  arg[1]='s';
+  arg[2]=48+vol%1000/100;
+  arg[3]=48+vol%100/10;
+  arg[4]=48+vol%10;
+  arg[5]='\0';
+  pid = fork();
+  if (pid==0) {
+    execlp("aumix","aumix",arg,NULL);
+    perror("execlp(aumix)");
+    exit(1);
+  } 
+  /* player will reap the child */
 }
 
 Interface::showstatus()

@@ -37,8 +37,10 @@ Config::initdefaults(struct options* op)
   op->keytable["list"]="l";
   op->keytable["file"]="f";
   op->keytable["jump"]="j";
+  /*
   op->keytable["pause"]="P";
   op->keytable["cont"]="C";
+  */
   op->keytable["vol0"]="0";
   op->keytable["vol1"]="1";
   op->keytable["vol2"]="2";
@@ -59,7 +61,6 @@ Config::setupkeys()
   op = &opts;
   for (map<string, string>::iterator it = opts.keytable.begin();
       it != opts.keytable.end(); it++) {
-    printf("defining key `%s'\n",it->first.c_str());
     if (it->first=="help") {
       for (int i=0; i<it->second.size(); i++) {
         opts.keys[it->second[i]]=&Interface::help;
@@ -108,6 +109,7 @@ Config::setupkeys()
       }
       continue;
     }
+    /*
     if (it->first=="pause") {
       for (int i=0; i<it->second.size(); i++) {
         opts.keys[it->second[i]]=&Interface::pause;
@@ -120,6 +122,7 @@ Config::setupkeys()
       }
       continue;
     }
+    */
     if (it->first=="vol0") {
       for (int i=0; i<it->second.size(); i++) {
         opts.keys[it->second[i]]=&Interface::vol0;
@@ -387,13 +390,13 @@ Config::readconfig(string filename)
         opt = &option[4];
         val.erase(val.begin());
         val.erase(val.end()-1);
+        /* Taste schonmal belegt? */
         for (map<string,string>::iterator it=opts.keytable.begin();
             it != opts.keytable.end(); it++)
-          for (int i=0; i<val.size(); i++) {
-            if (it->second.find(val[i])!=-1) {
+          for (int i=0; i<val.size(); i++) 
+            if (it->second.find(val[i])!=-1) 
+              /* alte Belegung entfernen */
               it->second.erase(it->second.find(val[i]));
-            }
-          }
         opts.keytable[opt]=val;
         continue;
       }
