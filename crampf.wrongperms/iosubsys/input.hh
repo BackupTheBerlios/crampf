@@ -1,5 +1,5 @@
 /*
- * $Id: input.hh,v 1.3 2003/01/11 14:25:41 logic Exp $
+ * $Id: input.hh,v 1.4 2003/01/11 16:04:28 logic Exp $
  */
 
 #ifndef __INPUT_HH
@@ -8,6 +8,7 @@
 #include <string>
 #include <queue>
 #include <list>
+#include <map>
 #include <termios.h>
 #include "../config.h"
 #include "../module.hh"
@@ -43,6 +44,7 @@ class TermInput : public InputObject {
 	void singlekeyTerm() const;
 	std::string readline( const char *prompt );
 	std::map<int,std::string> hotkeys;
+	std::map<std::string,int> keynames;
     public:
 	TermInput();
 	std::string read();

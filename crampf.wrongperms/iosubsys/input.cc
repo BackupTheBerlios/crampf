@@ -38,6 +38,11 @@ TermInput::TermInput() : InputObject( "terminal" )
 	  perror("tcgetattr");
       }
       singlekeyTerm();
+      /* special keys */
+      keynames["space"] = ' ';
+      keynames["enter"] = '\n';
+      keynames["tab"] = '\t';
+      keynames["escape"] = '\e';
       /* default hotkeys */
       hotkeys['h'] = std::string( "module terminal" );
       hotkeys['n'] = std::string( "search" );
@@ -105,8 +110,18 @@ TermInput::configure( const std::string &s )
 	  output->printf( "key '?' -> search backward\n" );
 	  output->printf( "---Keymap-(user-definable)---\n" );
 	  for( std::map<int,std::string>::const_iterator it = hotkeys.begin();
-		  it != hotkeys.end(); it++ )
-	      output->printf( "key '%c' -> '%s'\n", it->first, it->second.c_str() );
+		  it != hotkeys.end(); it++ ){
+	      std::map<std::string,int>::const_iterator at;
+	      for( at = keynames.begin();
+		      at != keynames.end(); at++ )
+		  if( at->second == it->first ){
+		      output->printf( "key '%s'\t-> '%s'\n", at->first.c_str(),
+			      it->second.c_str() );
+		      break;
+		  }
+	      if( at == keynames.end() )
+		  output->printf( "key '%c' \t-> '%s'\n", it->first, it->second.c_str() );
+	  }
       } else {
 	  std::string cmd = CommandMap::arg0( s );
 	  std::string args = CommandMap::args( s );
@@ -117,10 +132,21 @@ TermInput::configure( const std::string &s )
 		  std::string key = CommandMap::arg0( args );
 		  args = CommandMap::args( args );
 		  if( args.empty() ){
-		      if( key.size() == 1 && hotkeys.count( key[0] ) == 1 )
-			  output->printf( "key '%c' -> '%s'\n", key[0], hotkeys[key[0]].c_str() );
-		      else /* TODO resolv special keyname */
-			  throw std::string( "key '" ) + key + "' undefined";
+		      if( key.size() == 1 ){
+			  if( hotkeys.count( key[0] ) == 1 )
+			      output->printf( "key '%c' -> '%s'\n",
+				      key[0], hotkeys[key[0]].c_str() );
+			  else
+			      throw std::string( "key '" ) + key + "' undefined";
+		      } else {
+			  /* resolv special keyname */
+			  if( keynames.count( key ) == 1 )
+			      if( hotkeys.count( keynames[key] ) == 1 )
+				  output->printf( "key '%s' -> '%s'\n",
+					  keynames[key], hotkeys[key[0]].c_str() );
+			      else
+				  throw std::string( "key '" ) + key + "' undefined";
+		      }
 		  } else {
 		      if( key.size() == 1 ){
 			  printdebug( "assigning command '%s' to hotkey '%c'\n",
@@ -142,6 +168,11 @@ TermInput::help( const std::string &s ) const
       output->printf( "possible commands:\n" );
       output->printf( "bind <key> <command>  - bind key <key> to comand <command>\n" );
       output->printf( "show                  - show current configuration\n" );
+      output->printf( "A key may be a letter (e.g. 'a', 'W' etc.) or one of the\n" );
+      output->printf( "following special keynames:\n" );
+      for( std::map<std::string,int>::const_iterator it = keynames.begin();
+	      it != keynames.end(); it++ )
+	  output->printf( "\t%s\n", it->first.c_str() );
 }
 
 void
