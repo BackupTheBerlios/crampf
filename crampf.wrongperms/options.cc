@@ -31,8 +31,8 @@ void Config::initdefaults(struct Options* op)
   try {
     op->cmdmap["define next=jump +1"];
     op->cmdmap["define prev=jump -1"];
-    // FIXME add compat macro (must take argument)
-    // op->cmdmap["define map=module terminal bind"];
+    /* backwards compatible macro to attic map command */
+    op->cmdmap["define map=module terminal bind"];
 #if 0
     op->cmdmap["map h map"];
     op->cmdmap["map n search"];
