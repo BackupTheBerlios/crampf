@@ -21,7 +21,7 @@ debug: all
 install: all
 
 clean:
-	@rm -f $(PROGNAME) $(OBJS) $(OBJS:.o=.d)
+	rm -f $(PROGNAME) $(OBJS) $(OBJS:.o=.d)
 
 %.d:	%.cc
 	@$(SHELL) -ec '$(CXX) -MM $(CXXFLAGS) $< \

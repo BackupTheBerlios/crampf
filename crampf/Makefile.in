@@ -51,19 +51,19 @@ util:
 debug: all
 
 clean:
-	@rm -f $(PROGNAME) $(OBJS) $(OBJS:.o=.d)
+	rm -f $(PROGNAME) $(OBJS) $(OBJS:.o=.d)
 	$(MAKE) clean -C commands 
 	$(MAKE) clean -C util
 
 commands/commands.hh:
-	@cd commands && ./commands.sh
+	cd commands && ./commands.sh
 
 install: all
 	@mkdir -p ${bindir}
 	$(INSTALL) $(PROGNAME) ${bindir}
 
 uninstall:
-	@rm -f ${exec_prefix}/$(PROGNAME)
+	rm -f ${exec_prefix}/$(PROGNAME)
 
 %.d:	%.cc
 	@$(SHELL) -ec '$(CXX) -MM $(CXXFLAGS) $< \
