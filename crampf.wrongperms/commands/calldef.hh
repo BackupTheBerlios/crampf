@@ -1,5 +1,5 @@
 //
-// $Id: calldef.hh,v 1.5 2002/12/24 19:51:50 logic Exp $
+// $Id: calldef.hh,v 1.6 2003/01/11 16:01:38 logic Exp $
 //
 
 #ifndef CALLDEF_HH
@@ -16,7 +16,7 @@ class CallDef : public Command {
     void help( const std::string &s ) const;
     void description() const;
   private:
-    void execute( const std::string &s );
+    void execute( const std::string &macro, const std::string &args );
     CommandMap* cmap;
 };
 

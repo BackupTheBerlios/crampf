@@ -17,11 +17,12 @@ CallDef::doit( const std::string &s )
 {
   char c[s.size()];
   sscanf(s.c_str(),"%s",c);
+  std::string args = CommandMap::args( s );
   if (cmap->defmap.count(c)==0) {
     output->printf("calldef: not a macro\n");
     return;
   } else 
-    execute(c);
+    execute(c,args);
 }
 
 void 
@@ -39,10 +40,17 @@ CallDef::description() const
 }
 
 void
-CallDef::execute( const std::string &s )
+CallDef::execute( const std::string &macro, const std::string &args )
 {
-  for (std::vector<std::string>::const_iterator it = cmap->defmap[s].begin();
-      it != cmap->defmap[s].end(); it++) 
-    (*cmap)[(*it)];
+  for (std::vector<std::string>::const_iterator it = cmap->defmap[macro].begin();
+      it != cmap->defmap[macro].end(); it++){
+      std::vector<std::string>::const_iterator at = it;
+      at++;
+      if( at == cmap->defmap[macro].end() )
+	  /* add argument to last command */
+	  (*cmap)[(*it)+" "+args];
+      else
+	  (*cmap)[(*it)];
+  }
 }
 
