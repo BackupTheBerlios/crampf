@@ -17,6 +17,8 @@ extern struct options* opts;
 void
 Status::doit( string s )
 {
+      if( plist->size() <= plist->pos() )
+	  plist->jump( plist->pos() );
       if ((*plist).size() > 0) {
 	  if (opts->titlewidth==0) {
 	      printf("\n[%d/%d] - %s\n",plist->pos()+1,plist->size(),
