@@ -43,7 +43,7 @@ Interface::mainloop()
   player_play();
   try {
     char c;
-    while (1) {
+    while (!player_finished()) {
       if (player_restarted()) {
         opts->cmdmap["status"];
       }

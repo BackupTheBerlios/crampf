@@ -18,12 +18,14 @@ int player_pid = 999999; /* hope this pid never exists ;] */
 bool player_sigignore;
 bool player_newsong;
 bool first_track_damaged;
+bool player_has_finished;
 
 void player_init()
 {
   player_sigignore = false;
   player_newsong = false;
   first_track_damaged = false;
+  player_has_finished = false;
   signal(SIGCHLD,player_playerstop);
 }
 
@@ -114,7 +116,8 @@ void player_playerstop(int status)
   } catch( string error )
   {
     printf( "%s\n", error.c_str() );
-    exit( 0 );
+    player_has_finished = true;
+    return;
   }
   player_play();
 }
@@ -146,4 +149,9 @@ bool player_restarted( void )
     return true;
   } else
     return false;
+}
+
+bool player_finished( void )
+{
+  return player_has_finished;
 }
