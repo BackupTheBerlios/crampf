@@ -52,27 +52,19 @@ bool splitwords( const char *str, int str_len, char *head, int head_len, char *t
 	  str_len--;
       }
       while( ( str_len > 0 && *str != '\0' ) && *str != ' ' && *str != '\t' ){
-	  *head = *str;
-	  head++;
-	  head_len--;
-	  str++;
+	  *head++ = *str++;
 	  str_len--;
       }
       *head = '\0';
-      head_len--;
       while( ( str_len > 0 && *str != '\0' ) && ( *str == ' ' || *str == '\t' ) ){
 	  str++;
 	  str_len--;
       }
       while( ( str_len > 0 && *str != '\0' ) ){
-	  *tail = *str;
-	  tail++;
-	  tail_len--;
-	  str++;
+	  *tail++ = *str++;
 	  str_len--;
       }
       *tail = '\0';
-      tail_len--;
       return *str == '\0';
 }
 
@@ -149,6 +141,7 @@ ExecPlayer::addPlayer( const std::string & cfgstr )
       *regexp = '\0';
       assert( cfgstr.size() < BUFSIZ );
       memcpy( cfgline, cfgstr.c_str(), cfgstr.size() );
+      cfgline[cfgstr.size()] = '\0';
       for(;;){
 	  splitwords( cfgline, strlen( cfgline ), word, BUFSIZ, buf, BUFSIZ );
 	  if( *word == '\0' )
@@ -170,6 +163,7 @@ ExecPlayer::addPlayer( const std::string & cfgstr )
 	      case REGEXP:
 		  if( *word != '/' ){
 		      fprintf( stderr, "parsing error 1: '%s'\n", cfgstr.c_str() );
+		      fprintf( stderr, "should be '/', but is '%c'\n", *word );
 		      return false;
 		  }
 		  {
