@@ -29,7 +29,11 @@ Jump::doit( const std::string &s )
       throw std::string("quit");
     printf("jump error: %s\n",error.c_str());
   }
-  player->play( (**plist).filename() );
+  if( player->supportedFormat( (**plist).filename() ) == 0 ){
+      if( s[0] == '+' || s[0] == '-' )
+	  doit( s );
+  } else 
+      player->play( (**plist).filename() );
 }
 
 void

@@ -20,14 +20,23 @@ RSearch::RSearch( CommandMap* c )
 void
 RSearch::doit( const std::string &s )
 {
-  int newpos;
+  int newpos, firstmatch, origpos = plist->pos();
   if (!s.empty())
     cmap->searchstr = s;
   if (cmap->searchstr.empty())
     throw std::string("rsearch: no searchstring");
   try {
-    newpos = rsearch(cmap->searchstr);
-    plist->jump(newpos);
+    newpos = rsearch( cmap->searchstr );
+    firstmatch = newpos;
+    plist->jump( newpos );
+    while( player->supportedFormat( (**plist).filename() ) == 0.0 ){
+	newpos = rsearch( cmap->searchstr );
+	if( newpos = firstmatch ){
+	    plist->jump( origpos );
+	    throw std::string("no supported file found");
+	}
+	plist->jump( newpos );
+    }
     player->play( (**plist).filename() );
   } catch (std::string error) {
     printf("rsearch: %s\n",error.c_str());
