@@ -9,7 +9,7 @@
 #include <unistd.h>
 #include "autocommand.hh"
 #include "../autocmd.hh"
-#include "../config.hh"
+#include "../options.hh"
 #include "../debug.hh"
 
 extern struct options* opts;

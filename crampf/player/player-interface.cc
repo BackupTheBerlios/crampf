@@ -2,7 +2,7 @@
 #include "player-interface.hh"
 #include "../autocmd.hh"
 #include "backends/execplayer/execplayer.hh"
-#include "../config.hh"
+#include "../options.hh"
 #include "../autocmd.hh"
 
 extern AutocmdMap autocmdmap;

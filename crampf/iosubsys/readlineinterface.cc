@@ -20,7 +20,7 @@
   }
 #endif
 
-#include "config.hh"
+#include "options.hh"
 #include "readlineinterface.hh"
 
 

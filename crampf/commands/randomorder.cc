@@ -1,7 +1,7 @@
 #include "randomorder.hh"
 #include <string>
 #include <stdio.h>
-#include "../config.hh"
+#include "../options.hh"
 
 extern struct options* opts;
 

@@ -1,6 +1,6 @@
 #include <string>
 #include "../playlist.hh"
-#include "../config.hh"
+#include "../options.hh"
 #include "../commandmap.hh"
 #include "../player/player-interface.hh"
 #include "rsearch.hh"

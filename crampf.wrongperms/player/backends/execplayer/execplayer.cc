@@ -1,5 +1,5 @@
 #include "execplayer.hh"
-#include "../../../config.hh"
+#include "../../../options.hh"
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>

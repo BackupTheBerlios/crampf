@@ -1,5 +1,5 @@
 #include <string>
-#include "../config.hh"
+#include "../options.hh"
 #include "exit.hh"
 #include <stdio.h>
 

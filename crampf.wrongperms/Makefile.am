@@ -5,11 +5,11 @@ SUBDIRS=commands util cb player
 EXTRA_DIST=README COPYING INSTALL COPYRIGHT ChangeLog crampfrc-example
 
 noinst_HEADERS=autocmd.hh command.hh commandmap.hh commands.hh	\
-    	       config.h config.hh crampf.hh debug.hh file.hh	\
+    	       config.h options.hh crampf.hh debug.hh file.hh	\
 	       interface.hh playlist.hh	readlineinterface.hh	\
 	       track.hh
 
-crampf_SOURCES=commandmap.cc config.cc crampf.cc file.cc	\
+crampf_SOURCES=commandmap.cc options.cc crampf.cc file.cc	\
 	       interface.cc playlist.cc readlineinterface.cc	\
 	       track.cc
 

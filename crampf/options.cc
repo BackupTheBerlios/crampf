@@ -8,7 +8,7 @@
 #include <string>
 #include <vector>
 #include <map>
-#include "config.hh"
+#include "options.hh"
 #include "config.h"
 #include "interface.hh"
 #include <errno.h>

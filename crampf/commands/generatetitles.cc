@@ -1,7 +1,7 @@
 #include "../command.hh"
 #include <string>
 #include "generatetitles.hh"
-#include "../config.hh"
+#include "../options.hh"
 
 extern struct options* opts;
 

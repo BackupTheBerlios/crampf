@@ -1,5 +1,5 @@
 #include <string>
-#include "../config.hh"
+#include "../options.hh"
 #include "regexp.hh"
 #include <stdio.h>
 

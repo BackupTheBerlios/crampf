@@ -7,7 +7,7 @@
 #include <string.h>
 #include <stdio.h>
 #include <unistd.h>
-#include "../config.hh"
+#include "../options.hh"
 #include "../config.h"
 #include "vol.hh"
 

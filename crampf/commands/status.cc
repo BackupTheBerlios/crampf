@@ -8,7 +8,7 @@
 #include <stdio.h>
 #include <unistd.h>
 #include "../playlist.hh"
-#include "../config.hh"
+#include "../options.hh"
 #include "status.hh"
 
 extern Playlist* plist;

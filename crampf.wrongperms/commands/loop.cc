@@ -1,5 +1,5 @@
 #include "../command.hh"
-#include "../config.hh"
+#include "../options.hh"
 #include <string>
 #include <stdio.h>
 #include <stdlib.h>

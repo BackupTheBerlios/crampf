@@ -12,7 +12,7 @@
 #include <sys/stat.h>
 #include <unistd.h>
 #include "playlist.hh"
-#include "config.hh"
+#include "options.hh"
 #include "util/regex.hh"
 
 extern struct options* opts;

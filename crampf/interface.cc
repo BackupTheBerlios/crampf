@@ -13,7 +13,7 @@
 #include <string>
 #include <map>
 #include "interface.hh"
-#include "config.hh"
+#include "options.hh"
 #include "debug.hh"
 #include "config.h"
 #include "readlineinterface.hh"
