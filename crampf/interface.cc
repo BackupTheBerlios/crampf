@@ -7,6 +7,7 @@
 #include <termios.h>
 #include "interface.hh"
 #include "config.hh"
+#include "player.hh"
 
 Interface::Interface( void )
 {
@@ -32,10 +33,51 @@ Interface::mainloop()
   while (!userexit) {
     showstatus();
     c = fgetc(stdin); 
-    printf("%x, %s, %d\n",opts->keys[c],opts->keys[c],opts->keys[c]);
     if (opts->keys[c]!=NULL)
       (this->*(opts->keys[c]))();
   } 
+}
+
+Interface::showstatus()
+{
+  printf("[%d/%d] - %s\n",plist->pos(),plist->size(),
+      (*(*plist)).title().c_str());
+}
+
+void
+Interface::next( void )
+{
+  ++(*plist);
+}
+
+void
+Interface::prev( void )
+{
+  --(*plist);
+}
+
+void
+Interface::info( void )
+{
+  printf("not implemented yet\n");
+}
+
+void
+Interface::pause( void )
+{
+  player_pause();
+}
+
+void
+Interface::cont( void )
+{
+  player_continue();
+}
+
+void
+Interface::list( void )
+{
+  printf("not implemented yet\n");
 }
 
 void
@@ -50,8 +92,74 @@ Interface::quit( void )
   userexit = true;
 }
 
-Interface::showstatus()
+void
+Interface::vol0( void )
 {
-  printf("[%d/%d] - %s\n",plist->pos(),plist->size(),
-      (*(*plist)).title().c_str());
+  printf("not implemented yet\n");
+}
+
+void
+Interface::vol1( void )
+{
+  printf("not implemented yet\n");
+}
+
+void
+Interface::vol2( void )
+{
+  printf("not implemented yet\n");
+}
+
+void
+Interface::vol3( void )
+{
+  printf("not implemented yet\n");
+}
+
+void
+Interface::vol4( void )
+{
+  printf("not implemented yet\n");
+}
+
+void
+Interface::vol5( void )
+{
+  printf("not implemented yet\n");
+}
+
+void
+Interface::vol6( void )
+{
+  printf("not implemented yet\n");
+}
+
+void
+Interface::vol7( void )
+{
+  printf("not implemented yet\n");
+}
+
+void
+Interface::vol8( void )
+{
+  printf("not implemented yet\n");
+}
+
+void
+Interface::vol9( void )
+{
+  printf("not implemented yet\n");
+}
+
+void
+Interface::vol_up( void )
+{
+  printf("not implemented yet\n");
+}
+
+void
+Interface::vol_down( void )
+{
+  printf("not implemented yet\n");
 }

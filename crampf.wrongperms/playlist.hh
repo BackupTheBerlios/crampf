@@ -1,5 +1,5 @@
 //
-// $Id: playlist.hh,v 1.2 2000/03/10 04:02:30 logic Exp $
+// $Id: playlist.hh,v 1.3 2000/03/10 10:06:28 logic Exp $
 //
 
 #ifndef playlist
@@ -8,8 +8,13 @@
 #include <string>
 #include <vector>
 #include "track.hh"
+#include "config.hh"
+#include "playlist.hh"
 
 #define MAXFILENAMELENGTH 1024
+
+extern Playlist* plist;
+extern struct options* opts;
 
 class Playlist : public vector<Track>
 {
