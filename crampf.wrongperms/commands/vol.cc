@@ -12,6 +12,8 @@
 #include "vol.hh"
 #include "../iosubsys/output.hh"
 
+#define LINEWIDTH 128
+
 void
 Vol::doit( const std::string &s )
 {
@@ -53,12 +55,12 @@ Soundcard::Soundcard()
       flag[MAX_TYPE] = '\0';
       /* TODO add HAVE_DEV_SNDSTAT */
       type = STANDARD;
+#ifdef HAVE_DEV_SNDSTAT
       FILE* fp = fopen("/dev/sndstat","r");
       if (fp==NULL) {
 	  perror("sndstat");
 	  return;
       }
-#define LINEWIDTH 128
       char line[LINEWIDTH];
       std::string l;
       while (fgets(line,LINEWIDTH,fp)) {
@@ -67,6 +69,7 @@ Soundcard::Soundcard()
 	      type = ULTRASOUND;
       }
       fclose(fp);
+#endif
 }
 
 int

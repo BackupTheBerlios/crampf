@@ -10,7 +10,6 @@
 #include <map>
 #include "options.hh"
 #include "config.h"
-#include "interface.hh"
 #include <errno.h>
 
 void
@@ -25,7 +24,6 @@ void Config::initdefaults(struct Options* op)
   op->randomOrder=true;
   op->readconfig=true;
   op->generateTitles=true;
-  op->soundcard='w';
   op->loop=0;
   op->casesensivity=true;
   op->regexp=0;

@@ -82,6 +82,8 @@ dnl Checks for library functions.
 AC_TYPE_SIGNAL
 AC_CHECK_FUNCS(regcomp strerror readline)
 
+AC_CHECK_FILE(/dev/sndstat,AC_DEFINE(HAVE_DEV_SNDSTAT))
+
 AC_OUTPUT(util/Makefile Makefile commands/Makefile cb/Makefile player/Makefile player/backends/Makefile player/backends/execplayer/Makefile iosubsys/Makefile, echo timestamp > stamp-h)
 
 AC_MSG_RESULT( [

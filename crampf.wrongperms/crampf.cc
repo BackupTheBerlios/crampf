@@ -4,7 +4,6 @@
 
 #include <stdio.h>
 #include "crampf.hh"
-#include "interface.hh"
 #include "player/player-interface.hh"
 #include "iosubsys/output.hh"
 #include "iosubsys/input.hh"

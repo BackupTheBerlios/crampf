@@ -1,5 +1,5 @@
 //
-// $Id: options.hh,v 1.24 2003/01/05 12:39:24 logic Exp $
+// $Id: options.hh,v 1.25 2003/01/05 12:53:29 logic Exp $
 //
 
 #ifndef OPTIONS_HH
@@ -8,7 +8,6 @@
 #include <string>
 #include <vector>
 #include <map>
-#include "interface.hh"
 #include "commandmap.hh"
 
 #define FILELINEWIDTH 128    /* max config and filter file linewidth */
@@ -21,10 +20,8 @@ struct Options {
   bool                     generateTitles;
   int                      loop;
   unsigned int             titlewidth;
-  unsigned int             volume;
   int                      regexp;	/* regexp level (0=no, 1=std, 2=extended)*/
   bool                     casesensivity;
-  char                     soundcard; /* s = UltraSound, w = SB-Clone */
   std::vector<std::string> negativeFilterFiles;
   std::vector<std::string> negativeFilter;
   std::vector<std::string> positiveFilterFiles;
