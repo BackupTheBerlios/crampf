@@ -9,34 +9,35 @@
 #include <unistd.h>
 #include "../commandmap.hh"
 #include "set.hh"
+#include "../iosubsys/output.hh"
 
 void
 Set::doit( const std::string &s )
 {
   if (s=="list" || s=="all" || s=="show") {
-    printf("---Options---\n");
+    output->printf("---Options---\n");
     return;
-    printf("not yet implemented :-(\n");
+    output->printf("not yet implemented :-(\n");
   }
 }
 
 void
 Set::help( const std::string &s ) const
 {
-  printf("format: set <optionname>\n");
-  printf("    or: set <optionname>=<value>\n");
-  printf("    or: set <optionname> <value>\n");
-  printf("    or: set all\n");
-  printf("    or: set list\n");
-  printf("    or: set show\n");
-  printf("description: prints setting of option <optionname>,\n");
-  printf("sets option <optionname> to value <value> or lists out\n");
-  printf("all current settings\n");
+  output->printf("format: set <optionname>\n");
+  output->printf("    or: set <optionname>=<value>\n");
+  output->printf("    or: set <optionname> <value>\n");
+  output->printf("    or: set all\n");
+  output->printf("    or: set list\n");
+  output->printf("    or: set show\n");
+  output->printf("description: prints setting of option <optionname>,\n");
+  output->printf("sets option <optionname> to value <value> or lists out\n");
+  output->printf("all current settings\n");
 }
 
 
 void 
 Set::description() const
 {
-  printf("change/view runtime options\n");
+  output->printf("change/view runtime options\n");
 }

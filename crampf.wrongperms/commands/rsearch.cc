@@ -7,10 +7,7 @@
 #include "search.hh"
 #include <stdio.h>
 #include "../util/regex.hh"
-
-extern Playlist* plist;
-extern struct options* opts;
-extern PlayerInterface *player;
+#include "../iosubsys/output.hh"
 
 RSearch::RSearch( CommandMap* c )
 {
@@ -39,25 +36,25 @@ RSearch::doit( const std::string &s )
     }
     player->play( (**plist).filename() );
   } catch (std::string error) {
-    printf("rsearch: %s\n",error.c_str());
+    output->printf("rsearch: %s\n",error.c_str());
   }
 }
 
 void
 RSearch::help( const std::string &s ) const
 {
-  printf("format: rsearch [<substring>]\n");
-  printf("description: searches backward for the occurence of <substring>\n");
-  printf("in the playlist. if rsearch is successful skips to the found\n");
-  printf("track. If <substring> is ommitted the last keyword is used\n");
-  printf("again.\n");
-  printf("see also: search, regexp, case, loop\n");
+  output->printf("format: rsearch [<substring>]\n");
+  output->printf("description: searches backward for the occurence of <substring>\n");
+  output->printf("in the playlist. if rsearch is successful skips to the found\n");
+  output->printf("track. If <substring> is ommitted the last keyword is used\n");
+  output->printf("again.\n");
+  output->printf("see also: search, regexp, case, loop\n");
 }
 
 void
 RSearch::description() const
 {
-  printf("rsearch backward in the playlist\n");
+  output->printf("rsearch backward in the playlist\n");
 }
 
 int

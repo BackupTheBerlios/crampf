@@ -2,20 +2,19 @@
 #include "../options.hh"
 #include "regexp.hh"
 #include <stdio.h>
-
-extern struct options* opts;
+#include "../iosubsys/output.hh"
 
 void
 RegExp::doit( const std::string &s )
 {
       if (s.empty()) {
-	  printf("regexp: ");
+	  output->printf("regexp: ");
 	  switch (opts->regexp) {
-	      case 0: printf("disabled\n");
+	      case 0: output->printf("disabled\n");
 		      break;
-	      case 1: printf("POSIX Basic Regular Expressions\n");
+	      case 1: output->printf("POSIX Basic Regular Expressions\n");
 		      break;
-	      case 2: printf("POSIX Extended Regular Expressions\n");
+	      case 2: output->printf("POSIX Extended Regular Expressions\n");
 		      break;
 	  }
       } else {
@@ -43,19 +42,19 @@ RegExp::doit( const std::string &s )
 void
 RegExp::help( const std::string &s ) const
 {
-  printf("format: regexp [<value>]\n");
-  printf("description: Specifies what kind of regular expressions to use\n");
-  printf("when searching through the playlist.\n");
-  printf("Following types are available:\n");
-  printf("off 	   - dont use regular expressions at all\n");
-  printf("basic    - use POSIX regular expression syntax\n");
-  printf("extended - use POSIX extended regular expression syntax\n");
-  printf("When no <value> is given the current setting is printed.\n");
-  printf("see also: search, rsearch, case\n");
+  output->printf("format: regexp [<value>]\n");
+  output->printf("description: Specifies what kind of regular expressions to use\n");
+  output->printf("when searching through the playlist.\n");
+  output->printf("Following types are available:\n");
+  output->printf("off 	   - dont use regular expressions at all\n");
+  output->printf("basic    - use POSIX regular expression syntax\n");
+  output->printf("extended - use POSIX extended regular expression syntax\n");
+  output->printf("When no <value> is given the current setting is printed.\n");
+  output->printf("see also: search, rsearch, case\n");
 }
 
 void
 RegExp::description() const
 {
-      printf("specify regular expression syntax\n");
+      output->printf("specify regular expression syntax\n");
 }

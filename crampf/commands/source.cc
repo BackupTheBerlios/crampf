@@ -3,6 +3,7 @@
 #include <string>
 #include "source.hh"
 #include "../file.hh"
+#include "../iosubsys/output.hh"
 
 Source::Source( CommandMap* c )
 {
@@ -21,7 +22,7 @@ Source::doit( const std::string &s )
     } catch (std::string error) {
       if (error=="end of file")
         return;
-      printf("source(%s,line %d): %s \"%s\"\n", s.c_str(),f.linenum(),error.c_str(), cmd.c_str());
+      output->printf("source(%s,line %d): %s \"%s\"\n", s.c_str(),f.linenum(),error.c_str(), cmd.c_str());
     }
   }
 }
@@ -29,13 +30,13 @@ Source::doit( const std::string &s )
 void
 Source::help( const std::string &s ) const
 {
-  printf("format: source <filename>\n");
-  printf("description: read and executes commands from file <filename>\n");
+  output->printf("format: source <filename>\n");
+  output->printf("description: read and executes commands from file <filename>\n");
 }
 
 void
 Source::description() const
 {
-  printf("reads and executes commands from file\n");
+  output->printf("reads and executes commands from file\n");
 }
 

@@ -8,8 +8,7 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 #include "../../../debug.hh"
-
-extern options *opts;
+#include "../../../iosubsys/output.hh"
 
 ExecPlayer *ExecPlayer::self = NULL;
 
@@ -98,7 +97,7 @@ ExecPlayer::signalHandler( int status )
       try {
 	  stopCB("");
       } catch( std::string error ){
-	  printf( "%s\n", error.c_str() );
+	  output->printf( "%s\n", error.c_str() );
       }
 }
 
@@ -162,8 +161,8 @@ ExecPlayer::addPlayer( const std::string & cfgstr )
 		  }
 	      case REGEXP:
 		  if( *word != '/' ){
-		      fprintf( stderr, "parsing error 1: '%s'\n", cfgstr.c_str() );
-		      fprintf( stderr, "should be '/', but is '%c'\n", *word );
+		      output->printf( "parsing error 1: '%s'\n", cfgstr.c_str() );
+		      output->printf( "should be '/', but is '%c'\n", *word );
 		      return false;
 		  }
 		  {
@@ -171,7 +170,7 @@ ExecPlayer::addPlayer( const std::string & cfgstr )
 		    while( cfgline[re_start] != '/' ){
 			re_start++;
 			if( re_start >= strlen( cfgline ) ){
-			    fprintf( stderr, "parsing error 2: '%s'\n", cfgstr.c_str() );
+			    output->printf( "parsing error 2: '%s'\n", cfgstr.c_str() );
 			    return false;
 			}
 			if( cfgline[re_start] == '/' && re_start > 0 &&
@@ -183,7 +182,7 @@ ExecPlayer::addPlayer( const std::string & cfgstr )
 		    while( cfgline[re_stop] != '/' ){
 			re_stop++;
 			if( re_stop >= strlen( cfgline ) ){
-			    fprintf( stderr, "parsing error 3: '%s'\n", cfgstr.c_str() );
+			    output->printf( "parsing error 3: '%s'\n", cfgstr.c_str() );
 			    return false;
 			}
 			if( cfgline[re_stop] == '/' && re_stop > 0 &&
@@ -201,7 +200,7 @@ ExecPlayer::addPlayer( const std::string & cfgstr )
 	      case SCORE:
 		  score = strtod( word, &endptr );
 		  if( word == endptr || *regexp == '\0' ){
-		      fprintf( stderr, "parsing error 4: '%s'\n", cfgstr.c_str() );
+		      output->printf( "parsing error 4: '%s'\n", cfgstr.c_str() );
 		      return false;
 		  }
 		  cmd.supportedFilesRegExp.push_back(
@@ -214,7 +213,7 @@ ExecPlayer::addPlayer( const std::string & cfgstr )
 		  state = REGEXP;
 		  break;
 	      default:
-		  fprintf( stderr, "parsing error 5: '%s'\n", cfgstr.c_str() );
+		  output->printf( "parsing error 5: '%s'\n", cfgstr.c_str() );
 		  return false;
 	  }
       }

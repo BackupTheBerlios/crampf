@@ -1,5 +1,5 @@
 //
-// $Id: options.hh,v 1.23 2003/01/04 18:46:40 logic Exp $
+// $Id: options.hh,v 1.24 2003/01/05 12:39:24 logic Exp $
 //
 
 #ifndef OPTIONS_HH
@@ -13,7 +13,7 @@
 
 #define FILELINEWIDTH 128    /* max config and filter file linewidth */
 
-struct options {
+struct Options {
   std::string              configfile;
   bool                     readconfig;
   std::vector<std::string> playlistfiles;
@@ -35,16 +35,18 @@ struct options {
 
 class Config {
   public:
-    struct options* returnopts();
+    struct Options* returnopts();
     void configure(int argc, char** argv);
   private:
     void getopts(int argc, char** argv);
     /* Achtung: Eventuell noch '\n' beim parsen beachten! */
     void readconfig( std::string filename );
-    void initdefaults(struct options* op);
+    void initdefaults(struct Options* op);
   
-    struct options opts;
+    struct Options opts;
 };
+
+extern struct Options* opts;
 
 #endif
 

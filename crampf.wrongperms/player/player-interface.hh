@@ -1,5 +1,5 @@
 //
-// $Id: player-interface.hh,v 1.3 2002/12/29 01:23:26 logic Exp $
+// $Id: player-interface.hh,v 1.4 2003/01/05 12:39:30 logic Exp $
 //
 
 #ifndef __PLAYER_INTERFACE_HH
@@ -33,5 +33,7 @@ class PlayerInterface : public std::vector< GenericPlayer* >, public GenericPlay
 	       "stop"
 	 */
 };
+
+extern PlayerInterface *player;
 
 #endif

@@ -2,8 +2,7 @@
 #include "../playlist.hh"
 #include "pfilter.hh"
 #include <stdio.h>
-
-extern Playlist* plist;
+#include "../iosubsys/output.hh"
 
 void
 PFilter::doit( const std::string &s )
@@ -16,14 +15,14 @@ PFilter::doit( const std::string &s )
 void
 PFilter::help( const std::string &s ) const
 {
-  printf("format: pfilter <word>\n");
-  printf("description: filters all tracks out of the playlist which\n");
-  printf("contain the word <word> in their full filename.\n");
-  printf("see also: loadpfilter, nfilter\n");
+  output->printf("format: pfilter <word>\n");
+  output->printf("description: filters all tracks out of the playlist which\n");
+  output->printf("contain the word <word> in their full filename.\n");
+  output->printf("see also: loadpfilter, nfilter\n");
 }
 
 void 
 PFilter::description() const
 {
-  printf("filters current playlist\n");
+  output->printf("filters current playlist\n");
 }

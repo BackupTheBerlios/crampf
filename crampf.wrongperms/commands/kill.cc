@@ -4,9 +4,7 @@
 #include <string>
 #include <stdio.h>
 #include <stdlib.h>
-
-extern Playlist* plist;
-extern PlayerInterface *player;
+#include "../iosubsys/output.hh"
 
 void
 Kill::doit( const std::string &s )
@@ -24,12 +22,12 @@ Kill::doit( const std::string &s )
 void
 Kill::help( const std::string &s ) const
 {
-  printf("format: kill [<tracknumber>]\n");
-  printf("description: removes current track or track <tracknumber>\n");
+  output->printf("format: kill [<tracknumber>]\n");
+  output->printf("description: removes current track or track <tracknumber>\n");
 }
 
 void
 Kill::description() const
 {
-  printf("removes tracks\n");
+  output->printf("removes tracks\n");
 }

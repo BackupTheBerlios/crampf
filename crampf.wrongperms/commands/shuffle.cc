@@ -5,8 +5,7 @@
 #include <string>
 #include "../playlist.hh"
 #include "shuffle.hh"
-
-extern Playlist* plist;
+#include "../iosubsys/output.hh"
 
   void
 Shuffle::doit( const std::string &s )
@@ -17,12 +16,12 @@ Shuffle::doit( const std::string &s )
 void
 Shuffle::help( const std::string &s ) const
 {
-  printf("format: shuffle\n");
-  printf("description: scrambles the playlist\n");
+  output->printf("format: shuffle\n");
+  output->printf("description: scrambles the playlist\n");
 }
 
 void 
 Shuffle::description() const
 {
-  printf("scrambles the playlist\n");
+  output->printf("scrambles the playlist\n");
 }

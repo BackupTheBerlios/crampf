@@ -3,8 +3,7 @@
 #include <string>
 #include <stack>
 #include "../playlist.hh"
-
-extern Playlist* plist;
+#include "../iosubsys/output.hh"
 
 void
 Unify::doit( const std::string &s )
@@ -38,12 +37,12 @@ Unify::doit( const std::string &s )
 void
 Unify::help( const std::string &s ) const
 {
-  printf("format: unify\n");
-  printf("description: removes multiple entries in playlist\n");
+  output->printf("format: unify\n");
+  output->printf("description: removes multiple entries in playlist\n");
 }
 
 void
 Unify::description() const
 {
-  printf("removes multiple entries in playlist\n");
+  output->printf("removes multiple entries in playlist\n");
 }

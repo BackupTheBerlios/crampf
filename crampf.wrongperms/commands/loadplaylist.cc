@@ -2,8 +2,7 @@
 #include "../playlist.hh"
 #include <stdio.h>
 #include "loadplaylist.hh"
-
-extern Playlist* plist;
+#include "../iosubsys/output.hh"
 
 void
 LoadPlaylist::doit( const std::string &s )
@@ -14,14 +13,14 @@ LoadPlaylist::doit( const std::string &s )
 void
 LoadPlaylist::help( const std::string &s ) const
 {
-  printf("format: loadplaylist <filename>\n");
-  printf("description: adds contents of playlist <filename> to the\n");
-  printf("current playlist.\n");
-  printf("see also: write\n");
+  output->printf("format: loadplaylist <filename>\n");
+  output->printf("description: adds contents of playlist <filename> to the\n");
+  output->printf("current playlist.\n");
+  output->printf("see also: write\n");
 }
 
 void 
 LoadPlaylist::description() const
 {
-  printf("adds a playlistfile to the current playlist\n");
+  output->printf("adds a playlistfile to the current playlist\n");
 }

@@ -4,14 +4,13 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "titlewidth.hh"
-
-extern struct options* opts;
+#include "../iosubsys/output.hh"
 
 void
 TitleWidth::doit( const std::string &s )
 {
   if (s.empty()) {
-    printf("titlewidth: %d\n",opts->titlewidth);
+    output->printf("titlewidth: %d\n",opts->titlewidth);
   } else {
     opts->titlewidth=atoi(s.c_str());
   }
@@ -20,13 +19,13 @@ TitleWidth::doit( const std::string &s )
 void
 TitleWidth::help( const std::string &s ) const
 {
-  printf("format: titlewidth <width>\n");
-  printf("description: gets/sets linewidth of status command\n");
-  printf("see also: status\n");
+  output->printf("format: titlewidth <width>\n");
+  output->printf("description: gets/sets linewidth of status command\n");
+  output->printf("see also: status\n");
 }
 
 void
 TitleWidth::description() const
 {
-  printf("gets/sets linewidth of status command\n");
+  output->printf("gets/sets linewidth of status command\n");
 }

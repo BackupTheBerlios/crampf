@@ -7,8 +7,7 @@
 #include "../playlist.hh"
 #include "listtracks.hh"
 #include "../debug.hh"
-
-extern Playlist* plist;
+#include "../iosubsys/output.hh"
 
 void
 ListTracks::doit( const std::string &s )
@@ -29,20 +28,20 @@ ListTracks::doit( const std::string &s )
   snprintf( f, 512, "%%%dd - %%s\n", w );
   printdebug( "listing tracks from %d to %d\n", pos, pos+20 );
   for(unsigned int i = pos; i<plist->size() && i<pos+20; i++ )
-      printf( f, i+1, (*plist)[i].title().c_str() );
+      output->printf( f, i+1, (*plist)[i].title().c_str() );
 }
 
 void
 ListTracks::help( const std::string &s ) const
 {
-  printf("format: list [<position>]\n");
-  printf("description: list 20 tracks starting at position\n");
-  printf("If position is ommited the next 20 tracks are shown\n");
-  printf("+ or - may be used for relative positions\n");
+  output->printf("format: list [<position>]\n");
+  output->printf("description: list 20 tracks starting at position\n");
+  output->printf("If position is ommited the next 20 tracks are shown\n");
+  output->printf("+ or - may be used for relative positions\n");
 }
 
 void 
 ListTracks::description() const
 {
-  printf("list tracks from playlist\n");
+  output->printf("list tracks from playlist\n");
 }

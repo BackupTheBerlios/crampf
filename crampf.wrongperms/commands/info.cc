@@ -11,6 +11,7 @@
 #include "info.hh"
 #include "../config.h"
 #include <malloc.h>
+#include "../iosubsys/output.hh"
 
 #ifdef LIBID3TAG
 #include <id3tag.h>
@@ -105,20 +106,18 @@ void show_frame( struct id3_frame *frame )
 
 #endif
 
-extern Playlist* plist;
-
 void
 Info::doit( const std::string &s )
 {
 #ifdef LIBID3TAG
   struct id3_file *file = id3_file_open( (*(*plist)).filename().c_str(), ID3_FILE_MODE_READONLY );
   if( !file ){
-      fprintf( stderr, "error reading id3 tags\n" );
+      output->printf( "error reading id3 tags\n" );
       return;
   }
   struct id3_tag *tag = id3_file_tag( file );
   if( !tag ){
-      fprintf( stderr, "error reading id3 tags\n" );
+      output->printf( "error reading id3 tags\n" );
       return;
   }
       struct id3_frame *frame;
@@ -126,7 +125,7 @@ Info::doit( const std::string &s )
   while( (frame = id3_tag_findframe( tag, NULL, i++ )) )
       show_frame( frame );
   if( i == 1 )
-      printf( "id3tag empty\n" );
+      output->printf( "id3tag empty\n" );
   id3_file_close( file );
 #else
 #  ifdef MP3INFO_CMD
@@ -144,13 +143,13 @@ Info::doit( const std::string &s )
 void
 Info::help( const std::string &s ) const
 {
-  printf("format: info\n");
-  printf("description: shows information on current title\n");
-  printf("see also: status, filename\n");
+  output->printf("format: info\n");
+  output->printf("description: shows information on current title\n");
+  output->printf("see also: status, filename\n");
 }
 
 void 
 Info::description() const
 {
-  printf("shows information on current title\n");
+  output->printf("shows information on current title\n");
 }

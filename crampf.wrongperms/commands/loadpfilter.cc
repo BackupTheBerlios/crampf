@@ -2,8 +2,7 @@
 #include <string>
 #include "../playlist.hh"
 #include "loadpfilter.hh"
-
-extern Playlist* plist;
+#include "../iosubsys/output.hh"
 
 void
 LoadPFilter::doit( const std::string &s )
@@ -14,14 +13,14 @@ LoadPFilter::doit( const std::string &s )
 void
 LoadPFilter::help( const std::string &s ) const
 {
-  printf("format: loadpfilter <filterfile>\n");
-  printf("description: does a pfilter command with each line of the\n");
-  printf("filter file.\n");
-  printf("see also: pfilter, nfilter, loadnfilter\n");
+  output->printf("format: loadpfilter <filterfile>\n");
+  output->printf("description: does a pfilter command with each line of the\n");
+  output->printf("filter file.\n");
+  output->printf("see also: pfilter, nfilter, loadnfilter\n");
 }
 
 void 
 LoadPFilter::description() const
 {
-  printf("loads positive filters from file\n");
+  output->printf("loads positive filters from file\n");
 }

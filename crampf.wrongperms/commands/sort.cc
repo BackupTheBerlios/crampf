@@ -4,8 +4,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <algo.h>
-
-extern Playlist* plist;
+#include "../iosubsys/output.hh"
 
 void
 Sort::doit( const std::string &s )
@@ -20,13 +19,13 @@ Sort::doit( const std::string &s )
 void
 Sort::help( const std::string &s ) const
 {
-  printf("format: sort\n");
-  printf("description: sorts the playlist alphabetically\n");
-  printf("see also: shuffle\n");
+  output->printf("format: sort\n");
+  output->printf("description: sorts the playlist alphabetically\n");
+  output->printf("see also: shuffle\n");
 }
 
 void
 Sort::description() const
 {
-  printf("sorts playlist\n");
+  output->printf("sorts playlist\n");
 }

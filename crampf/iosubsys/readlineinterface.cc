@@ -22,9 +22,8 @@
 
 #include "options.hh"
 #include "readlineinterface.hh"
+#include "output.hh"
 
-
-extern struct options* opts;
 
 char *crampf_command_generator( const char *text, int state ){
     static std::map<std::string,Command*>::const_iterator cmd_it;
@@ -78,45 +77,17 @@ ReadLineInterface::~ReadLineInterface()
 {
 }
 
-void
-ReadLineInterface::input()
+std::string
+ReadLineInterface::input( const char *prompt )
 {
-  char* cmd = readline(":");
-  if (cmd && *cmd) {
-    add_history(cmd);
-    try {
-      opts->cmdmap[cmd];
-    } catch (std::string error) {
-      if (error=="quit" || error=="exit")
-        throw error;
-      printf("error: `%s'\n",error.c_str());
-    }
-  }
-  free(cmd);
-}
-
-void
-ReadLineInterface::input( const std::string &s )
-{
-  std::string cmd;
-  char prompt[ s.length() ];
-  strcpy( prompt, s.c_str() );
-  char *searchstr = readline( prompt );
-  if (searchstr && *searchstr) 
-    add_history(searchstr);
-  try {
-    std::string cmd = std::string(searchstr);;
-    if (s[0]=='/')
-      cmd=std::string("search ") + cmd;
-    if (s[0]=='?')
-      cmd="rsearch " + cmd;
-    opts->cmdmap[cmd];
-  } catch (std::string error) {
-    if (error=="quit" || error=="exit")
-      throw error;
-    printf("error: `%s'\n",error.c_str());
-  }
-  free(searchstr);
+      char *input = readline( prompt );
+      if( input && *input ){
+	  add_history( input );
+	  std::string cmd = std::string( input );
+	  free( input );
+	  return cmd;
+      }
+      return std::string("");
 }
 
 #ifndef HAVE_RL_COMPLETION_MATCHES

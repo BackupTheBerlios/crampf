@@ -6,6 +6,7 @@
 #include <vector>
 #include <stdio.h>
 #include <string.h>
+#include "../iosubsys/output.hh"
 
 Define::Define( CommandMap* c )
 {
@@ -29,18 +30,18 @@ Define::doit( const std::string &s )
 void
 Define::help( const std::string &s ) const
 {
-  printf("format: define\n");
-  printf("    or: define <macroname>\n");
-  printf("    or: define <macroname>=<comando> [; <commando> [; ...] ]\n");
-  printf("description: list all macro, contents of macro <macroname>\n");
-  printf("or define a macro.\n");
-  printf("see also: calldef\n");
+  output->printf("format: define\n");
+  output->printf("    or: define <macroname>\n");
+  output->printf("    or: define <macroname>=<comando> [; <commando> [; ...] ]\n");
+  output->printf("description: list all macro, contents of macro <macroname>\n");
+  output->printf("or define a macro.\n");
+  output->printf("see also: calldef\n");
 }
 
 void
 Define::description() const
 {
-  printf("gets/sets definition (macros)\n");
+  output->printf("gets/sets definition (macros)\n");
 }
 
 void
@@ -62,18 +63,18 @@ Define::adddef( std::string s )
 void
 Define::showdefine( const std::string &s ) const
 {
-  printf("define: %s\n",s.c_str());
+  output->printf("define: %s\n",s.c_str());
   for (std::vector<std::string>::const_iterator it = cmap->defmap[s].begin();
       it != cmap->defmap[s].end(); it++)
-    printf("\t%s\n",it->c_str());
+    output->printf("\t%s\n",it->c_str());
 }
 
 void
 Define::showdefines() const
 {
-  printf("--defined-macros--\n");
+  output->printf("--defined-macros--\n");
   for (std::map<std::string,std::vector<std::string> >::const_iterator it = cmap->defmap.begin();
       it != cmap->defmap.end(); it++)
-    printf("\t%s\n",it->first.c_str());
+    output->printf("\t%s\n",it->first.c_str());
 }
     

@@ -8,6 +8,7 @@
 #include <stdio.h>
 #include <unistd.h>
 #include "quit.hh"
+#include "../iosubsys/output.hh"
 
 void
 Quit::doit( const std::string &s )
@@ -18,12 +19,12 @@ Quit::doit( const std::string &s )
 void
 Quit::help( const std::string &s ) const
 {
-  printf("quit -- guess what it does :-)\n");
-  printf("see also: exit\n");
+  output->printf("quit -- guess what it does :-)\n");
+  output->printf("see also: exit\n");
 }
 
 void 
 Quit::description() const
 {
-  printf("guess what it does :-)\n");
+  output->printf("guess what it does :-)\n");
 }

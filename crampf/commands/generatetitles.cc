@@ -2,14 +2,13 @@
 #include <string>
 #include "generatetitles.hh"
 #include "../options.hh"
-
-extern struct options* opts;
+#include "../iosubsys/output.hh"
 
 void
 GenerateTitles::doit( const std::string &s )
 {
   if (s.empty())
-    printf("generatetitles: %s\n",(opts->generateTitles)?"Yes":"No");
+    output->printf("generatetitles: %s\n",(opts->generateTitles)?"Yes":"No");
   else switch (s[0]) {
     case 'y':
     case 'Y':
@@ -22,21 +21,21 @@ GenerateTitles::doit( const std::string &s )
       opts->generateTitles=false;
       break;
     default:
-      printf("generatetitles: bad option\n");
+      output->printf("generatetitles: bad option\n");
   }
 }
 
 void
 GenerateTitles::help( const std::string &s ) const
 {
-  printf("format: generatetitles [<value>]\n");
-  printf("description: When turned on strips off search path from track\n");
-  printf("titles during playlist generation.\n");
-  printf("see also: status, filename\n");
+  output->printf("format: generatetitles [<value>]\n");
+  output->printf("description: When turned on strips off search path from track\n");
+  output->printf("titles during playlist generation.\n");
+  output->printf("see also: status, filename\n");
 }
 
 void
 GenerateTitles::description() const
 {
-  printf("strip titles\n");
+  output->printf("strip titles\n");
 }

@@ -1,5 +1,5 @@
 //
-// $Id: crampf.hh,v 1.8 2003/01/04 18:46:40 logic Exp $
+// $Id: crampf.hh,v 1.9 2003/01/05 12:39:24 logic Exp $
 //
 
 #ifndef CRAMPF_HH
@@ -9,13 +9,17 @@
 #include "player/player-interface.hh"
 #include "options.hh"
 #include "autocmd.hh"
+#include "iosubsys/input.hh"
+#include "iosubsys/output.hh"
 
 /* global variables */
 
 Playlist* plist;
-struct options* opts;
+struct Options* opts;
 AutocmdMap autocmdmap;
 PlayerInterface *player;
+Input *input;
+Output *output;
 
 #endif
 

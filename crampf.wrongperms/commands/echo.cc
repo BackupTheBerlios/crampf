@@ -3,6 +3,7 @@
 #include "echo.hh"
 #include <string>
 #include <stdio.h>
+#include "../iosubsys/output.hh"
 
 /* TODO implement some %s directives (e.g. version number, current songname,
 				      current trackno, etc.)
@@ -11,18 +12,18 @@
 void
 Echo::doit( const std::string &s )
 {
-  printf( "%s\n", s.c_str() );
+  output->printf( "%s\n", s.c_str() );
 }
 
 void
 Echo::help( const std::string &s ) const
 {
-  printf("format: echo <text>\n");
-  printf("description: prints out given arguments\n");
+  output->printf("format: echo <text>\n");
+  output->printf("description: prints out given arguments\n");
 }
 
 void 
 Echo::description() const
 {
-  printf("prints out given arguments\n");
+  output->printf("prints out given arguments\n");
 }

@@ -6,10 +6,7 @@
 #include "../util/regex.hh"
 #include "samedir.hh"
 #include <stdio.h>
-
-extern Playlist* plist;
-extern struct options* opts;
-extern PlayerInterface *player;
+#include "../iosubsys/output.hh"
 
 void
 SameDir::doit( const std::string &s )
@@ -51,18 +48,18 @@ SameDir::doit( const std::string &s )
 void
 SameDir::help( const std::string &s ) const
 {
-  printf("format: samedir [<dirlevel>]\n");
-  printf("description: searches for next file within the same directory.\n");
-  printf("the optional <dirlevel> argument specifies what directory should\n");
-  printf("be used. It defaults to 1 which means same directory as current\n");
-  printf("song.\n");
-  printf("Example: if the current song played is /data/mp3/Artist/Album/track.mp3\n");
-  printf("a <dirlevel> of 2 would mean search for the next song in directory\n");
-  printf("/data/mp3/Artist\n");
+  output->printf("format: samedir [<dirlevel>]\n");
+  output->printf("description: searches for next file within the same directory.\n");
+  output->printf("the optional <dirlevel> argument specifies what directory should\n");
+  output->printf("be used. It defaults to 1 which means same directory as current\n");
+  output->printf("song.\n");
+  output->printf("Example: if the current song played is /data/mp3/Artist/Album/track.mp3\n");
+  output->printf("a <dirlevel> of 2 would mean search for the next song in directory\n");
+  output->printf("/data/mp3/Artist\n");
 }
 
 void
 SameDir::description() const
 {
-  printf("search for next song in the same directory as current song\n");
+  output->printf("search for next song in the same directory as current song\n");
 }

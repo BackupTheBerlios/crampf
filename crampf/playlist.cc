@@ -14,8 +14,7 @@
 #include "playlist.hh"
 #include "options.hh"
 #include "util/regex.hh"
-
-extern struct options* opts;
+#include "iosubsys/output.hh"
 
 Playlist::Playlist()
 {
@@ -46,9 +45,9 @@ Playlist::addPath( const std::string &path )
       addTrack(path,&cbuf[path.size()]);
     }
   } catch( std::string error ){
-    printf( "EXCEPTION: caught '%s'\n", error.c_str() );
+    output->printf( "EXCEPTION: caught '%s'\n", error.c_str() );
   } catch(...){
-    printf( "EXCEPTION: caught something\n" );
+    output->printf( "EXCEPTION: caught something\n" );
   }
   if( fp )
     pclose(fp);

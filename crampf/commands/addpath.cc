@@ -5,8 +5,7 @@
 #include <string>
 #include "addpath.hh"
 #include "../playlist.hh"
-
-extern Playlist* plist;
+#include "../iosubsys/output.hh"
 
 void
 AddPath::doit( const std::string &s )
@@ -20,13 +19,13 @@ AddPath::doit( const std::string &s )
 void
 AddPath::help( const std::string &s ) const
 {
-  printf("format: addpath <path>\n");
-  printf("description: adds a path or file to current playlist\n");
+  output->printf("format: addpath <path>\n");
+  output->printf("description: adds a path or file to current playlist\n");
 }
 
 void 
 AddPath::description() const
 {
-  printf("adds a path or file to current playlist\n");
+  output->printf("adds a path or file to current playlist\n");
 }
 

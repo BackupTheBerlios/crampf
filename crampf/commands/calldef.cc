@@ -5,6 +5,7 @@
 #include <vector>
 #include <map>
 #include "calldef.hh"
+#include "../iosubsys/output.hh"
 
 CallDef::CallDef( CommandMap* c )
 {
@@ -17,7 +18,7 @@ CallDef::doit( const std::string &s )
   char c[s.size()];
   sscanf(s.c_str(),"%s",c);
   if (cmap->defmap.count(c)==0) {
-    printf("calldef: not a macro\n");
+    output->printf("calldef: not a macro\n");
     return;
   } else 
     execute(c);
@@ -26,15 +27,15 @@ CallDef::doit( const std::string &s )
 void 
 CallDef::help( const std::string &s ) const
 {
-  printf("format: calldef <macroname>\n");
-  printf("description: explicitly call the macro <macroname>\n");
-  printf("see also: define, map\n");
+  output->printf("format: calldef <macroname>\n");
+  output->printf("description: explicitly call the macro <macroname>\n");
+  output->printf("see also: define, map\n");
 }
 
 void
 CallDef::description() const
 {
-  printf("explicitly call the macro <macroname>\n");
+  output->printf("explicitly call the macro <macroname>\n");
 }
 
 void

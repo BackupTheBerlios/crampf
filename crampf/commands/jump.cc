@@ -7,9 +7,7 @@
 #include "../playlist.hh"
 #include "../player/player-interface.hh"
 #include "jump.hh"
-
-extern Playlist *plist;
-extern PlayerInterface *player;
+#include "../iosubsys/output.hh"
 
 void
 Jump::doit( const std::string &s )
@@ -27,7 +25,7 @@ Jump::doit( const std::string &s )
       throw std::string("quit");
     if (error=="end of playlist") 
       throw std::string("quit");
-    printf("jump error: %s\n",error.c_str());
+    output->printf("jump error: %s\n",error.c_str());
   }
   if( player->supportedFormat( (**plist).filename() ) == 0 ){
       if( s[0] == '+' || s[0] == '-' )
@@ -39,14 +37,14 @@ Jump::doit( const std::string &s )
 void
 Jump::help( const std::string &s ) const
 {
-  printf("format: jump <position>\n");
-  printf("description: skips current track and jumps to track at\n");
-  printf("position <position>. <position> may also be prefixed by\n");
-  printf("+ or - resulting in a relative jump\n");
+  output->printf("format: jump <position>\n");
+  output->printf("description: skips current track and jumps to track at\n");
+  output->printf("position <position>. <position> may also be prefixed by\n");
+  output->printf("+ or - resulting in a relative jump\n");
 }
 
 void 
 Jump::description() const
 {
-  printf("jump to another song\n");
+  output->printf("jump to another song\n");
 }

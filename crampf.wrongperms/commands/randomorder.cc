@@ -2,14 +2,13 @@
 #include <string>
 #include <stdio.h>
 #include "../options.hh"
-
-extern struct options* opts;
+#include "../iosubsys/output.hh"
 
 void
 RandomOrder::doit( const std::string &s )
 {
   if (s.empty()) {
-    printf("randomorder: %s\n",(opts->randomOrder)?"yes":"no");
+    output->printf("randomorder: %s\n",(opts->randomOrder)?"yes":"no");
     return;
   } else {
     switch (s[0]) {
@@ -32,13 +31,13 @@ RandomOrder::doit( const std::string &s )
 void
 RandomOrder::help( const std::string &s ) const
 {
-  printf("format: randomorder [<yes|no>]\n");
-  printf("description: if activated playlist is shuffled at startup.\n");
-  printf("Only useful in startup (config) file\n");
+  output->printf("format: randomorder [<yes|no>]\n");
+  output->printf("description: if activated playlist is shuffled at startup.\n");
+  output->printf("Only useful in startup (config) file\n");
 }
 
 void RandomOrder::description() const
 {
-  printf("shuffle playlist at startup.\n");
+  output->printf("shuffle playlist at startup.\n");
 }
           

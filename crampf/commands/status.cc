@@ -10,9 +10,7 @@
 #include "../playlist.hh"
 #include "../options.hh"
 #include "status.hh"
-
-extern Playlist* plist;
-extern struct options* opts;
+#include "../iosubsys/output.hh"
 
 void
 Status::doit( const std::string &s )
@@ -21,7 +19,7 @@ Status::doit( const std::string &s )
 	  plist->jump( plist->pos() );
       if ((*plist).size() > 0) {
 	  if (opts->titlewidth==0) {
-	      printf("\n[%d/%d] - %s\n",plist->pos()+1,plist->size(),
+	      output->printf("\n[%d/%d] - %s\n",plist->pos()+1,plist->size(),
 		      (*(*plist)).title().c_str());
 	  } else {
 #define MAXTITLEWIDTH 1024
@@ -31,28 +29,28 @@ Status::doit( const std::string &s )
 	      if (strlen(title)>opts->titlewidth) {
 		  unsigned int i;
 		  for (i=0; i<opts->titlewidth/3; i++)
-		      printf("%c",title[i]);
-		  printf("...");
+		      output->printf("%c",title[i]);
+		  output->printf("...");
 		  i=strlen(title)-i*2-1;
 		  for (;i<strlen(title);i++)
-		      printf("%c",title[i]);
+		      output->printf("%c",title[i]);
 	      } else 
-		  printf("%s",title);
+		  output->printf("%s",title);
 	  }
       } else 
-	  printf("playlist empty\n");
+	  output->printf("playlist empty\n");
 }
 
 void
 Status::help( const std::string &s ) const
 {
-  printf("format: status\n");
-  printf("description: shows track number and title\n");
-  printf("see also: filename, titlewidth, info\n");
+  output->printf("format: status\n");
+  output->printf("description: shows track number and title\n");
+  output->printf("see also: filename, titlewidth, info\n");
 }
 
 void 
 Status::description() const
 {
-  printf("shows track number and title\n");
+  output->printf("shows track number and title\n");
 }

@@ -4,9 +4,7 @@
 #include <stack>
 #include "../playlist.hh"
 #include "../player/player-interface.hh"
-
-extern Playlist* plist;
-extern PlayerInterface *player;
+#include "../iosubsys/output.hh"
 
 void
 Clean::doit( const std::string &s )
@@ -25,12 +23,12 @@ Clean::doit( const std::string &s )
 void
 Clean::help( const std::string &s ) const
 {
-  printf("format: clean\n");
-  printf("description: removes unsupported entries in playlist\n");
+  output->printf("format: clean\n");
+  output->printf("description: removes unsupported entries in playlist\n");
 }
 
 void
 Clean::description() const
 {
-  printf("removes unsupported entries in playlist\n");
+  output->printf("removes unsupported entries in playlist\n");
 }

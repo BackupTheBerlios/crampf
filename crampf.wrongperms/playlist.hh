@@ -1,5 +1,5 @@
 //
-// $Id: playlist.hh,v 1.17 2002/12/30 16:07:43 logic Exp $
+// $Id: playlist.hh,v 1.18 2003/01/05 12:39:24 logic Exp $
 //
 
 #ifndef PLAYLIST_HH
@@ -45,6 +45,8 @@ class Playlist : public std::vector<Track>
     void addTrack(FILE* fp);
     int current;
 };
+
+extern Playlist* plist;
 
 #endif
 

@@ -9,8 +9,7 @@ class ReadLineInterface {
   public:
     ReadLineInterface();
     ~ReadLineInterface();
-    void input();
-    void input( const std::string &s );
+    std::string input( const char *prompt );
   private:
     void initialize_readline();
 };
