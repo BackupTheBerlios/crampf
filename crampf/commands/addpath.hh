@@ -1,5 +1,5 @@
 //
-// $Id: addpath.hh,v 1.2 2000/03/18 04:38:10 logic Exp $
+// $Id: addpath.hh,v 1.3 2000/03/18 08:14:16 logic Exp $
 //
 
 #ifndef addpath
@@ -13,6 +13,7 @@ class AddPath : public Command {
   public:
     void doit( string s );
     void help( string s );
+    void description();
 };
 
 #endif

@@ -15,6 +15,7 @@ class Command {
     ~Command();
     virtual void doit( string s ) = 0;
     virtual void help( string s ) = 0;
+    virtual void description() = 0;
 };
 
 #endif

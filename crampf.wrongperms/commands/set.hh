@@ -14,7 +14,7 @@ class Set : public Command {
   public:
     void doit( string s );
     void help( string s );
-  private:
+    void description();
 };
 
 #endif

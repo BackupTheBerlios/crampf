@@ -18,6 +18,12 @@ Shuffle::doit( string s )
 void
 Shuffle::help( string s )
 {
-  printf("shuffle\n");
+  printf("format: shuffle\n");
+  printf("description: scrambles the playlist\n");
+}
+
+void 
+Shuffle::description()
+{
   printf("scrambles the playlist\n");
 }

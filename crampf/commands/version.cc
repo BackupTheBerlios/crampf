@@ -17,3 +17,9 @@ Version::help( string s )
   printf("format: version\n");
   printf("description: prints out version information\n");
 }
+
+void 
+Version::description()
+{
+  printf("prints out version information\n");
+}

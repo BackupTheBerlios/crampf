@@ -27,3 +27,9 @@ Next::help( string s )
   printf("skips forward to next song\n");
 }
 
+
+void 
+Next::description()
+{
+  printf("skips forward to next song\n");
+}

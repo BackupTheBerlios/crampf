@@ -32,7 +32,7 @@ Config::initdefaults(struct options* op)
   op->playercmd="amp";
   op->playercmd_args="-q";
   try {
-    op->cmdmap["map h help"];
+    op->cmdmap["map h map"];
     op->cmdmap["map n next"];
     op->cmdmap["map p prev"];
     op->cmdmap["map i info"];

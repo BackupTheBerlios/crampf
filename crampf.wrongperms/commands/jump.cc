@@ -32,3 +32,9 @@ Jump::help( string s )
   printf("position <position>. <position> may also be prefixed by\n");
   printf("+ or - resulting in a relative jump\n");
 }
+
+void 
+Jump::description()
+{
+  printf("jump to another song\n");
+}

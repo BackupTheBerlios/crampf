@@ -32,3 +32,8 @@ Info::help( string s )
   printf("description: shows information on current title\n");
 }
 
+void 
+Info::description()
+{
+  printf("shows information on current title\n");
+}

@@ -4,8 +4,11 @@ OBJS=$(SRC:.cc=.o)
 LIBS=
 PROGNAME=
 
-all:    $(OBJS)
+all:    generate_header $(OBJS)
 #	$(GCC) $(LIBS) -o $(PROGNAME) $(OBJS)
+
+generate_header:
+	./commands.sh
 
 clean:
 	@rm -f $(PROGNAME) $(OBJS) $(OBJS:.o=.d)

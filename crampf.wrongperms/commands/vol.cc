@@ -56,3 +56,9 @@ Vol::help( string s )
   printf("done relative to the current volume\n");
 }
 
+
+void 
+Vol::description()
+{
+  printf("changes playback volume\n");
+}

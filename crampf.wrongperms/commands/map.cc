@@ -48,3 +48,9 @@ Map::help( string s )
   printf("form of \\xxx\n");
 }
 
+
+void 
+Map::description()
+{
+  printf("binds commands to keystrokes\n");
+}

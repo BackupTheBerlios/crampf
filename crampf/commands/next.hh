@@ -13,5 +13,6 @@ class Next : public Command {
   public:
     void doit( string s );
     void help( string s );
+    void description();
 };
 #endif

@@ -14,6 +14,9 @@ clean:
 	@rm -f $(PROGNAME) $(OBJS) $(OBJS:.o=.d)
 	$(MAKE) clean -C commands 
 
+commands/commands.hh:
+	@cd commands && ./commands.sh
+
 %.d:	%.cc
 	$(SHELL) -ec '$(GCC) -MM $(CPPFLAGS) $< \
 	| sed '\''s/\($*\)\.o[ :]*/\1.o $@ : /g'\'' > $@; \

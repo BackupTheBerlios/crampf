@@ -1,5 +1,5 @@
 //
-// $Id: shuffle.hh,v 1.2 2000/03/18 04:38:11 logic Exp $
+// $Id: shuffle.hh,v 1.3 2000/03/18 08:14:17 logic Exp $
 //
 
 #ifndef shuffle
@@ -13,6 +13,7 @@ class Shuffle : public Command {
   public:
     void doit( string s );
     void help( string s );
+    void description();
 };
 #endif
 

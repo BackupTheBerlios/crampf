@@ -22,3 +22,8 @@ Quit::help( string s )
   printf("quit -- guess what it does :-)\n");
 }
 
+void 
+Quit::description()
+{
+  printf("guess what it does :-)\n");
+}

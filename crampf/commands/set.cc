@@ -35,3 +35,9 @@ Set::help( string s )
   printf("all current settings\n");
 }
 
+
+void 
+Set::description()
+{
+  printf("change/view runtime options\n");
+}

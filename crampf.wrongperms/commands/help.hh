@@ -15,6 +15,7 @@ class Help : public Command {
     Help( CommandMap* c);
     void doit( string s );
     void help( string s );
+    void description();
   private:
     CommandMap* cmap;
 };

@@ -45,3 +45,9 @@ Status::help( string s )
   printf("format: status\n");
   printf("description: shows track number and title\n");
 }
+
+void 
+Status::description()
+{
+  printf("shows track number and title\n");
+}

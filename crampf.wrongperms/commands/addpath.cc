@@ -23,3 +23,10 @@ AddPath::help( string s )
   printf("format: addPath <path>\n");
   printf("description: adds a path or file to current playlist\n");
 }
+
+void 
+AddPath::description()
+{
+  printf("adds a path or file to current playlist\n");
+}
+

@@ -27,3 +27,9 @@ Prev::help( string s )
   printf("skips backward to previous song\n");
 }
 
+
+void 
+Prev::description()
+{
+  printf("skips backward to previous song\n");
+}
