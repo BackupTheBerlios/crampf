@@ -97,10 +97,13 @@ void player_stop( void )
 
 void player_playerstop(int status)
 {
-  if (status!=SIGCHLD)
+  //printf("got signaled: signal=%d\n",status);
+  if (status!=SIGCHLD) 
     return;
-  status = wait(NULL);
+  status = waitpid(-1,NULL,WNOHANG);
   //printf("got signaled by %d\n",status);
+  if (status==0)
+    return;  /* no dead child */
   if (status != player_pid)
     return;
   if (player_sigignore)
