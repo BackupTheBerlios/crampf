@@ -12,10 +12,10 @@
 
 int main(int argc, char** argv)
 {
+  plist = new Playlist();
   Config cfg;
   opts=cfg.returnopts();
   cfg.configure(argc, argv);
-  plist = new Playlist();
   plist->addPath(opts->mp3SearchPaths);
   plist->addPlaylist(opts->playlistfiles);
   plist->positiveFilter(opts->positiveFilter);

@@ -71,6 +71,10 @@ Playlist::savePlaylist( string filename )
 void
 Playlist::addPlaylist(string filename)
 {
+  if (filename[0]=='~') { // replace ~ with users home
+    filename.erase(filename.begin());
+    filename = getenv("HOME") + filename;
+  }
   FILE* fp=fopen(filename.c_str(),"r");
   if (fp==NULL) {
     perror("read Playlist");
@@ -80,22 +84,8 @@ Playlist::addPlaylist(string filename)
     while (1)
       addTrack(fp);
   } catch (string error) {
-    printf("addPlaylist: %s\n",error.c_str());
   }
   fclose(fp);
-  /*
-  FILE* fp=fopen(filename.c_str(),"r");
-  if (fp==NULL) {
-    perror("read Playlist");
-    return;
-  }
-  char cbuf[MAXFILENAMELENGTH];
-  while (fgets(cbuf,MAXFILENAMELENGTH,fp)) {
-    cbuf[strlen(cbuf)-1]='\0'; // strip ending '\n' 
-    addTrack("",cbuf);
-  }
-  fclose(fp);
-  */
 }
 
 void
