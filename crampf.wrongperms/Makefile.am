@@ -15,6 +15,5 @@ crampf_SOURCES=commandmap.cc config.cc crampf.cc file.cc	\
 
 crampf_LDADD=commands/libcmds.a util/libutil.a player/stdplayer/libstdplayer.a
 
-dist-hook:
-	@echo updating ChangeLog
+ChangeLog:
 	./cvs2cl.pl --prune
