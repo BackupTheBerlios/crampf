@@ -35,6 +35,8 @@ Config::initdefaults(struct options* op)
   op->keytable["info"]="i";
   op->keytable["list"]="l";
   op->keytable["jump"]="j";
+  op->keytable["pause"]="P";
+  op->keytable["cont"]="C";
   op->keytable["vol0"]="0";
   op->keytable["vol1"]="1";
   op->keytable["vol2"]="2";
@@ -94,6 +96,18 @@ Config::setupkeys()
     if (it->first=="jump") {
       for (int i=0; i<it->second.size(); i++) {
         opts.keys[it->second[i]]=&Interface::list;
+      }
+      continue;
+    }
+    if (it->first=="pause") {
+      for (int i=0; i<it->second.size(); i++) {
+        opts.keys[it->second[i]]=&Interface::pause;
+      }
+      continue;
+    }
+    if (it->first=="cont") {
+      for (int i=0; i<it->second.size(); i++) {
+        opts.keys[it->second[i]]=&Interface::cont;
       }
       continue;
     }

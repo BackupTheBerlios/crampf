@@ -1,5 +1,5 @@
 //
-// $Id: interface.hh,v 1.6 2000/03/11 00:46:26 logic Exp $
+// $Id: interface.hh,v 1.7 2000/03/11 00:59:30 logic Exp $
 //
 
 #ifndef interface
@@ -24,6 +24,8 @@ class Interface {
     void next( void );
     void prev( void );
     void jump( void );
+    void pause( void );
+    void cont( void );
     void vol0( void );
     void vol1( void );
     void vol2( void );

@@ -37,10 +37,10 @@ Interface::~Interface()
 
 Interface::mainloop()
 {
-  char c;
+  showstatus();
   try {
+    char c;
     while (1) {
-      showstatus();
       c = fgetc(stdin); 
       if (opts->keys[c]!=NULL)
         (this->*(opts->keys[c]))();
@@ -98,12 +98,14 @@ void
 Interface::next( void )
 {
   ++(*plist);
+  showstatus();
 }
 
 void
 Interface::prev( void )
 {
   --(*plist);
+  showstatus();
 }
 
 void
@@ -184,6 +186,20 @@ void
 Interface::vol_dn( void )
 {
   printf("vol_dn\n");
+  printf("not yet implemented\n");
+}
+
+void
+Interface::pause( void )
+{
+  printf("pause\n");
+  printf("not yet implemented\n");
+}
+
+void
+Interface::cont( void )
+{
+  printf("cont\n");
   printf("not yet implemented\n");
 }
 
