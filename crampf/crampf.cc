@@ -33,7 +33,7 @@ int main( int argc, char **argv )
 	  }
 	  player = new PlayerInterface();
 	  Interface iface;
-	  autocmdmap["start"].trigger();
+	  autocmdmap["init"].trigger();
 	  iface.mainloop();
 	  autocmdmap["exit"].trigger();
       } catch (std::string m) {
