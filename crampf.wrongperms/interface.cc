@@ -19,6 +19,7 @@
 Interface::Interface( void )
 {
   printf("WELCOME TO THE CRAMPF!\n");
+  detectSoundCard();
   struct termios t;
   if (tcgetattr(1,&terminal_settings)==-1) {
     perror("tcgetattr");
@@ -97,8 +98,13 @@ Interface::quit( void )
 void 
 Interface::info( void )
 {
-  printf("info\n");
-  printf("not yet implemented\n");
+  int pid;
+  pid = fork();
+  if (pid==0) {
+    execlp("mp3info","mp3info",(*(*plist)).filename().c_str(),"-F 2",NULL);
+    perror("execlp(mp3info)");
+    exit(1);
+  }
 }
 
 void
@@ -230,7 +236,7 @@ Interface::changevol(int vol)
   if (vol<0 || vol>100)
     return -1;
   arg[0]='-';
-  arg[1]='s';
+  arg[1]=opts->soundcard;
   arg[2]=48+vol%1000/100;
   arg[3]=48+vol%100/10;
   arg[4]=48+vol%10;
@@ -242,6 +248,25 @@ Interface::changevol(int vol)
     exit(1);
   } 
   /* player will reap the child */
+}
+ 
+Interface::detectSoundCard()
+{
+  opts->soundcard='w'; /* default */
+  FILE* fp = fopen("/dev/sndstat","r");
+  if (fp==NULL) {
+    perror("sndstat");
+    return -1;
+  }
+#define LINEWIDTH 128
+  char line[LINEWIDTH];
+  string l;
+  while (fgets(line,LINEWIDTH,fp)) {
+    l=line;
+    if (l.find("UltraSound")!=-1)
+      opts->soundcard='s';
+  }
+  fclose(fp);
 }
 
 Interface::showstatus()

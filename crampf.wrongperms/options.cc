@@ -26,6 +26,7 @@ Config::initdefaults(struct options* op)
   op->randomOrder=true;
   op->readconfig=true;
   op->generateTitles=true;
+  op->soundcard='w';
   op->loop=0;
   op->playercmd="amp";
   op->playercmd_args="-q";
