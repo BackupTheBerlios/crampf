@@ -5,8 +5,8 @@
 // DONT EDIT!                                                     
 //                                                                
                                                                   
-#ifndef commands                                                  
-#define commands                                                  
+#ifndef COMMANDS                                                  
+#define COMMANDS COMMANDS                                         
                                                                   
 #include "../version_info.hh"                                     
 #include <string>                                                 

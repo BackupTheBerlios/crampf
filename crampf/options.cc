@@ -81,9 +81,10 @@ Config::getopts(int argc, char** argv)
       {"dont-generate-titles", 0, 0, 'G'},
       {"title-width"         , 1, 0, 't'},
       {"help"                , 0, 0, 'h'},
+      {"version"             , 0, 0, 'v'},
       {0, 0, 0, 0}  // NULL marks end
     };
-    c = getopt_long(argc, argv, "p:rRl::f:F:P:a:c:t:ihgG",
+    c = getopt_long(argc, argv, "p:rRl::f:F:P:a:c:t:ihvgG",
         krampf_options, &option_index);
     if (c==EOF)
       break;
@@ -154,6 +155,10 @@ Config::getopts(int argc, char** argv)
         printf("[ -G | --dont-generate-titles         ]\n");
         printf("[ -t | --title-width <title-width>    ]\n");
         printf("[ -h | --help                         ]\n");
+        printf("[ -v | --version                      ]\n");
+        exit(0);
+      case 'v':
+        printf("crampf %s %s\n", RELEASENAME, VERSION);
         exit(0);
       case '?':
         // missing parameter (getopts generates the output)
