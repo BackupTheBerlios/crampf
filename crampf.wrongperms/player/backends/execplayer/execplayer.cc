@@ -297,6 +297,9 @@ ExecPlayer::play( const std::string &filename )
 	      fclose( stdin );
 	      fclose( stdout );
 	      fclose( stderr );
+	      fopen( "/dev/null", "r" ); /* stdin */
+	      fopen( "/dev/null", "w" ); /* stdout */
+	      fopen( "/dev/null", "w" ); /* stderr */
 	      execvp( cmd, argv );
 	      perror( "execvp" );
 	      exit(2);
