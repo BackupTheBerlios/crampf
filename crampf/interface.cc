@@ -236,7 +236,7 @@ Interface::vol9( void )
 void
 Interface::vol_up( void )
 {
-  if (volume-5>0) {
+  if (volume+5<=100) {
     volume+=5;
     changevol(volume);
   }
@@ -245,7 +245,7 @@ Interface::vol_up( void )
 void
 Interface::vol_dn( void )
 {
-  if (volume+5<100) {
+  if (volume-5>=0) {
     volume-=5;
     changevol(volume);
   }
