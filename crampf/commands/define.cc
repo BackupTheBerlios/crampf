@@ -70,9 +70,9 @@ Define::showdefine( string s )
 void
 Define::showdefines()
 {
-  printf("--defines--\n");
+  printf("--defined-macros--\n");
   for (map<string,vector<string> >::iterator it = cmap->defmap.begin();
       it != cmap->defmap.end(); it++)
-    showdefine(it->first);
+    printf("macros: %s\n",it->first.c_str());
 }
     

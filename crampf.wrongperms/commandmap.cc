@@ -17,8 +17,6 @@ CommandMap::CommandMap()
   cmdmap["loop"]           = new Loop           ();
   cmdmap["volume"]         = new Vol            ();
   cmdmap["info"]           = new Info           ();
-  cmdmap["next"]           = new Next           ();
-  cmdmap["previous"]       = new Prev           ();
   cmdmap["quit"]           = new Quit           ();
   cmdmap["status"]         = new Status         ();
   cmdmap["jump"]           = new Jump           ();
@@ -33,6 +31,8 @@ CommandMap::CommandMap()
   cmdmap["define"]         = new Define         (this);
   cmdmap["calldef"]        = new CallDef        (this);
   cmdmap["source"]         = new Source         (this);
+  cmdmap["search"]         = new Search         (this);
+  cmdmap["rsearch"]        = new RSearch        (this);
 }
 
 CommandMap::~CommandMap()
@@ -47,11 +47,13 @@ CommandMap::operator[](string cmd)
 {
   string c = arg0(cmd);
   string p = args(cmd);
-  if (cmdmap.count(c))
+  if (cmdmap.count(c)) {
     cmdmap[c]->doit(p);
-  else if (defmap.count(c))
-    cmdmap["calldef"]->doit(cmd);
-  else {
+    return;
+  } else if (defmap.count(c)) {
+    cmdmap["calldef"]->doit(c + " " + p);
+    return;
+  } else {
     try {
       string macro = findFirstDef(c);
       cmdmap["calldef"]->doit(macro + " " + p);

@@ -9,6 +9,8 @@ extern Playlist* plist;
 void
 NFilter::doit( string s )
 {
+  if (s.empty())
+    throw string("filter: parameter missing!");
   plist->negativeFilter(s);
 }
 

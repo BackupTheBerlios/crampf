@@ -23,6 +23,7 @@ class CommandMap {
     map<string, Command*> cmdmap;
     map<char, string> keymap;
     map< string , vector<string> > defmap;
+    string searchstr;
   private:
     Command* findFirst( string c );
     string findFirstDef( string c );

@@ -40,7 +40,7 @@ void
 CallDef::execute( string s )
 {
   for (vector<string>::iterator it = cmap->defmap[s].begin();
-      it != cmap->defmap[s].end(); it++)
+      it != cmap->defmap[s].end(); it++) 
     (*cmap)[(*it)];
 }
 

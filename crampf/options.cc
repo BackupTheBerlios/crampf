@@ -33,6 +33,8 @@ Config::initdefaults(struct options* op)
   op->playercmd_args="-q";
   try {
     op->cmdmap["map h map"];
+    op->cmdmap["define next=jump +1"];
+    op->cmdmap["define prev=jump -1"];
     op->cmdmap["map n next"];
     op->cmdmap["map p prev"];
     op->cmdmap["map i info"];
