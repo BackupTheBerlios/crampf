@@ -16,22 +16,42 @@
 int player_pid = 999999; /* hope this pid never exists ;] */
 bool player_sigignore;
 bool player_newsong;
+bool first_track_damaged;
 
 void player_init()
 {
   player_sigignore = false;
   player_newsong = false;
+  first_track_damaged = false;
   signal(SIGCHLD,player_playerstop);
 }
 
 void player_play( void )
 {
   player_stop();
+  if (first_track_damaged) {
+    --(*plist);
+    first_track_damaged = false;
+  }
   player_pid=fork();
   if (player_pid==-1) {
     perror("fork");
     exit(1);
   }
+  struct stat buf;
+  if (stat((const char*)(*(*plist)).filename().c_str(),&buf)==-1) {
+    if (player_pid == 0) {
+      perror((const char*)(*(*plist)).filename().c_str());
+    } else {
+      plist->erase(&(*plist)[plist->pos()]);
+      try {
+        --(*plist);
+      } catch (string e) {
+        first_track_damaged = true;
+      }
+      return;
+    }
+  } 
   if (player_pid==0) {
     /*  printf("execlp(%s, %s, %s)\n",(const char*)opts->playercmd.c_str(), 
         (const char*)opts->playercmd_args.c_str(), 
@@ -43,8 +63,7 @@ void player_play( void )
         NULL);
     perror("execlp");
     exit(2);
-  }
-  //printf("new playerprocess %d\n",player_pid);
+  } 
   player_newsong = true;
 }
 
