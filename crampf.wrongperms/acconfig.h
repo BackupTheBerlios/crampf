@@ -1,5 +1,5 @@
 //
-// $Id: acconfig.h,v 1.2 2002/06/09 23:07:00 logic Exp $
+// $Id: acconfig.h,v 1.3 2002/06/10 00:45:21 logic Exp $
 //
 
 #ifndef __ACCONFIG_H
@@ -9,6 +9,14 @@
 #define NODEBUG
 
 #undef LIBID3TAG
+
+#undef PLAYER_CMD
+#undef PLAYER_CMD_ARGS
+
+#undef MIXER_CMD
+
+#undef MP3INFO_CMD
+#undef MP3INFO_CMD_ARGS
 
 #endif
 

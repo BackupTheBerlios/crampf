@@ -19,8 +19,10 @@ CommandMap::CommandMap()
       cmdmap["map"]            = new Map            (this);
       cmdmap["titlewidth"]     = new TitleWidth     ();
       cmdmap["loop"]           = new Loop           ();
+#ifdef MIXER_CMD
       cmdmap["volume"]         = new Vol            ();
-#if defined(LIBID3TAG) || defined(HAS_MP3INFO)
+#endif
+#if defined(LIBID3TAG) || defined(MP3INFO_CMD)
       cmdmap["info"]           = new Info           ();
 #endif
       cmdmap["autocommand"]    = new Autocommand    ();

@@ -8,6 +8,7 @@
 #include <stdio.h>
 #include <unistd.h>
 #include "../config.hh"
+#include "../config.h"
 #include "vol.hh"
 
 extern struct options* opts;

@@ -1,6 +1,6 @@
 dnl Process this file with autoconf to produce a configure script.
 AC_INIT(crampf.cc)
-AM_INIT_AUTOMAKE(crampf,0.1.125a)
+AM_INIT_AUTOMAKE(crampf,0.126a)
 AM_CONFIG_HEADER(config.h)
 
 dnl Makefile sets all needed CXXFLAGS
@@ -39,33 +39,35 @@ AC_CHECK_HEADERS(map vector string stack fcntl.h unistd.h getopt.h math.h regex.
 dnl Checks for typedefs, structures, and compiler characteristics.
 AC_C_CONST
 
-AC_CHECK_PROG(HAS_PLAYER_AMP,amp,yes,no)
-if test "$HAS_PLAYER_AMP" = "no" ; then
-    AC_MSG_RESULT( [
-MP3-Player amp not found! See README for details on using another Player
-] )
-    sleep 2
+AC_CHECK_PROGS(PLAYER_CMD,madplay alsaplayer mpg321 amp mpg123,None)
+if test "${PLAYER_CMD}" != "None" ; then
+    AC_DEFINE_UNQUOTED(PLAYER_CMD,"${PLAYER_CMD}")
+    if "${PLAYER_CMD}" = "mpg123" ; then
+	AC_DEFINE(PLAYER_CMD_ARGS,"-q")
+    else
+	AC_DEFINE(PLAYER_CMD_ARGS,"")
+    fi
+else
+    AC_MSG_RESULT( [No supported mp3 player found!] )
+    exit 1
 fi
-AC_CHECK_PROG(HAS_AUMIX,aumix,yes,no)
-if test "$HAS_AUMIX" = "no" ; then
-    AC_MSG_RESULT( [
-Aumix not found. No volume setting will be possible
-] )
-    sleep 2
+AC_CHECK_PROGS(MIXER_CMD,aumix,None)
+if test "${MIXER_CMD}" != "None" ; then
+    AC_DEFINE_UNQUOTED(MIXER_CMD,"${MIXER_CMD}")
 fi
-AC_CHECK_PROG(HAS_MP3INFO,mp3info,yes,no)
-if test "$HAS_AUMIX" = "no" ; then
-    AC_MSG_RESULT( [
-mp3info not found. ID3-Tag support will not work
-] )
-    sleep 2
+AC_CHECK_PROGS(MP3INFO_CMD,mp3info,None)
+if test "${MP3INFO_CMD}" != "None" ; then
+    AC_DEFINE_UNQUOTED(MP3INFO_CMD,"${MP3INFO_CMD}")
+    AC_DEFINE(MP3INFO_CMD_ARGS,"-F 2")
 fi
-BLA=LIBS
+LIBS_BAK=${LIBS}
 LIBS="${LIBS} -lz"
+HAS_LIBID3TAG=no
 AC_CHECK_LIB(id3tag,id3_tag_new,
     AC_DEFINE(LIBID3TAG)
+    HAS_LIBID3TAG=yes
     LIBS="${LIBS} -lid3tag",
-    LIBS=${BLA}
+    LIBS=${LIBS_BAK}
 )
 
 dnl Checks for library functions.
@@ -73,3 +75,14 @@ AC_TYPE_SIGNAL
 AC_CHECK_FUNCS(regcomp strerror readline)
 
 AC_OUTPUT(util/Makefile Makefile commands/Makefile cb/Makefile player/Makefile player/stdplayer/Makefile, echo timestamp > stamp-h)
+
+AC_MSG_RESULT( [
+] )
+
+AC_MSG_RESULT( [MP3-Player      : ${PLAYER_CMD}] )
+AC_MSG_RESULT( [Mixer program   : ${MIXER_CMD}] )
+if test "${HAS_LIBID3TAG}"; then
+    AC_MSG_RESULT( [ID3 Support     : libid3tag] )
+else
+    AC_MSG_RESULT( [ID3 Support     : ${MP3INFO_CMD}] )
+fi

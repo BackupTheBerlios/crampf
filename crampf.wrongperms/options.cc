@@ -32,8 +32,8 @@ void Config::initdefaults(struct options* op)
   op->casesensivity=true;
   op->regexp=0;
   op->titlewidth=0;
-  op->playercmd="amp";
-  op->playercmd_args="-q";
+  op->playercmd=PLAYER_CMD;
+  op->playercmd_args=PLAYER_CMD_ARGS;
   try {
     op->cmdmap["map h map"];
     op->cmdmap["define next=jump +1"];

@@ -109,11 +109,11 @@ Info::doit( const string &s )
       printf( "id3tag empty\n" );
   id3_file_close( file );
 #else
-#  ifdef HAS_MP3INFO
+#  ifdef MP3INFO_CMD
   int pid;
   pid = fork();
   if (pid==0) {
-    execlp("mp3info","mp3info",(*(*plist)).filename().c_str(),"-F 2",NULL);
+    execlp(MP3INFO_CMD,"mp3info",(*(*plist)).filename().c_str(),MP3INFO_CMD_ARGS,NULL);
     perror("execlp(mp3info)");
     exit(1);
   }

@@ -1,5 +1,6 @@
 #include "stdplayer.hh"
 #include "../../debug.hh"
+#include "../../config.h"
 #include "autocmd.hh"
 #include <signal.h>
 #include <unistd.h>
@@ -60,6 +61,10 @@ StdPlayer::play()
     }
   } 
   if (pid==0) {
+      fclose(stdin);
+      fclose(stdout);
+      if( strcmp( PLAYER_CMD , "mpg123" ) != 0 ) /* Ouch FIXME */
+	  fclose(stderr);
       vector<string> args;
       int p=0;
       for (unsigned int i=opts->playercmd_args.find(" ",p); 
@@ -104,6 +109,7 @@ StdPlayer::stop()
     }
     int pid = fork();
     if (pid==0) {
+      fclose(stdin);
       fclose(stdout); /* Hardcore */
       fclose(stderr); /* even harder */
       execlp("fuser","fuser","-k","/dev/dsp",NULL);
