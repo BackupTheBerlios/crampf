@@ -35,6 +35,8 @@ CommandMap::CommandMap()
       cmdmap["loadplaylist"]   = new LoadPlaylist   ();
       cmdmap["pfilter"]        = new PFilter        ();
       cmdmap["nfilter"]        = new NFilter        ();
+      cmdmap["loadnfilter"]    = new LoadNFilter    ();
+      cmdmap["loadpfilter"]    = new LoadPFilter    ();
       cmdmap["generatetitles"] = new GenerateTitles ();
       cmdmap["filename"]       = new Filename       ();
       cmdmap["define"]         = new Define         (this);

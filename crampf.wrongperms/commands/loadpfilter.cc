@@ -8,9 +8,7 @@ extern Playlist* plist;
 void
 LoadPFilter::doit( const string &s )
 {
-  printf("not yet implemented\n");
-  /* es gibt noch keine allgemeine Funktion zum laden eines
-     Filterfiles (die einzige versteckt sich im Config Objekt */
+  plist->loadPositiveFilter( s );
 }
 
 void

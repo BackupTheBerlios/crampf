@@ -20,6 +20,8 @@ int main(int argc, char** argv)
 	  plist->addPlaylist(opts->playlistfiles);
 	  plist->positiveFilter(opts->positiveFilter);
 	  plist->negativeFilter(opts->negativeFilter);
+	  plist->loadNegativeFilter( opts->negativeFilterFiles );
+	  plist->loadPositiveFilter( opts->positiveFilterFiles );
 	  if (opts->randomOrder) {
 	      plist->shuffle();
 	  }

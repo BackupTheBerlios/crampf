@@ -154,6 +154,54 @@ Playlist::negativeFilter( const vector<string> &flt )
   }
 }
 
+vector<string>
+Playlist::loadFilterFile( const string &filename )
+{
+  vector<string> flt;
+  FILE* fp = fopen((const char*)filename.c_str(),"r");
+  if (fp==NULL) {
+    perror((const char*)filename.c_str());
+    throw string("cannot open filterfile");
+  }
+  char line[FILELINEWIDTH];
+  while (fgets(line,FILELINEWIDTH,fp)) {
+    if (line[0]!='#' && line[0]!='\n') {
+      line[strlen(line)-1]='\0'; /* remove '\n' */
+      flt.push_back(line);
+    }
+  }
+  fclose(fp);
+  return flt;
+}
+
+void
+Playlist::loadNegativeFilter( const string &filename )
+{
+  negativeFilter( loadFilterFile( filename ) );
+}
+
+void
+Playlist::loadPositiveFilter( const string &filename )
+{
+  positiveFilter( loadFilterFile( filename ) );
+}
+
+void
+Playlist::loadNegativeFilter( const vector<string> &filenames )
+{
+  for( vector<string>::const_iterator it = filenames.begin();
+	  it != filenames.end(); it++ )
+      negativeFilter( loadFilterFile( *it ) );
+}
+
+void
+Playlist::loadPositiveFilter( const vector<string> &filenames )
+{
+  for( vector<string>::const_iterator it = filenames.begin();
+	  it != filenames.end(); it++ )
+      positiveFilter( loadFilterFile( *it  ) );
+}
+
 void
 Playlist::shuffle()
 {

@@ -1,5 +1,5 @@
 //
-// $Id: options.hh,v 1.18 2002/06/04 12:04:16 logic Exp $
+// $Id: options.hh,v 1.19 2002/07/01 19:01:47 logic Exp $
 //
 
 #ifndef CONFIG_HH
@@ -37,10 +37,6 @@ struct options {
 
 class Config {
   public:
-    void readPositiveFilter( const string &filename );
-    void readPositiveFilter( const vector<string> &filenames );
-    void readNegativeFilter( const string &filename );
-    void readNegativeFilter( const vector<string> &filenames );
     struct options* returnopts();
     void configure(int argc, char** argv);
   private:
@@ -48,7 +44,6 @@ class Config {
     /* Achtung: Eventuell noch '\n' beim parsen beachten! */
     void readconfig( string filename );
     void initdefaults(struct options* op);
-    void readFilter( vector<string>* flt, const string &filename );
   
     struct options opts;
 };

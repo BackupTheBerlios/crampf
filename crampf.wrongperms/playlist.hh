@@ -1,5 +1,5 @@
 //
-// $Id: playlist.hh,v 1.13 2002/06/16 05:32:31 logic Exp $
+// $Id: playlist.hh,v 1.14 2002/07/01 19:01:47 logic Exp $
 //
 
 #ifndef PLAYLIST_HH
@@ -25,6 +25,10 @@ class Playlist : public vector<Track>
     void positiveFilter( const vector<string> &flt );
     void negativeFilter( const string &flt );
     void negativeFilter( const vector<string> &flt );
+    void loadNegativeFilter( const string &filename );
+    void loadPositiveFilter( const string &filename );
+    void loadNegativeFilter( const vector<string> &filenames );
+    void loadPositiveFilter( const vector<string> &filenames );
     void shuffle();
     Track operator++();
     Track operator++( int ) { ++(*this); }
@@ -33,6 +37,7 @@ class Playlist : public vector<Track>
     int pos() const;
     void jump(int newpos);
   private:
+    vector<string> loadFilterFile( const string &filename );
     void addTrack( const string &path, string filename );
     void addTrack(FILE* fp);
     int current;

@@ -18,8 +18,6 @@ Config::configure(int argc, char** argv)
 {
   initdefaults(&opts);
   getopts(argc, argv);
-  readPositiveFilter(opts.positiveFilterFiles);
-  readNegativeFilter(opts.negativeFilterFiles);
 }
 
 void Config::initdefaults(struct options* op)
@@ -295,47 +293,6 @@ void Config::readconfig( string filename )
   */
 }
 
-void Config::readFilter( vector<string>* flt, const string &filename )
-{
-  FILE* fp = fopen((const char*)filename.c_str(),"r");
-  if (fp==NULL) {
-    perror((const char*)filename.c_str());
-    throw string("cannot open filterfile");
-  }
-  char line[FILELINEWIDTH];
-  while (fgets(line,FILELINEWIDTH,fp)) {
-    if (line[0]!='#' && line[0]!='\n') {
-      line[strlen(line)-1]='\0'; /* remove '\n' */
-      flt->push_back(line);
-    }
-  }
-  fclose(fp);
-}
-
-void Config::readPositiveFilter( const string &filename )
-{
-  readFilter(&opts.positiveFilter, filename);
-}
-
-void Config::readPositiveFilter( const vector<string> &filenames )
-{
-  for (vector<string>::const_iterator it = filenames.begin();
-      it != filenames.end(); it++)
-    readPositiveFilter(*it);
-}
-
-void Config::readNegativeFilter( const string &filename )
-{
-  readFilter(&opts.negativeFilter, filename);
-}
-
-void Config::readNegativeFilter( const vector<string> &filenames )
-{
-  for (vector<string>::const_iterator it = filenames.begin();
-      it != filenames.end(); it++)
-    readNegativeFilter(*it);
-}
-  
 struct options* 
 Config::returnopts()
 {
