@@ -9,6 +9,7 @@
 #include <vector>
 #include "config.hh"
 #include "interface.hh"
+#include <errno.h>
 
 Config::Config(int argc, char** argv)
 {
@@ -53,7 +54,7 @@ Config::getopts(int argc, char** argv)
       {"help"            , 0, 0, 'h'},  // -h | --help
       {0, 0, 0, 0}  // NULL marks end
     };
-    c = getopt_long(argc, argv, "p:rRl::f:F:P:a:c:h",
+    c = getopt_long(argc, argv, "p:rRl::f:F:P:a:c:ih",
         krampf_options, &option_index);
     if (c==EOF)
       break;
@@ -126,17 +127,17 @@ Config::getopts(int argc, char** argv)
   }
   /* do we have to read a config file? */
   if (cmdopts.readconfig) {
-    if (cmdopts.configfile!="") {
+    if (!cmdopts.configfile.empty()) {
       try {
         readconfig(cmdopts.configfile)==-1;
-      } catch (string error) {
-        fprintf(stderr,"error: %s\n",(const char*)error.c_str());
+      } catch (char* e) {
+        fprintf(stderr,"config-error: %s\n", e);
       }
-    } else {
+    } else { // using default
       try {
         readconfig("~/.crampfrc");
-      } catch (string error) {
-        fprintf(stderr,"error: %s\n",(const char*)error.c_str());
+      } catch (char* e) {
+       // fprintf(stderr,"config-error: %s\n", e);
       }
     }
   }
@@ -168,8 +169,8 @@ Config::readconfig(string filename)
   }
   FILE* fp = fopen((const char*)filename.c_str(), "r");
   if (fp == NULL) {
-    perror((const char*)filename.c_str());
-    throw string("cannot open configfile");
+    /* perror((const char*)filename.c_str()); */
+    throw strerror(errno);
   }
   char line[FILELINEWIDTH];
   char option[FILELINEWIDTH];
