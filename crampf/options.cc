@@ -207,6 +207,8 @@ Config::getopts(int argc, char** argv)
   struct options cmdopts;
   bool cmdrandom=false;         // set true if options specified
   bool cmdloop=false;
+  bool cmdgenerateTitles=false;
+  bool cmdtitlewidth = false;
   while (1) {
     static struct option krampf_options[] =
     {
@@ -222,10 +224,11 @@ Config::getopts(int argc, char** argv)
       {"ignore-config"       , 0, 0, 'i'},
       {"generate-titles"     , 0, 0, 'g'},
       {"dont-generate-titles", 0, 0, 'G'},
+      {"title-width"         , 1, 0, 't'},
       {"help"                , 0, 0, 'h'},
       {0, 0, 0, 0}  // NULL marks end
     };
-    c = getopt_long(argc, argv, "p:rRl::f:F:P:a:c:ihgG",
+    c = getopt_long(argc, argv, "p:rRl::f:F:P:a:c:t:ihgG",
         krampf_options, &option_index);
     if (c==EOF)
       break;
@@ -268,9 +271,15 @@ Config::getopts(int argc, char** argv)
         break;
       case 'g':
         cmdopts.generateTitles = true;
+        cmdgenerateTitles = true;
         break;
       case 'G':
         cmdopts.generateTitles = false;
+        cmdgenerateTitles = true;
+        break;
+      case 't':
+        cmdopts.titlewidth = atoi(optarg);
+        cmdtitlewidth = true;
         break;
       case 'h':
         printf("      crampf developers version\n");
@@ -287,6 +296,7 @@ Config::getopts(int argc, char** argv)
         printf("[ -i | --ignore-config                ]\n");
         printf("[ -g | --generate-titles              ]\n");
         printf("[ -G | --dont-generate-titles         ]\n");
+        printf("[ -t | --title-width <title-width>    ]\n");
         printf("[ -h | --help                         ]\n");
         exit(0);
       case '?':
@@ -338,6 +348,10 @@ Config::getopts(int argc, char** argv)
     opts.loop=cmdopts.loop;
   if (cmdrandom)
     opts.randomOrder=cmdopts.randomOrder;
+  if (cmdgenerateTitles)
+    opts.generateTitles=cmdopts.generateTitles;
+  if (cmdtitlewidth)
+    opts.titlewidth=cmdopts.titlewidth;
 }
 
 Config::readconfig(string filename) 
@@ -391,6 +405,13 @@ Config::readconfig(string filename)
       if (opt == "titlewidth") {
         opts.titlewidth = atoi(value);
         continue;
+      }
+      if (opt == "generateTitles") {
+        if (value[0]=='y' || value[0]=='Y') {
+          opts.generateTitles=true;
+        } else {
+          opts.generateTitles=false;
+        }
       }
       if (strncmp(option,"key_",4)==0) {
         opt = &option[4];

@@ -219,15 +219,19 @@ Interface::vol9( void )
 void
 Interface::vol_up( void )
 {
-  volume+=5;
-  changevol(volume);
+  if (volume-5>0) {
+    volume+=5;
+    changevol(volume);
+  }
 }
 
 void
 Interface::vol_dn( void )
 {
-  volume-=5;
-  changevol(volume);
+  if (volume+5<100) {
+    volume-=5;
+    changevol(volume);
+  }
 }
 
 Interface::changevol(int vol)
