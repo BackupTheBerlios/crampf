@@ -82,6 +82,8 @@ void player_stop( void )
     }
     int pid = fork();
     if (pid==0) {
+      fclose(stdout); /* Hardcore */
+      fclose(stderr); /* even harder */
       execlp("fuser","fuser","-k","/dev/dsp",NULL);
       perror("execlp(fuser)");
       exit(1);

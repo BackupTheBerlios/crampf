@@ -1,4 +1,4 @@
-OBJS=config.o crampf.o playlist.o player.o track.o interface.o command.o commandmap.o readlineinterface.o
+OBJS=config.o crampf.o playlist.o player.o track.o interface.o command.o commandmap.o readlineinterface.o file.o
 CMDOBJS=commands/*.o
 LIBS=-lreadline 
 PROGNAME=crampf

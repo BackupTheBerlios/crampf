@@ -34,6 +34,7 @@
 #include "quit.hh"
 #include "set.hh"
 #include "shuffle.hh"
+#include "source.hh"
 #include "status.hh"
 #include "titlewidth.hh"
 #include "version.hh"

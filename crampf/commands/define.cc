@@ -32,7 +32,8 @@ Define::help( string s )
   printf("format: define\n");
   printf("    or: define <macroname>\n");
   printf("    or: define <macroname>=<comando> [; <commando> [; ...] ]\n");
-  printf("description: only for the advanced power users :-)\n");
+  printf("description: list all macro, contents of macro <macroname>\n");
+  printf("or define a macro.\n");
 }
 
 void

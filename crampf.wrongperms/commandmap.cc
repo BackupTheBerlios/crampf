@@ -32,6 +32,7 @@ CommandMap::CommandMap()
   cmdmap["filename"]       = new Filename       ();
   cmdmap["define"]         = new Define         (this);
   cmdmap["calldef"]        = new CallDef        (this);
+  cmdmap["source"]         = new Source         (this);
 }
 
 CommandMap::~CommandMap()
@@ -89,26 +90,28 @@ CommandMap::findFirst( string c )
 void
 CommandMap::setKey(char key, string cmd)
 {
-  string c = arg0(cmd);
-  Command* action = findFirst(c);
-  if (action==NULL)
-    throw string("setKey: bad commandname");
-  string p = args(cmd);
-  keymap[key] = cmd;
+  try {
+    string c = findFirstDef(arg0(cmd));
+    keymap[key] = cmd;
+  } catch (string error) {
+    Command* action = findFirst(arg0(cmd));
+    if (action==NULL)
+      throw string("setKey: bad commandname");
+    keymap[key] = cmd;
+  }
 }
 
 void
 CommandMap::help( string cmd )
 {
-  if (cmdmap.count(arg0(cmd)))
+  if (cmdmap.count(arg0(cmd))) 
     cmdmap[arg0(cmd)]->help(args(cmd));
   else {
-    try {
-      findFirst(arg0(cmd))->help(args(cmd));
-    } catch (string error) {
-      //  else
+    Command* action = findFirst(arg0(cmd));
+    if (action!=NULL)
+      action->help(args(cmd));
+    else
       throw string("help: no such topic");
-    }
   }
 }
 
@@ -134,6 +137,8 @@ CommandMap::args(string s)
   int sep = s.find(" ");
   if (sep==-1) 
     return "";
-  else 
-    return s.erase(0,sep+1);
+  s.erase(0,sep+1);
+  for (sep=s.size()-1; s[sep]==' '; sep--)
+    s.erase(sep);
+  return s;
 }
