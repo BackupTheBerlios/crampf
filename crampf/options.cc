@@ -25,7 +25,7 @@ Config::initdefaults(struct options* op)
 {
   op->randomOrder=true;
   op->readconfig=true;
-  op->loop=1;
+  op->loop=0;
   op->playercmd="amp";
   op->playercmd_args="-q";
   op->keytable["help"]="h";
