@@ -20,6 +20,7 @@ Interface::Interface( void )
 {
   printf("WELCOME TO THE CRAMPF!\n");
   detectSoundCard();
+  volume = getVolume();
   struct termios t;
   if (tcgetattr(1,&terminal_settings)==-1) {
     perror("tcgetattr");
@@ -218,15 +219,15 @@ Interface::vol9( void )
 void
 Interface::vol_up( void )
 {
-  printf("vol_up\n");
-  printf("not yet implemented\n");
+  volume+=5;
+  changevol(volume);
 }
 
 void
 Interface::vol_dn( void )
 {
-  printf("vol_dn\n");
-  printf("not yet implemented\n");
+  volume-=5;
+  changevol(volume);
 }
 
 Interface::changevol(int vol)
@@ -235,6 +236,7 @@ Interface::changevol(int vol)
   char arg[6];
   if (vol<0 || vol>100)
     return -1;
+  volume = vol;
   arg[0]='-';
   arg[1]=opts->soundcard;
   arg[2]=48+vol%1000/100;
@@ -267,6 +269,25 @@ Interface::detectSoundCard()
       opts->soundcard='s';
   }
   fclose(fp);
+}
+
+int
+Interface::getVolume()
+{
+  FILE* fp = popen("aumix -q","r");
+  char line[LINEWIDTH];
+  char rs[5];
+  char ls[5];
+  int ri,li;
+  while (fgets(line,LINEWIDTH,fp)) {
+    if (strncmp("synth",line,5)==0) {
+      sscanf(line,"%*[a-z]%*[\t ]%[0-9]%*[, ]%[0-9]\n",ls,rs);
+      ri=atoi(rs);
+      li=atoi(ls);
+    }
+  }
+  pclose(fp);
+  return ((ri+li)/2);
 }
 
 Interface::showstatus()

@@ -60,7 +60,7 @@ void player_stop( void )
     }
     int pid = fork();
     if (pid==0) {
-      execlp("fuser","fuser","-k","/dev/dsp","&>/dev/null",NULL);
+      execlp("fuser","fuser","-k","/dev/dsp",NULL);
       perror("execlp(fuser)");
       exit(1);
     } 

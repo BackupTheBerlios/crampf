@@ -1,5 +1,5 @@
 //
-// $Id: interface.hh,v 1.9 2000/03/11 21:29:38 logic Exp $
+// $Id: interface.hh,v 1.10 2000/03/11 23:50:54 logic Exp $
 //
 
 #ifndef interface
@@ -42,9 +42,11 @@ class Interface {
   private:
     showstatus();
     detectSoundCard();
+    int getVolume();
     mainloop();
     changevol(int vol);
     struct termios terminal_settings; 
+    int volume;
 };
 
 #endif
