@@ -278,7 +278,8 @@ Interface::getVolume()
   char line[LINEWIDTH];
   char rs[5];
   char ls[5];
-  int ri,li;
+  int ri=40; /* default setting */
+  int li=40;
   while (fgets(line,LINEWIDTH,fp)) {
     if (strncmp("synth",line,5)==0) {
       sscanf(line,"%*[a-z]%*[\t ]%[0-9]%*[, ]%[0-9]\n",ls,rs);

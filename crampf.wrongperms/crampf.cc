@@ -20,11 +20,10 @@ int main(int argc, char** argv)
   if (opts->randomOrder) {
     plist->shuffle();
   }
-  /*
-  for (Playlist::iterator it = plist->begin();
-      it != plist->end(); it++)
-    printf("%s\n",(const char*)it->filename().c_str());
-  */
+  if (plist->empty()) {
+    fprintf(stderr,"No mp3s found!\n");
+    exit(2);
+  }
   try {
     Interface iface;
   } catch (string m) {
