@@ -4,7 +4,7 @@
 
 RegEx::RegEx( const std::string &re, int flags )
 {
-      cflags = flags;
+      cflags = flags | REG_NEWLINE;
       int error = regcomp( &preg, re.c_str(), cflags );
       if (error != 0) {
 	  char errmsg[REGEXP_MAXERRLEN];
