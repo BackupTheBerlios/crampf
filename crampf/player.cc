@@ -25,7 +25,7 @@ void player_play( void )
     perror("fork");
     exit(1);
   }
-  if (player_pid!=0) {
+  if (player_pid==0) {
     /* printf("execlp(%s, %s, %s)\n",(const char*)opts->playercmd.c_str(), 
           (const char*)opts->playercmd_args.c_str(), 
           (const char*)(*(*plist)).filename().c_str()); */
@@ -37,10 +37,12 @@ void player_play( void )
     perror("execlp");
     exit(2);
   }
+  printf("new playerprocess %d\n",player_pid);
 }
 
 void player_stop( void )
 {
+  printf("stopping pid %d\n",player_pid);
   if (player_isrunning()) {
     kill(player_pid,SIGTERM);
     sleep(1);
@@ -52,8 +54,12 @@ void player_stop( void )
 
 void player_playerstop(int status)
 {
+  if (status!=SIGCHLD)
+    return;
+  status = wait(NULL);
   printf("got signaled: %d\n",status);
-  wait(NULL);
+  if (status != player_pid)
+    return;
   printf("starting next song\n");
   ++(*plist);
   player_play();
