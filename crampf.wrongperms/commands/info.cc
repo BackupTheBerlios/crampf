@@ -13,7 +13,9 @@
 #include <malloc.h>
 
 #ifdef LIBID3TAG
-#include "id3tag.h"
+#include <id3tag.h>
+#include "genre.dat"
+# define NGENRES (sizeof(genre_table) / sizeof(genre_table[0]))
 
 const char* get_frame_description( struct id3_frame *frame )
 {
@@ -86,16 +88,16 @@ void show_frame( struct id3_frame *frame )
 	      default: /* printf( "unknown tag type %d", frame->fields[i].type ) */ ;
 	  }
 	  // printf( "field type: %d\n", frame->fields[i].type );
-	  /* FIXME id3_ucs4_t != (id3_ucs4_t) id3_latin1_t;
+	  /* FIXME id3_ucs4_t != (id3_ucs4_t) id3_latin1_t; */
 	  if( strncmp( ID3_FRAME_GENRE, frame->id, 4 ) == 0 ){
-	      id3_ucs4_t buf[8192];
-	      for(a=0;i<strlen(content);i++)
-		  buf[i] = (id3_latin1_t)(content[i]+127);
-	      frptr[f] = id3_ucs4_latin1duplicate( id3_genre_name( buf ) );
-	      if( frptr[f] && frptr[f][0] )
-		  snprintf( content, MAX_CONTENT, "%s", frptr[f++] );
+	      char *p;
+	      int number;
+	      if( sscanf( content, "%d", &number ) == 1 )
+		  if( number < NGENRES ){
+		      frptr[f] = id3_ucs4_latin1duplicate( genre_table[number] );
+		      snprintf( content, MAX_CONTENT, "%s", frptr[f++] );
+		  }
 	  }
-	  */
 	  if( strlen( content ) > a ) printf( "%s %s\n", descr, content );
 	  while(f-->0)
 	      free(frptr[f]);
