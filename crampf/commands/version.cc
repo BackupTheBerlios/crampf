@@ -7,8 +7,8 @@
 void
 Version::doit( const string &s )
 {
-  printf("crampf %s\n",VERSION);
-  printf("please send bugreports to logic@tzi.de\n");
+  printf("crampf %s (C) 1999 by logic@tzi.org under GPL2\n",VERSION);
+  printf("please send bugreports to logic@tzi.org\n");
 }
 
 void
