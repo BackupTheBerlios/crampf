@@ -12,3 +12,4 @@ crampf_SOURCES=command.cc commandmap.cc config.cc crampf.cc	\
 	       readlineinterface.cc track.cc
 
 crampf_LDADD=commands/libcmds.a util/libutil.a
+noinst_SCRIPTS=cvs2cl.pl

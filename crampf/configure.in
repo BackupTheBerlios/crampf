@@ -1,6 +1,6 @@
 dnl Process this file with autoconf to produce a configure script.
 AC_INIT(crampf.cc)
-AM_INIT_AUTOMAKE(crampf,0.121a)
+AM_INIT_AUTOMAKE(crampf,0.122a)
 AM_CONFIG_HEADER(config.h)
 
 dnl Makefile sets all needed CXXFLAGS
@@ -54,3 +54,9 @@ AC_TYPE_SIGNAL
 AC_CHECK_FUNCS(regcomp strerror readline)
 
 AC_OUTPUT(util/Makefile Makefile commands/Makefile cb/Makefile, echo timestamp > stamp-h)
+
+dnl update ChangeLog
+if test -x ./cvs2cl.pl ; then
+    AC_MSG_RESULT([Writing ChangeLog])
+    ./cvs2cl.pl
+fi
