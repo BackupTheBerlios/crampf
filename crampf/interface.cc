@@ -20,7 +20,7 @@
 
 Interface::Interface( void )
 {
-  printf("WELCOME TO THE CRAMPF!\n");
+  printf("welcome to the crampf %s (%s)\n", VERSION, RELEASENAME);
   detectSoundCard();
   opts->volume = getVolume();
   /* save terminal settings */

@@ -20,7 +20,11 @@ void
 Map::doit( string s )
 {
   if (s=="list" || s=="all" || s=="show" || s=="") {
-    printf("---Keymap---\n");
+    printf("---Special-Keys-(always-avaible)---\n");
+    printf("key ':' -> enter command\n");
+    printf("key '/' -> search forward\n");
+    printf("key '?' -> search backward\n");
+    printf("---Keymap-(user-definable)---\n");
     for (map<char,string>::iterator it = cmap->keymap.begin();
         it != cmap->keymap.end(); it++)
      printf("key '%c' -> '%s'\n",it->first,it->second.c_str()); 
