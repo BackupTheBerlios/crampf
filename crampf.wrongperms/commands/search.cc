@@ -74,7 +74,7 @@ Search::search( string s )
 	      regfree( &re );
 	      return i;
 	  }
-      if (opts->loop>0) {
+      if (opts->loop!=0) {
 	  for (int i=0; i<plist->pos(); i++)
 	      if (regexec( &re, (*plist)[i].title().c_str(), 0, NULL, flags )
 		      != REG_NOMATCH) {
@@ -90,7 +90,7 @@ Search::search( string s )
       for (int i=plist->pos()+1; i<plist->size(); i++)
 	  if ((*plist)[i].title().find(s)!=-1)
 	      return i;
-      if (opts->loop>0) {
+      if (opts->loop!=0) {
 	  for (int i=0; i<plist->pos(); i++)
 	      if ((*plist)[i].title().find(s)!=-1) {
 		  opts->loop--;

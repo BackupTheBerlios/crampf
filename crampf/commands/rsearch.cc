@@ -69,17 +69,17 @@ RSearch::rsearch( string s )
 	  throw string(errmsg);
       }
       /* here comes the real search */
-      for (int i=plist->pos()+1; i<plist->size(); i--)
+      for (int i=plist->pos()-1; i>=0; i--)
 	  if (regexec( &re, (*plist)[i].title().c_str(), 0, NULL, flags )
 		  != REG_NOMATCH) {
 	      regfree( &re );
 	      return i;
 	  }
-      if (opts->loop>0) {
-	  for (int i=0; i<plist->pos(); i--)
+      if (opts->loop!=0) {
+	  for (int i=plist->size()-1; i>plist->pos(); i--)
 	      if (regexec( &re, (*plist)[i].title().c_str(), 0, NULL, flags )
 		      != REG_NOMATCH) {
-		  opts->loop--;
+		  opts->loop++;
 		  regfree( &re );
 		  return i;
 	      }
@@ -88,13 +88,13 @@ RSearch::rsearch( string s )
   } else {
       /* old stl string search function */
       /* TODO kick it! */
-      for (int i=plist->pos()+1; i<plist->size(); i--)
+      for (int i=plist->pos()-1; i>=0; i--)
 	  if ((*plist)[i].title().find(s)!=-1)
 	      return i;
-      if (opts->loop>0) {
+      if (opts->loop!=0) {
 	  for (int i=0; i<plist->pos(); i--)
 	      if ((*plist)[i].title().find(s)!=-1) {
-		  opts->loop--;
+		  opts->loop++;
 		  return i;
 	      }
       }
