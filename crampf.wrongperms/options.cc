@@ -29,6 +29,8 @@ Config::initdefaults(struct options* op)
   op->generateTitles=true;
   op->soundcard='w';
   op->loop=0;
+  op->casesensivity=true;
+  op->regexp=0;
   op->titlewidth=0;
   op->playercmd="amp";
   op->playercmd_args="-q";
@@ -54,6 +56,7 @@ Config::initdefaults(struct options* op)
     op->cmdmap["map 9 vol 90"];
     op->cmdmap["map 0 vol 00"];
     op->cmdmap["map f filename"];
+    op->cmdmap["map \040 next"];
   } catch (string error) {
     printf("keytable init error: `%s'\n",error.c_str());
   }

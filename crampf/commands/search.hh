@@ -1,5 +1,5 @@
 //
-// $Id: search.hh,v 1.1 2000/03/19 06:58:24 logic Exp $
+// $Id: search.hh,v 1.2 2000/07/03 02:02:40 logic Exp $
 //
 
 #ifndef search
@@ -11,7 +11,7 @@
 
 class Search : public Command {
   public: 
-    Search( CommandMap* c );
+    Search( CommandMap *c );
     void doit( string s );
     void help( string s );
     void description();

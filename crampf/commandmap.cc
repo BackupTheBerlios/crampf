@@ -39,6 +39,8 @@ CommandMap::CommandMap()
   cmdmap["write"]          = new Write          ();
   cmdmap["kill"]           = new Kill           ();
   cmdmap["unify"]          = new Unify          ();
+  cmdmap["case"]	   = new Case		();
+  cmdmap["regexp"]	   = new RegExp		();
 }
 
 CommandMap::~CommandMap()

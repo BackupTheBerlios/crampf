@@ -15,6 +15,7 @@
                                                                   
 #include "addpath.hh"
 #include "calldef.hh"
+#include "case.hh"
 #include "commands.hh"
 #include "define.hh"
 #include "filename.hh"
@@ -34,6 +35,7 @@
 #include "playercmd_args.hh"
 #include "quit.hh"
 #include "randomorder.hh"
+#include "regexp.hh"
 #include "rsearch.hh"
 #include "search.hh"
 #include "set.hh"

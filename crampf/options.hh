@@ -1,5 +1,5 @@
 //
-// $Id: options.hh,v 1.13 2000/03/19 09:00:23 logic Exp $
+// $Id: options.hh,v 1.14 2000/07/03 02:02:29 logic Exp $
 //
 
 #ifndef config
@@ -23,6 +23,8 @@ struct options {
   int                   loop;
   int                   titlewidth;
   int                   volume;
+  int			regexp;	/* regexp level (0=no, 1=std, 2=extended)*/
+  bool			casesensivity;
   char                  soundcard; /* s = UltraSound, w = SB-Clone */
   vector<string>        negativeFilterFiles;
   vector<string>        negativeFilter;

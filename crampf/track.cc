@@ -15,9 +15,18 @@ Track::Track( FILE* fp )
     throw string("error reading playlist");
   char f[MAXLINEWIDTH];
   char c[MAXLINEWIDTH];
-  sscanf(line,"\"%[^\"]\";\"%[^\"]\";\"%d\"",f,c,&rating);
-  fullname=f;
-  callsign=c;
+  if (sscanf(line,"\"%[^\"]\";\"%[^\"]\";\"%d\"",f,c,&rating) == 0) {
+      /* playlist has bad format, try to load it in the `old' way */
+      string trackname = string(line);
+      /* strip '\n' */
+      trackname.erase(trackname.length()-1,trackname.length());
+      fullname=trackname;
+      callsign=trackname;
+      rating = 0;
+  } else {
+      fullname=f;
+      callsign=c;
+  }
 }
 
 Track::Track( string name )
