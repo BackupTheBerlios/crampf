@@ -41,7 +41,7 @@ Track::write( FILE* fp )
 }
 
 string 
-Track::title( void )
+Track::title( void ) const
 {
   if (!callsign.empty())
     return callsign;
@@ -56,7 +56,7 @@ Track::title( string s )
 }
 
 int    
-Track::rate( void )
+Track::rate( void ) const
 {
   return rating;
 }
@@ -68,7 +68,13 @@ Track::rate( int r )
 }
 
 string 
-Track::filename( void )
+Track::filename( void ) const
 {
   return fullname;
+}
+
+bool
+Track::operator<(const Track &other) const
+{
+      return filename() < other.filename();
 }

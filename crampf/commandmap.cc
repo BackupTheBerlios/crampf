@@ -46,6 +46,7 @@ CommandMap::CommandMap()
       cmdmap["case"]	       = new Case	    ();
       cmdmap["regexp"]	       = new RegExp	    ();
       cmdmap["exit"]   	       = new Exit	    ();
+      cmdmap["sort"]   	       = new Sort	    ();
   }
 }
 

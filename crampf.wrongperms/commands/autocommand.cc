@@ -23,7 +23,7 @@ void
 Autocommand::doit( string s )
 {
   unsigned int p = s.find(" ");
-  if( p == -1 || s.size() == 0 ){
+  if( p == -1 || s.empty() ){
       printf( "current autocommands:\n" );
       for( map<string,string>::const_iterator it = actionmap.begin();
 	      it != actionmap.end(); it++ )
@@ -50,8 +50,7 @@ Autocommand::evtcb( const string &event )
       printf( "autocmdmap: received unregistered event %s\n", event.c_str() );
       return false;
   }
-  printdebug( "autocmdmap: executing command '%s'\n",
-	  event.c_str(), actionmap[event].c_str() );
+  printdebug( "autocmdmap: executing command '%s'\n", actionmap[event].c_str() );
   opts->cmdmap[ actionmap[event] ];
 }
 
