@@ -70,7 +70,7 @@ Default hotkeys:
 Key:	Command:
 EOF
 
-sed -ne '/hotkeys\[...*.\] *=.*"/{
+sed -ne '/^[ 	]*hotkeys\[...*.\] *=.*"/{
 	    s/.*hotkeys\[.\(..*\).\][^"]*"\([^"]*\)".*/\1	\2/
 	    s/^	/<tab>/
 	    s/^\\t/<tab>/
@@ -80,7 +80,7 @@ sed -ne '/hotkeys\[...*.\] *=.*"/{
 	    s/^/<enter>/
 	    s/^\\n/<enter>/
 	    p
-	}' iosubsys/input.cc
+	}' iosubsys/terminal.cc
 
 cat <<-EOF
 
