@@ -27,7 +27,7 @@ PlayerInterface::play( const std::string &filename )
       while( curPlayer_isPlaying )
 	  stop();
       block_song_stop_event = false;
-      double score, bestscore;
+      double score, bestscore = 0;
       iterator bestplayer = end();
       for( iterator it = begin(); it != end(); it++ ){
 	  score = (*it)->supportedFormat( filename );
