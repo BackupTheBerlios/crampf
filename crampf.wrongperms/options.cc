@@ -25,6 +25,7 @@ Config::initdefaults(struct options* op)
 {
   op->randomOrder=true;
   op->readconfig=true;
+  op->generateTitles=true;
   op->loop=0;
   op->playercmd="amp";
   op->playercmd_args="-q";
@@ -34,6 +35,7 @@ Config::initdefaults(struct options* op)
   op->keytable["prev"]="p";
   op->keytable["info"]="i";
   op->keytable["list"]="l";
+  op->keytable["file"]="f";
   op->keytable["jump"]="j";
   op->keytable["pause"]="P";
   op->keytable["cont"]="C";
@@ -90,6 +92,12 @@ Config::setupkeys()
     if (it->first=="list") {
       for (int i=0; i<it->second.size(); i++) {
         opts.keys[it->second[i]]=&Interface::list;
+      }
+      continue;
+    }
+    if (it->first=="file") {
+      for (int i=0; i<it->second.size(); i++) {
+        opts.keys[it->second[i]]=&Interface::file;
       }
       continue;
     }
@@ -196,20 +204,22 @@ Config::getopts(int argc, char** argv)
   while (1) {
     static struct option krampf_options[] =
     {
-      {"playlist"        , 1, 0, 'p'},  // -p | --playlist <playlistfile>
-      {"no-random"       , 0, 0, 'r'},  // -r | --no-random
-      {"random"          , 0, 0, 'R'},  // -R | --random
-      {"loop"            , 2, 0, 'l'},  // -l | --loop [times]
-      {"negative-filter" , 1, 0, 'f'},  // -f | --negative-filter <filterfile>
-      {"positive-filter" , 1, 0, 'F'},  // -F | --positive-filter <filterfile>
-      {"player"          , 1, 0, 'P'},  // -P | --player <playercmd>
-      {"player-args"     , 1, 0, 'a'},  // -s | --player-args <player-arguments>
-      {"config-file"     , 1, 0, 'c'},  // -c | --config-file <cfgfile>
-      {"ignore-config"   , 0, 0, 'i'},  // -i | --ignore-config
-      {"help"            , 0, 0, 'h'},  // -h | --help
+      {"playlist"            , 1, 0, 'p'},
+      {"no-random"           , 0, 0, 'r'},
+      {"random"              , 0, 0, 'R'},
+      {"loop"                , 2, 0, 'l'},
+      {"negative-filter"     , 1, 0, 'f'},
+      {"positive-filter"     , 1, 0, 'F'},
+      {"player"              , 1, 0, 'P'},
+      {"player-args"         , 1, 0, 'a'},
+      {"config-file"         , 1, 0, 'c'},
+      {"ignore-config"       , 0, 0, 'i'},
+      {"generate-titles"     , 0, 0, 'g'},
+      {"dont-generate-titles", 0, 0, 'G'},
+      {"help"                , 0, 0, 'h'},
       {0, 0, 0, 0}  // NULL marks end
     };
-    c = getopt_long(argc, argv, "p:rRl::f:F:P:a:c:ih",
+    c = getopt_long(argc, argv, "p:rRl::f:F:P:a:c:ihgG",
         krampf_options, &option_index);
     if (c==EOF)
       break;
@@ -250,6 +260,12 @@ Config::getopts(int argc, char** argv)
       case 'i':
         cmdopts.readconfig = false;
         break;
+      case 'g':
+        cmdopts.generateTitles = true;
+        break;
+      case 'G':
+        cmdopts.generateTitles = false;
+        break;
       case 'h':
         printf("      crampf developers version\n");
         printf("---------------------------------------\n");
@@ -263,6 +279,8 @@ Config::getopts(int argc, char** argv)
         printf("[ -a | --player-args <player-args>    ]\n");
         printf("[ -c | --config-file <configfile>     ]\n");
         printf("[ -i | --ignore-config                ]\n");
+        printf("[ -g | --generate-titles              ]\n");
+        printf("[ -G | --dont-generate-titles         ]\n");
         printf("[ -h | --help                         ]\n");
         exit(0);
       case '?':

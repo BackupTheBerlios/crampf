@@ -107,6 +107,12 @@ Interface::list( void )
 }
 
 void
+Interface::file( void )
+{
+  printf("filename: ``%s''\n",(*(*plist)).filename().c_str());
+}
+
+void
 Interface::next( void )
 {
   ++(*plist);

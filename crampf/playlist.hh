@@ -1,5 +1,5 @@
 //
-// $Id: playlist.hh,v 1.4 2000/03/10 18:28:35 logic Exp $
+// $Id: playlist.hh,v 1.5 2000/03/11 19:06:25 logic Exp $
 //
 
 #ifndef playlist
@@ -27,6 +27,7 @@ class Playlist : public vector<Track>
     int pos();
     void jump(int newpos);
   private:
+    void addTrack(string path, string filename);
     int current;
 };
 

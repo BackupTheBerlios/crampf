@@ -1,5 +1,5 @@
 //
-// $Id: options.hh,v 1.6 2000/03/10 23:04:46 logic Exp $
+// $Id: options.hh,v 1.7 2000/03/11 19:06:25 logic Exp $
 //
 
 #ifndef config
@@ -17,6 +17,7 @@ struct options {
   bool                  readconfig;
   vector<string>        playlistfiles;
   bool                  randomOrder;
+  bool                  generateTitles;
   int                   loop;
   vector<string>        negativeFilterFiles;
   vector<string>        negativeFilter;
