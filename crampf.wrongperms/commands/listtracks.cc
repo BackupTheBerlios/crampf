@@ -30,7 +30,7 @@ ListTracks::doit( string s )
   snprintf( f, 512, "%%%dd - %%s\n", w );
   printdebug( "listing tracks from %d to %d\n", pos, pos+20 );
   for(int i = pos; i<plist->size() && i<pos+20; i++ )
-      printf( f, i, (*plist)[i].title().c_str() );
+      printf( f, i+1, (*plist)[i].title().c_str() );
 }
 
 void
