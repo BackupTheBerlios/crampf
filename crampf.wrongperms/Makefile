@@ -1,5 +1,5 @@
 GCC=g++
-OBJS=config.o crampf.o playlist.o player.o
+OBJS=config.o crampf.o playlist.o player.o track.o
 #LIBS=-lpthread
 PROGNAME=crampf
 

@@ -21,7 +21,7 @@ void Playlist::addPath(string path)
   stat((const char*)path.c_str(),&buf);
   if (!(S_ISDIR(buf.st_mode))) {
     /* only a single file to add */
-    this->push_back(path);
+    this->push_back(Track(path));
     return;
   }
   FILE* fp;
@@ -34,7 +34,7 @@ void Playlist::addPath(string path)
   char cbuf[MAXFILENAMELENGTH];
   while (fgets(cbuf,MAXFILENAMELENGTH,fp)) {
     cbuf[strlen(cbuf)-1]='\0'; /* strip ending '\n' */
-    this->push_back(cbuf);
+    this->push_back(Track(cbuf));
   }
   pclose(fp);
 }
@@ -48,9 +48,9 @@ void Playlist::addPath(vector<string> path)
 
 void Playlist::positiveFilter(string flt)
 {
-  for (vector<string>::iterator it = this->begin();
+  for (Playlist::iterator it = this->begin();
       it != this->end(); it++) 
-    if (it->find(flt)==-1) 
+    if (it->filename().find(flt)==-1) 
       this->erase(it--);
 }
 
@@ -63,9 +63,9 @@ void Playlist::positiveFilter(vector<string> flt)
 
 void Playlist::negativeFilter(string flt)
 {
-  for (vector<string>::iterator it = this->begin();
+  for (Playlist::iterator it = this->begin();
       it != this->end(); it++) 
-    if (it->find(flt)!=-1) 
+    if (it->filename().find(flt)!=-1) 
       this->erase(it--);
 }
 
@@ -77,7 +77,7 @@ void Playlist::negativeFilter(vector<string> flt)
   }
 }
 
-string Playlist::operator++()
+Track Playlist::operator++()
 {
   if (current+1<this->size()) {
     current++;
@@ -86,7 +86,7 @@ string Playlist::operator++()
     throw string("end of playlist");
 }
 
-string Playlist::operator--()
+Track Playlist::operator--()
 {
   if (current>0) {
     current--;
@@ -95,7 +95,7 @@ string Playlist::operator--()
     throw string("end of playlist");
 }
     
-string Playlist::operator*()
+Track Playlist::operator*()
 {
   return (*this)[current];
 }

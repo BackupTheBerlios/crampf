@@ -16,10 +16,11 @@ int main(int argc, char** argv)
   plist->addPath(opts->mp3SearchPaths);
   plist->positiveFilter(opts->positiveFilter);
   plist->negativeFilter(opts->negativeFilter);
-//  plist->shuffle();
-/*  for (vector<string>::iterator it = plist->begin();
+  /*
+  for (Playlist::iterator it = plist->begin();
       it != plist->end(); it++)
-    printf("%s\n",(const char*)it->c_str()); */
+    printf("%s\n",(const char*)it->filename().c_str());
+  */
   player_init();
   player_play();
 }
