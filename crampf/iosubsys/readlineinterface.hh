@@ -12,6 +12,7 @@ class ReadLineInterface {
     ReadLineInterface();
     ~ReadLineInterface();
     void input();
+    void input( string s );
   private:
     void initialize_readline();
 };

@@ -50,9 +50,18 @@ Interface::mainloop()
       usleep(100);
       c = fgetc(stdin); 
       if (c!=EOF) {
-        if (c==':') {
-          use_rli();
-        } else {
+        switch (c) {
+          case ':':
+            use_rli();
+            break;
+          case '/':
+          case '?':
+            char xx[2];
+            xx[0]=c;
+            xx[1]='\0';
+            use_search_rli(xx);
+            break;
+          default:
           try {
             opts->cmdmap[c];
           } catch (string error) {
@@ -97,6 +106,14 @@ Interface::use_rli( void )
 {
   restoreTerm();
   rli.input();
+  singlekeyTerm();
+}
+
+void
+Interface::use_search_rli( string s )
+{
+  restoreTerm();
+  search_rli.input(s);
   singlekeyTerm();
 }
 

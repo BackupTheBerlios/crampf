@@ -49,3 +49,25 @@ ReadLineInterface::input()
   free(cmd);
 }
 
+void
+ReadLineInterface::input( string s )
+{
+  string cmd;
+  char* searchstr = readline(s.c_str());
+  if (searchstr && *searchstr) 
+    add_history(searchstr);
+  try {
+    string cmd = string(searchstr);;
+    if (s[0]=='/')
+      cmd=string("search ") + cmd;
+    if (s[0]=='?')
+      cmd="rsearch " + cmd;
+    opts->cmdmap[cmd];
+  } catch (string error) {
+    if (error=="quit")
+      throw error;
+    printf("error: `%s'\n",error.c_str());
+  }
+  free(searchstr);
+}
+
