@@ -121,7 +121,8 @@ StdPlayer::stop()
     } 
   }
   int f;
-  while ((f=open("/dev/dsp",O_WRONLY))==-1);
+  while ((f=open("/dev/dsp",O_WRONLY))==-1)
+      usleep(80000); /* XXX */
   close(f);
   printdebug( "%s\n", "waiting one second...");
   sleep(1); /* just to be sure... */
