@@ -29,9 +29,12 @@ void Config::initdefaults(struct Options* op)
   op->regexp=0;
   op->titlewidth=0;
   try {
-    op->cmdmap["map h map"];
     op->cmdmap["define next=jump +1"];
     op->cmdmap["define prev=jump -1"];
+    // FIXME add compat macro (must take argument)
+    // op->cmdmap["define map=module terminal bind"];
+#if 0
+    op->cmdmap["map h map"];
     op->cmdmap["map n search"];
     op->cmdmap["map N search"];
     op->cmdmap["map i info"];
@@ -57,8 +60,9 @@ void Config::initdefaults(struct Options* op)
     op->cmdmap["map \040 next"];
     op->cmdmap["map \\012 samedir"];
     op->cmdmap["map \\011 samedir 2"];
+#endif
   } catch (std::string error) {
-    printf("keytable init error: `%s'\n",error.c_str());
+    printf("macro init error: `%s'\n",error.c_str());
   }
 }
 

@@ -1,5 +1,5 @@
 //
-// $Id: crampf.hh,v 1.9 2003/01/05 12:39:24 logic Exp $
+// $Id: crampf.hh,v 1.10 2003/01/11 14:25:38 logic Exp $
 //
 
 #ifndef CRAMPF_HH
@@ -9,8 +9,9 @@
 #include "player/player-interface.hh"
 #include "options.hh"
 #include "autocmd.hh"
-#include "iosubsys/input.hh"
+#include "module.hh"
 #include "iosubsys/output.hh"
+#include "iosubsys/input.hh"
 
 /* global variables */
 
@@ -20,6 +21,7 @@ AutocmdMap autocmdmap;
 PlayerInterface *player;
 Input *input;
 Output *output;
+Modules *modules;
 
 #endif
 

@@ -16,7 +16,6 @@ CommandMap::CommandMap()
 {
   if( ! objcnt++ ){
       cmdmap["help"]           = new Help           (this);
-      cmdmap["map"]            = new Map            (this);
       cmdmap["titlewidth"]     = new TitleWidth     ();
       cmdmap["loop"]           = new Loop           ();
 #ifdef MIXER_CMD
@@ -57,6 +56,7 @@ CommandMap::CommandMap()
       cmdmap["addplayer"]      = new AddPlayer	    ();
       cmdmap["clean"]          = new Clean	    ();
       cmdmap["samedir"]        = new SameDir	    ();
+      cmdmap["module"]	       = new Mod	    ();
   }
 }
 
@@ -117,20 +117,6 @@ CommandMap::findFirst( const std::string &c ) const
 }
 
 void
-CommandMap::setKey(char key, const std::string &cmd)
-{
-  try {
-    std::string c = findFirstDef(arg0(cmd));
-    keymap[key] = cmd;
-  } catch (std::string error) {
-    Command* action = findFirst(arg0(cmd));
-    if (action==NULL)
-      throw std::string("setKey: bad commandname");
-    keymap[key] = cmd;
-  }
-}
-
-void
 CommandMap::help( const std::string &cmd )
 {
   if (cmdmap.count(arg0(cmd))) 
@@ -144,14 +130,8 @@ CommandMap::help( const std::string &cmd )
   }
 }
 
-void
-CommandMap::operator[](char key)
-{
-  (*this)[keymap[key]];
-}
-
 std::string
-CommandMap::arg0( std::string s ) const
+CommandMap::arg0( std::string s )
 {
   while( s.size() > 0 && s[0] == ' ' )
       s.erase( 0, 1 );
@@ -163,7 +143,7 @@ CommandMap::arg0( std::string s ) const
 }
 
 std::string
-CommandMap::args( std::string s ) const
+CommandMap::args( std::string s )
 {
   while( s.size() > 0 && s[0] == ' ' )
       s.erase( 0, 1 );

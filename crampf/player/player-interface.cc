@@ -95,6 +95,6 @@ PlayerInterface::backendStopped( const std::string &msg )
 	  printdebug( "%s\n", "sending 'stop' event"); //++(*plist);
 	  autocmdmap["stop"].trigger();
       } else {
-	  printdebug( "IGNORING SIGNAL\n" );
+	  printdebug( "%s", "IGNORING SIGNAL\n" );
       }
 }

@@ -2,6 +2,7 @@
 #include "input.hh"
 #include "output.hh"
 #include "../options.hh"
+#include "../debug.hh"
 #include <unistd.h>
 
 void mainloop()
@@ -11,10 +12,10 @@ void mainloop()
 	  usleep(100);
 	  std::string cmd = input->read();
 	  try {
-	      if( cmd.size() == 1 )
-		  opts->cmdmap[cmd[0]];
-	      else if( cmd.size() > 1 && cmd[0] == ':' )
-		  opts->cmdmap[cmd.substr(1)];
+	      if( ! cmd.empty() ){
+		  printdebug( "executing command: '%s'\n", cmd.c_str() );
+		  opts->cmdmap[cmd];
+	      }
 	  } catch (std::string error) {
 	      if (error=="quit" || error=="exit")
 		  throw error;

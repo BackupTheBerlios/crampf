@@ -6,7 +6,7 @@ EXTRA_DIST=README COPYING INSTALL COPYRIGHT ChangeLog crampfrc-example
 
 noinst_HEADERS=autocmd.hh command.hh commandmap.hh commands.hh	\
     	       config.h options.hh crampf.hh debug.hh file.hh	\
-	       playlist.hh track.hh
+	       playlist.hh track.hh module.hh
 
 crampf_SOURCES=commandmap.cc options.cc crampf.cc file.cc	\
 	       playlist.cc track.cc
@@ -16,6 +16,5 @@ crampf_LDADD=commands/libcmds.a util/libutil.a player/libgenplayer.a player/back
 dist-hook:
 	@echo updating ChangeLog
 	./cvs2cl.pl --prune
-
-README:	generate_readme.sh
+	@echo generating README
 	./generate_readme.sh > README

@@ -3,7 +3,7 @@
 #include <stdarg.h>
 
 int
-Output::printf( char *fmt, ... )
+Output::printf( const char *fmt, ... )
 {
       static char buf[BUFSIZ];
       va_list ap;
@@ -28,7 +28,7 @@ Output::~Output()
 	  delete *it;
 }
 
-StdOutput::StdOutput()
+StdOutput::StdOutput() : OutputObject( "stdout" )
 {
       printf( "welcome to the crampf %s\n", VERSION );
 }
@@ -40,6 +40,25 @@ StdOutput::flush()
 	  fputs( front().c_str(), stdout );
 	  pop();
       }
+}
+
+void
+StdOutput::configure( const std::string &s )
+{
+      /* TODO */
+      throw std::string( "stdout module cannot be configured\n" );
+}
+
+void
+StdOutput::help( const std::string &s ) const
+{
+      output->printf( "stdout module cannot be configured\n" );
+}
+
+void
+StdOutput::description() const
+{
+      output->printf( "sends all output to stdout\n" );
 }
 
 StdOutput::~StdOutput()

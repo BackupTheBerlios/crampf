@@ -32,4 +32,4 @@ map v volume
 define wipe=nfilter Toten Hosen|Aerzte|Roten Rosen|Chopin|diverses|Festival Orchestra|Begemann|sting|\<A-Ha\>|Bruce Springsteen|georg phillip telemann|johann sebastian bach
 
 # autoload negative filter on startup
-autocommand start loadnfilter /home/logic/playlists/negativ.filter ; echo using negativ.filter on /data/mp3
+#autocommand start loadnfilter /home/logic/playlists/negativ.filter ; echo using negativ.filter on /data/mp3

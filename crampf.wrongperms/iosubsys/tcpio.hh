@@ -1,5 +1,5 @@
 /*
- * $Id: tcpio.hh,v 1.1 2003/01/09 09:15:41 logic Exp $
+ * $Id: tcpio.hh,v 1.2 2003/01/11 14:25:41 logic Exp $
  */
 
 #ifndef __TCPIO_H
@@ -16,6 +16,7 @@ class TcpIO : public InputObject, public OutputObject {
 	TcpIO();
 	~TcpIO();
 	std::string read();
+	void configure( const std::string &s );
 	void flush();
 };
 

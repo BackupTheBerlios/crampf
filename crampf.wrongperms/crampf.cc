@@ -5,16 +5,17 @@
 #include <stdio.h>
 #include "crampf.hh"
 #include "player/player-interface.hh"
-#include "iosubsys/output.hh"
-#include "iosubsys/input.hh"
 #include "iosubsys/mainloop.hh"
 #include "iosubsys/tcpio.hh"
 
 int main( int argc, char **argv )
 {
       try {
+	  modules = new Modules();
 	  output = new Output();
 	  output->push_back( new StdOutput() );
+	  input = new Input();
+	  input->push_back( new TermInput() );
 	  autocmdmap.newEvent( "start", "called whenever a new song gets played" );
 	  autocmdmap.newEvent( "stop", "called immediately after playback of a song finishes" );
 	  autocmdmap.newEvent( "exit", "called on exit" );
@@ -38,8 +39,6 @@ int main( int argc, char **argv )
 	      exit(2);
 	  }
 	  player->play( (**plist).filename() );
-	  input = new Input();
-	  input->push_back( new TermInput() );
 #if 0
 	  TcpIO *t = new TcpIO();
 	  input->push_back( t );

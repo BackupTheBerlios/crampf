@@ -10,7 +10,7 @@
 #define MYPORT 4321
 #define BACKLOG 10
 
-TcpIO::TcpIO()
+TcpIO::TcpIO() : InputObject( "tcp" ), OutputObject( "tcp" )
 {
       /* listen on crampf server io port */
       struct sockaddr_in my_addr;
@@ -74,7 +74,7 @@ TcpIO::read()
 	      it != sockfds.end(); it++ ){
 	  if( FD_ISSET( *it, &readfds ) ){
 	      char buf[BUFSIZ];
-	      size_t len = ::read( *it, buf, BUFSIZ );
+	      ssize_t len = ::read( *it, buf, BUFSIZ );
 	      if( len > 2 && buf[len-2] == '\r' && buf[len-1] == '\n' ){
 		  buf[len-2] = '\0'; /* strip \r\n */
 		  printf( "DEBUG: read from socket '%s'\n", buf );
@@ -86,6 +86,12 @@ TcpIO::read()
 	  }
       }
       return std::string( "" );
+}
+
+void
+TcpIO::configure( const std::string &s )
+{
+      /* TODO */
 }
 
 void
