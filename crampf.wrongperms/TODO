@@ -1,4 +1,5 @@
 FEATURE WISHLIST
+	* add title and artist search (first and second directory above mp3)
 	* Change options-struct into a map with fixed keys, initialized by the
 	      constructor
 	    * this map could be read and set by the user through set command

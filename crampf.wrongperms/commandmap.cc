@@ -44,8 +44,6 @@ CommandMap::CommandMap()
       cmdmap["source"]         = new Source         (this);
       cmdmap["search"]         = new Search         (this);
       cmdmap["rsearch"]        = new RSearch        (this);
-      cmdmap["playercmd"]      = new PlayerCMD      ();
-      cmdmap["playercmd_args"] = new PlayerCMD_Args ();
       cmdmap["randomorder"]    = new RandomOrder    ();
       cmdmap["write"]          = new Write          ();
       cmdmap["kill"]           = new Kill           ();
