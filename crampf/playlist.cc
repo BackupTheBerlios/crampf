@@ -280,7 +280,7 @@ Playlist::jump(int newpos)
   if (newpos>(signed)(size()-1)) {
     if (opts->loop>0)
       opts->loop-=(int)ceil((double)newpos/(double)size());
-    if (opts->loop<=0)
+    if (opts->loop==0)
       throw std::string("end of playlist");
     newpos%=(size());
   }

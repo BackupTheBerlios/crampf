@@ -62,5 +62,6 @@ int main( int argc, char **argv )
       delete player;
       delete input;
       delete output;
+      delete modules;
       return 0;
 }

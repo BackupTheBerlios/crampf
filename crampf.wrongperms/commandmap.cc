@@ -85,6 +85,8 @@ CommandMap::operator[](const std::string &cmd)
 		  std::string macro = findFirstDef(c);
 		  cmdmap["calldef"]->doit(macro + " " + p);
 	      } catch (std::string error) {
+		  if( error == "quit" )
+		      throw error;
 		  Command* action = findFirst(c);
 		  if (action!=NULL) {
 		      action->doit(p);
