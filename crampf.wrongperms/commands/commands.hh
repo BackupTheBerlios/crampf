@@ -15,12 +15,15 @@
                                                                   
 #include "addpath.hh"
 #include "commands.hh"
+#include "filename.hh"
+#include "generatetitles.hh"
 #include "help.hh"
 #include "info.hh"
 #include "jump.hh"
 #include "loadnfilter.hh"
 #include "loadpfilter.hh"
 #include "loadplaylist.hh"
+#include "loop.hh"
 #include "map.hh"
 #include "next.hh"
 #include "nfilter.hh"
@@ -30,6 +33,7 @@
 #include "set.hh"
 #include "shuffle.hh"
 #include "status.hh"
+#include "titlewidth.hh"
 #include "version.hh"
 #include "vol.hh"
                                                                   

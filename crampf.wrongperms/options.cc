@@ -50,6 +50,7 @@ Config::initdefaults(struct options* op)
     op->cmdmap["map 8 vol 80"];
     op->cmdmap["map 9 vol 90"];
     op->cmdmap["map 0 vol 00"];
+    op->cmdmap["map f filename"];
   } catch (string error) {
     printf("keytable init error: `%s'\n",error.c_str());
   }

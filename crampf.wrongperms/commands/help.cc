@@ -27,7 +27,7 @@ Help::doit( string s )
     printf("avaible commands:\n");
     for (map<string,Command*>::iterator it = cmap->cmdmap.begin();
         it != cmap->cmdmap.end(); it++) {
-      for (int len = printf("\t%s",it->first.c_str()); len<15; len++)
+      for (int len = printf("\t%s",it->first.c_str()); len<20; len++)
         printf(" ");
       it->second->description();
     }

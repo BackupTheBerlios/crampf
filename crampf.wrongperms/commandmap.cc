@@ -11,22 +11,25 @@
 
 CommandMap::CommandMap()
 {
-  cmdmap["help"]         = new Help         (this);
-  cmdmap["map"]          = new Map          (this);
-  cmdmap["set"]          = new Set          ();
-  cmdmap["volume"]       = new Vol          ();
-  cmdmap["info"]         = new Info         ();
-  cmdmap["next"]         = new Next         ();
-  cmdmap["previous"]     = new Prev         ();
-  cmdmap["quit"]         = new Quit         ();
-  cmdmap["status"]       = new Status       ();
-  cmdmap["jump"]         = new Jump         ();
-  cmdmap["addpath"]      = new AddPath      ();
-  cmdmap["shuffle"]      = new Shuffle      ();
-  cmdmap["version"]      = new Version      ();
-  cmdmap["loadplaylist"] = new LoadPlaylist ();
-  cmdmap["pfliter"]      = new PFilter      ();
-  cmdmap["nfliter"]      = new NFilter      ();
+  cmdmap["help"]           = new Help           (this);
+  cmdmap["map"]            = new Map            (this);
+  cmdmap["titlewidth"]     = new TitleWidth     ();
+  cmdmap["loop"]           = new Loop           ();
+  cmdmap["volume"]         = new Vol            ();
+  cmdmap["info"]           = new Info           ();
+  cmdmap["next"]           = new Next           ();
+  cmdmap["previous"]       = new Prev           ();
+  cmdmap["quit"]           = new Quit           ();
+  cmdmap["status"]         = new Status         ();
+  cmdmap["jump"]           = new Jump           ();
+  cmdmap["addpath"]        = new AddPath        ();
+  cmdmap["shuffle"]        = new Shuffle        ();
+  cmdmap["version"]        = new Version        ();
+  cmdmap["loadplaylist"]   = new LoadPlaylist   ();
+  cmdmap["pfliter"]        = new PFilter        ();
+  cmdmap["nfliter"]        = new NFilter        ();
+  cmdmap["generatetitles"] = new GenerateTitles ();
+  cmdmap["filename"]       = new Filename       ();
 }
 
 CommandMap::~CommandMap()

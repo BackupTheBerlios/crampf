@@ -27,5 +27,5 @@ clean:
 %.d:	%.cc
 	@$(SHELL) -ec '$(CXX) -MM $(CXXFLAGS) $< \
 	| sed '\''s/\($*\)\.o[ :]*/\1.o $@ : /g'\'' > $@; \
-	[ -s $@ ] || rm -f $@'
+	[ -s $@ ] || rm -f $@' 2>&1
 
