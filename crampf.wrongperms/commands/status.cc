@@ -17,25 +17,28 @@ extern struct options* opts;
 void
 Status::doit( string s )
 {
-  if (opts->titlewidth==0) {
-  printf("\n[%d/%d] - %s\n",plist->pos()+1,plist->size(),
-      (*(*plist)).title().c_str());
-  } else {
+      if ((*plist).size() > 0) {
+	  if (opts->titlewidth==0) {
+	      printf("\n[%d/%d] - %s\n",plist->pos()+1,plist->size(),
+		      (*(*plist)).title().c_str());
+	  } else {
 #define MAXTITLEWIDTH 1024
-    char title[MAXTITLEWIDTH];
-    sprintf(title,"\n[%d/%d] - %s\n",plist->pos()+1,plist->size(),
-      (*(*plist)).title().c_str());
-    if (strlen(title)>opts->titlewidth) {
-      int i;
-      for (i=0; i<opts->titlewidth/3; i++)
-        printf("%c",title[i]);
-      printf("...");
-      i=strlen(title)-i*2-1;
-      for (;i<strlen(title);i++)
-        printf("%c",title[i]);
-    } else 
-      printf("%s",title);
-  }
+	      char title[MAXTITLEWIDTH];
+	      sprintf(title,"\n[%d/%d] - %s\n",plist->pos()+1,plist->size(),
+		      (*(*plist)).title().c_str());
+	      if (strlen(title)>opts->titlewidth) {
+		  int i;
+		  for (i=0; i<opts->titlewidth/3; i++)
+		      printf("%c",title[i]);
+		  printf("...");
+		  i=strlen(title)-i*2-1;
+		  for (;i<strlen(title);i++)
+		      printf("%c",title[i]);
+	      } else 
+		  printf("%s",title);
+	  }
+      } else 
+	  printf("playlist empty\n");
 }
 
 void

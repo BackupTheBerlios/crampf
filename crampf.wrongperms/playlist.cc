@@ -29,7 +29,7 @@ Playlist::addPath(string path)
   stat((const char*)path.c_str(),&buf);
   if (!(S_ISDIR(buf.st_mode))) {
     /* only a single file to add */
-    addTrack("",path);
+    if (S_ISREG(buf.st_mode)) addTrack("",path);
     return;
   }
   FILE* fp;
@@ -191,6 +191,8 @@ Playlist::pos()
 void 
 Playlist::jump(int newpos)
 {
+  if (this->size() == 0) 
+      throw string("empty playlist");
   while (newpos<0) {
     opts->loop--;
     newpos+=this->size();

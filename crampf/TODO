@@ -1,7 +1,10 @@
 FEATURE WISHLIST
 	Change the hardcoded defaults to something more useful
+	Change options-struct into a map with fixed keys, initialized by the
+	    constructor
 	Simple and flexible way to execute external commands
 	Integrate slang scripting language
+	Support for MODs, S3Ms, etc.
 
 
 KNOWN BUGS

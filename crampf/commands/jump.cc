@@ -22,6 +22,8 @@ Jump::doit( string s )
   try {
     plist->jump(pos);
   } catch (string error) {
+    if (error=="empty playlist") 
+      throw string("quit");
     if (error=="end of playlist") 
       throw string("quit");
     printf("jump error: %s\n",error.c_str());
