@@ -36,10 +36,11 @@ Autocommand::doit( string s )
       printf( "autocmdmap: no such event %s\n", evt.c_str() );
       return;
   }
-  actionmap[evt] = act;
   printdebug( "autocmdmap: registered command '%s' on event '%s'\n",
 	  act.c_str(), evt.c_str() );
-  autocmdmap[evt].registerCB( callback(*this,&Autocommand::evtcb) );
+  if( !actionmap.count( evt ) ) /* did we already register this event? */
+      autocmdmap[evt].registerCB( callback(*this,&Autocommand::evtcb) );
+  actionmap[evt] = act;
 }
 
 bool
