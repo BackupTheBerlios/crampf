@@ -1,5 +1,5 @@
 /*
- * $Id: terminal.hh,v 1.1 2003/01/11 20:33:40 logic Exp $
+ * $Id: terminal.hh,v 1.2 2003/01/14 22:01:47 logic Exp $
  */
 
 #ifndef __TERMINAL_HH
@@ -17,7 +17,11 @@ class TermInput : public InputObject {
 	void singlekeyTerm() const;
 	std::string readline( const char *prompt );
 	std::map<int,std::string> hotkeys;
+	std::map<std::string,std::string> hotseqs;
 	std::map<std::string,int> keynames;
+	std::map<int,std::string> keynames_rev;
+	std::map<std::string,std::string> escseqs;
+	std::map<std::string,std::string> escseqs_rev;
     public:
 	TermInput();
 	std::string read();

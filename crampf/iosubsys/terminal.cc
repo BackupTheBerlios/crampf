@@ -17,6 +17,30 @@ TermInput::TermInput() : InputObject( "terminal" )
 	  perror("tcgetattr");
       }
       singlekeyTerm();
+      /* key sequences for special keys (e.g. cursor keys ) */
+      /* taken from linux console (is there a standard for this?) */
+      escseqs["up"]	= "\e[A";
+      escseqs["down"]	= "\e[B";
+      escseqs["left"]	= "\e[C";
+      escseqs["right"]	= "\e[D";
+      escseqs["F1"]	= "\e[[A";
+      escseqs["F2"]	= "\e[[B";
+      escseqs["F3"]	= "\e[[C";
+      escseqs["F4"]	= "\e[[D";
+      escseqs["F5"]	= "\e[[E";
+      escseqs["F6"]	= "\e[[17~";
+      escseqs["F7"]	= "\e[[18~";
+      escseqs["F8"]	= "\e[[19~";
+      escseqs["F9"]	= "\e[[20~";
+      escseqs["F10"]	= "\e[[21~";
+      escseqs["F11"]	= "\e[[23~";
+      escseqs["F12"]	= "\e[[24~";
+      escseqs["home"]	= "\e[1~";
+      escseqs["insert"]	= "\e[2~";
+      escseqs["delete"]	= "\e[3~";
+      escseqs["end"]	= "\e[4~";
+      escseqs["pageup"]	= "\e[5~";
+      escseqs["pagedown"]= "\e[6~";
       /* special keys */
       keynames["space"] = ' ';
       keynames["enter"] = '\n';
@@ -50,6 +74,19 @@ TermInput::TermInput() : InputObject( "terminal" )
       hotkeys['\n'] = std::string( "samedir" );
       hotkeys['\t'] = std::string( "samedir 2" );
       //hotkeys['\e'] = std::string( "quit" );
+      /* default special keys */
+      hotseqs[escseqs["left"]]	= std::string( "volume +5" );
+      hotseqs[escseqs["right"]]	= std::string( "volume -5" );
+      hotseqs[escseqs["up"] ]	= std::string( "prev" );
+      hotseqs[escseqs["down"]]	= std::string( "next" );
+      hotseqs[escseqs["F1"]]	= std::string( "help" );
+      /* reverse mappings (for faster lookups) */
+      for( std::map<std::string,int>::const_iterator it = keynames.begin();
+	      it != keynames.end(); it++ )
+	  keynames_rev[it->second] = it->first;
+      for( std::map<std::string,std::string>::const_iterator it = escseqs.begin();
+	      it != escseqs.end(); it++ )
+	  escseqs_rev[it->second] = it->first;
 }
 
 TermInput::~TermInput()
@@ -60,22 +97,50 @@ TermInput::~TermInput()
 std::string
 TermInput::read()
 {
-      int c = fgetc(stdin); 
-      switch( c ){
+      static int buf[BUFSIZ];
+      int i, seqpos;
+      buf[0] = fgetc(stdin); 
+      switch( buf[0] ){
 	  case EOF: return std::string(""); /* no key pressed */
 	  case ':': return readline( ":" );
 	  case '/':
 	  case '?': {
-		      char xx[2] = { c, '\0' };
+		      char xx[2] = { buf[0], '\0' };
 		      std::string cmd = readline( xx );
-		      if (c=='/')
+		      if (buf[0]=='/')
 			  cmd=std::string("search ") + cmd;
-		      if (c=='?')
+		      if (buf[0]=='?')
 			  cmd="rsearch " + cmd;
 		      return cmd;
 		    }
 	  default:
-		  return hotkeys[c];
+		  seqpos = 0;
+		  while(1){
+		      /* Try to read escape sequence (e.g. cursor keys) */
+		      i = 0;
+		      for( std::map<std::string,std::string>::const_iterator
+			      it = hotseqs.begin(); it != hotseqs.end(); it++ )
+			  if( it->first[seqpos] == buf[seqpos] )
+			      i++;
+		      assert( ++seqpos < BUFSIZ );
+		      if( i > 1 )
+			  buf[seqpos] = fgetc(stdin);
+		      else
+			  break;
+		  }
+		  if( i == 1 ){
+		      static char cbuf[BUFSIZ];
+		      buf[seqpos] = '\0';
+		      while( seqpos-- ){
+			  cbuf[seqpos] = buf[seqpos];
+		      }
+		      return hotseqs[cbuf];
+		  } else {
+		      if( seqpos > 1 ){
+			  printdebug( "WARNING: read %d characters but found no escseqs\n", seqpos );
+		      }
+		      return hotkeys[buf[0]];
+		  }
       }
 }
 
@@ -90,18 +155,17 @@ TermInput::configure( const std::string &s )
 	  output->printf( "key '?' -> search backward\n" );
 	  output->printf( "---Keymap-(user-definable)---\n" );
 	  for( std::map<int,std::string>::const_iterator it = hotkeys.begin();
-		  it != hotkeys.end(); it++ ){
-	      std::map<std::string,int>::const_iterator at;
-	      for( at = keynames.begin();
-		      at != keynames.end(); at++ )
-		  if( at->second == it->first ){
-		      output->printf( "key '%s'\t-> '%s'\n", at->first.c_str(),
+		  it != hotkeys.end(); it++ )
+	      if( keynames_rev.count( it->first ) == 1 )
+		      output->printf( "key '%s'\t-> '%s'\n", keynames_rev[it->first].c_str(),
 			      it->second.c_str() );
-		      break;
-		  }
-	      if( at == keynames.end() )
+	      else
 		  output->printf( "key '%c' \t-> '%s'\n", it->first, it->second.c_str() );
-	  }
+	  for( std::map<std::string,std::string>::const_iterator it = hotseqs.begin();
+		  it != hotseqs.end(); it++ )
+	      if( escseqs_rev.count( it->first ) == 1 )
+		  output->printf( "key '%s'\t-> '%s'\n", escseqs_rev[it->first].c_str(),
+			  it->second.c_str() );
       } else {
 	  std::string cmd = CommandMap::arg0( s );
 	  std::string args = CommandMap::args( s );
@@ -123,9 +187,17 @@ TermInput::configure( const std::string &s )
 			  if( keynames.count( key ) == 1 )
 			      if( hotkeys.count( keynames[key] ) == 1 )
 				  output->printf( "key '%s' -> '%s'\n",
-					  keynames[key], hotkeys[key[0]].c_str() );
+					  key.c_str(), hotkeys[keynames[key]].c_str() );
 			      else
 				  throw std::string( "key '" ) + key + "' undefined";
+			  else if( escseqs.count( key ) == 1 )
+			      if( hotseqs.count( key ) == 1 )
+				  output->printf( "key '%s' -> '%s'\n",
+					  key.c_str(), hotseqs[key].c_str() );
+			      else
+				  throw std::string( "key '" ) + key + "' undefined";
+			  else
+			      throw std::string( "unknown key '" ) + key + "'";
 		      }
 		  } else {
 		      if( key.size() == 1 ){
@@ -134,7 +206,17 @@ TermInput::configure( const std::string &s )
 			  hotkeys[key[0]] = args;
 			  return;
 		      } else {
-			  /* TODO resolv special keyname */
+			  /* resolv special keyname */
+			  if( keynames.count( key ) == 1 ){
+			      printdebug( "assigning command '%s' to hotkey '%s'\n",
+				      args.c_str(), key.c_str() );
+			      hotkeys[ keynames[ key ] ] = args;
+			  } else if( escseqs.count( key ) == 1 ){
+			      printdebug( "assigning command '%s' to hotkey '%s'\n",
+				      args.c_str(), key.c_str() );
+			      hotseqs[ escseqs[ key ] ] = args;
+			  } else
+			      throw std::string( "unknown key '" ) + key + "'";
 		      }
 		  }
 	      }
@@ -152,6 +234,9 @@ TermInput::help( const std::string &s ) const
       output->printf( "following special keynames:\n" );
       for( std::map<std::string,int>::const_iterator it = keynames.begin();
 	      it != keynames.end(); it++ )
+	  output->printf( "\t%s\n", it->first.c_str() );
+      for( std::map<std::string,std::string>::const_iterator it = escseqs.begin();
+	      it != escseqs.end(); it++ )
 	  output->printf( "\t%s\n", it->first.c_str() );
 }
 
