@@ -265,6 +265,7 @@ Config::getopts(int argc, char** argv)
         break;
       case 'c':
         cmdopts.configfile = optarg;
+        cmdopts.readconfig = true;
         break;
       case 'i':
         cmdopts.readconfig = false;
