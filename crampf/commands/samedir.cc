@@ -24,7 +24,7 @@ SameDir::doit( const std::string &s )
 		  dirlevel--;
 		  if( dirlevel == 0 ){
 		      /* skip to next song */
-		      std::string dirname = (**plist).filename().substr( 0, i );
+		      std::string dirname = (**plist).filename().substr( 0, i+1 );
 		      for (unsigned int i=plist->pos()+1; i<plist->size(); i++)
 			  if( (*plist)[i].filename().find(dirname) == 0 &&
 				  player->supportedFormat( (*plist)[i].filename() ) != 0.0 ){
