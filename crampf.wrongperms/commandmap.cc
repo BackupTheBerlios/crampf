@@ -38,6 +38,7 @@ CommandMap::CommandMap()
   cmdmap["randomorder"]    = new RandomOrder    ();
   cmdmap["write"]          = new Write          ();
   cmdmap["kill"]           = new Kill           ();
+  cmdmap["unify"]          = new Unify          ();
 }
 
 CommandMap::~CommandMap()

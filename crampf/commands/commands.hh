@@ -41,6 +41,7 @@
 #include "source.hh"
 #include "status.hh"
 #include "titlewidth.hh"
+#include "unify.hh"
 #include "version.hh"
 #include "vol.hh"
 #include "write.hh"
