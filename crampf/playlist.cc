@@ -57,6 +57,10 @@ Playlist::addPath(vector<string> path)
 void
 Playlist::savePlaylist( string filename )
 {
+  if (filename[0]=='~') { // replace ~ with users home
+    filename.erase(filename.begin());
+    filename = getenv("HOME") + filename;
+  }
   FILE* fp=fopen(filename.c_str(),"w");
   if (fp==NULL) {
     perror("save Playlist");
