@@ -80,7 +80,7 @@ ExecPlayer::ExecPlayer( const StopCB &cb )
       addPlayer( "amp /\\.mp3$/ 0.6" );
       addPlayer( "mpg123 -q /\\.mp3$/ 0.5" );
       addPlayer( "ogg123 /\\.ogg$/ 0.9" );
-      //addPlayer( "play /\\.wav$/ 0.9 /\\.au$/ 0.9" );
+      addPlayer( "mplayer -vo null /\\.wma$/ 0.5 /\\.wav$/ 0.5 /\\.mp3$/ 0.5 /\\.mpg$/ 0.5 /\\.mpeg$/ 0.5 /\\.avi$/ 0.5 /\\.mov$/ 0.5" );
 }
 
 void
