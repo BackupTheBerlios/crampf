@@ -1,0 +1,10 @@
+FEATURE WISHLIST
+	Change the hardcoded defaults to something more useful
+	Simple and flexible way to execute external commands
+	Integrate slang scripting language
+
+KNOWN BUGS
+	When loop is set to infinitive and the playlist (or the playercommand)
+	    is invalid the program hangs in an endless loop
+	Sometimes the player skips to the next song after executing another
+	    command (couldn't reproduce this one clearly)

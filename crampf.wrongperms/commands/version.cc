@@ -8,7 +8,7 @@ void
 Version::doit( string s )
 {
   printf("crampf %s %s\n",RELEASENAME,VERSION_INFO);
-  printf("please send bugreports to logic@wg.netz\n");
+  printf("please send bugreports to logic@tzi.de\n");
 }
 
 void
