@@ -10,6 +10,7 @@ int main(int argc, char** argv)
 {
       try {
 	  autocmdmap.newEvent( "next", "called before the next track gets played" );
+	  autocmdmap.newEvent( "exit", "called on exit" );
 	  plist = new Playlist();
 	  Config cfg;
 	  opts=cfg.returnopts();
@@ -27,6 +28,7 @@ int main(int argc, char** argv)
 	  }
 	  player = player_init();
 	  Interface iface;
+	  autocmdmap["exit"].trigger();
       } catch (string m) {
 	  printf("%s\n",(const char*)m.c_str());
       }
