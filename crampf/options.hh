@@ -1,5 +1,5 @@
 //
-// $Id: options.hh,v 1.1 2000/03/09 01:33:18 logic Exp $
+// $Id: options.hh,v 1.2 2000/03/10 07:16:58 logic Exp $
 //
 
 #ifndef config
@@ -23,6 +23,28 @@ struct options {
   string                playercmd;
   string                playercmd_args;
   vector<string>        mp3SearchPaths;
+  struct keys {
+    string      next;
+    string      prev;
+    string      pause;
+    string      cont;
+    string      info;
+    string      list;
+    string      help;
+    string      quit;
+    string      vol0;
+    string      vol1;
+    string      vol2;
+    string      vol3;
+    string      vol4;
+    string      vol5;
+    string      vol6;
+    string      vol7;
+    string      vol8;
+    string      vol9;
+    string      vol_up;
+    string      vol_down;
+  } key;
 };
 
 class Config {

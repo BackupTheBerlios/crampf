@@ -7,6 +7,7 @@
 #include "config.hh"
 #include "player.hh"
 #include "crampf.hh"
+#include "interface.hh"
 
 int main(int argc, char** argv)
 {
@@ -21,6 +22,7 @@ int main(int argc, char** argv)
       it != plist->end(); it++)
     printf("%s\n",(const char*)it->filename().c_str());
   */
-  player_init();
-  player_play();
+  Interface iface;
+  printf("tschoess\n");
+  return 0;
 }
