@@ -1,5 +1,5 @@
 /*
- * $Id: output.hh,v 1.2 2003/01/11 14:25:41 logic Exp $
+ * $Id: output.hh,v 1.3 2003/01/11 20:33:40 logic Exp $
  */
 
 #ifndef __OUTPUT_HH
@@ -28,16 +28,6 @@ class Output : public std::list<OutputObject*> {
 };
 
 extern Output *output;
-
-class StdOutput : public OutputObject {
-    public:
-	StdOutput();
-	void flush();
-	~StdOutput();
-	void configure( const std::string &s );
-	void help( const std::string &s ) const;
-	void description() const;
-};
 
 /* further ideas:
 class SocketOutput : OutputObject {
