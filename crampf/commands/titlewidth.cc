@@ -22,6 +22,7 @@ TitleWidth::help( string s )
 {
   printf("format: titlewidth <width>\n");
   printf("description: gets/sets linewidth of status command\n");
+  printf("see also: status\n");
 }
 
 void

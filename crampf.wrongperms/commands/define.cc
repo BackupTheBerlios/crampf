@@ -34,6 +34,7 @@ Define::help( string s )
   printf("    or: define <macroname>=<comando> [; <commando> [; ...] ]\n");
   printf("description: list all macro, contents of macro <macroname>\n");
   printf("or define a macro.\n");
+  printf("see also: calldef\n");
 }
 
 void

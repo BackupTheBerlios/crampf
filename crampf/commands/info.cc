@@ -30,6 +30,7 @@ Info::help( string s )
 {
   printf("format: info\n");
   printf("description: shows information on current title\n");
+  printf("see also: status, filename\n");
 }
 
 void 

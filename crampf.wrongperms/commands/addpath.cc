@@ -20,7 +20,7 @@ AddPath::doit( string s )
 void
 AddPath::help( string s )
 {
-  printf("format: addPath <path>\n");
+  printf("format: addpath <path>\n");
   printf("description: adds a path or file to current playlist\n");
 }
 

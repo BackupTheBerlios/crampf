@@ -21,6 +21,7 @@ PlayerCMD_Args::help( string s )
 {
   printf("format: playercmd_args [<args>]\n");
   printf("description: gets/sets mp3play arguments.\n");
+  printf("see also: playercmd\n");
   printf("USE WITH CAUTION!\n");
 }
 

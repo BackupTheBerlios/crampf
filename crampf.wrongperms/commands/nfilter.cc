@@ -20,6 +20,7 @@ NFilter::help( string s )
   printf("format: nfilter <word>\n");
   printf("description: filters all tracks out of the playlist which\n");
   printf("contain the word <word> in their full filename.\n");
+  printf("see also: loadnfilter, pfilter\n");
 }
 
 void 

@@ -40,7 +40,7 @@ Search::help( string s )
   printf("in the playlist. if search is successful skips to the found\n");
   printf("track. If <substring> is ommitted the last keyword is used\n");
   printf("again.\n");
-  printf("see also: case, regexp\n");
+  printf("see also: rsearch, regexp, case, loop\n");
 }
 
 void
@@ -86,6 +86,7 @@ Search::search( string s )
       regfree( &re );
   } else {
       /* old stl string search function */
+      /* TODO kick it! */
       for (int i=plist->pos()+1; i<plist->size(); i++)
 	  if ((*plist)[i].title().find(s)!=-1)
 	      return i;

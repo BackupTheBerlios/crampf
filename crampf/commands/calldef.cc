@@ -28,6 +28,7 @@ CallDef::help( string s )
 {
   printf("format: calldef <macroname>\n");
   printf("description: explicitly call the macro <macroname>\n");
+  printf("see also: define, map\n");
 }
 
 void

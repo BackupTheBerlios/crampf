@@ -20,6 +20,7 @@ LoadNFilter::help( string s )
   printf("format: loadnfilter <filterfile>\n");
   printf("description: does a nfilter command with each line of the\n");
   printf("filter file.\n");
+  printf("see also: nfilter, pfilter, loadpfilter\n");
 }
 
 void 

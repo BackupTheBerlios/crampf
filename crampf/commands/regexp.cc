@@ -51,6 +51,7 @@ RegExp::help( string s )
   printf("basic    - use POSIX regular expression syntax\n");
   printf("extended - use POSIX extended regular expression syntax\n");
   printf("When no <value> is given the current setting is printed.\n");
+  printf("see also: search, rsearch, case\n");
 }
 
 void

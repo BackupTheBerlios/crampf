@@ -35,6 +35,7 @@ Write::help( string s )
 {
   printf("format: write [<filename>]\n");
   printf("description: write contents of playlist to file <filename>\n");
+  printf("see also: loadplaylist\n");
 }
 
 void

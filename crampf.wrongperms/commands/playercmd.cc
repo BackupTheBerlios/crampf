@@ -20,6 +20,7 @@ PlayerCMD::help( string s )
 {
   printf("format: playercmd [<playercmd>]\n");
   printf("description: gets/set the mp3player command.\n");
+  printf("see also: playercmd_args\n");
   printf("USE WITH CAUTION!\n");
 }
 

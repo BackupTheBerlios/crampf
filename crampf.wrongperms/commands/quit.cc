@@ -20,6 +20,7 @@ void
 Quit::help( string s )
 {
   printf("quit -- guess what it does :-)\n");
+  printf("see also: exit\n");
 }
 
 void 

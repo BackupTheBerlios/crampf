@@ -32,6 +32,7 @@ GenerateTitles::help( string s )
   printf("format: generatetitles [<value>]\n");
   printf("description: When turned on strips off search path from track\n");
   printf("titles during playlist generation.\n");
+  printf("see also: status, filename\n");
 }
 
 void

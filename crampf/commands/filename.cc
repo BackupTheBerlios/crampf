@@ -18,6 +18,7 @@ Filename::help( string s )
   printf("format: filename\n");
   printf("description: shows full filename (with path) of current\n");
   printf("track.\n");
+  printf("see also: status, info\n");
 }
 
 void

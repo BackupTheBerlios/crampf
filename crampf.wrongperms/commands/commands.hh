@@ -18,6 +18,7 @@
 #include "case.hh"
 #include "commands.hh"
 #include "define.hh"
+#include "exit.hh"
 #include "filename.hh"
 #include "generatetitles.hh"
 #include "help.hh"

@@ -18,6 +18,7 @@ LoadPlaylist::help( string s )
   printf("format: loadplaylist <filename>\n");
   printf("description: adds contents of playlist <filename> to the\n");
   printf("current playlist.\n");
+  printf("see also: write\n");
 }
 
 void 
