@@ -59,6 +59,7 @@ Config::setupkeys()
   op = &opts;
   for (map<string, string>::iterator it = opts.keytable.begin();
       it != opts.keytable.end(); it++) {
+    printf("defining key `%s'\n",it->first.c_str());
     if (it->first=="help") {
       for (int i=0; i<it->second.size(); i++) {
         opts.keys[it->second[i]]=&Interface::help;
@@ -352,7 +353,7 @@ Config::readconfig(string filename)
   while (fgets(line,FILELINEWIDTH,fp)) {
     if (line[0]!='#' && line[0]!='\n') {
       option[0]='\0'; value[0]='\0';
-      sscanf(line,"%[a-zA-Z_]%*[=\t ]%s\n",option,value);
+      sscanf(line,"%[a-zA-Z_]%*[=\t ]%[^\n]\n",option,value);
       string opt = option; string val = value;   
       if (opt == "playercmd") {
         opts.playercmd = value;
