@@ -54,6 +54,7 @@ CommandMap::CommandMap()
       cmdmap["sort"]   	       = new Sort	    ();
       cmdmap["list"]   	       = new ListTracks	    ();
       cmdmap["echo"]   	       = new Echo	    ();
+      cmdmap["addplayer"]      = new AddPlayer	    ();
   }
 }
 

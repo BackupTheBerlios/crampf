@@ -113,7 +113,8 @@ ExecPlayer::signalHandler( int status )
 bool
 ExecPlayer::addPlayer( const std::string &cmdname,
 		const std::list<std::string> &cmdargs, 
-		const std::list<SupportedFilesRegExp> &supportedFilesRegExp )
+		const std::list<SupportedFilesRegExp> &supportedFilesRegExp,
+		const std::list<SupportedFilesRegExpAsStrings> &supportedFilesRegExpAsStrings )
 {
       char buf[BUFSIZ];
       if( which( cmdname, buf, BUFSIZ ) ){
@@ -121,6 +122,7 @@ ExecPlayer::addPlayer( const std::string &cmdname,
 	  cmd.cmdname = cmdname;
 	  cmd.cmdargs = cmdargs;
 	  cmd.supportedFilesRegExp = supportedFilesRegExp;
+	  cmd.supportedFilesRegExpAsStrings = supportedFilesRegExpAsStrings;
 	  playCmds.push_back( cmd );
 	  return true;
       } else
@@ -210,6 +212,8 @@ ExecPlayer::addPlayer( const std::string & cfgstr )
 		  }
 		  cmd.supportedFilesRegExp.push_back(
 			  SupportedFilesRegExp( new RegEx( regexp, re_flags ), score ) );
+		  cmd.supportedFilesRegExpAsStrings.push_back(
+			  SupportedFilesRegExpAsStrings( regexp, score ) );
 		  printdebug( "PlayerRegExp/Score: %3.3f '%s'\n", score, regexp );
 		  *regexp = '\0';
 		  cfgline = buf;
@@ -220,7 +224,8 @@ ExecPlayer::addPlayer( const std::string & cfgstr )
 		  return false;
 	  }
       }
-      return addPlayer( cmd.cmdname, cmd.cmdargs, cmd.supportedFilesRegExp );
+      return addPlayer( cmd.cmdname, cmd.cmdargs, cmd.supportedFilesRegExp,
+	     cmd.supportedFilesRegExpAsStrings );
 }
 
 ExecPlayer::~ExecPlayer()
@@ -358,4 +363,10 @@ ExecPlayer::isPlaying() const
 {
       printdebug( "isPlaying() = %d\n", pid != NOT_A_PID );
       return pid != NOT_A_PID;
+}
+
+const std::list<struct ExecPlayer::PlayCmds> &
+ExecPlayer::getPlayCmds() const
+{
+      return playCmds;
 }
