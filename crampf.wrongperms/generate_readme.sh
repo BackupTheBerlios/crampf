@@ -9,7 +9,7 @@ cat <<-EOF
 
 OVERVIEW
 
-	Crampf is a console based mp3-player frontend with a ``vi-like''
+	Crampf is a console based mp3-player frontend with a \`\`vi-like\'\'
 	interface.
 
 
@@ -23,12 +23,12 @@ INSTALL
 DOCUMENTATION
 
 	The program should be quite self-explanatory. For commandline parameters
-	check `--help', to see the current hotkey-mappings press `h' during
-	playback and `:help' to see all available commands. For a detailed help
-	on each command enter `:help <commandname>'.
+	check \`--help\', to see the current hotkey-mappings press \`h\' during
+	playback and \`:help\' to see all available commands. For a detailed help
+	on each command enter \`:help <commandname>\'.
 	For configuring the default behavior create a file $HOME/.crampfrc
 	you may use any commands in this file which you would otherwise enter in
-	the `:' mode.
+	the \`:\' mode.
 
 
 
