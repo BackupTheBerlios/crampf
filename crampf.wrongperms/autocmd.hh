@@ -1,5 +1,5 @@
 //
-// $Id: autocmd.hh,v 1.1 2002/04/28 00:01:20 logic Exp $
+// $Id: autocmd.hh,v 1.2 2002/04/28 01:19:08 logic Exp $
 //
 
 #ifndef __AUTOCMD_HH
@@ -28,8 +28,10 @@ class AutocmdHandler {
 	  {
 	    printdebug("AutocmdHandler::trigger\n");
 	    for( list<AutoCB>::const_iterator it = cbs.begin();
-		  it != cbs.end(); it++ )
+		  it != cbs.end(); it++ ){
+		printdebug( "delivering event...\n" );
 	      (*it)( name );
+	    }
 	  }
 };
 

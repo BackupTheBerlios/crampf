@@ -47,6 +47,7 @@ CommandMap::CommandMap()
       cmdmap["regexp"]	       = new RegExp	    ();
       cmdmap["exit"]   	       = new Exit	    ();
       cmdmap["sort"]   	       = new Sort	    ();
+      cmdmap["list"]   	       = new ListTracks	    ();
   }
 }
 
