@@ -17,7 +17,7 @@ Define::doit( const string &s )
 {
   if (s.empty())
     showdefines();
-  else if (s.find('=')==-1) {
+  else if ((signed)(s.find('='))==-1) {
     if (cmap->defmap.count(s))
       showdefine(s);
     else

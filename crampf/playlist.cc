@@ -206,7 +206,7 @@ void
 Playlist::shuffle()
 {
   srand(time(NULL));
-  for (int i=0; i<size(); i++) {
+  for (unsigned int i=0; i<size(); i++) {
     Track h = (*this)[i];
     int x = rand()%size();
     (*this)[i] = (*this)[x];
@@ -236,7 +236,7 @@ Playlist::operator*() const
   return (*this)[current];
 }
 
-int 
+unsigned int 
 Playlist::pos() const
 {
   return current;
@@ -251,7 +251,7 @@ Playlist::jump(int newpos)
     opts->loop--;
     newpos+=size();
   }
-  if (newpos>size()-1) {
+  if (newpos>(signed)(size()-1)) {
     if (opts->loop>0)
       opts->loop-=(int)ceil((double)newpos/(double)size());
     if (opts->loop<=0)

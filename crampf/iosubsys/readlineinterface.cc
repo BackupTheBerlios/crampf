@@ -20,7 +20,6 @@ char *crampf_command_generator( char *text, int state ){
     static map<string,Command*>::const_iterator cmd_it;
     static map<string,vector<string> >::const_iterator def_it;
     static int count, len;
-    char *name;
     if( !state ){
 	count = 0;
 	cmd_it = opts->cmdmap.cmdmap.begin();

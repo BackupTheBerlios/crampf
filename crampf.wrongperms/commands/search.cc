@@ -61,12 +61,12 @@ Search::search( const string &s ) const
       if (opts->regexp==2)
 	  flags = flags | REG_EXTENDED;
       RegEx re = RegEx( s, flags );
-      for (int i=plist->pos()+1; i<plist->size(); i++)
+      for (unsigned int i=plist->pos()+1; i<plist->size(); i++)
 	  if ( re.match( (*plist)[i].title().c_str() ) ) {
 	      return i;
 	  }
       if (opts->loop!=0) {
-	  for (int i=0; i<plist->pos(); i++)
+	  for (unsigned int i=0; i<plist->pos(); i++)
 	      if ( re.match( (*plist)[i].title().c_str() ) ) {
 		  return i;
 	      }
@@ -74,12 +74,12 @@ Search::search( const string &s ) const
   } else {
       /* old stl string search function */
       /* TODO kick it! */
-      for (int i=plist->pos()+1; i<plist->size(); i++)
-	  if ((*plist)[i].title().find(s)!=-1)
+      for (unsigned int i=plist->pos()+1; i<plist->size(); i++)
+	  if ((signed)((*plist)[i].title().find(s))!=-1)
 	      return i;
       if (opts->loop!=0) {
-	  for (int i=0; i<plist->pos(); i++)
-	      if ((*plist)[i].title().find(s)!=-1) {
+	  for (unsigned int i=0; i<plist->pos(); i++)
+	      if ((signed)((*plist)[i].title().find(s))!=-1) {
 		  opts->loop--;
 		  return i;
 	      }

@@ -29,7 +29,7 @@ Status::doit( const string &s )
 	      sprintf(title,"\n[%d/%d] - %s\n",plist->pos()+1,plist->size(),
 		      (*(*plist)).title().c_str());
 	      if (strlen(title)>opts->titlewidth) {
-		  int i;
+		  unsigned int i;
 		  for (i=0; i<opts->titlewidth/3; i++)
 		      printf("%c",title[i]);
 		  printf("...");

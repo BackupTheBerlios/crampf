@@ -131,7 +131,7 @@ void Interface::detectSoundCard()
   string l;
   while (fgets(line,LINEWIDTH,fp)) {
     l=line;
-    if (l.find("UltraSound")!=-1)
+    if ((signed)(l.find("UltraSound"))!=-1)
       opts->soundcard='s';
   }
   fclose(fp);

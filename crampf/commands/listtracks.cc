@@ -14,7 +14,7 @@ extern Playlist* plist;
 void
 ListTracks::doit( const string &s )
 {
-  int pos;
+  unsigned int pos;
   if( s.empty() )
       pos = plist->pos();
   else {
@@ -25,11 +25,11 @@ ListTracks::doit( const string &s )
 	  pos--; /* first track is 1 for the user, 0 intern */
   }
   int w=0;
-  for( int i=1; i<pos+20; i*=10,w++ );
+  for( unsigned int i=1; i<pos+20; i*=10,w++ );
   char f[512];
   snprintf( f, 512, "%%%dd - %%s\n", w );
   printdebug( "listing tracks from %d to %d\n", pos, pos+20 );
-  for(int i = pos; i<plist->size() && i<pos+20; i++ )
+  for(unsigned int i = pos; i<plist->size() && i<pos+20; i++ )
       printf( f, i+1, (*plist)[i].title().c_str() );
 }
 

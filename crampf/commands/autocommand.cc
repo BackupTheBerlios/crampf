@@ -23,7 +23,7 @@ void
 Autocommand::doit( const string &s )
 {
   unsigned int p = s.find(" ");
-  if( p == -1 || s.empty() ){
+  if( (signed)p == -1 || s.empty() ){
       printf( "current autocommands:\n" );
       for( map<string,string>::const_iterator it = actionmap.begin();
 	      it != actionmap.end(); it++ )

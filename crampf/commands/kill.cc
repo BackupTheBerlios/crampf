@@ -16,7 +16,7 @@ Kill::doit( const string &s )
     player->play();
   } else {
     int d = atoi(s.c_str());
-    if (d>0 && d<plist->size()) 
+    if (d>0 && d<(signed)plist->size()) 
       plist->erase(&(*plist)[--d]);
   }
 }

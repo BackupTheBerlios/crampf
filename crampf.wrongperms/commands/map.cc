@@ -29,12 +29,14 @@ Map::doit( const string &s )
      printf("key '%c' -> '%s'\n",it->first,it->second.c_str()); 
   } else {
     char functionname[255]; 
+    unsigned int keyname_numeric;
     char keyname;
     if (sscanf(s.c_str(),"\\%o%*[ \t=]%[^\n]",
-          &keyname,functionname)!=2)
-      if (sscanf(s.c_str(),"%c%*[ \t=]%[^\n]",
-            &keyname,functionname)!=2)  
-        throw string("map: parsing error");
+          &keyname_numeric,functionname)==2)
+	keyname = keyname_numeric;
+    else if (sscanf(s.c_str(),"%c%*[ \t=]%[^\n]",
+		&keyname,functionname)!=2)  
+	throw string("map: parsing error");
     cmap->setKey(keyname, functionname);
   }
 }

@@ -1,5 +1,5 @@
 //
-// $Id: options.hh,v 1.19 2002/07/01 19:01:47 logic Exp $
+// $Id: options.hh,v 1.20 2002/07/02 16:28:54 logic Exp $
 //
 
 #ifndef CONFIG_HH
@@ -20,8 +20,8 @@ struct options {
   bool                  randomOrder;
   bool                  generateTitles;
   int                   loop;
-  int                   titlewidth;
-  int                   volume;
+  unsigned int          titlewidth;
+  unsigned int          volume;
   int			regexp;	/* regexp level (0=no, 1=std, 2=extended)*/
   bool			casesensivity;
   char                  soundcard; /* s = UltraSound, w = SB-Clone */

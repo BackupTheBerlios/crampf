@@ -68,7 +68,7 @@ RSearch::rsearch( const string &s ) const
 	      return i;
 	  }
       if (opts->loop!=0) {
-	  for (int i=plist->size()-1; i>plist->pos(); i--)
+	  for (unsigned int i=plist->size()-1; i>plist->pos(); i--)
 	      if ( re.match( (*plist)[i].title().c_str() ) ) {
 		  return i;
 	      }
@@ -77,11 +77,11 @@ RSearch::rsearch( const string &s ) const
       /* old stl string search function */
       /* TODO kick it! */
       for (int i=plist->pos()-1; i>=0; i--)
-	  if ((*plist)[i].title().find(s)!=-1)
+	  if ((signed)((*plist)[i].title().find(s))!=-1)
 	      return i;
       if (opts->loop!=0) {
-	  for (int i=0; i<plist->pos(); i--)
-	      if ((*plist)[i].title().find(s)!=-1) {
+	  for (unsigned int i=0; i<plist->pos(); i--)
+	      if ((signed)((*plist)[i].title().find(s))!=-1) {
 		  opts->loop++;
 		  return i;
 	      }

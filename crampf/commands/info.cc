@@ -41,11 +41,11 @@ const char* get_frame_description( struct id3_frame *frame )
 void show_frame( struct id3_frame *frame )
 {
       if( !frame ) return;
-      int i,a,f=0;
+      unsigned int i,a;
+      int f=0;
 #define MAX_CONTENT 8192
       char descr[512], content[MAX_CONTENT];
       id3_latin1_t *frptr[8192];
-      id3_length_t l;
       /* snprintf( descr, 512, "%4s %-12s:", frame->id, get_frame_description( frame ) ); */
       snprintf( descr, 512, "%-9s:", get_frame_description( frame ) );
       for( i=0; i<frame->nfields; i++ ){
@@ -74,7 +74,7 @@ void show_frame( struct id3_frame *frame )
 	      case ID3_FIELD_TYPE_INT24:
 	      case ID3_FIELD_TYPE_INT32:
 		  a = id3_field_getint( frame->fields+i );
-		  if( a != -1 ) snprintf( content, MAX_CONTENT, "%d", a );
+		  if( (signed)a != -1 ) snprintf( content, MAX_CONTENT, "%d", a );
 		  break;
 	      case ID3_FIELD_TYPE_LANGUAGE:
 	      case ID3_FIELD_TYPE_FRAMEID:
@@ -90,15 +90,14 @@ void show_frame( struct id3_frame *frame )
 	  // printf( "field type: %d\n", frame->fields[i].type );
 	  /* FIXME id3_ucs4_t != (id3_ucs4_t) id3_latin1_t; */
 	  if( strncmp( ID3_FRAME_GENRE, frame->id, 4 ) == 0 ){
-	      char *p;
 	      int number;
 	      if( sscanf( content, "%d", &number ) == 1 )
-		  if( number < NGENRES ){
+		  if( number < (signed)NGENRES ){
 		      frptr[f] = id3_ucs4_latin1duplicate( genre_table[number] );
 		      snprintf( content, MAX_CONTENT, "%s", frptr[f++] );
 		  }
 	  }
-	  if( strlen( content ) > a ) printf( "%s %s\n", descr, content );
+	  if( (unsigned)strlen( content ) > a ) printf( "%s %s\n", descr, content );
 	  while(f-->0)
 	      free(frptr[f]);
       }
@@ -124,7 +123,7 @@ Info::doit( const string &s )
   }
       struct id3_frame *frame;
       int i=0;
-  while( frame = id3_tag_findframe( tag, NULL, i++ ) )
+  while( (frame = id3_tag_findframe( tag, NULL, i++ )) )
       show_frame( frame );
   if( i == 1 )
       printf( "id3tag empty\n" );
