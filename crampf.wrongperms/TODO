@@ -1,4 +1,9 @@
 FEATURE WISHLIST
+	* add more information to info command:
+	    * information from track database:
+		* times played, times skipped, last time played
+	    * length of song (e.g. madtime for .mp3)
+	* add command to remove unsupported tracks
 	* add title and artist search (first and second directory above mp3)
 	* Change options-struct into a map with fixed keys, initialized by the
 	      constructor
