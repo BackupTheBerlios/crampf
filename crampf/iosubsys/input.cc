@@ -44,7 +44,7 @@ TermInput::TermInput() : InputObject( "terminal" )
       keynames["tab"] = '\t';
       keynames["escape"] = '\e';
       /* default hotkeys */
-      hotkeys['h'] = std::string( "module terminal" );
+      hotkeys['h'] = std::string( "module terminal hotkeys" );
       hotkeys['n'] = std::string( "search" );
       hotkeys['N'] = std::string( "rsearch" );
       hotkeys['i'] = std::string( "info" );
@@ -68,8 +68,9 @@ TermInput::TermInput() : InputObject( "terminal" )
       hotkeys['p'] = std::string( "prev" );
       hotkeys['n'] = std::string( "next" );
       hotkeys[' '] = std::string( "next" );
-      hotkeys['\n' ] = std::string( "samedir" );
-      hotkeys['	'] = std::string( "samedir 2" );
+      hotkeys['\n'] = std::string( "samedir" );
+      hotkeys['\t'] = std::string( "samedir 2" );
+      hotkeys['\e'] = std::string( "quit" );
 }
 
 TermInput::~TermInput()
