@@ -53,9 +53,11 @@ void player_play( void )
     }
   } 
   if (player_pid==0) {
-    /*  printf("execlp(%s, %s, %s)\n",(const char*)opts->playercmd.c_str(), 
-        (const char*)opts->playercmd_args.c_str(), 
-        (const char*)(*(*plist)).filename().c_str()); */
+    /*
+    printf("execlp(\"%s\",\"%s\",\"%s\")\n",opts->playercmd.c_str(),
+        opts->playercmd_args.c_str(), 
+        (*(*plist)).filename().c_str());
+    */
     execlp((const char*)opts->playercmd.c_str(),
         (const char*)opts->playercmd.c_str(),
         (const char*)opts->playercmd_args.c_str(), 

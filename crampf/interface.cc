@@ -49,40 +49,27 @@ Interface::mainloop()
       if (player_restarted()) {
         showstatus();
       }
-      usleep(100);
-      c = fgetc(stdin); 
-      if (opts->keys[c]!=NULL) 
-        (this->*(opts->keys[c]))();
-      c = '\0'; 
+      c = EOF; 
+      while (c==EOF) {
+        usleep(100);
+        c = fgetc(stdin); 
+      }
+      if (c==':') {
+        rli();
+      } else {
+        try {
+          opts->cmdmap[c];
+        } catch (string error) {
+          if (error=="quit")
+            throw error;
+          printf("error: `%s'\n",error.c_str());
+        }
+      }
     } 
   } catch (string s) {
     printf("%s\n",(const char*)s.c_str());
   }
   player_stop();
-}
-
-void
-Interface::help( void )
-{
-  int col=0;
-  printf("\ncrampf developers v0.0 -- help\n");
-  printf("==============================\n");
-  for (map<string, string>::iterator it = opts->keytable.begin();
-      it != opts->keytable.end(); it++) {
-    printf("%s\t[",it->first.c_str());
-    for (int i=0; i<it->second.size(); i++) {
-      printf("%c",it->second[i]);
-      if (i+1<it->second.size())
-        printf(",");
-    }
-    printf("]");
-    if ((++col)%2==0) {
-      printf("\n");
-    } else {
-      printf("\t");
-    }
-  }
-  printf("\n\n");
 }
 
 void
@@ -107,12 +94,7 @@ Interface::restoreTerm()
   }
 }
 
-void
-Interface::quit( void )
-{
-  throw string("");
-}
-
+/*
 void 
 Interface::info( void )
 {
@@ -124,143 +106,23 @@ Interface::info( void )
     exit(1);
   }
 }
+*/
 
 void
-Interface::list( void )
-{
-  printf("list\n");
-  printf("not yet implemented\n");
-}
-
-void
-Interface::file( void )
-{
-  printf("filename: ``%s''\n",(*(*plist)).filename().c_str());
-}
-
-void
-Interface::next( void )
-{
-  ++(*plist);
-  player_play();
-}
-
-void
-Interface::prev( void )
-{
-  --(*plist);
-  player_play();
-}
-
-void
-Interface::jump( void )
-{
-  printf("jump\n");
-  printf("not yet implemented\n");
-}
-
-void
-Interface::pause( void )
-{
-  printf("pause\n");
-  player_pause();
-}
-
-void
-Interface::cont( void )
-{
-  printf("cont\n");
-  player_continue();
-}
-
-void
-Interface::vol0( void )
-{
-  changevol(0);
-}
-
-void
-Interface::vol1( void )
-{
-  changevol(10);
-}
-
-void
-Interface::vol2( void )
-{
-  changevol(20);
-}
-
-void
-Interface::vol3( void )
-{
-  changevol(30);
-}
-
-void
-Interface::vol4( void )
-{
-  changevol(40);
-}
-
-void
-Interface::vol5( void )
-{
-  changevol(50);
-}
-
-void
-Interface::vol6( void )
-{
-  changevol(60);
-}
-
-void
-Interface::vol7( void )
-{
-  changevol(70);
-}
-
-void
-Interface::vol8( void )
-{
-  changevol(80);
-}
-
-void
-Interface::vol9( void )
-{
-  changevol(90);
-}
-
-void
-Interface::vol_up( void )
-{
-  if (volume+5<=100) {
-    volume+=5;
-    changevol(volume);
-  }
-}
-
-void
-Interface::vol_dn( void )
-{
-  if (volume-5>=0) {
-    volume-=5;
-    changevol(volume);
-  }
-}
-
-void
-Interface::cli( void )
+Interface::rli( void )
 {
   restoreTerm();
   char* cmd = readline(":");
-  printf("Command: `%s'\n",cmd);
+  try {
+    opts->cmdmap[cmd];
+  } catch (string error) {
+    printf("error: `%s'\n",error.c_str());
+  }
   free(cmd);
   singlekeyTerm();
 }
 
+/*
 Interface::changevol(int vol)
 {
   int pid;
@@ -280,9 +142,10 @@ Interface::changevol(int vol)
     perror("execlp(aumix)");
     exit(1);
   } 
-  /* player will reap the child */
+  // player will reap the child 
 }
- 
+*/
+
 Interface::detectSoundCard()
 {
   opts->soundcard='w'; /* default */

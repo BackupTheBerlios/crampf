@@ -1,5 +1,5 @@
 GCC=g++
-OBJS=config.o crampf.o playlist.o player.o track.o interface.o
+OBJS=config.o crampf.o playlist.o player.o track.o interface.o command.o commandmap.o commands.o
 LIBS=-lreadline
 PROGNAME=crampf
 

@@ -1,5 +1,5 @@
 //
-// $Id: options.hh,v 1.9 2000/03/12 01:12:54 logic Exp $
+// $Id: options.hh,v 1.10 2000/03/16 02:21:42 logic Exp $
 //
 
 #ifndef config
@@ -9,6 +9,7 @@
 #include <vector>
 #include <map>
 #include "interface.hh"
+#include "commandmap.hh"
 
 #define FILELINEWIDTH 128    /* max config and filter file linewidth */
 
@@ -28,8 +29,7 @@ struct options {
   string                playercmd;
   string                playercmd_args;
   vector<string>        mp3SearchPaths;
-  map<string, string>   keytable;           // "function" -> "keys"
-  map<char, void(Interface::*)(void)> keys; // 'key' -> functionpointer
+  CommandMap            cmdmap;
 };
 
 class Config {
@@ -45,7 +45,6 @@ class Config {
     /* Achtung: Eventuell noch '\n' beim parsen beachten! */
     readconfig(string filename);
     initdefaults(struct options* op);
-    setupkeys();
     readFilter(vector<string>* flt, string filename);
   
     struct options opts;

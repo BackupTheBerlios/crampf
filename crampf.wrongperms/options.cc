@@ -16,7 +16,6 @@ Config::Config(int argc, char** argv)
 {
   initdefaults(&opts);
   getopts(argc, argv);
-  setupkeys();
   readPositiveFilter(opts.positiveFilterFiles);
   readNegativeFilter(opts.negativeFilterFiles);
 }
@@ -31,179 +30,14 @@ Config::initdefaults(struct options* op)
   op->titlewidth=0;
   op->playercmd="amp";
   op->playercmd_args="-q";
-  op->keytable["help"]="h";
-  op->keytable["quit"]="q";
-  op->keytable["next"]="n";
-  op->keytable["prev"]="p";
-  op->keytable["info"]="i";
-  op->keytable["list"]="l";
-  op->keytable["file"]="f";
-  op->keytable["jump"]="j";
-  /*
-  op->keytable["pause"]="P";
-  op->keytable["cont"]="C";
-  */
-  op->keytable["vol0"]="0";
-  op->keytable["vol1"]="1";
-  op->keytable["vol2"]="2";
-  op->keytable["vol3"]="3";
-  op->keytable["vol4"]="4";
-  op->keytable["vol5"]="5";
-  op->keytable["vol6"]="6";
-  op->keytable["vol7"]="7";
-  op->keytable["vol8"]="8";
-  op->keytable["vol9"]="9";
-  op->keytable["vol_up"]="+";
-  op->keytable["vol_dn"]="-";
-  op->keytable["cli"]=":";
-}
-
-Config::setupkeys()
-{
-  struct options* op;
-  op = &opts;
-  for (map<string, string>::iterator it = opts.keytable.begin();
-      it != opts.keytable.end(); it++) {
-    if (it->first=="help") {
-      for (int i=0; i<it->second.size(); i++) {
-        opts.keys[it->second[i]]=&Interface::help;
-      }
-      continue;
-    }
-    if (it->first=="quit") {
-      for (int i=0; i<it->second.size(); i++) {
-        opts.keys[it->second[i]]=&Interface::quit;
-      }
-      continue;
-    }
-    if (it->first=="next") {
-      for (int i=0; i<it->second.size(); i++) {
-        opts.keys[it->second[i]]=&Interface::next;
-      }
-      continue;
-    }
-    if (it->first=="prev") {
-      for (int i=0; i<it->second.size(); i++) {
-        opts.keys[it->second[i]]=&Interface::prev;
-      }
-      continue;
-    }
-    if (it->first=="info") {
-      for (int i=0; i<it->second.size(); i++) {
-        opts.keys[it->second[i]]=&Interface::info;
-      }
-      continue;
-    }
-    if (it->first=="list") {
-      for (int i=0; i<it->second.size(); i++) {
-        opts.keys[it->second[i]]=&Interface::list;
-      }
-      continue;
-    }
-    if (it->first=="file") {
-      for (int i=0; i<it->second.size(); i++) {
-        opts.keys[it->second[i]]=&Interface::file;
-      }
-      continue;
-    }
-    if (it->first=="jump") {
-      for (int i=0; i<it->second.size(); i++) {
-        opts.keys[it->second[i]]=&Interface::list;
-      }
-      continue;
-    }
-    /*
-    if (it->first=="pause") {
-      for (int i=0; i<it->second.size(); i++) {
-        opts.keys[it->second[i]]=&Interface::pause;
-      }
-      continue;
-    }
-    if (it->first=="cont") {
-      for (int i=0; i<it->second.size(); i++) {
-        opts.keys[it->second[i]]=&Interface::cont;
-      }
-      continue;
-    }
-    */
-    if (it->first=="vol0") {
-      for (int i=0; i<it->second.size(); i++) {
-        opts.keys[it->second[i]]=&Interface::vol0;
-      }
-      continue;
-    }
-    if (it->first=="vol1") {
-      for (int i=0; i<it->second.size(); i++) {
-        opts.keys[it->second[i]]=&Interface::vol1;
-      }
-      continue;
-    }
-    if (it->first=="vol2") {
-      for (int i=0; i<it->second.size(); i++) {
-        opts.keys[it->second[i]]=&Interface::vol2;
-      }
-      continue;
-    }
-    if (it->first=="vol3") {
-      for (int i=0; i<it->second.size(); i++) {
-        opts.keys[it->second[i]]=&Interface::vol3;
-      }
-      continue;
-    }
-    if (it->first=="vol4") {
-      for (int i=0; i<it->second.size(); i++) {
-        opts.keys[it->second[i]]=&Interface::vol4;
-      }
-      continue;
-    }
-    if (it->first=="vol5") {
-      for (int i=0; i<it->second.size(); i++) {
-        opts.keys[it->second[i]]=&Interface::vol5;
-      }
-      continue;
-    }
-    if (it->first=="vol6") {
-      for (int i=0; i<it->second.size(); i++) {
-        opts.keys[it->second[i]]=&Interface::vol6;
-      }
-      continue;
-    }
-    if (it->first=="vol7") {
-      for (int i=0; i<it->second.size(); i++) {
-        opts.keys[it->second[i]]=&Interface::vol7;
-      }
-      continue;
-    }
-    if (it->first=="vol8") {
-      for (int i=0; i<it->second.size(); i++) {
-        opts.keys[it->second[i]]=&Interface::vol8;
-      }
-      continue;
-    }
-    if (it->first=="vol9") {
-      for (int i=0; i<it->second.size(); i++) {
-        opts.keys[it->second[i]]=&Interface::vol9;
-      }
-      continue;
-    }
-    if (it->first=="vol_up") {
-      for (int i=0; i<it->second.size(); i++) {
-        opts.keys[it->second[i]]=&Interface::vol_up;
-      }
-      continue;
-    }
-    if (it->first=="vol_dn") {
-      for (int i=0; i<it->second.size(); i++) {
-        opts.keys[it->second[i]]=&Interface::vol_dn;
-      }
-      continue;
-    }
-    if (it->first=="cli") {
-      for (int i=0; i<it->second.size(); i++) {
-        opts.keys[it->second[i]]=&Interface::cli;
-      }
-      continue;
-    }
+  try {
+    op->cmdmap["set key h help"];
+    op->cmdmap["set key n next"];
+    op->cmdmap["set key p prev"];
+    op->cmdmap["set key i info"];
+    op->cmdmap["set key q quit"];
+  } catch (string error) {
+    printf("keytable init error: `%s'\n",error.c_str());
   }
 }
 
@@ -423,20 +257,6 @@ Config::readconfig(string filename)
         } else {
           opts.generateTitles=false;
         }
-      }
-      if (strncmp(option,"key_",4)==0) {
-        opt = &option[4];
-        val.erase(val.begin());
-        val.erase(val.end()-1);
-        /* Taste schonmal belegt? */
-        for (map<string,string>::iterator it=opts.keytable.begin();
-            it != opts.keytable.end(); it++)
-          for (int i=0; i<val.size(); i++) 
-            if (it->second.find(val[i])!=-1) 
-              /* alte Belegung entfernen */
-              it->second.erase(it->second.find(val[i]));
-        opts.keytable[opt]=val;
-        continue;
       }
       fprintf(stderr,"configfile: unknown option: %s\n",line);
     }
