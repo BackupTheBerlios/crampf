@@ -52,13 +52,13 @@ void
 SameDir::help( const std::string &s ) const
 {
   printf("format: samedir [<dirlevel>]\n");
-  printf("description: searches for next file within the same directory.\n"
-	 "the optional <dirlevel> argument specifies what directory should\n"
-	 "be used. It defaults to 1 which means same directory as current\n"
-	 "song.\n"
-	 "Example: if the current song played is /data/mp3/Artist/Album/track.mp3\n"
-	 "a <dirlevel> of 2 would mean search for the next song in directory\n"
-	 "/data/mp3/Artist\n" );
+  printf("description: searches for next file within the same directory.\n");
+  printf("the optional <dirlevel> argument specifies what directory should\n");
+  printf("be used. It defaults to 1 which means same directory as current\n");
+  printf("song.\n");
+  printf("Example: if the current song played is /data/mp3/Artist/Album/track.mp3\n");
+  printf("a <dirlevel> of 2 would mean search for the next song in directory\n");
+  printf("/data/mp3/Artist\n");
 }
 
 void
