@@ -15,3 +15,6 @@ crampf_LDADD=commands/libcmds.a util/libutil.a player/libgenplayer.a player/back
 
 ChangeLog:
 	./cvs2cl.pl --prune
+
+README:	generate_readme.sh
+	./generate_readme.sh > README
