@@ -8,10 +8,12 @@
 #include "player.hh"
 #include "crampf.hh"
 #include "interface.hh"
+#include "autocmd.hh"
 
 int main(int argc, char** argv)
 {
       try {
+	  autocmdmap.newEvent( "next", "called before the next track gets played" );
 	  plist = new Playlist();
 	  Config cfg;
 	  opts=cfg.returnopts();

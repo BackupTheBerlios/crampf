@@ -7,40 +7,46 @@
 #include "commandmap.hh"
 #include "command.hh"
 #include "commands.hh"
+#include "debug.hh"
+
+unsigned int CommandMap::objcnt = 0;
 
 CommandMap::CommandMap()
 {
-  cmdmap["help"]           = new Help           (this);
-  cmdmap["map"]            = new Map            (this);
-  cmdmap["titlewidth"]     = new TitleWidth     ();
-  cmdmap["loop"]           = new Loop           ();
-  cmdmap["volume"]         = new Vol            ();
-  cmdmap["info"]           = new Info           ();
-  cmdmap["quit"]           = new Quit           ();
-  cmdmap["status"]         = new Status         ();
-  cmdmap["jump"]           = new Jump           ();
-  cmdmap["addpath"]        = new AddPath        ();
-  cmdmap["shuffle"]        = new Shuffle        ();
-  cmdmap["version"]        = new Version        ();
-  cmdmap["loadplaylist"]   = new LoadPlaylist   ();
-  cmdmap["pfilter"]        = new PFilter        ();
-  cmdmap["nfilter"]        = new NFilter        ();
-  cmdmap["generatetitles"] = new GenerateTitles ();
-  cmdmap["filename"]       = new Filename       ();
-  cmdmap["define"]         = new Define         (this);
-  cmdmap["calldef"]        = new CallDef        (this);
-  cmdmap["source"]         = new Source         (this);
-  cmdmap["search"]         = new Search         (this);
-  cmdmap["rsearch"]        = new RSearch        (this);
-  cmdmap["playercmd"]      = new PlayerCMD      ();
-  cmdmap["playercmd_args"] = new PlayerCMD_Args ();
-  cmdmap["randomorder"]    = new RandomOrder    ();
-  cmdmap["write"]          = new Write          ();
-  cmdmap["kill"]           = new Kill           ();
-  cmdmap["unify"]          = new Unify          ();
-  cmdmap["case"]	   = new Case		();
-  cmdmap["regexp"]	   = new RegExp		();
-  cmdmap["exit"]   	   = new Exit		();
+  if( ! objcnt++ ){
+      cmdmap["help"]           = new Help           (this);
+      cmdmap["map"]            = new Map            (this);
+      cmdmap["titlewidth"]     = new TitleWidth     ();
+      cmdmap["loop"]           = new Loop           ();
+      cmdmap["volume"]         = new Vol            ();
+      cmdmap["info"]           = new Info           ();
+      cmdmap["autocommand"]    = new Autocommand    ();
+      cmdmap["quit"]           = new Quit           ();
+      cmdmap["status"]         = new Status         ();
+      cmdmap["jump"]           = new Jump           ();
+      cmdmap["addpath"]        = new AddPath        ();
+      cmdmap["shuffle"]        = new Shuffle        ();
+      cmdmap["version"]        = new Version        ();
+      cmdmap["loadplaylist"]   = new LoadPlaylist   ();
+      cmdmap["pfilter"]        = new PFilter        ();
+      cmdmap["nfilter"]        = new NFilter        ();
+      cmdmap["generatetitles"] = new GenerateTitles ();
+      cmdmap["filename"]       = new Filename       ();
+      cmdmap["define"]         = new Define         (this);
+      cmdmap["calldef"]        = new CallDef        (this);
+      cmdmap["source"]         = new Source         (this);
+      cmdmap["search"]         = new Search         (this);
+      cmdmap["rsearch"]        = new RSearch        (this);
+      cmdmap["playercmd"]      = new PlayerCMD      ();
+      cmdmap["playercmd_args"] = new PlayerCMD_Args ();
+      cmdmap["randomorder"]    = new RandomOrder    ();
+      cmdmap["write"]          = new Write          ();
+      cmdmap["kill"]           = new Kill           ();
+      cmdmap["unify"]          = new Unify          ();
+      cmdmap["case"]	       = new Case	    ();
+      cmdmap["regexp"]	       = new RegExp	    ();
+      cmdmap["exit"]   	       = new Exit	    ();
+  }
 }
 
 CommandMap::~CommandMap()
@@ -55,6 +61,7 @@ CommandMap::operator[](string cmd)
 {
   string c = arg0(cmd);
   string p = args(cmd);
+  printdebug( "CommandMap: command '%s', parameter '%s'\n", c.c_str(), p.c_str() );
   if (cmdmap.count(c)) {
     cmdmap[c]->doit(p);
     return;

@@ -1,5 +1,5 @@
 //
-// $Id: crampf.hh,v 1.3 2000/07/16 23:10:19 logic Exp $
+// $Id: crampf.hh,v 1.4 2002/04/28 00:01:20 logic Exp $
 //
 
 #ifndef CRAMPF
@@ -7,11 +7,13 @@
 
 #include "playlist.hh"
 #include "config.hh"
+#include "autocmd.hh"
 
 /* global variables */
 
 Playlist* plist;
 struct options* opts;
+AutocmdMap autocmdmap;
 
 #endif
 

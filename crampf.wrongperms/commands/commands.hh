@@ -13,6 +13,7 @@
 #include "../commandmap.hh"                                       
                                                                   
 #include "addpath.hh"
+#include "autocommand.hh"
 #include "calldef.hh"
 #include "case.hh"
 #include "commands.hh"

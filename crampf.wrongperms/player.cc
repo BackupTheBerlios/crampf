@@ -13,6 +13,7 @@
 #include "player.hh"
 #include "playlist.hh"
 #include "debug.hh"
+#include "autocmd.hh"
 
 int player_pid = 999999; /* hope this pid never exists ;] */
 bool player_sigignore;
@@ -31,6 +32,7 @@ void player_init()
 
 void player_play( void )
 {
+  printdebug( "starting player\n" );
   player_stop();
   if (first_track_damaged) {
     --(*plist);
@@ -63,7 +65,6 @@ void player_play( void )
 	      p=++i, i=opts->playercmd_args.find(" ",p)) 
 	  args.push_back( opts->playercmd_args.substr( p, i-p ) );
       args.push_back( opts->playercmd_args.substr( p ) );
-      printdebug("using %d args\n",args.size());
       char *argv[ args.size() + 3 ];
       argv[0] = (char*)opts->playercmd.c_str();
       p=1;
@@ -72,11 +73,13 @@ void player_play( void )
 	  argv[p++] = (char*)(it->c_str());
       argv[p++] = (char*)(*(*plist)).filename().c_str();
       argv[p] = NULL;
-      printdebug("execvp( %s,\n", (const char*)opts->playercmd.c_str());
+#ifdef DEBUG
+      printdebug("execvp( %s, [", (const char*)opts->playercmd.c_str());
       for (int i=0; i<p; i++) {
-	  printdebug("\t%s,\n", argv[i]);
+	  printf("%s, ", argv[i]);
       }
-      printdebug("\tNULL )\n");
+      printf(", NULL] )\n");
+#endif
       execvp( (const char*)opts->playercmd.c_str(), argv );
       perror("execvp");
       exit(2);
@@ -86,6 +89,7 @@ void player_play( void )
 
 void player_stop( void )
 {
+  printdebug( "stopping player\n" );
   player_sigignore = true;
   //printf("stopping pid %d\n",player_pid);
   if (player_isrunning()) {
@@ -125,16 +129,15 @@ void player_playerstop(int status)
     return;
   if (player_sigignore)
     return;
-  printdebug("starting next song\n");
   try {
-    ++(*plist);
+    printdebug("sending 'next' event\n"); //++(*plist);
+    autocmdmap["next"].trigger();
   } catch( string error )
   {
     printf( "%s\n", error.c_str() );
     player_has_finished = true;
     return;
   }
-  player_play();
 }
 
 void player_pause()

@@ -28,6 +28,8 @@ class CommandMap {
     string findFirstDef( string c );
     string arg0( string s );
     string args( string s );
+    static unsigned int objcnt; /* bad hack: counts number of CommandMap-Entities
+				    only first one initializes commands */
 };
     
 #endif
