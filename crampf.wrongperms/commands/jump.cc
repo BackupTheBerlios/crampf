@@ -20,7 +20,13 @@ Jump::doit( string s )
     pos+=plist->pos();
   else
     pos--; /* first track is 1 for the user, 0 intern */
-  plist->jump(pos);
+  try {
+    plist->jump(pos);
+  } catch (string error) {
+    if (error=="end of playlist") 
+      throw string("quit");
+    printf("jump error: %s\n",error.c_str());
+  }
   player_play();
 }
 

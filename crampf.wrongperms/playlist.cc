@@ -9,6 +9,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+#include <math.h>
 #include <sys/stat.h>
 #include <unistd.h>
 #include "playlist.hh"
@@ -150,30 +151,16 @@ Playlist::shuffle()
 Track 
 Playlist::operator++()
 {
-  if (current+1<this->size()) {
-    current++;
-  } else  if (opts->loop>0) {
-    opts->loop--;
-    current=0;
-  } else if (opts->loop==-1) {
-    current=0;
-  } else if (opts->loop==0) 
-    throw string("end of playlist");
+  /* FIXME ++command obsolete? */
+  jump(this->pos()+1);
   return (*this)[current];
 }
 
 Track 
 Playlist::operator--()
 {
-  if (current>0) {
-    current--;
-  } else  if (opts->loop>0) {
-    opts->loop++;
-    current=this->size()-1;
-  } else if (opts->loop==-1) {
-    current=this->size()-1;
-  } else if (opts->loop==0) 
-    throw string("end of playlist");
+  /* FIXME --command obsolete? */
+  jump(this->pos()+1);
   return (*this)[current];
 }
     
@@ -192,10 +179,17 @@ Playlist::pos()
 void 
 Playlist::jump(int newpos)
 {
-  while (newpos<0)
+  while (newpos<0) {
+    opts->loop--;
     newpos+=this->size();
-  if (newpos>this->size()-1)
+  }
+  if (newpos>this->size()-1) {
+    if (opts->loop>0)
+      opts->loop-=(int)ceil((double)newpos/(double)this->size());
+    if (opts->loop<=0)
+      throw string("end of playlist");
     newpos%=(this->size());
+  }
   current=newpos;
 }
 
