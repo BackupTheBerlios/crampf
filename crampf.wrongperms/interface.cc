@@ -10,6 +10,7 @@
 #include <string>
 #include <map>
 #include "interface.hh"
+#include "player.hh"
 #include "config.hh"
 
 Interface::Interface( void )
@@ -38,6 +39,8 @@ Interface::~Interface()
 Interface::mainloop()
 {
   showstatus();
+  player_init();
+  player_play();
   try {
     char c;
     while (1) {
@@ -48,6 +51,7 @@ Interface::mainloop()
   } catch (string s) {
     printf("%s\n",(const char*)s.c_str());
   }
+  player_stop();
 }
 
 void
@@ -98,6 +102,7 @@ void
 Interface::next( void )
 {
   ++(*plist);
+  player_play();
   showstatus();
 }
 
@@ -105,6 +110,7 @@ void
 Interface::prev( void )
 {
   --(*plist);
+  player_play();
   showstatus();
 }
 
@@ -113,6 +119,20 @@ Interface::jump( void )
 {
   printf("jump\n");
   printf("not yet implemented\n");
+}
+
+void
+Interface::pause( void )
+{
+  printf("pause\n");
+  player_pause();
+}
+
+void
+Interface::cont( void )
+{
+  printf("cont\n");
+  player_continue();
 }
 
 void
@@ -186,20 +206,6 @@ void
 Interface::vol_dn( void )
 {
   printf("vol_dn\n");
-  printf("not yet implemented\n");
-}
-
-void
-Interface::pause( void )
-{
-  printf("pause\n");
-  printf("not yet implemented\n");
-}
-
-void
-Interface::cont( void )
-{
-  printf("cont\n");
   printf("not yet implemented\n");
 }
 

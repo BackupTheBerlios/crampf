@@ -42,10 +42,10 @@ void player_play( void )
 void player_stop( void )
 {
   if (player_isrunning()) {
-    kill(SIGTERM,player_pid);
+    kill(player_pid,SIGTERM);
     sleep(1);
     while (player_isrunning()) {
-      kill(SIGKILL,player_pid);
+      kill(player_pid,SIGKILL);
     }
   }
 }
@@ -62,18 +62,18 @@ void player_playerstop(int status)
 void player_pause()
 {
   if (player_isrunning())
-    kill(SIGSTOP,player_pid);
+    kill(player_pid,SIGSTOP);
 }
 
 void player_continue()
 {
   if (player_isrunning())
-    kill(SIGCONT,player_pid);
+    kill(player_pid,SIGCONT);
 }
 
 bool player_isrunning( void )
 {
-  if (kill(0,player_pid)==0)
+  if (kill(player_pid,0)==0)
     return true;
   else
     return false;
