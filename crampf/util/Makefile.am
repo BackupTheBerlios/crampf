@@ -1,3 +1,3 @@
 noinst_LIBRARIES=libutil.a
-noinst_HEADERS=regex.hh
-libutil_a_SOURCES=regex.cc
+noinst_HEADERS=regex.hh kill_family.h
+libutil_a_SOURCES=regex.cc kill_family.c

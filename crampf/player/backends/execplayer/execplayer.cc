@@ -9,6 +9,7 @@
 #include <sys/wait.h>
 #include "../../../debug.hh"
 #include "../../../iosubsys/output.hh"
+#include "../../../util/kill_family.h"
 
 ExecPlayer *ExecPlayer::self = NULL;
 
@@ -253,7 +254,7 @@ ExecPlayer::play( const std::string &filename )
 {
       printdebug( "play( \"%s\" )\n", filename.c_str() );
       /* FIXME this is an *UGLY* hack !!! */
-      system( "fuser -k /dev/dsp >/dev/null 2>&1" );
+      // system( "fuser -k /dev/dsp >/dev/null 2>&1" );
       double bestscore = 0;
       std::list<struct PlayCmds>::const_iterator bestplayer = playCmds.end();
 
@@ -309,7 +310,11 @@ ExecPlayer::stop()
 {
       printdebug( "stop() %d\n", pid != NOT_A_PID );
       if( pid != NOT_A_PID ){
+#ifdef HAVE_PROC_STAT
+	  kill_family( pid );
+#else /* HAVE_PROC_STAT */
 	  kill( pid,  SIGTERM );
+#endif /* HAVE_PROC_STAT */
 #if 0
 	  if( pid != NOT_A_PID && kill(pid,SIGTERM) == 0 ){
 	      usleep( 500 );
