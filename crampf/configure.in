@@ -36,9 +36,6 @@ AC_HEADER_STDC
 AC_HEADER_SYS_WAIT
 AC_CHECK_HEADERS(map vector string stack fcntl.h unistd.h getopt.h math.h regex.h signal.h stdio.h sys/stat.h sys/types.h wait.h termios.h time.h readline/readline.h readline/history.h,,exit 1)
 
-dnl Checks for typedefs, structures, and compiler characteristics.
-AC_C_CONST
-
 AC_CHECK_PROGS(PLAYER_CMD,madplay alsaplayer mpg321 amp mpg123,None)
 if test "${PLAYER_CMD}" != "None" ; then
     AC_DEFINE_UNQUOTED(PLAYER_CMD,"${PLAYER_CMD}")
