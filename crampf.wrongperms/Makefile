@@ -1,23 +1,25 @@
-GCC=g++
 OBJS=config.o crampf.o playlist.o player.o track.o interface.o command.o commandmap.o readlineinterface.o
 CMDOBJS=commands/*.o
-LIBS=-lreadline -s
+LIBS=-lreadline 
 PROGNAME=crampf
 
 all:    cmds $(OBJS)
-	$(GCC) $(LIBS) -o $(PROGNAME) $(OBJS) $(CMDOBJS)
+	$(CXX) -o $(PROGNAME) $(OBJS) $(CMDOBJS) $(LDFLAGS) $(LIBS)
 
 ifneq ($(MAKECMDGOALS),clean)
 include $(OBJS:.o=.d)
 endif
 ifeq ($(MAKECMDGOALS),dist)
-CXXFLAGS+=-DDIST
+CXXFLAGS+=-DDIST -O2
+LDFLAGS+=-s 
+else
+CXXFLAGS+=-g
 endif
 
 .PHONY: dist tar clean cmds
 
 cmds:	
-	$(MAKE) -C commands
+	$(MAKE) -C commands $(MAKECMDGOALS)
 
 dist:   clean tar all
 
@@ -32,7 +34,7 @@ commands/commands.hh:
 	@cd commands && ./commands.sh
 
 %.d:	%.cc
-	@$(SHELL) -ec '$(GCC) -MM $(CPPFLAGS) $< \
+	@$(SHELL) -ec '$(CXX) -MM $(CXXFLAGS) $< \
 	| sed '\''s/\($*\)\.o[ :]*/\1.o $@ : /g'\'' > $@; \
 	[ -s $@ ] || rm -f $@'
 

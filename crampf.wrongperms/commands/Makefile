@@ -1,7 +1,5 @@
-GCC=g++
 SRC=$(wildcard *.cc)
 OBJS=$(SRC:.cc=.o)
-LIBS=
 PROGNAME=crampf
 
 all:    generate_header $(OBJS)
@@ -9,12 +7,16 @@ all:    generate_header $(OBJS)
 ifneq ($(MAKECMDGOALS),clean)
 include $(OBJS:.o=.d)
 endif
-
 ifeq ($(MAKECMDGOALS),dist)
-CXXFLAGS+=-DDIST
+CXXFLAGS+=-DDIST -O2
+LDFLAGS=-s 
+else
+CXXFLAGS+=-g
 endif
 
-.PHONY : clean
+.PHONY : clean dist static
+
+dist:	clean all
 
 generate_header:
 	@./commands.sh
@@ -23,7 +25,7 @@ clean:
 	@rm -f $(PROGNAME) $(OBJS) $(OBJS:.o=.d)
 
 %.d:	%.cc
-	@$(SHELL) -ec '$(GCC) -MM $(CPPFLAGS) $< \
+	@$(SHELL) -ec '$(CXX) -MM $(CXXFLAGS) $< \
 	| sed '\''s/\($*\)\.o[ :]*/\1.o $@ : /g'\'' > $@; \
 	[ -s $@ ] || rm -f $@'
 
