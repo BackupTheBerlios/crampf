@@ -1,5 +1,5 @@
 //
-// $Id: options.hh,v 1.4 2000/03/10 09:26:16 logic Exp $
+// $Id: options.hh,v 1.5 2000/03/10 18:28:35 logic Exp $
 //
 
 #ifndef config
@@ -25,6 +25,11 @@ struct options {
   string                playercmd;
   string                playercmd_args;
   vector<string>        mp3SearchPaths;
+  /*
+   * Als zweiten parameter fuer keys struct nehmen, der nicht nur
+   * Funktionspointer, sondern auch einen Namen enthaelt
+   * (um das Erstellen der Online-Hilfe zu erleichtern)
+   */
   map<char, void(Interface::*)(void)> keys;
 };
 

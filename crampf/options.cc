@@ -28,24 +28,6 @@ Config::initdefaults(struct options* op)
   op->playercmd_args="-q";
   op->keys['h']=&Interface::help;
   op->keys['q']=&Interface::quit;
-  op->keys['n']=&Interface::next;
-  op->keys['p']=&Interface::prev;
-  op->keys['P']=&Interface::pause;
-  op->keys['C']=&Interface::cont;
-  op->keys['i']=&Interface::info;
-  op->keys['l']=&Interface::list;
-  op->keys['0']=&Interface::vol0;
-  op->keys['1']=&Interface::vol1;
-  op->keys['2']=&Interface::vol2;
-  op->keys['3']=&Interface::vol3;
-  op->keys['4']=&Interface::vol4;
-  op->keys['5']=&Interface::vol5;
-  op->keys['6']=&Interface::vol6;
-  op->keys['7']=&Interface::vol7;
-  op->keys['8']=&Interface::vol8;
-  op->keys['9']=&Interface::vol9;
-  op->keys['+']=&Interface::vol_up;
-  op->keys['-']=&Interface::vol_down;
 }
 
 Config::getopts(int argc, char** argv)

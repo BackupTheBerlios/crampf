@@ -83,18 +83,7 @@ Track Playlist::operator++()
     current++;
     return (*this)[current];
   } else
-   switch (opts->loop!=0) {
-     case 0:
-       throw string("end of playlist");
-       break;
-     case -1: /* loop 4ever */
-       current=0;
-       break;
-     default:
-       loop--;
-       current=0;
-       break;
-   }
+    throw string("end of playlist");
 }
 
 Track Playlist::operator--()
