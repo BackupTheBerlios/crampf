@@ -5,6 +5,7 @@
 #ifndef command
 #define command
 
+#include "version_info.hh"
 #include <string>
 #include <stdio.h>
 

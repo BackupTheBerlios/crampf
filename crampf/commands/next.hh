@@ -5,6 +5,7 @@
 #ifndef next
 #define next
 
+#include "../version_info.hh"
 #include <string>
 #include "../command.hh"
 

@@ -2,6 +2,7 @@
  * Playlist Class -- contains the playlist, handels filters
  */
 
+#include "version_info.hh"
 #include <string>
 #include <string.h>
 #include <vector>

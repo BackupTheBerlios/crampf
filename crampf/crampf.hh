@@ -1,10 +1,11 @@
 //
-// $Id: crampf.hh,v 1.1 2000/03/09 21:55:24 logic Exp $
+// $Id: crampf.hh,v 1.2 2000/03/18 04:38:09 logic Exp $
 //
 
 #ifndef crampf
 #define crampf
 
+#include "version_info.hh"
 #include "playlist.hh"
 #include "config.hh"
 

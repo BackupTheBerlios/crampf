@@ -5,6 +5,7 @@
 #ifndef commandmap
 #define commandmap
 
+#include "version_info.hh"
 #include <string>
 #include <map>
 #include <stdio.h>

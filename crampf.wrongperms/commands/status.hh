@@ -5,6 +5,7 @@
 #ifndef status
 #define status
 
+#include "../version_info.hh"
 #include <string>
 #include "../command.hh"
 

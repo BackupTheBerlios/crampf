@@ -1,10 +1,11 @@
 //
-// $Id: map.hh,v 1.1 2000/03/18 02:17:15 logic Exp $
+// $Id: map.hh,v 1.2 2000/03/18 04:38:11 logic Exp $
 //
 
 #ifndef map
 #define map map
 
+#include "../version_info.hh"
 #include <string>
 #include "../command.hh"
 #include "../commandmap.hh"

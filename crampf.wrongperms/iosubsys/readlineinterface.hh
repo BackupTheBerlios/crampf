@@ -4,6 +4,8 @@
 
 #ifndef readlineinterface
 #define readlineinterface readlineinterface
+#include "version_info.hh"
+#include "version_info.hh"
 
 class ReadLineInterface {
   public:

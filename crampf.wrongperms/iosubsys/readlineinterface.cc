@@ -2,6 +2,7 @@
  * This Class provides the ex-like interface
  */
 
+#include "version_info.hh"
 #include <string>
 #include <string.h>
 #include <stdio.h>

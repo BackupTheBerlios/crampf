@@ -1,10 +1,11 @@
 //
-// $Id: playlist.hh,v 1.7 2000/03/15 08:25:32 logic Exp $
+// $Id: playlist.hh,v 1.8 2000/03/18 04:38:09 logic Exp $
 //
 
 #ifndef playlist
 #define playlist
 
+#include "version_info.hh"
 #include <string>
 #include <vector>
 #include "track.hh"

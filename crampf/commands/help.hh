@@ -5,6 +5,7 @@
 #ifndef help
 #define help help
 
+#include "../version_info.hh"
 #include <string>
 #include "../command.hh"
 #include "../commandmap.hh"

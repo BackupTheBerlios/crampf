@@ -5,6 +5,7 @@
 #ifndef info
 #define info
 
+#include "../version_info.hh"
 #include <string>
 #include "../command.hh"
 

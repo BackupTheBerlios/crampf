@@ -2,6 +2,7 @@
  * Adds a path or file to the playlist
  */
 
+#include "../version_info.hh"
 #include <string>
 #include "addpath.hh"
 #include "../playlist.hh"

@@ -1,10 +1,11 @@
 //
-// $Id: track.hh,v 1.1 2000/03/10 04:02:30 logic Exp $
+// $Id: track.hh,v 1.2 2000/03/18 04:38:09 logic Exp $
 //
 
 #ifndef track
 #define track
 
+#include "version_info.hh"
 #include <string>
 
 class Track {

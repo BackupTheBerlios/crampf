@@ -2,6 +2,7 @@
  * CommandMap -- funcname -> function
  */
 
+#include "version_info.hh"
 #include <string>
 #include <map>
 #include "commandmap.hh"
@@ -22,6 +23,7 @@ CommandMap::CommandMap()
   cmdmap["jump"]       = new Jump    ();
   cmdmap["addpath"]    = new AddPath ();
   cmdmap["shuffle"]    = new Shuffle ();
+  cmdmap["version"]    = new Version ();
 }
 
 CommandMap::~CommandMap()

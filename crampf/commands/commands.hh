@@ -5,6 +5,7 @@
 #ifndef commands
 #define commands
 
+#include "../version_info.hh"
 #include <string>
 #include "../command.hh"
 #include "../commandmap.hh"
@@ -22,6 +23,7 @@
 #include "status.hh"
 #include "vol.hh"
 #include "map.hh"
+#include "version.hh"
 
 #endif
 

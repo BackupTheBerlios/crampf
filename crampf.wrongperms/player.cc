@@ -2,6 +2,7 @@
  * player.cc -- Controls the mp3player itself
  */
 
+#include "version_info.hh"
 #include <string>
 #include <stdio.h>
 #include <signal.h>

@@ -5,6 +5,7 @@
 #ifndef set
 #define set
 
+#include "../version_info.hh"
 #include <string>
 #include "../command.hh"
 #include "../commandmap.hh"

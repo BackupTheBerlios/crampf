@@ -5,6 +5,7 @@
 #ifndef quit
 #define quit
 
+#include "../version_info.hh"
 #include <string>
 #include "../command.hh"
 

@@ -2,6 +2,7 @@
  * Track Class extends trackinformation to more than just a string
  */
 
+#include "version_info.hh"
 #include <string>
 #include "track.hh"
 

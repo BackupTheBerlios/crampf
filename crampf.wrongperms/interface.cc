@@ -2,6 +2,7 @@
  * Standard textmode interface
  */
 
+#include "version_info.hh"
 #include <unistd.h>
 #include <stdio.h>
 #include <stdlib.h>
