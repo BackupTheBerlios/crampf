@@ -63,8 +63,11 @@ StdPlayer::play()
   if (pid==0) {
       fclose(stdin);
       fclose(stdout);
-      if( strcmp( PLAYER_CMD , "mpg123" ) != 0 ) /* Ouch FIXME */
-	  fclose(stderr);
+      if( strcmp( PLAYER_CMD , "madplay" ) == 0
+	      || strcmp( PLAYER_CMD, "mpg321" ) == 0
+	      || strcmp( PLAYER_CMD, "amp" ) == 0
+	      || strcmp( PLAYER_CMD, "alsaplayer" ) == 0)
+	  fclose(stderr); /* TODO how to redirect stderr to /dev/null? */
       vector<string> args;
       int p=0;
       for (unsigned int i=opts->playercmd_args.find(" ",p); 
