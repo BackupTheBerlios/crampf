@@ -86,7 +86,7 @@ void Config::getopts(int argc, char** argv)
       {"version"             , 0, 0, 'v'},
       {0, 0, 0, 0}  // NULL marks end
     };
-    c = getopt_long(argc, argv, "p:rRl::f:F:P:a:c:t:ihvgG",
+    c = getopt_long(argc, argv, "p:rRl::f:F:c:igGt:hv",
         krampf_options, &option_index);
     if (c==EOF)
       break;

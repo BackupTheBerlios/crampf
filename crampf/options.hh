@@ -1,5 +1,5 @@
 //
-// $Id: options.hh,v 1.21 2002/12/24 19:51:48 logic Exp $
+// $Id: options.hh,v 1.22 2002/12/28 23:47:50 logic Exp $
 //
 
 #ifndef CONFIG_HH
@@ -29,8 +29,6 @@ struct options {
   std::vector<std::string> negativeFilter;
   std::vector<std::string> positiveFilterFiles;
   std::vector<std::string> positiveFilter;
-  std::string              playercmd;
-  std::string              playercmd_args;
   std::vector<std::string> mp3SearchPaths;
   CommandMap               cmdmap;
 };
