@@ -3,4 +3,4 @@
 =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
 INSTALL
-  you need readline-devel
+  Inlcudefiles for readline required (packages readline-devel on Red Hat 6.x)
