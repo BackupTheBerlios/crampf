@@ -1,0 +1,91 @@
+SHELL=/bin/sh
+VPATH=@srcdir@
+
+subdirs=@subdirs@
+top_srcdir=@top_srcdir@
+srcdir=@srcdir@
+prefix=@prefix@
+exec_prefix=@exec_prefix@
+bindir=$(exec_prefix)/bin
+infodir=$(prefix)/info
+libdir=$(prefix)/lib
+mandir=$(prefix)/man/man1
+
+CC=@CC@
+CPPFLAGS=@CPPFLAGS@
+CFLAGS=$(CPPFLAGS) @CFLAGS@
+CXX=@CXX@
+CXXFLAGS=@CXXFLAGS@
+LDFLAGS=@LDFLAGS@
+LIBS=@LIBS@
+INSTALL=@INSTALL@
+
+OBJS=config.o crampf.o playlist.o player.o track.o interface.o command.o commandmap.o readlineinterface.o file.o
+CMDOBJS=${srcdir}/commands/*.o
+UTILOBJS=${srcdir}/util/*.o
+#LIBS=-lreadline 
+PROGNAME=crampf
+
+all:    util cmds ${srcdir}/$(OBJS)
+	$(CXX) -o ${srcdir}/$(PROGNAME) ${srcdir}/$(OBJS) \
+		${srcdir}/$(CMDOBJS) ${srcdir}/$(UTILOBJS) $(LDFLAGS) $(LIBS)
+
+ifneq ($(MAKECMDGOALS),clean)
+include $(OBJS:.o=.d)
+endif
+ifeq ($(MAKECMDGOALS),debug)
+CXXFLAGS+=-g
+else
+CXXFLAGS+=-DDIST -O2
+LDFLAGS+=-s 
+endif
+
+.PHONY: clean cmds util debug install all
+
+cmds:	
+	$(MAKE) -C commands $(MAKECMDGOALS)
+
+util:
+	$(MAKE) -C util $(MAKECMDGOALS)
+
+debug: all
+
+clean:
+	@rm -f $(PROGNAME) $(OBJS) $(OBJS:.o=.d)
+	$(MAKE) clean -C commands 
+	$(MAKE) clean -C util
+
+commands/commands.hh:
+	@cd commands && ./commands.sh
+
+install: all
+	@mkdir -p ${bindir}
+	$(INSTALL) $(PROGNAME) ${bindir}
+
+uninstall:
+	@rm -f ${exec_prefix}/$(PROGNAME)
+
+%.d:	%.cc
+	@$(SHELL) -ec '$(CXX) -MM $(CXXFLAGS) $< \
+	| sed '\''s/\($*\)\.o[ :]*/\1.o $@ : /g'\'' > $@; \
+	[ -s $@ ] || rm -f $@' 
+
+${srcdir}/configure: configure.in 
+	cd ${srcdir} && autoconf
+
+${srcdir}/config.h.in: stamp-h.in
+
+${srcdir}/stamp-h.in: configure.in 
+	cd ${srcdir} && autoheader
+	echo timestamp > ${srcdir}/stamp-h.in
+
+config.h: stamp-h
+
+stamp-h: config.h.in config.status
+	./config.status
+
+Makefile: Makefile.in config.status
+	./config.status
+
+config.status: configure
+	./config.status --recheck

@@ -1,0 +1,26 @@
+dnl Process this file with autoconf to produce a configure script.
+AC_INIT(crampf.cc)
+
+dnl Checks for programs.
+AC_LANG_CPLUSPLUS
+AC_PROG_CXX
+AC_PROG_CXXCPP
+AC_PROG_INSTALL
+
+dnl Checks for libraries.
+dnl Replace `main' with a function in -lreadline:
+AC_CHECK_LIB(readline, readline,,exit 1)
+
+dnl Checks for header files.
+AC_HEADER_STDC
+AC_HEADER_SYS_WAIT
+AC_CHECK_HEADERS(map vector string stack fcntl.h unistd.h getopt.h math.h regex.h signal.h stdio.h sys/stat.h sys/types.h wait.h termios.h time.h readline/readline.h readline/history.h,,exit 1)
+
+dnl Checks for typedefs, structures, and compiler characteristics.
+AC_C_CONST
+
+dnl Checks for library functions.
+AC_TYPE_SIGNAL
+AC_CHECK_FUNCS(regcomp strerror readline)
+
+AC_OUTPUT(util/Makefile Makefile commands/Makefile, echo timestamp > stamp-h)
