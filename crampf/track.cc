@@ -78,3 +78,9 @@ Track::operator<(const Track &other) const
 {
       return filename() < other.filename();
 }
+
+bool
+Track::operator==( const Track &other ) const
+{
+      return filename() == other.filename();
+}

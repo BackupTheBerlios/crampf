@@ -11,7 +11,11 @@ extern Playlist* plist;
 void
 Sort::doit( const string &s )
 {
-  sort( plist->begin(), plist->end() );
+      Track t( *(*plist) );
+      sort( plist->begin(), plist->end() );
+      plist->jump( 0 );
+      while( t != *(*plist) )
+	  (*plist)++;
 }
 
 void

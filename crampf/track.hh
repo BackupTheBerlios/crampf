@@ -1,5 +1,5 @@
 //
-// $Id: track.hh,v 1.7 2002/06/04 12:04:16 logic Exp $
+// $Id: track.hh,v 1.8 2002/06/16 05:32:31 logic Exp $
 //
 
 #ifndef TRACK_HH
@@ -19,6 +19,7 @@ class Track {
     string filename( void ) const;
     void   write( FILE* fp );
     bool   operator<(const Track &other) const;
+    bool   operator==(const Track &other ) const;
   private:
     string fullname; /* holds path and name */
     string callsign; /* holds short title */

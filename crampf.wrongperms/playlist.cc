@@ -67,8 +67,8 @@ Playlist::savePlaylist( string filename )
     perror("save Playlist");
     return;
   }
-  for (Playlist::iterator it = this->begin();
-      it != this->end(); it++)
+  for (Playlist::iterator it = begin();
+      it != end(); it++)
     it->write(fp);
   fclose(fp);
 }
@@ -104,16 +104,19 @@ Playlist::addPlaylist( const vector<string> &filenames )
 void 
 Playlist::positiveFilter( const string &flt )
 {
-      int flags = REG_NOSUB;
+      int flags = REG_NOSUB, c=current, i=0;
       if (!opts->casesensivity)
 	  flags = flags | REG_ICASE;
       if (opts->regexp==2)
 	  flags = flags | REG_EXTENDED;
       RegEx re = RegEx( flt, flags );
-      for (Playlist::iterator it = this->begin();
-	      it != this->end(); it++) 
-	  if ( !re.match( it->title().c_str() ) ) 
-	      this->erase(it--);
+      for (Playlist::iterator it = begin();
+	      it != end(); it++,i++) 
+	  if ( !re.match( it->title().c_str() ) ) {
+	      if( i < c )
+		  current--;
+	      erase(it--);
+	  }
 }
 
 void 
@@ -127,16 +130,19 @@ Playlist::positiveFilter( const vector<string> &flt )
 void 
 Playlist::negativeFilter( const string &flt )
 {
-      int flags = REG_NOSUB;
+      int flags = REG_NOSUB, c=current, i=0;
       if (!opts->casesensivity)
 	  flags = flags | REG_ICASE;
       if (opts->regexp==2)
 	  flags = flags | REG_EXTENDED;
       RegEx re = RegEx( flt, flags );
-      for (Playlist::iterator it = this->begin();
-	      it != this->end(); it++) 
-	  if ( re.match( it->title().c_str() ) ) 
-	      this->erase(it--);
+      for (Playlist::iterator it = begin();
+	      it != end(); it++,i++) 
+	  if ( re.match( it->title().c_str() ) ) {
+	      if( i < c )
+		  current--;
+	      erase(it--);
+	  }
 }
 
 void 
@@ -152,9 +158,9 @@ void
 Playlist::shuffle()
 {
   srand(time(NULL));
-  for (int i=0; i<this->size(); i++) {
+  for (int i=0; i<size(); i++) {
     Track h = (*this)[i];
-    int x = rand()%this->size();
+    int x = rand()%size();
     (*this)[i] = (*this)[x];
     (*this)[x] = h;
   }
@@ -164,7 +170,7 @@ Track
 Playlist::operator++()
 {
   /* FIXME ++command obsolete? */
-  jump(this->pos()+1);
+  jump(pos()+1);
   return (*this)[current];
 }
 
@@ -172,7 +178,7 @@ Track
 Playlist::operator--()
 {
   /* FIXME --command obsolete? */
-  jump(this->pos()+1);
+  jump(pos()+1);
   return (*this)[current];
 }
     
@@ -191,18 +197,18 @@ Playlist::pos() const
 void 
 Playlist::jump(int newpos)
 {
-  if (this->size() == 0) 
+  if (size() == 0) 
       throw string("empty playlist");
   while (newpos<0) {
     opts->loop--;
-    newpos+=this->size();
+    newpos+=size();
   }
-  if (newpos>this->size()-1) {
+  if (newpos>size()-1) {
     if (opts->loop>0)
-      opts->loop-=(int)ceil((double)newpos/(double)this->size());
+      opts->loop-=(int)ceil((double)newpos/(double)size());
     if (opts->loop<=0)
       throw string("end of playlist");
-    newpos%=(this->size());
+    newpos%=(size());
   }
   current=newpos;
 }
@@ -210,16 +216,16 @@ Playlist::jump(int newpos)
 void 
 Playlist::addTrack( const string &path, string filename )
 {
-  this->push_back(Track(path+filename));
+  push_back(Track(path+filename));
   if (opts->generateTitles) {
     filename.erase(filename.end()-4,filename.end());
-    (*this)[this->size()-1].title(filename);
+    (*this)[size()-1].title(filename);
   }
 }
 
 void 
 Playlist::addTrack( FILE* fp )
 {
-  this->push_back(Track(fp));
+  push_back(Track(fp));
 }
 
