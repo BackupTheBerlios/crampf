@@ -3,9 +3,9 @@
 #include "../config.hh"
 #include "../commandmap.hh"
 #include "../player.hh"
+#include "../util/regex.hh"
 #include "search.hh"
 #include <stdio.h>
-#include <regex.h>
 
 extern Playlist* plist;
 extern struct options* opts;
@@ -54,36 +54,22 @@ Search::search( string s )
 {
   if (opts->regexp || !opts->casesensivity) {
       /* new regexp part */
-      regex_t re;
       int flags = REG_NOSUB;
       if (!opts->casesensivity)
 	  flags = flags | REG_ICASE;
       if (opts->regexp==2)
 	  flags = flags | REG_EXTENDED;
-      int error = regcomp( &re, s.c_str(), flags );
-      if (error != 0) {
-#define REGEXP_MAXERRLEN	255
-	  char errmsg[REGEXP_MAXERRLEN];
-	  regerror( error, &re, errmsg, REGEXP_MAXERRLEN);
-	  throw string(errmsg);
-      }
-      /* here comes the real search */
+      RegEx re = RegEx( s, flags );
       for (int i=plist->pos()+1; i<plist->size(); i++)
-	  if (regexec( &re, (*plist)[i].title().c_str(), 0, NULL, flags )
-		  != REG_NOMATCH) {
-	      regfree( &re );
+	  if ( re.match( (*plist)[i].title().c_str() ) ) {
 	      return i;
 	  }
       if (opts->loop!=0) {
 	  for (int i=0; i<plist->pos(); i++)
-	      if (regexec( &re, (*plist)[i].title().c_str(), 0, NULL, flags )
-		      != REG_NOMATCH) {
-		  opts->loop--;
-		  regfree( &re );
+	      if ( re.match( (*plist)[i].title().c_str() ) ) {
 		  return i;
 	      }
       }
-      regfree( &re );
   } else {
       /* old stl string search function */
       /* TODO kick it! */

@@ -14,7 +14,7 @@
 #include <unistd.h>
 #include "playlist.hh"
 #include "config.hh"
-#include <regex.h>
+#include "util/regex.hh"
 
 extern struct options* opts;
 
@@ -105,25 +105,16 @@ Playlist::addPlaylist(vector<string> filenames)
 void 
 Playlist::positiveFilter(string flt)
 {
-      regex_t re;
       int flags = REG_NOSUB;
       if (!opts->casesensivity)
 	  flags = flags | REG_ICASE;
       if (opts->regexp==2)
 	  flags = flags | REG_EXTENDED;
-      int error = regcomp( &re, flt.c_str(), flags );
-      if (error != 0) {
-#define REGEXP_MAXERRLEN	255
-	  char errmsg[REGEXP_MAXERRLEN];
-	  regerror( error, &re, errmsg, REGEXP_MAXERRLEN);
-	  throw string(errmsg);
-      }
+      RegEx re = RegEx( flt, flags );
       for (Playlist::iterator it = this->begin();
 	      it != this->end(); it++) 
-	  if (regexec( &re, it->title().c_str(), 0, NULL, flags )
-		  == REG_NOMATCH)
+	  if ( re.match( it->title().c_str() ) ) 
 	      this->erase(it--);
-      regfree( &re );
 }
 
 void 
@@ -137,25 +128,16 @@ Playlist::positiveFilter(vector<string> flt)
 void 
 Playlist::negativeFilter(string flt)
 {
-      regex_t re;
       int flags = REG_NOSUB;
       if (!opts->casesensivity)
 	  flags = flags | REG_ICASE;
       if (opts->regexp==2)
 	  flags = flags | REG_EXTENDED;
-      int error = regcomp( &re, flt.c_str(), flags );
-      if (error != 0) {
-#define REGEXP_MAXERRLEN	255
-	  char errmsg[REGEXP_MAXERRLEN];
-	  regerror( error, &re, errmsg, REGEXP_MAXERRLEN);
-	  throw string(errmsg);
-      }
+      RegEx re = RegEx( flt, flags );
       for (Playlist::iterator it = this->begin();
 	      it != this->end(); it++) 
-	  if (regexec( &re, it->title().c_str(), 0, NULL, flags )
-		  != REG_NOMATCH)
+	  if ( re.match( it->title().c_str() ) ) 
 	      this->erase(it--);
-      regfree( &re );
 }
 
 void 

@@ -1,10 +1,11 @@
 OBJS=config.o crampf.o playlist.o player.o track.o interface.o command.o commandmap.o readlineinterface.o file.o
 CMDOBJS=commands/*.o
+UTILOBJS=util/*.o
 LIBS=-lreadline 
 PROGNAME=crampf
 
-all:    cmds $(OBJS)
-	$(CXX) -o $(PROGNAME) $(OBJS) $(CMDOBJS) $(LDFLAGS) $(LIBS)
+all:    util cmds $(OBJS)
+	$(CXX) -o $(PROGNAME) $(OBJS) $(CMDOBJS) $(UTILOBJS) $(LDFLAGS) $(LIBS)
 
 ifneq ($(MAKECMDGOALS),clean)
 include $(OBJS:.o=.d)
@@ -16,10 +17,13 @@ else
 CXXFLAGS+=-g
 endif
 
-.PHONY: dist tar clean cmds
+.PHONY: dist tar clean cmds util
 
 cmds:	
 	$(MAKE) -C commands $(MAKECMDGOALS)
+
+util:
+	$(MAKE) -C util $(MAKECMDGOALS)
 
 dist:   clean tar all
 
@@ -29,6 +33,7 @@ tar:
 clean:
 	@rm -f $(PROGNAME) $(OBJS) $(OBJS:.o=.d) $(PROGNAME)-*.tar.gz
 	$(MAKE) clean -C commands 
+	$(MAKE) clean -C util
 
 commands/commands.hh:
 	@cd commands && ./commands.sh
