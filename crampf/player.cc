@@ -6,6 +6,9 @@
 #include <stdio.h>
 #include <signal.h>
 #include <sys/wait.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <sys/fcntl.h>
 #include <unistd.h>
 #include "player.hh"
 #include "playlist.hh"
@@ -55,7 +58,9 @@ void player_stop( void )
     while (player_isrunning()) {
       kill(player_pid,SIGKILL);
     }
-    sleep(1); /* just to be sure /dev/dsp is not used anymore */
+    int f;   /* just to be sure /dev/dsp is not used anymore */
+    while ((f=open("/dev/dsp",O_WRONLY))==-1) ;
+    close(f);
   }
   player_sigignore = false;
 }
