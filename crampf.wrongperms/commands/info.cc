@@ -97,10 +97,10 @@ void show_frame( struct id3_frame *frame )
 		      snprintf( content, MAX_CONTENT, "%s", frptr[f++] );
 		  }
 	  }
-	  if( (unsigned)strlen( content ) > a ) printf( "%s %s\n", descr, content );
-	  while(f-->0)
-	      free(frptr[f]);
       }
+      if( (unsigned)strlen( content ) > a ) printf( "%s %s\n", descr, content );
+      while(f-->0)
+	  free(frptr[f]);
 }
 
 #endif
