@@ -40,13 +40,13 @@ PlayerInterface::play( const std::string &filename )
 	  if( (*bestplayer)->play( filename ) ){
 	      curPlayer = bestplayer;
 	      curPlayer_isPlaying = true;
-	      autocmdmap["song_start"].trigger();
+	      autocmdmap["start"].trigger();
 	      return true;
 	  }
       } else {
 	  printdebug( "unsupported fileformat %s\n", filename.c_str() );
       }
-      autocmdmap["song_stop"].trigger();
+      autocmdmap["stop"].trigger();
       return false;
 }
 
@@ -92,8 +92,8 @@ PlayerInterface::backendStopped( const std::string &msg )
       curPlayer = end();
       curPlayer_isPlaying = false;
       if( ! block_song_stop_event ){
-	  printdebug( "%s\n", "sending 'song_stop' event"); //++(*plist);
-	  autocmdmap["song_stop"].trigger();
+	  printdebug( "%s\n", "sending 'stop' event"); //++(*plist);
+	  autocmdmap["stop"].trigger();
       } else {
 	  printdebug( "IGNORING SIGNAL\n" );
       }

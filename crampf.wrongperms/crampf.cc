@@ -10,10 +10,10 @@
 int main( int argc, char **argv )
 {
       try {
-	  autocmdmap.newEvent( "song_start", "called whenever a new song gets played" );
-	  autocmdmap.newEvent( "song_stop", "called immediately after playback of a song finishes" );
+	  autocmdmap.newEvent( "start", "called whenever a new song gets played" );
+	  autocmdmap.newEvent( "stop", "called immediately after playback of a song finishes" );
 	  autocmdmap.newEvent( "exit", "called on exit" );
-	  autocmdmap.newEvent( "start", "called after initialization, right before playback starts" );
+	  autocmdmap.newEvent( "init", "called after initialization, right before playback starts" );
 	  plist = new Playlist();
 	  Config cfg;
 	  opts=cfg.returnopts();
