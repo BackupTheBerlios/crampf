@@ -1,4 +1,11 @@
 FEATURE WISHLIST
+	* add variables that are automatically expanded before command
+	  execution. There could be 2 types of variables: user definable
+	  (e.g. $LOOP, $VOLUME etc.) and variables that are automatically
+	  set by crampf (e.g. $TRACK, $TITLE, $RANDOM etc.)
+	* the variable $CURDIR could hold the basename of the dirctory of
+	  the current track. this could be used for samedir command and for
+	  a positive and negative filter.
 	* add printf command which should support many %x directives
 	  (e.g. CurrentTrackNum, Playlistlength, Current-Track-Name etc.)
 	  this could supersede the status-command 
