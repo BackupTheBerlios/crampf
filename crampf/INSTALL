@@ -6,6 +6,10 @@ REQUIREMENTS
 	    	information
 	    * aumix to change sound volume
 
+	You also need some libraries and headerfiles installed, but this is
+	hopefully checked by the configure script.
+
+
 INSTALL
 	Installation should be quite easy, just do
 
@@ -25,5 +29,6 @@ INSTALL
 	If you have any trouble during compilation please send a detailed
 	bugreport containing the configure and the make output to Kevin Loos
 	<logic@tzi.de>.
+
 
 Please see README for a little documentation.

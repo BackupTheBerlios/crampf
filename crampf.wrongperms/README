@@ -6,8 +6,10 @@ OVERVIEW
 	Crampf is a console based mp3-player frontend with a ``vi-like''
 	interface.
 
+
 INSTALL
 	Please see INSTALL for a quick installation guide.
+
 
 DOCUMENTATION
 	The program should be quite self-explanatory. For commandline parameters
@@ -17,6 +19,7 @@ DOCUMENTATION
 	For configuring the default behavior create a file $HOME/.crampfrc
 	you may use any commands in this file which you would otherwise enter in
 	the `:' mode.
+
 
 BUGREPORTS
 	I would be very happy to see any kind of (detailed) bugreports,
