@@ -87,17 +87,19 @@ AC_OUTPUT(util/Makefile Makefile commands/Makefile cb/Makefile player/Makefile p
 AC_MSG_RESULT( [
 ] )
 
-type madplay >/dev/null 2>&1 ||
-    type alsaplayer >/dev/null 2>&1 ||
-    type mpg321 >/dev/null 2>&1 ||
-    type amp >/dev/null 2>&1 ||
-    type mpg123 >/dev/null 2>&1 ||
+if type madplay >/dev/null 2>&1 ||
+	type alsaplayer >/dev/null 2>&1 ||
+	type mpg321 >/dev/null 2>&1 ||
+	type amp >/dev/null 2>&1 ||
+	type mpg123 >/dev/null 2>&1 ; then
+    echo "MP3-Player      : at least one supported mp3player found!"
+else
     cat <<-EOF
-	Warning: No supported mp3-player found!
+	MP3-Player      : WARNING: No supported mp3-player found!
 	You have to add support for your favorite player with addplayer command,
 	or install one of the following: madplay, alsaplayer, mpg321, amp, mpg123
 EOF
-
+fi
 AC_MSG_RESULT( [Mixer program   : ${MIXER_CMD}] )
 if test "${HAS_LIBID3TAG}" = "yes"; then
     AC_MSG_RESULT( [ID3 Support     : libid3tag] )
