@@ -41,26 +41,28 @@ StdPlayer::play()
     --(*plist);
     first_track_damaged = false;
   }
+  /* fork player process */
   pid=fork();
   if (pid==-1) {
     perror("fork");
     exit(1);
   }
-  struct stat buf;
-  if (stat((const char*)(*(*plist)).filename().c_str(),&buf)==-1) {
-    if (pid == 0) {
-      perror((const char*)(*(*plist)).filename().c_str());
-    } else {
-      plist->erase(&(*plist)[plist->pos()]);
-      try {
-        --(*plist);
-      } catch (string e) {
-        first_track_damaged = true;
-      }
-      return;
-    }
-  } 
   if (pid==0) {
+      /* check file exists */
+      struct stat buf;
+      if (stat((const char*)(*(*plist)).filename().c_str(),&buf)==-1) {
+	  if (pid == 0) {
+	      perror((const char*)(*(*plist)).filename().c_str());
+	  } else {
+	      plist->erase(&(*plist)[plist->pos()]);
+	      try {
+		  --(*plist);
+	      } catch (string e) {
+		  first_track_damaged = true;
+	      }
+	      return;
+	  }
+      } 
       fclose(stdin);
       fclose(stdout);
       if( strcmp( PLAYER_CMD , "madplay" ) == 0
