@@ -7,4 +7,11 @@ all:    $(OBJS)
 	$(GCC) $(LIBS) -o $(PROGNAME) $(OBJS)
 
 clean:
-	@rm -f $(PROGNAME) $(OBJS)
+	@rm -f $(PROGNAME) $(OBJS) $(OBJS:.o=.d)
+
+%.d:	%.cc
+	$(SHELL) -ec '$(GCC) -MM $(CPPFLAGS) $< \
+	| sed '\''s/\($*\)\.o[ :]*/\1.o $@ : /g'\'' > $@; \
+	[ -s $@ ] || rm -f $@'
+
+include $(OBJS:.o=.d)
