@@ -1,4 +1,7 @@
 FEATURE WISHLIST
+	* Change options-struct into a map with fixed keys, initialized by the
+	      constructor
+	    * this map could be read and set by the user through set command
 	* add score command: if called with no args it shows the score
 	    of the current track, a relative or absolute numeric argument can
 	    be given to adjust current score
@@ -19,8 +22,6 @@ FEATURE WISHLIST
 	* More generic player interface (e.g. alsaplayer + alsaremotectrl)
 	    * probably using plugins?
 	* create a real exception class (get rid of throwing strings)
-	* Change options-struct into a map with fixed keys, initialized by the
-	      constructor
 	* Support for MODs, S3Ms, etc.
 	* Integrate slang scripting language
 
