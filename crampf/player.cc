@@ -27,7 +27,7 @@ void player_init()
   player_newsong = false;
   first_track_damaged = false;
   player_has_finished = false;
-  signal(SIGCHLD,player_playerstop);
+  signal(SIGCHLD,player_sig_playerstop);
 }
 
 void player_play( void )
@@ -116,7 +116,7 @@ void player_stop( void )
   player_sigignore = false;
 }
 
-void player_playerstop(int status)
+void player_sig_playerstop(int status)
 {
   printdebug("got signaled: signal=%d\n",status);
   if (status!=SIGCHLD) 
