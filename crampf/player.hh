@@ -1,5 +1,5 @@
 //
-// $Id: player.hh,v 1.2 2000/03/09 21:55:24 logic Exp $
+// $Id: player.hh,v 1.3 2000/03/11 18:32:37 logic Exp $
 //
 
 #ifndef player
@@ -19,5 +19,6 @@ void player_playerstop( int status );
 void player_pause( void );
 void player_continue( void );
 bool player_isrunning( void );
+bool player_restarted( void );
 
 #endif

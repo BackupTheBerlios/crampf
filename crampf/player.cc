@@ -11,9 +11,13 @@
 #include "playlist.hh"
 
 int player_pid = 999999; /* hope this pid never exists ;] */
+bool player_sigignore;
+bool player_newsong;
 
 void player_init()
 {
+  player_sigignore = false;
+  player_newsong = false;
   signal(SIGCHLD,player_playerstop);
 }
 
@@ -37,19 +41,23 @@ void player_play( void )
     perror("execlp");
     exit(2);
   }
-  printf("new playerprocess %d\n",player_pid);
+  //printf("new playerprocess %d\n",player_pid);
+  player_newsong = true;
 }
 
 void player_stop( void )
 {
-  printf("stopping pid %d\n",player_pid);
+  player_sigignore = true;
+  //printf("stopping pid %d\n",player_pid);
   if (player_isrunning()) {
     kill(player_pid,SIGTERM);
     sleep(1);
     while (player_isrunning()) {
       kill(player_pid,SIGKILL);
     }
+    sleep(1); /* just to be sure /dev/dsp is not used anymore */
   }
+  player_sigignore = false;
 }
 
 void player_playerstop(int status)
@@ -57,10 +65,12 @@ void player_playerstop(int status)
   if (status!=SIGCHLD)
     return;
   status = wait(NULL);
-  printf("got signaled: %d\n",status);
+  //printf("got signaled by %d\n",status);
   if (status != player_pid)
     return;
-  printf("starting next song\n");
+  if (player_sigignore)
+    return;
+  //printf("starting next song\n");
   ++(*plist);
   player_play();
 }
@@ -82,5 +92,14 @@ bool player_isrunning( void )
   if (kill(player_pid,0)==0)
     return true;
   else
+    return false;
+}
+
+bool player_restarted( void )
+{
+  if (player_newsong) {
+    player_newsong = false;
+    return true;
+  } else
     return false;
 }

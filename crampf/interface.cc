@@ -7,6 +7,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <termios.h>
+#include <fcntl.h>
 #include <string>
 #include <map>
 #include "interface.hh"
@@ -25,6 +26,9 @@ Interface::Interface( void )
   if (tcsetattr(1,TCSANOW,&t)==-1) {
     perror("tcsetattr");
   }
+  if (fcntl(1,F_SETFL, O_NONBLOCK)==-1) {
+    perror("fcntl");
+  }
   mainloop();
 }
 
@@ -38,15 +42,19 @@ Interface::~Interface()
 
 Interface::mainloop()
 {
-  showstatus();
   player_init();
   player_play();
   try {
     char c;
     while (1) {
+      if (player_restarted()) {
+        showstatus();
+      }
+      usleep(100);
       c = fgetc(stdin); 
-      if (opts->keys[c]!=NULL)
+      if (opts->keys[c]!=NULL) 
         (this->*(opts->keys[c]))();
+      c = '\0'; 
     } 
   } catch (string s) {
     printf("%s\n",(const char*)s.c_str());
@@ -103,7 +111,6 @@ Interface::next( void )
 {
   ++(*plist);
   player_play();
-  showstatus();
 }
 
 void
@@ -111,7 +118,6 @@ Interface::prev( void )
 {
   --(*plist);
   player_play();
-  showstatus();
 }
 
 void
@@ -211,12 +217,15 @@ Interface::vol_dn( void )
 
 Interface::changevol(int vol)
 {
-  char cmd[] = "aumix -s    ";
+  printf("volume changing is broken :-(\n");
+  return -1;
+  char cmd[] = "aumix -s     ";
   if (vol<0 || vol>100)
     return -1;
   cmd[9]=48+vol%1000/100;
   cmd[10]=48+vol%100/10;
   cmd[11]=48+vol%10;
+  printf("exec: `%s'\n",cmd);
   if (system(cmd)==-1)
     perror("aumix");
 }
