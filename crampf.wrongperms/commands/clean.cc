@@ -9,26 +9,30 @@
 void
 Clean::doit( const std::string &s )
 {
-  std::stack<Playlist::iterator> stck;
-  for (Playlist::iterator it = plist->begin();
-      it != plist->end(); it++) 
-      if( player->supportedFormat( it->filename() ) == 0.0 )
-	  stck.push( it );
-  while (!stck.empty()) {
-    plist->erase(stck.top());
-    stck.pop();
-  }
+      std::stack<Playlist::iterator> stck;
+      int newpos = plist->pos();
+      for( int i=0; i<plist->size(); i++ )
+	  if( player->supportedFormat( (*plist)[i].filename() ) == 0.0 ){
+	      if( i < plist->pos() )
+		  newpos--;
+	      stck.push( plist->Iterator( i ) );
+	  }
+      while (!stck.empty()) {
+	  plist->erase(stck.top());
+	  stck.pop();
+      }
+      plist->jump( newpos );
 }
 
 void
 Clean::help( const std::string &s ) const
 {
-  output->printf("format: clean\n");
-  output->printf("description: removes unsupported entries in playlist\n");
+      output->printf("format: clean\n");
+      output->printf("description: removes unsupported entries in playlist\n");
 }
 
 void
 Clean::description() const
 {
-  output->printf("removes unsupported entries in playlist\n");
+      output->printf("removes unsupported entries in playlist\n");
 }
