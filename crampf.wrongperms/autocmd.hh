@@ -1,5 +1,5 @@
 //
-// $Id: autocmd.hh,v 1.4 2002/06/04 12:04:15 logic Exp $
+// $Id: autocmd.hh,v 1.5 2002/07/02 15:58:00 logic Exp $
 //
 
 #ifndef __AUTOCMD_HH
@@ -27,10 +27,10 @@ class AutocmdHandler {
 	  { return description; }
 	void trigger() const
 	  {
-	    printdebug("AutocmdHandler::trigger\n");
+	    printdebug("AutocmdHandler::trigger - %s\n", name.c_str() );
 	    for( list<AutoCB>::const_iterator it = cbs.begin();
 		  it != cbs.end(); it++ ){
-		printdebug( "delivering event...\n" );
+		printdebug( "delivering event... %s\n", name.c_str() );
 	      (*it)( name );
 	    }
 	  }

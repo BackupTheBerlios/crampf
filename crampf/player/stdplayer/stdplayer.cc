@@ -35,7 +35,7 @@ StdPlayer::~StdPlayer()
 void
 StdPlayer::play()
 {
-  printdebug( "starting player\n" );
+  printdebug( "%s\n", "starting player" );
   stop();
   if (first_track_damaged) {
     --(*plist);
@@ -100,7 +100,7 @@ StdPlayer::play()
 void
 StdPlayer::stop()
 {
-  printdebug( "stopping player\n" );
+  printdebug( "%s\n", "stopping player" );
   sigignore = true;
   //printf("stopping pid %d\n",pid);
   if (isRunning()) {
@@ -123,7 +123,7 @@ StdPlayer::stop()
   int f;
   while ((f=open("/dev/dsp",O_WRONLY))==-1);
   close(f);
-  printdebug("waiting one second...\n");
+  printdebug( "%s\n", "waiting one second...");
   sleep(1); /* just to be sure... */
   sigignore = false;
 }
@@ -182,7 +182,7 @@ StdPlayer::signalHandler( int status )
   if (sigignore)
     return;
   try {
-    printdebug("sending 'next' event\n"); //++(*plist);
+    printdebug( "%s\n", "sending 'next' event"); //++(*plist);
     autocmdmap["next"].trigger();
   } catch( string error )
   {
