@@ -9,6 +9,9 @@
 #include <sys/stat.h>
 #include <unistd.h>
 #include "playlist.hh"
+#include "config.hh"
+
+extern struct options* opts;
 
 Playlist::Playlist()
 {
@@ -81,18 +84,28 @@ Track Playlist::operator++()
 {
   if (current+1<this->size()) {
     current++;
-    return (*this)[current];
-  } else
+  } else  if (opts->loop>0) {
+    opts->loop--;
+    current=0;
+  } else if (opts->loop==-1) {
+    current=0;
+  } else if (opts->loop==0) 
     throw string("end of playlist");
+  return (*this)[current];
 }
 
 Track Playlist::operator--()
 {
   if (current>0) {
     current--;
-    return (*this)[current];
-  } else
+  } else  if (opts->loop>0) {
+    opts->loop++;
+    current=this->size()-1;
+  } else if (opts->loop==-1) {
+    current=this->size()-1;
+  } else if (opts->loop==0) 
     throw string("end of playlist");
+  return (*this)[current];
 }
     
 Track Playlist::operator*()

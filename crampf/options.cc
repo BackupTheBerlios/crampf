@@ -46,7 +46,7 @@ Config::initdefaults(struct options* op)
   op->keytable["vol8"]="8";
   op->keytable["vol9"]="9";
   op->keytable["vol_up"]="+";
-  op->keytable["vol_down"]="-";
+  op->keytable["vol_dn"]="-";
 }
 
 Config::setupkeys()
@@ -163,9 +163,9 @@ Config::setupkeys()
       }
       continue;
     }
-    if (it->first=="vol_down") {
+    if (it->first=="vol_dn") {
       for (int i=0; i<it->second.size(); i++) {
-        opts.keys[it->second[i]]=&Interface::vol_down;
+        opts.keys[it->second[i]]=&Interface::vol_dn;
       }
       continue;
     }
