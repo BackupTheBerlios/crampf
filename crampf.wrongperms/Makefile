@@ -25,7 +25,7 @@ tar:
 	./make_tarball.sh
 
 clean:
-	@rm -f $(PROGNAME) $(OBJS) $(OBJS:.o=.d)
+	@rm -f $(PROGNAME) $(OBJS) $(OBJS:.o=.d) $(PROGNAME)-*.tar.gz
 	$(MAKE) clean -C commands 
 
 commands/commands.hh:
