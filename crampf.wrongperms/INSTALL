@@ -1,9 +1,9 @@
 REQUIREMENTS
 	To use crampf you need some of the following programs installed:
-	    * a simple console based mp3-player (e.g. amp, mpg123, etc. defaults
-		to amp)
-	    * mp3info (I use version 0.2.16) for id3-tags, time and bitrate
-	    	information
+	    * a simple console based mp3-player (e.g. madplay, alsaplayer,
+	      mpg321, amp, mpg123, etc.)
+	    * libid3tag (which is part of mad) or mp3info (I use version
+	      0.2.16) for id3-tags, time and bitrate information
 	    * aumix to change sound volume
 
 	You also need some libraries and headerfiles installed, but this is
@@ -17,14 +17,10 @@ INSTALL
 	$make
 	$make install
 
-	To use another mp3-player instead of amp write the following
-	two lines in your $HOME/.crampfrc:
-		playercmd 	<mp3-playername>
-		playercmd_args 	<mp3-player parameters>
-
-	For use with mpg123 for example use the following:
-		playercmd	mpg123
-		playercmd_args	-q
+	To use a mp3-player which is not supported out of the box write the
+	following line to your $HOME/.crampfrc:
+		addplayer 	<playercmd> <player args> /\.mp3$/ 1.0
+	(for details see :help addplayer)
 
 	If you have any trouble during compilation please send a detailed
 	bugreport containing the configure and the make output to Kevin Loos
