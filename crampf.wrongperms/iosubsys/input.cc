@@ -20,35 +20,13 @@ Input::~Input()
 std::string
 Input::read()
 {
-      fd_set set;
-      FD_ZERO( &set );
-      int maxfd = -1, fd;
-      for( iterator it = begin(); it != end(); it++ ){
-	  fd = (*it)->getFD();
-	  FD_SET( fd, &set );
-	  if( fd > maxfd )
-	      maxfd = fd;
-      }
-      if( maxfd == -1 )
-	  return std::string( "" );
-      struct timeval tv = { 0, 0 };
-      select( maxfd+1, &set, NULL, NULL, &tv );
-      for( iterator it = begin(); it != end(); it++ )
-	  if( FD_ISSET( (*it)->getFD(), &set ) )
-	      return (*it)->read(); /* FIXME this is not fair queuing !!! */
-      return std::string( "" );
-#if 0
       std::string res;
-      if( rrp == end() ) /* FIXME what happens with the iterator
-			    if an element was removed after rpp == end() ? */
-	  rrp = begin();
-      while( rrp != end() ){
-	  res = (*rrp++)->read();
-	  if( res != "" )
+      for( iterator it = begin(); it != end(); it++ ){
+	  res = (*it)->read();
+	  if( res != "" ) /* FIXME this is NOT fair queuing !!! */
 	      return res;
       }
-      return std::string("");
-#endif
+      return std::string( "" );
 }
 
 TermInput::TermInput()
@@ -71,12 +49,9 @@ TermInput::read()
       int c = fgetc(stdin); 
       switch( c ){
 	  case EOF: return std::string(""); /* no key pressed */
-	  case ':': /* TBD read full command string and execute */
-		    return readline( ":" );
-		    break;
+	  case ':': return readline( ":" ).insert( 0, ":" );
 	  case '/':
-	  case '?': /* TBD read search string and search */
-		    {
+	  case '?': {
 		      char xx[2] = { c, '\0' };
 		      std::string cmd = readline( xx );
 		      if (c=='/')
@@ -85,7 +60,6 @@ TermInput::read()
 			  cmd="rsearch " + cmd;
 		      return cmd;
 		    }
-		  break;
 	  default:
 		  std::string res("x");
 		  res[0] = c;
@@ -115,12 +89,6 @@ TermInput::restoreTerm() const
   }
 }
 
-
-int
-TermInput::getFD() const
-{
-      return 0;
-}
 
 std::string
 TermInput::readline( const char *prompt )

@@ -1,5 +1,5 @@
 /*
- * $Id: input.hh,v 1.1 2003/01/05 12:39:29 logic Exp $
+ * $Id: input.hh,v 1.2 2003/01/09 09:15:41 logic Exp $
  */
 
 #ifndef __INPUT_HH
@@ -18,7 +18,6 @@
 class InputObject : public std::queue<std::string> {
     public:
 	virtual std::string read() = 0;
-	virtual int getFD() const = 0;
 	virtual ~InputObject() {}
 };
 
@@ -43,7 +42,6 @@ class TermInput : public InputObject {
     public:
 	TermInput();
 	std::string read();
-	int getFD() const;
 	~TermInput();
 };
 

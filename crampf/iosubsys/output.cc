@@ -1,5 +1,6 @@
 #include "output.hh"
 #include "../config.h"
+#include <stdarg.h>
 
 int
 Output::printf( char *fmt, ... )

@@ -13,8 +13,8 @@ void mainloop()
 	  try {
 	      if( cmd.size() == 1 )
 		  opts->cmdmap[cmd[0]];
-	      else if( cmd.size() > 1 )
-		  opts->cmdmap[cmd];
+	      else if( cmd.size() > 1 && cmd[0] == ':' )
+		  opts->cmdmap[cmd.substr(1)];
 	  } catch (std::string error) {
 	      if (error=="quit" || error=="exit")
 		  throw error;
