@@ -1,13 +1,17 @@
 FEATURE WISHLIST
 	* Change the hardcoded defaults to something more useful
-	* Change options-struct into a map with fixed keys, initialized by the
-	      constructor
+	* remove global objects ('extern bla...')
 	* Simple and flexible way to execute external commands
+	    * make aumix, mpg3info, amp better configurable
+	    * let configure check at least for amp, mpg123, mpg321, freeamp, alsaplayer
+	      and choose a default that exists on the target system
 	* More generic player interface (e.g. alsaplayer + alsaremotectrl)
 	    * create abstract player interface
 	    * probably using plugins?
 	* id3v2tag support (e.g. libid3, id3v2)
 	* create a real exception class (get rid of throwing strings)
+	* Change options-struct into a map with fixed keys, initialized by the
+	      constructor
 	* Support for MODs, S3Ms, etc.
 	* Integrate slang scripting language
 

@@ -1,5 +1,5 @@
 //
-// $Id: acconfig.h,v 1.1 2002/06/04 21:22:29 logic Exp $
+// $Id: acconfig.h,v 1.2 2002/06/09 23:07:00 logic Exp $
 //
 
 #ifndef __ACCONFIG_H
@@ -7,6 +7,8 @@
 
 #undef DEBUG
 #define NODEBUG
+
+#undef LIBID3TAG
 
 #endif
 

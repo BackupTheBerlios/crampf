@@ -8,6 +8,7 @@
 #include "command.hh"
 #include "commands.hh"
 #include "debug.hh"
+#include "config.h"
 
 unsigned int CommandMap::objcnt = 0;
 
@@ -19,7 +20,9 @@ CommandMap::CommandMap()
       cmdmap["titlewidth"]     = new TitleWidth     ();
       cmdmap["loop"]           = new Loop           ();
       cmdmap["volume"]         = new Vol            ();
+#if defined(LIBID3TAG) || defined(HAS_MP3INFO)
       cmdmap["info"]           = new Info           ();
+#endif
       cmdmap["autocommand"]    = new Autocommand    ();
       cmdmap["quit"]           = new Quit           ();
       cmdmap["status"]         = new Status         ();
