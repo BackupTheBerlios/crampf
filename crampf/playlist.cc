@@ -55,6 +55,20 @@ Playlist::addPath(vector<string> path)
 }
 
 void
+Playlist::savePlaylist( string filename )
+{
+  FILE* fp=fopen(filename.c_str(),"w");
+  if (fp==NULL) {
+    perror("save Playlist");
+    return;
+  }
+  for (Playlist::iterator it = this->begin();
+      it != this->end(); it++)
+    it->write(fp);
+  fclose(fp);
+}
+
+void
 Playlist::addPlaylist(string filename)
 {
   FILE* fp=fopen(filename.c_str(),"r");
@@ -62,12 +76,26 @@ Playlist::addPlaylist(string filename)
     perror("read Playlist");
     return;
   }
+  try {
+    while (1)
+      addTrack(fp);
+  } catch (string error) {
+    printf("addPlaylist: %s\n",error.c_str());
+  }
+  fclose(fp);
+  /*
+  FILE* fp=fopen(filename.c_str(),"r");
+  if (fp==NULL) {
+    perror("read Playlist");
+    return;
+  }
   char cbuf[MAXFILENAMELENGTH];
   while (fgets(cbuf,MAXFILENAMELENGTH,fp)) {
-    cbuf[strlen(cbuf)-1]='\0'; /* strip ending '\n' */
+    cbuf[strlen(cbuf)-1]='\0'; // strip ending '\n' 
     addTrack("",cbuf);
   }
   fclose(fp);
+  */
 }
 
 void
@@ -185,5 +213,11 @@ Playlist::addTrack( string path, string filename )
     filename.erase(filename.end()-4,filename.end());
     (*this)[this->size()-1].title(filename);
   }
+}
+
+void 
+Playlist::addTrack( FILE* fp )
+{
+  this->push_back(Track(fp));
 }
 

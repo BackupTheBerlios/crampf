@@ -39,9 +39,11 @@
 #include "shuffle.hh"
 #include "source.hh"
 #include "status.hh"
+#include "test.hh"
 #include "titlewidth.hh"
 #include "version.hh"
 #include "vol.hh"
+#include "write.hh"
                                                                   
 #endif                                                            
                                                                   

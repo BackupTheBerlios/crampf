@@ -1,5 +1,5 @@
 //
-// $Id: playlist.hh,v 1.8 2000/03/18 04:38:09 logic Exp $
+// $Id: playlist.hh,v 1.9 2000/03/19 12:44:20 logic Exp $
 //
 
 #ifndef playlist
@@ -8,6 +8,7 @@
 #include "version_info.hh"
 #include <string>
 #include <vector>
+#include <stdio.h>
 #include "track.hh"
 
 #define MAXFILENAMELENGTH 1024
@@ -20,6 +21,7 @@ class Playlist : public vector<Track>
     void addPath(vector<string> path);
     void addPlaylist(string filename);
     void addPlaylist(vector<string> filenames);
+    void savePlaylist( string filename );
     void positiveFilter(string flt);
     void positiveFilter(vector<string> flt);
     void negativeFilter(string flt);
@@ -32,6 +34,7 @@ class Playlist : public vector<Track>
     void jump(int newpos);
   private:
     void addTrack(string path, string filename);
+    void addTrack(FILE* fp);
     int current;
 };
 
