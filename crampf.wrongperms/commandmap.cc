@@ -24,8 +24,8 @@ CommandMap::CommandMap()
   cmdmap["shuffle"]        = new Shuffle        ();
   cmdmap["version"]        = new Version        ();
   cmdmap["loadplaylist"]   = new LoadPlaylist   ();
-  cmdmap["pfliter"]        = new PFilter        ();
-  cmdmap["nfliter"]        = new NFilter        ();
+  cmdmap["pfilter"]        = new PFilter        ();
+  cmdmap["nfilter"]        = new NFilter        ();
   cmdmap["generatetitles"] = new GenerateTitles ();
   cmdmap["filename"]       = new Filename       ();
   cmdmap["define"]         = new Define         (this);
