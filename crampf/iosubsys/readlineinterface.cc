@@ -41,7 +41,7 @@ ReadLineInterface::input()
     try {
       opts->cmdmap[cmd];
     } catch (string error) {
-      if (error=="quit")
+      if (error=="quit" || error=="exit")
         throw error;
       printf("error: `%s'\n",error.c_str());
     }
@@ -64,7 +64,7 @@ ReadLineInterface::input( string s )
       cmd="rsearch " + cmd;
     opts->cmdmap[cmd];
   } catch (string error) {
-    if (error=="quit")
+    if (error=="quit" || error=="exit")
       throw error;
     printf("error: `%s'\n",error.c_str());
   }
