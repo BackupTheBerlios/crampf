@@ -29,6 +29,5 @@ int main(int argc, char** argv)
   } catch (string m) {
     printf("%s\n",(const char*)m.c_str());
   }
-  printf("tschoess\n");
   return 0;
 }

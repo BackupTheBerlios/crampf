@@ -28,6 +28,7 @@ Config::initdefaults(struct options* op)
   op->generateTitles=true;
   op->soundcard='w';
   op->loop=0;
+  op->titlewidth=0;
   op->playercmd="amp";
   op->playercmd_args="-q";
   op->keytable["help"]="h";
@@ -385,6 +386,10 @@ Config::readconfig(string filename)
         } else {
           opts.loop = atoi(value);
         }
+        continue;
+      }
+      if (opt == "titlewidth") {
+        opts.titlewidth = atoi(value);
         continue;
       }
       if (strncmp(option,"key_",4)==0) {
