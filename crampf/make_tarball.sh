@@ -6,6 +6,6 @@ PROGNAME=`basename $(pwd)`
 DISTNAME=$PROGNAME-$VERSION
 ln -s . $DISTNAME
 find $DISTNAME/ -name '*.hh' -or -name '*.cc' -or -name 'Makefile' \
-        -or -name 'README.*' -or -name '*.sh' \
+        -or -name 'README*' -or -name '*.sh' \
         | xargs tar -hvczf $DISTNAME.tar.gz 
 rm -f $DISTNAME

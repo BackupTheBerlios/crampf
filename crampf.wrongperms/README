@@ -4,3 +4,13 @@
 
 INSTALL
   Inlcudefiles for readline required (packages readline-devel on Red Hat 6.x)
+
+DOCUMENTATION
+
+         ``Real programmers don't document. if it was hard 
+           to write, it should be hard to understand.''
+
+                                            unknown Author
+
+
+  Online help avaible by entering :help during playback ;-)
