@@ -8,7 +8,7 @@ ifneq ($(MAKECMDGOALS),clean)
 include $(OBJS:.o=.d)
 endif
 ifeq ($(MAKECMDGOALS),debug)
-CXXFLAGS+=-g
+CXXFLAGS+=-g -DDEBUG
 else
 CXXFLAGS+=-DDIST -O2
 LDFLAGS=-s 

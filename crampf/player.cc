@@ -12,6 +12,7 @@
 #include <unistd.h>
 #include "player.hh"
 #include "playlist.hh"
+#include "debug.hh"
 
 int player_pid = 999999; /* hope this pid never exists ;] */
 bool player_sigignore;
@@ -55,18 +56,18 @@ void player_play( void )
     }
   } 
   if (player_pid==0) {
-    /*
-    printf("execlp(\"%s\",\"%s\",\"%s\")\n",opts->playercmd.c_str(),
-        opts->playercmd_args.c_str(), 
-        (*(*plist)).filename().c_str());
-    */
-    execlp((const char*)opts->playercmd.c_str(),
-        (const char*)opts->playercmd.c_str(),
-        (const char*)opts->playercmd_args.c_str(), 
-        (const char*)(*(*plist)).filename().c_str(),
-        NULL);
-    perror("execlp");
-    exit(2);
+      /*
+	 printf("execlp(\"%s\",\"%s\",\"%s\")\n",opts->playercmd.c_str(),
+	 opts->playercmd_args.c_str(), 
+	 (*(*plist)).filename().c_str());
+       */
+      execlp((const char*)opts->playercmd.c_str(),
+	      (const char*)opts->playercmd.c_str(),
+	      (const char*)opts->playercmd_args.c_str(), 
+	      (const char*)(*(*plist)).filename().c_str(),
+	      NULL);
+      perror("execlp");
+      exit(2);
   } 
   player_newsong = true;
 }
@@ -77,9 +78,10 @@ void player_stop( void )
   //printf("stopping pid %d\n",player_pid);
   if (player_isrunning()) {
     kill(player_pid,SIGTERM);
-    sleep(1);
+    sleep(1); /* wait for sigchld */
     while (player_isrunning()) {
       kill(player_pid,SIGKILL);
+      sleep(1); /* wait for sigchld */
     }
     int pid = fork();
     if (pid==0) {
@@ -93,23 +95,25 @@ void player_stop( void )
   int f;
   while ((f=open("/dev/dsp",O_WRONLY))==-1);
   close(f);
+  printdebug("waiting one second...\n");
+  sleep(1); /* just to be sure... */
   player_sigignore = false;
 }
 
 void player_playerstop(int status)
 {
-  //printf("got signaled: signal=%d\n",status);
+  printdebug("got signaled: signal=%d\n",status);
   if (status!=SIGCHLD) 
     return;
   status = waitpid(-1,NULL,WNOHANG);
-  //printf("got signaled by %d\n",status);
+  printdebug("got signaled by %d\n",status);
   if (status==0)
     return;  /* no dead child */
   if (status != player_pid)
     return;
   if (player_sigignore)
     return;
-  //printf("starting next song\n");
+  printdebug("starting next song\n");
   try {
     ++(*plist);
   } catch( string error )
