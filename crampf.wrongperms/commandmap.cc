@@ -53,6 +53,7 @@ CommandMap::CommandMap()
       cmdmap["exit"]   	       = new Exit	    ();
       cmdmap["sort"]   	       = new Sort	    ();
       cmdmap["list"]   	       = new ListTracks	    ();
+      cmdmap["echo"]   	       = new Echo	    ();
   }
 }
 

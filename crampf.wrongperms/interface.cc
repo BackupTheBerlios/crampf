@@ -30,7 +30,6 @@ Interface::Interface()
     perror("tcgetattr");
   }
   singlekeyTerm();
-  mainloop();
 }
   
 Interface::~Interface()
