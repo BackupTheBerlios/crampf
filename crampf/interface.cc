@@ -50,7 +50,6 @@ Interface::mainloop()
 	      usleep(100);
 	      c = fgetc(stdin); 
 	      if (c!=EOF) {
-		  printf("read key `%c'(%d)\n",c,c);
 		  switch (c) {
 		      case ':':
 			  use_rli();

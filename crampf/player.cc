@@ -69,7 +69,6 @@ void player_play( void )
     perror("execlp");
     exit(2);
   } 
-  printf("playing new song!\n");
   player_newsong = true;
 }
 
@@ -147,7 +146,6 @@ bool player_restarted( void )
 {
   if (player_newsong) {
     player_newsong = false;
-    printf("played a new song!\n");
     return true;
   } else
     return false;
