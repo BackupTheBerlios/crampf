@@ -56,17 +56,29 @@ void player_play( void )
     }
   } 
   if (player_pid==0) {
-      /*
-	 printf("execlp(\"%s\",\"%s\",\"%s\")\n",opts->playercmd.c_str(),
-	 opts->playercmd_args.c_str(), 
-	 (*(*plist)).filename().c_str());
-       */
-      execlp((const char*)opts->playercmd.c_str(),
-	      (const char*)opts->playercmd.c_str(),
-	      (const char*)opts->playercmd_args.c_str(), 
-	      (const char*)(*(*plist)).filename().c_str(),
-	      NULL);
-      perror("execlp");
+      vector<string> args;
+      int p=0;
+      for (int i=opts->playercmd_args.find(" ",p); 
+	      i < opts->playercmd_args.length(); 
+	      p=++i, i=opts->playercmd_args.find(" ",p)) 
+	  args.push_back( opts->playercmd_args.substr( p, i-p ) );
+      args.push_back( opts->playercmd_args.substr( p ) );
+      printdebug("using %d args\n",args.size());
+      char *argv[ args.size() + 3 ];
+      argv[0] = (char*)opts->playercmd.c_str();
+      p=1;
+      for (vector<string>::iterator it = args.begin();
+	      it != args.end(); it++)
+	  argv[p++] = (char*)(it->c_str());
+      argv[p++] = (char*)(*(*plist)).filename().c_str();
+      argv[p] = NULL;
+      printdebug("execvp( %s,\n", (const char*)opts->playercmd.c_str());
+      for (int i=0; i<p; i++) {
+	  printdebug("\t%s,\n", argv[i]);
+      }
+      printdebug("\tNULL )\n");
+      execvp( (const char*)opts->playercmd.c_str(), argv );
+      perror("execvp");
       exit(2);
   } 
   player_newsong = true;
