@@ -24,7 +24,7 @@ Autocommand::doit( const std::string &s )
 {
   unsigned int p = s.find(" ");
   if( (signed)p == -1 || s.empty() ){
-      output->printf( "current autocommands:\n" );
+      output->printf( "current autocommands in use:\n" );
       for( std::map<std::string,std::string>::const_iterator it = actionmap.begin();
 	      it != actionmap.end(); it++ )
 	  output->printf( "\t%s\t%s\n", it->first.c_str(), it->second.c_str() );

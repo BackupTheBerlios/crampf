@@ -22,7 +22,7 @@ Define::doit( const std::string &s )
     if (cmap->defmap.count(s))
       showdefine(s);
     else
-      printf("no such macro\n");
+      throw std::string("no such macro");
   } else
       adddef(s);
 }

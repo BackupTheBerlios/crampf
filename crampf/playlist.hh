@@ -1,5 +1,5 @@
 //
-// $Id: playlist.hh,v 1.18 2003/01/05 12:39:24 logic Exp $
+// $Id: playlist.hh,v 1.19 2003/01/11 16:00:41 logic Exp $
 //
 
 #ifndef PLAYLIST_HH
@@ -33,6 +33,7 @@ class Playlist : public std::vector<Track>
     Track operator++();
     Track operator++( int ) { return ++(*this); }
     Track operator--();
+    Track operator--( int ) { return --(*this); }
     Track operator*() const;
     unsigned int pos() const;
     /* position defaults to current track */

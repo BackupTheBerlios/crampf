@@ -223,7 +223,6 @@ Playlist::shuffle()
 Track 
 Playlist::operator++()
 {
-  /* FIXME ++command obsolete? */
   jump(pos()+1);
   return (*this)[current];
 }
@@ -231,7 +230,6 @@ Playlist::operator++()
 Track 
 Playlist::operator--()
 {
-  /* FIXME --command obsolete? */
   jump(pos()+1);
   return (*this)[current];
 }
