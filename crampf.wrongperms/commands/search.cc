@@ -9,6 +9,7 @@
 
 extern Playlist* plist;
 extern struct options* opts;
+extern PlayerInterface *player;
 
 Search::Search( CommandMap* c )
 {
@@ -26,7 +27,7 @@ Search::doit( const string &s )
   try {
     newpos = search(cmap->searchstr);
     plist->jump(newpos);
-    player_play();
+    player->play();
   } catch (string error) {
     printf("search: %s\n",error.c_str());
   }

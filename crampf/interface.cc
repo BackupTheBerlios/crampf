@@ -13,10 +13,12 @@
 #include <string>
 #include <map>
 #include "interface.hh"
-#include "player.hh"
 #include "config.hh"
 #include "config.h"
 #include "readlineinterface.hh"
+#include "player.hh"
+
+extern PlayerInterface *player;
 
 Interface::Interface()
 {
@@ -39,12 +41,11 @@ Interface::~Interface()
 
 void Interface::mainloop()
 {
-      player_init();
-      player_play();
+      player->play();
       try {
 	  char c;
-	  while (!player_finished()) {
-	      if (player_restarted()) {
+	  while (!player->finished()) {
+	      if (player->restarted()) {
 		  opts->cmdmap["status"];
 	      }
 	      usleep(100);
@@ -76,7 +77,7 @@ void Interface::mainloop()
 	  if (error!="quit" && error!="exit")
 	      printf("error: `%s'\n",error.c_str());
 	  if (error!="exit")
-	      player_stop();
+	      player->stop();
       }
 }
 

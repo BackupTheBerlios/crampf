@@ -8,7 +8,8 @@
 #include "../player.hh"
 #include "jump.hh"
 
-extern Playlist* plist;
+extern Playlist *plist;
+extern PlayerInterface *player;
 
 void
 Jump::doit( const string &s )
@@ -28,7 +29,7 @@ Jump::doit( const string &s )
       throw string("quit");
     printf("jump error: %s\n",error.c_str());
   }
-  player_play();
+  player->play();
 }
 
 void

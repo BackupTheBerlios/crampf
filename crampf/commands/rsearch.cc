@@ -10,6 +10,7 @@
 
 extern Playlist* plist;
 extern struct options* opts;
+extern PlayerInterface *player;
 
 RSearch::RSearch( CommandMap* c )
 {
@@ -27,7 +28,7 @@ RSearch::doit( const string &s )
   try {
     newpos = rsearch(cmap->searchstr);
     plist->jump(newpos);
-    player_play();
+    player->play();
   } catch (string error) {
     printf("rsearch: %s\n",error.c_str());
   }

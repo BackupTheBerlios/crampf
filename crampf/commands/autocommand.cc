@@ -53,6 +53,7 @@ Autocommand::evtcb( const string &event )
   }
   printdebug( "autocmdmap: executing command '%s'\n", actionmap[event].c_str() );
   opts->cmdmap[ actionmap[event] ];
+  return true;
 }
 
 void

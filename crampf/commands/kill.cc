@@ -6,13 +6,14 @@
 #include <stdlib.h>
 
 extern Playlist* plist;
+extern PlayerInterface *player;
 
 void
 Kill::doit( const string &s )
 {
   if (s.empty()) {
     plist->erase(&(*plist)[plist->pos()]);
-    player_play();
+    player->play();
   } else {
     int d = atoi(s.c_str());
     if (d>0 && d<plist->size()) 

@@ -3,12 +3,8 @@
  */
 
 #include <stdio.h>
-#include "playlist.hh"
-#include "config.hh"
-#include "player.hh"
 #include "crampf.hh"
 #include "interface.hh"
-#include "autocmd.hh"
 
 int main(int argc, char** argv)
 {
@@ -29,6 +25,7 @@ int main(int argc, char** argv)
 	      fprintf(stderr,"No mp3s found!\n");
 	      exit(2);
 	  }
+	  player = player_init();
 	  Interface iface;
       } catch (string m) {
 	  printf("%s\n",(const char*)m.c_str());
