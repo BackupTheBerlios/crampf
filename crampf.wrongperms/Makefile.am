@@ -15,4 +15,4 @@ crampf_LDADD=commands/libcmds.a util/libutil.a player/stdplayer/libstdplayer.a
 
 dist-hook:
 	@echo updating ChangeLog
-	./cvs2cl.pl
+	./cvs2cl.pl --prune --no-wrap --seperate-header
