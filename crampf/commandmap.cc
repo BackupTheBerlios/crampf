@@ -37,6 +37,7 @@ CommandMap::CommandMap()
   cmdmap["playercmd_args"] = new PlayerCMD_Args ();
   cmdmap["randomorder"]    = new RandomOrder    ();
   cmdmap["write"]          = new Write          ();
+  cmdmap["kill"]           = new Kill           ();
 }
 
 CommandMap::~CommandMap()

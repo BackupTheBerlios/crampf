@@ -64,6 +64,7 @@ Config::getopts(int argc, char** argv)
   int option_index = 0;
   int c;
   struct options cmdopts;
+  cmdopts.readconfig = true;
   bool cmdrandom=false;         // set true if options specified
   bool cmdloop=false;
   bool cmdgenerateTitles=false;
