@@ -70,15 +70,19 @@ Default hotkeys:
 Key:	Command:
 EOF
 
-sed -ne '/^[ 	]*hotkeys\[...*.\] *=.*"/{
+sed -ne '/^[ 	]*hotkeys\[...*.\][ 	]*=.*"/{
 	    s/.*hotkeys\[.\(..*\).\][^"]*"\([^"]*\)".*/\1	\2/
-	    s/^	/<tab>/
-	    s/^\\t/<tab>/
-	    s/^ /<space>/
-	    s/^/<esc>/
-	    s/^\\e/<esc>/
-	    s/^/<enter>/
-	    s/^\\n/<enter>/
+	    s/^	/tab/
+	    s/^\\t/tab/
+	    s/^ /space/
+	    s/^/esc/
+	    s/^\\e/esc/
+	    s/^/enter/
+	    s/^\\n/enter/
+	    p
+	}
+	/^[ 	]*hotseqs\[escseqs\[...*.\]\][ 	]*=.*"/{
+	    s/.*hotseqs\[escseqs\[.\(..*\).\]\][^"]*"\([^"]*\)".*/\1	\2/
 	    p
 	}' iosubsys/terminal.cc
 
