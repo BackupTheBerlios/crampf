@@ -1,5 +1,5 @@
 //
-// $Id: interface.hh,v 1.20 2002/06/04 12:04:16 logic Exp $
+// $Id: interface.hh,v 1.21 2002/06/10 02:15:02 logic Exp $
 //
 
 #ifndef INTERFACE_HH
@@ -17,7 +17,6 @@ class Interface {
     Interface();
     ~Interface();
     void init();
-    void shutdown();
   private:
     ReadLineInterface rli;
     ReadLineInterface search_rli;
