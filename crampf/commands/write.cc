@@ -15,6 +15,7 @@ Write::doit( string s )
       printf("no filename\n");
       commit = false;
     } else if (commit) {
+      commit = false;
       printf("writing playlist to file `%s'\n",filename.c_str());
       plist->savePlaylist(filename);
     } else {

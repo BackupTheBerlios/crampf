@@ -73,6 +73,6 @@ Define::showdefines()
   printf("--defined-macros--\n");
   for (map<string,vector<string> >::iterator it = cmap->defmap.begin();
       it != cmap->defmap.end(); it++)
-    printf("macros: %s\n",it->first.c_str());
+    printf("\t%s\n",it->first.c_str());
 }
     

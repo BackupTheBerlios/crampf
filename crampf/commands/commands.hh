@@ -22,6 +22,7 @@
 #include "help.hh"
 #include "info.hh"
 #include "jump.hh"
+#include "kill.hh"
 #include "loadnfilter.hh"
 #include "loadpfilter.hh"
 #include "loadplaylist.hh"
