@@ -1,10 +1,11 @@
 //
-// $Id: debug.hh,v 1.3 2002/07/02 15:58:00 logic Exp $
+// $Id: debug.hh,v 1.4 2002/12/28 23:11:51 logic Exp $
 //
 
 #ifndef __DEBUG_HH
 #define __DEBUG_HH __DEBUG_HH
 
+#include <stdio.h>
 #include "config.h"
 
 #ifdef DEBUG

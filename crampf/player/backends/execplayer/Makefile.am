@@ -1,0 +1,3 @@
+noinst_LIBRARIES=libexecplayer.a
+noinst_HEADERS=execplayer.hh
+libexecplayer_a_SOURCES=execplayer.cc

@@ -14,9 +14,10 @@
 #include <map>
 #include "interface.hh"
 #include "config.hh"
+#include "debug.hh"
 #include "config.h"
 #include "readlineinterface.hh"
-#include "player.hh"
+#include "player/player-interface.hh"
 
 extern PlayerInterface *player;
 
@@ -40,7 +41,48 @@ Interface::~Interface()
 
 void Interface::mainloop()
 {
-      player->play();
+      printdebug( "start playing %s\n", (**plist).filename().c_str() );
+      player->play( (**plist).filename() );
+      printdebug( "isPlaying %d\n", player->isPlaying() );
+      try {
+	  char c;
+	  while (player->isPlaying()) {
+	      usleep(100); /* FIXME remove */
+	      c = fgetc(stdin); 
+	      if (c!=EOF) {
+		  switch (c) {
+		      case ':':
+			  use_rli();
+			  break;
+		      case '/':
+		      case '?':
+			  char xx[2];
+			  xx[0]=c;
+			  xx[1]='\0';
+			  use_search_rli(xx);
+			  break;
+		      default:
+			  try {
+			      opts->cmdmap[c];
+			  } catch (std::string error) {
+			      if (error=="quit" || error=="exit")
+				  throw error;
+			      printf("error: `%s'\n",error.c_str());
+			  } 
+		  } 
+	      } 
+	  }
+      } catch (std::string error) {
+	  if (error!="quit" && error!="exit")
+	      printf("error: `%s'\n",error.c_str());
+	  if (error!="exit")
+	      player->stop();
+      }
+}
+#if 0
+void Interface::mainloop()
+{
+      player->play( (**plist).filename() );
       try {
 	  char c;
 	  while (!player->finished()) {
@@ -79,6 +121,7 @@ void Interface::mainloop()
 	      player->stop();
       }
 }
+#endif
 
 void
 Interface::singlekeyTerm() const

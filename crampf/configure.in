@@ -57,18 +57,6 @@ AC_HEADER_STDC
 AC_HEADER_SYS_WAIT
 AC_CHECK_HEADERS(map vector string stack fcntl.h unistd.h getopt.h math.h regex.h signal.h stdio.h sys/stat.h sys/types.h wait.h termios.h time.h readline/readline.h readline/history.h,,exit 1)
 
-AC_CHECK_PROGS(PLAYER_CMD,madplay alsaplayer mpg321 amp mpg123,None)
-if test "${PLAYER_CMD}" != "None" ; then
-    AC_DEFINE_UNQUOTED(PLAYER_CMD,"${PLAYER_CMD}")
-    if "${PLAYER_CMD}" = "mpg123" ; then
-	AC_DEFINE(PLAYER_CMD_ARGS,"-q")
-    else
-	AC_DEFINE(PLAYER_CMD_ARGS,"")
-    fi
-else
-    AC_MSG_RESULT( [No supported mp3 player found!] )
-    exit 1
-fi
 AC_CHECK_PROGS(MIXER_CMD,aumix,None)
 if test "${MIXER_CMD}" != "None" ; then
     AC_DEFINE_UNQUOTED(MIXER_CMD,"${MIXER_CMD}")
@@ -94,10 +82,21 @@ dnl Checks for library functions.
 AC_TYPE_SIGNAL
 AC_CHECK_FUNCS(regcomp strerror readline)
 
-AC_OUTPUT(util/Makefile Makefile commands/Makefile cb/Makefile player/Makefile player/stdplayer/Makefile, echo timestamp > stamp-h)
+AC_OUTPUT(util/Makefile Makefile commands/Makefile cb/Makefile player/Makefile player/backends/Makefile player/backends/execplayer/Makefile, echo timestamp > stamp-h)
 
 AC_MSG_RESULT( [
 ] )
+
+type madplay >/dev/null 2>&1 ||
+    type alsaplayer >/dev/null 2>&1 ||
+    type mpg321 >/dev/null 2>&1 ||
+    type amp >/dev/null 2>&1 ||
+    type mpg123 >/dev/null 2>&1 ||
+    cat <<-EOF
+	Warning: No supported mp3-player found!
+	You have to add support for your favorite player with addplayer command,
+	or install one of the following: madplay, alsaplayer, mpg321, amp, mpg123
+EOF
 
 AC_MSG_RESULT( [MP3-Player      : ${PLAYER_CMD}] )
 AC_MSG_RESULT( [Mixer program   : ${MIXER_CMD}] )

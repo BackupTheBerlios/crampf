@@ -33,7 +33,8 @@ Playlist::addPath( const std::string &path )
     return;
   }
   FILE* fp;
-  std::string findcmd = "find \"" + path + "\" -iname \"*.mp3\" -type f -follow";
+  //std::string findcmd = "find \"" + path + "\" -iname \"*.mp3\" -type f -follow";
+  std::string findcmd = "find \"" + path + "\" -type f -follow";
   fp = popen((const char*)findcmd.c_str(),"r");
   if (fp==NULL) {
     perror((const char*)path.c_str());

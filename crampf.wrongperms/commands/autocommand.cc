@@ -16,7 +16,8 @@ extern struct options* opts;
 
 Autocommand::Autocommand()
 {
-  doit( "next next" );
+  doit( "song_start status" );
+  doit( "song_stop next" );
 }
 
 void

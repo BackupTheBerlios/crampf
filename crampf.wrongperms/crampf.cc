@@ -5,11 +5,13 @@
 #include <stdio.h>
 #include "crampf.hh"
 #include "interface.hh"
+#include "player/player-interface.hh"
 
-int main(int argc, char** argv)
+int main( int argc, char **argv )
 {
       try {
-	  autocmdmap.newEvent( "next", "called before the next track gets played" );
+	  autocmdmap.newEvent( "song_start", "called whenever a new song gets played" );
+	  autocmdmap.newEvent( "song_stop", "called immediately after playback of a song finishes" );
 	  autocmdmap.newEvent( "exit", "called on exit" );
 	  autocmdmap.newEvent( "start", "called after initialization, right before playback starts" );
 	  plist = new Playlist();
@@ -29,7 +31,7 @@ int main(int argc, char** argv)
 	      fprintf(stderr,"No mp3s found!\n");
 	      exit(2);
 	  }
-	  player = player_init();
+	  player = new PlayerInterface();
 	  Interface iface;
 	  autocmdmap["start"].trigger();
 	  iface.mainloop();

@@ -1,6 +1,6 @@
 #include "../playlist.hh"
-#include "../player.hh"
 #include "kill.hh"
+#include "../player/player-interface.hh"
 #include <string>
 #include <stdio.h>
 #include <stdlib.h>
@@ -13,7 +13,7 @@ Kill::doit( const std::string &s )
 {
   if (s.empty()) {
     plist->erase( plist->Iterator() );
-    player->play();
+    player->play( (**plist).filename() );
   } else {
     int d = atoi(s.c_str());
     if (d>0 && d<(signed)plist->size()) 

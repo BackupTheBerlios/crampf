@@ -2,7 +2,7 @@
 #include "../playlist.hh"
 #include "../config.hh"
 #include "../commandmap.hh"
-#include "../player.hh"
+#include "../player/player-interface.hh"
 #include "../util/regex.hh"
 #include "search.hh"
 #include <stdio.h>
@@ -27,7 +27,7 @@ Search::doit( const std::string &s )
   try {
     newpos = search(cmap->searchstr);
     plist->jump(newpos);
-    player->play();
+    player->play( (**plist).filename() );
   } catch (std::string error) {
     printf("search: %s\n",error.c_str());
   }

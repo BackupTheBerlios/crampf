@@ -5,7 +5,6 @@
 #include <stdlib.h>
 #include <string>
 #include "../playlist.hh"
-#include "../player.hh"
 #include "listtracks.hh"
 #include "../debug.hh"
 

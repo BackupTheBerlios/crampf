@@ -1,8 +1,8 @@
 #include <string>
 #include "../playlist.hh"
 #include "../config.hh"
-#include "../player.hh"
 #include "../commandmap.hh"
+#include "../player/player-interface.hh"
 #include "rsearch.hh"
 #include "search.hh"
 #include <stdio.h>
@@ -28,7 +28,7 @@ RSearch::doit( const std::string &s )
   try {
     newpos = rsearch(cmap->searchstr);
     plist->jump(newpos);
-    player->play();
+    player->play( (**plist).filename() );
   } catch (std::string error) {
     printf("rsearch: %s\n",error.c_str());
   }

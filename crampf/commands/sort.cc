@@ -1,5 +1,4 @@
 #include "../playlist.hh"
-#include "../player.hh"
 #include "sort.hh"
 #include <string>
 #include <stdio.h>

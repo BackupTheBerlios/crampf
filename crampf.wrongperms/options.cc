@@ -30,8 +30,6 @@ void Config::initdefaults(struct options* op)
   op->casesensivity=true;
   op->regexp=0;
   op->titlewidth=0;
-  op->playercmd=PLAYER_CMD;
-  op->playercmd_args=PLAYER_CMD_ARGS;
   try {
     op->cmdmap["map h map"];
     op->cmdmap["define next=jump +1"];
@@ -79,8 +77,6 @@ void Config::getopts(int argc, char** argv)
       {"loop"                , 2, 0, 'l'},
       {"negative-filter"     , 1, 0, 'f'},
       {"positive-filter"     , 1, 0, 'F'},
-      {"player"              , 1, 0, 'P'},
-      {"player-args"         , 1, 0, 'a'},
       {"config-file"         , 1, 0, 'c'},
       {"ignore-config"       , 0, 0, 'i'},
       {"generate-titles"     , 0, 0, 'g'},
@@ -119,12 +115,6 @@ void Config::getopts(int argc, char** argv)
       case 'F':
         cmdopts.positiveFilterFiles.push_back(optarg);
         break;
-      case 'P':
-        cmdopts.playercmd = optarg;
-        break;
-      case 'a':
-        cmdopts.playercmd_args = atoi(optarg);
-        break;
       case 'c':
         cmdopts.configfile = optarg;
         cmdopts.readconfig = true;
@@ -153,8 +143,6 @@ void Config::getopts(int argc, char** argv)
         printf("[ -l | --loop [times]                 ]\n");
         printf("[ -f | --negative-filter <filterfile> ]\n");
         printf("[ -F | --positive-filter <filterfile> ]\n");
-        printf("[ -P | --player <playercmd>           ]\n");
-        printf("[ -a | --player-args <player-args>    ]\n");
         printf("[ -c | --config-file <configfile>     ]\n");
         printf("[ -i | --ignore-config                ]\n");
         printf("[ -g | --generate-titles              ]\n");
@@ -210,10 +198,6 @@ void Config::getopts(int argc, char** argv)
   for (std::vector<std::string>::const_iterator it = cmdopts.playlistfiles.begin();
       it != cmdopts.playlistfiles.end(); it++)
     opts.playlistfiles.push_back(*it);
-  if (cmdopts.playercmd!="") 
-    opts.playercmd=cmdopts.playercmd;
-  if (cmdopts.playercmd_args!="") 
-    opts.playercmd_args=cmdopts.playercmd_args;
   if (cmdloop) 
     opts.loop=cmdopts.loop;
   if (cmdrandom)

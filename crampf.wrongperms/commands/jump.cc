@@ -5,7 +5,7 @@
 #include <stdlib.h>
 #include <string>
 #include "../playlist.hh"
-#include "../player.hh"
+#include "../player/player-interface.hh"
 #include "jump.hh"
 
 extern Playlist *plist;
@@ -29,7 +29,7 @@ Jump::doit( const std::string &s )
       throw std::string("quit");
     printf("jump error: %s\n",error.c_str());
   }
-  player->play();
+  player->play( (**plist).filename() );
 }
 
 void

@@ -1,3 +1,0 @@
-noinst_LIBRARIES=libstdplayer.a
-noinst_HEADERS=stdplayer.hh
-libstdplayer_a_SOURCES=stdplayer.cc
