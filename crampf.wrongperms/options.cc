@@ -185,14 +185,14 @@ Config::getopts(int argc, char** argv)
     if (!cmdopts.configfile.empty()) {
       try {
         readconfig(cmdopts.configfile)==-1;
-      } catch (char* e) {
-        fprintf(stderr,"config-error: %s\n", e);
+      } catch (string error) {
+        fprintf(stderr,"config-error: %s\n", error.c_str());
       }
     } else { // using default
       try {
         readconfig("~/.crampfrc");
-      } catch (char* e) {
-       // fprintf(stderr,"config-error: %s\n", e);
+      } catch (string error) {
+        fprintf(stderr,"config-error: %s\n", error.c_str());
       }
     }
   }
