@@ -32,11 +32,13 @@ void Config::initdefaults(struct Options* op)
     op->cmdmap["map h map"];
     op->cmdmap["define next=jump +1"];
     op->cmdmap["define prev=jump -1"];
-    op->cmdmap["map n next"];
-    op->cmdmap["map p prev"];
+    op->cmdmap["map n search"];
+    op->cmdmap["map N search"];
     op->cmdmap["map i info"];
     op->cmdmap["map q quit"];
+    op->cmdmap["map x exit"];
     op->cmdmap["map s status"];
+    op->cmdmap["map v volume"];
     op->cmdmap["map + vol +5"];
     op->cmdmap["map - vol -5"];
     op->cmdmap["map 1 vol 10"];
@@ -50,7 +52,11 @@ void Config::initdefaults(struct Options* op)
     op->cmdmap["map 9 vol 90"];
     op->cmdmap["map 0 vol 00"];
     op->cmdmap["map f filename"];
+    op->cmdmap["map p prev"];
+    op->cmdmap["map b prev"];
     op->cmdmap["map \040 next"];
+    op->cmdmap["map \\012 samedir"];
+    op->cmdmap["map \\011 samedir 2"];
   } catch (std::string error) {
     printf("keytable init error: `%s'\n",error.c_str());
   }
