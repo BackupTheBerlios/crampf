@@ -10,81 +10,69 @@
 #include "player.hh"
 #include "playlist.hh"
 
-Player::Player(string cmd, string args,Playlist* pl)
+int player_pid = 999999; /* hope this pid never exists ;] */
+
+void player_init()
 {
-  playercmd = cmd;
-  playercmd_args = args;
-  plist = pl;
-  signal(SIGCHLD,this->signalhandler);
+  signal(SIGCHLD,player_playerstop);
 }
 
-Player::play()
+void player_play( void )
 {
-  printf("start playing $%s$\n",(const char*)(*(*plist)).c_str());
-  stop();
-  pid=fork();
-  if (pid==-1) {
+  player_stop();
+  player_pid=fork();
+  if (player_pid==-1) {
     perror("fork");
-    throw string("cannot fork");
-  }
-  if (pid!=0) {
-    /* child starts playing */
     exit(1);
-    extern char** environ;
-    if (execle((const char*)playercmd.c_str(), (const char*)playercmd_args.c_str(), (const char*)(*(*plist)).c_str(), environ)==-1) {
-      printf("wir sinds nur\n");
-      perror("exec");
-      printf("%s\n",(const char*)playercmd.c_str());
-      printf("%s\n",(const char*)playercmd_args.c_str());
-      printf("%s\n", (const char*)(*(*plist)).c_str());
-      exit(2);
+  }
+  if (player_pid!=0) {
+    printf("execlp(%s, %s, %s)\n",(const char*)opts->playercmd.c_str(), 
+          (const char*)opts->playercmd_args.c_str(), 
+          (const char*)(*(*plist)).c_str());
+    execlp((const char*)opts->playercmd.c_str(), 
+        (const char*)opts->playercmd_args.c_str(), 
+        (const char*)(*(*plist)).c_str());
+    perror("execlp");
+    exit(2);
+  }
+}
+
+void player_stop( void )
+{
+  if (player_isrunning()) {
+    kill(SIGTERM,player_pid);
+    sleep(1);
+    while (player_isrunning()) {
+      kill(SIGKILL,player_pid);
     }
-  } else {
-    printf("DAD!\n");
-    while (1)
-      ;
   }
 }
 
-Player::pause()
+void player_playerstop(int status)
 {
-  if (kill(0,pid)==0)
-    kill(SIGSTOP,pid);
-}
-
-Player::cont()
-{
-  if (kill(0,pid)==0)
-    kill(SIGCONT,pid);
-}
-
-Player::stop()
-{
-  if (kill(0,pid)==0) {
-    kill(SIGTERM,pid);
-  }
-  while (kill(0,pid)==0) {
-    /* player still running, shoot him */
-    kill(SIGKILL,pid);
-  }
-}
-
-Player::prev()
-{
-  --(*plist);
-  play();
-}
-
-Player::next()
-{
-  ++(*plist);
-  play();
-}
-
-void
-Player::signalhandler(int status)
-{
-  printf("HAHAHAHAHA\n");
+  printf("got signaled: %d\n",status);
   wait(NULL);
+  printf("starting next song\n");
+  ++(*plist);
+  player_play();
 }
 
+void player_pause()
+{
+  if (player_isrunning())
+    kill(SIGSTOP,player_pid);
+}
+
+void player_continue()
+{
+  if (player_isrunning())
+    kill(SIGCONT,player_pid);
+}
+
+bool player_isrunning( void )
+{
+  if (kill(0,player_pid)==0)
+    return true;
+  else
+    return false;
+}

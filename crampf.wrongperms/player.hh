@@ -1,5 +1,5 @@
 //
-// $Id: player.hh,v 1.1 2000/03/09 01:33:18 logic Exp $
+// $Id: player.hh,v 1.2 2000/03/09 21:55:24 logic Exp $
 //
 
 #ifndef player
@@ -7,24 +7,17 @@
 
 #include <string>
 #include "playlist.hh"
+#include "config.hh"
 
-class Player {
-  public:
-    Player(string playercmd, string playercmd_args,Playlist* pl);
-    play();
-    stop();
-    pause();
-    cont();
-    next();
-    prev();
-  private:
-    int pid;
-    Playlist* plist;
-    void signalhandler(int status);
-    string playercmd;
-    string playercmd_args;
-    string filename; /* mp3 filename used by playerthread */
-};
+extern Playlist* plist;
+extern struct options* opts;
+
+void player_init( void );
+void player_play( void );
+void player_stop( void );
+void player_playerstop( int status );
+void player_pause( void );
+void player_continue( void );
+bool player_isrunning( void );
 
 #endif
-
