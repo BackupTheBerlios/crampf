@@ -22,7 +22,11 @@ int main(int argc, char** argv)
       it != plist->end(); it++)
     printf("%s\n",(const char*)it->filename().c_str());
   */
-  Interface iface;
+  try {
+    Interface iface;
+  } catch (string m) {
+    printf("%s\n",(const char*)m.c_str());
+  }
   printf("tschoess\n");
   return 0;
 }

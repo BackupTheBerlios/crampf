@@ -10,13 +10,13 @@
 
 Interface::Interface( void )
 {
+  userexit = false;
   printf("WELCOME TO THE CRAMPF!\n");
   struct termios t;
   tcgetattr(1,&terminal_settings);
   t = terminal_settings;
   t.c_lflag&=~(ICANON|ECHO);
   tcsetattr(1,TCSANOW,&t);
-  showstatus();
   mainloop();
 }
 
@@ -29,16 +29,25 @@ Interface::~Interface()
 Interface::mainloop()
 {
   char c;
-  do {
+  while (!userexit) {
     showstatus();
     c = fgetc(stdin); 
-    if (opts->keys["next"].find(c)!=-1)
-      ++(*plist);
-    else if (opts->keys["prev"].find(c)!=-1)
-      --(*plist);
-    else if (opts->keys["help"].find(c)!=-1)
-      printf("\nHELP\n");
-  } while (opts->keys["quit"].find(c)==-1);
+    printf("%x, %s, %d\n",opts->keys[c],opts->keys[c],opts->keys[c]);
+    if (opts->keys[c]!=NULL)
+      (this->*(opts->keys[c]))();
+  } 
+}
+
+void
+Interface::help( void )
+{
+  printf("crampf v0.0 -- help\n");
+}
+
+void
+Interface::quit( void )
+{
+  userexit = true;
 }
 
 Interface::showstatus()

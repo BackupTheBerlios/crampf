@@ -8,6 +8,7 @@
 #include <string>
 #include <vector>
 #include "config.hh"
+#include "interface.hh"
 
 Config::Config(int argc, char** argv)
 {
@@ -25,10 +26,8 @@ Config::initdefaults(struct options* op)
   op->loop=0;
   op->playercmd="amp";
   op->playercmd_args="-q";
-  op->keys["quit"]="q";
-  op->keys["next"]="n +";
-  op->keys["prev"]="p-";
-  op->keys["help"]="h";
+  op->keys['h']=&Interface::help;
+  op->keys['q']=&Interface::quit;
 }
 
 Config::getopts(int argc, char** argv)
