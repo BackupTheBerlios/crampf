@@ -18,7 +18,7 @@ Vol::doit( string s )
 {
   int value;
   if (s.empty()) {
-    printf("volume: %d\n",opts->volume);
+    printf("volume: %d%%\n",opts->volume);
   } else if (s[0]=='+') {
     sscanf(s.c_str(),"+%d",&value);
     opts->volume+=value;

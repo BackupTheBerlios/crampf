@@ -14,7 +14,9 @@
 #include "../commandmap.hh"                                       
                                                                   
 #include "addpath.hh"
+#include "calldef.hh"
 #include "commands.hh"
+#include "define.hh"
 #include "filename.hh"
 #include "generatetitles.hh"
 #include "help.hh"

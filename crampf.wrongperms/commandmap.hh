@@ -8,6 +8,7 @@
 #include "version_info.hh"
 #include <string>
 #include <map>
+#include <vector>
 #include <stdio.h>
 #include "command.hh"
 
@@ -21,8 +22,10 @@ class CommandMap {
     void operator[](char key);
     map<string, Command*> cmdmap;
     map<char, string> keymap;
+    map< string , vector<string> > defmap;
   private:
     Command* findFirst( string c );
+    string findFirstDef( string c );
     string arg0( string s );
     string args( string s );
 };

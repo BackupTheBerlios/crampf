@@ -30,6 +30,8 @@ CommandMap::CommandMap()
   cmdmap["nfliter"]        = new NFilter        ();
   cmdmap["generatetitles"] = new GenerateTitles ();
   cmdmap["filename"]       = new Filename       ();
+  cmdmap["define"]         = new Define         (this);
+  cmdmap["calldef"]        = new CallDef        (this);
 }
 
 CommandMap::~CommandMap()
@@ -46,7 +48,15 @@ CommandMap::operator[](string cmd)
   string p = args(cmd);
   if (cmdmap.count(c))
     cmdmap[c]->doit(p);
+  else if (defmap.count(c))
+    cmdmap["calldef"]->doit(cmd);
   else {
+    try {
+      string macro = findFirstDef(c);
+      cmdmap["calldef"]->doit(macro + " " + p);
+      return;
+    } catch (string error) {
+    }
     Command* action = findFirst(c);
     if (action!=NULL) {
       action->doit(p);
@@ -54,6 +64,16 @@ CommandMap::operator[](string cmd)
     } else
       throw string("bad command");
   }
+}
+
+string
+CommandMap::findFirstDef( string c )
+{
+  for (map<string, vector<string> >::iterator it = defmap.begin();
+      it != defmap.end(); it++)
+    if (it->first.find(c)==0) 
+      return it->first;
+  throw string("bad command");
 }
 
 Command*
