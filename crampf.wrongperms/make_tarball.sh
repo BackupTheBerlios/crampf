@@ -8,6 +8,12 @@ cvs -d /data/cvsroot co crampf
 cd crampf
 autoconf
 
+ed version_info.hh <<EOF
+/^#if 0/s/0/1/
+w
+q
+EOF
+
 VERSION=`sed -e '/^#define VERSION/{s/[^\"]*\"//;s/".*//;p;};d;' version_info.hh`
 PROGNAME=`basename $(pwd)`
 DISTNAME=$PROGNAME-$VERSION
