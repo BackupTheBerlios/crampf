@@ -53,6 +53,30 @@ Playlist::addPath(vector<string> path)
     addPath(*it);
 }
 
+void
+Playlist::addPlaylist(string filename)
+{
+  FILE* fp=fopen(filename.c_str(),"r");
+  if (fp==NULL) {
+    perror("read Playlist");
+    return;
+  }
+  char cbuf[MAXFILENAMELENGTH];
+  while (fgets(cbuf,MAXFILENAMELENGTH,fp)) {
+    cbuf[strlen(cbuf)-1]='\0'; /* strip ending '\n' */
+    addTrack("",cbuf);
+  }
+  fclose(fp);
+}
+
+void
+Playlist::addPlaylist(vector<string> filenames)
+{
+  for (vector<string>::iterator it = filenames.begin();
+      it != filenames.end(); it++)
+    addPlaylist(*it);
+}
+
 void 
 Playlist::positiveFilter(string flt)
 {
@@ -157,3 +181,4 @@ Playlist::addTrack( string path, string filename )
     (*this)[this->size()-1].title(filename);
   }
 }
+

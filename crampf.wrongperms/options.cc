@@ -348,6 +348,9 @@ Config::getopts(int argc, char** argv)
   for (vector<string>::iterator it = cmdopts.positiveFilterFiles.begin();
       it != cmdopts.positiveFilterFiles.end(); it++)
     opts.positiveFilterFiles.push_back(*it);
+  for (vector<string>::iterator it = cmdopts.playlistfiles.begin();
+      it != cmdopts.playlistfiles.end(); it++)
+    opts.playlistfiles.push_back(*it);
   if (cmdopts.playercmd!="") 
     opts.playercmd=cmdopts.playercmd;
   if (cmdopts.playercmd_args!="") 

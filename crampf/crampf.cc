@@ -15,6 +15,7 @@ int main(int argc, char** argv)
   opts=cfg.returnopts();
   plist = new Playlist();
   plist->addPath(opts->mp3SearchPaths);
+  plist->addPlaylist(opts->playlistfiles);
   plist->positiveFilter(opts->positiveFilter);
   plist->negativeFilter(opts->negativeFilter);
   if (opts->randomOrder) {

@@ -1,5 +1,5 @@
 //
-// $Id: playlist.hh,v 1.6 2000/03/11 22:48:02 logic Exp $
+// $Id: playlist.hh,v 1.7 2000/03/15 08:25:32 logic Exp $
 //
 
 #ifndef playlist
@@ -17,6 +17,8 @@ class Playlist : public vector<Track>
     Playlist();
     void addPath(string path);
     void addPath(vector<string> path);
+    void addPlaylist(string filename);
+    void addPlaylist(vector<string> filenames);
     void positiveFilter(string flt);
     void positiveFilter(vector<string> flt);
     void negativeFilter(string flt);
