@@ -2,10 +2,8 @@
  * This Class provides the ex-like interface
  */
 
-#ifndef readlineinterface
-#define readlineinterface readlineinterface
-#include "version_info.hh"
-#include "version_info.hh"
+#ifndef READLINEINTERFACE
+#define READLINEINTERFACE READLINEINTERFACE
 
 class ReadLineInterface {
   public:

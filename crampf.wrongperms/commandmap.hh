@@ -2,10 +2,9 @@
 // CommandoMap -- maps Functionsnames/Hotkeys -> Functions
 //
 
-#ifndef commandmap
-#define commandmap
+#ifndef COMMANDMAP
+#define COMMANDMAP COMMANDMAP
 
-#include "version_info.hh"
 #include <string>
 #include <map>
 #include <vector>

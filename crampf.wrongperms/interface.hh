@@ -1,11 +1,10 @@
 //
-// $Id: interface.hh,v 1.16 2000/03/19 07:17:23 logic Exp $
+// $Id: interface.hh,v 1.17 2000/07/16 23:10:19 logic Exp $
 //
 
-#ifndef interface
-#define interface
+#ifndef INTERFACE
+#define INTERFACE INTERFACE
 
-#include "version_info.hh"
 #include <termios.h>
 #include "playlist.hh"
 #include "readlineinterface.hh"

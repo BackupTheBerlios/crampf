@@ -1,11 +1,10 @@
 //
-// $Id: player.hh,v 1.5 2000/05/14 20:11:41 logic Exp $
+// $Id: player.hh,v 1.6 2000/07/16 23:10:19 logic Exp $
 //
 
-#ifndef player
-#define player
+#ifndef PLAYER
+#define PLAYER PLAYER
 
-#include "version_info.hh"
 #include <string>
 #include "playlist.hh"
 #include "config.hh"

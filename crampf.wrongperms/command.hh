@@ -2,10 +2,9 @@
 // all commands are derived from this base class
 //
 
-#ifndef command
-#define command
+#ifndef COMMAND
+#define COMMAND COMMAND
 
-#include "version_info.hh"
 #include <string>
 #include <stdio.h>
 

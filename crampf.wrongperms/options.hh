@@ -1,11 +1,10 @@
 //
-// $Id: options.hh,v 1.14 2000/07/03 02:02:29 logic Exp $
+// $Id: options.hh,v 1.15 2000/07/16 23:10:19 logic Exp $
 //
 
-#ifndef config
-#define config
+#ifndef CONFIG
+#define CONFIG CONFIG
 
-#include "version_info.hh"
 #include <string>
 #include <vector>
 #include <map>

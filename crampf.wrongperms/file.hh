@@ -1,9 +1,9 @@
 //
-// $Id: file.hh,v 1.2 2000/03/19 09:00:23 logic Exp $
+// $Id: file.hh,v 1.3 2000/07/16 23:10:19 logic Exp $
 //
 
-#ifndef file
-#define file file
+#ifndef FILE
+#define FILE FILE
 
 #include <stdio.h>
 #include <string>

@@ -1,11 +1,10 @@
 //
-// $Id: playlist.hh,v 1.9 2000/03/19 12:44:20 logic Exp $
+// $Id: playlist.hh,v 1.10 2000/07/16 23:10:19 logic Exp $
 //
 
-#ifndef playlist
-#define playlist
+#ifndef PLAYLIST
+#define PLAYLIST PLAYLIST
 
-#include "version_info.hh"
 #include <string>
 #include <vector>
 #include <stdio.h>

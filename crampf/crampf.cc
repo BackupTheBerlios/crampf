@@ -2,7 +2,6 @@
  * crampf -- Crampf Random Audio Mp3 Player Frontend
  */
 
-#include "version_info.hh"
 #include <stdio.h>
 #include "playlist.hh"
 #include "config.hh"

@@ -2,7 +2,6 @@
  * CommandMap -- funcname -> function
  */
 
-#include "version_info.hh"
 #include <string>
 #include <map>
 #include "commandmap.hh"

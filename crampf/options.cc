@@ -147,7 +147,7 @@ Config::getopts(int argc, char** argv)
         cmdtitlewidth = true;
         break;
       case 'h':
-        printf("    crampf %s %s\n", RELEASENAME, VERSION);
+        printf("    crampf %s %s\n", RELEASENAME, VERSION_INFO);
         printf("---------------------------------------\n");
         printf("[ -p | --playlist <playlist>          ]\n");
         printf("[ -r | --random                       ]\n");
@@ -166,7 +166,7 @@ Config::getopts(int argc, char** argv)
         printf("[ -v | --version                      ]\n");
         exit(0);
       case 'v':
-        printf("crampf %s %s\n", RELEASENAME, VERSION);
+        printf("crampf %s %s\n", RELEASENAME, VERSION_INFO);
         exit(0);
       case '?':
         // missing parameter (getopts generates the output)
