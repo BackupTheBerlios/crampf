@@ -1,4 +1,3 @@
-#include "../version_info.hh"
 #include "regex.hh"
 #include <string>
 #include <regex.h>

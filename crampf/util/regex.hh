@@ -1,11 +1,10 @@
 //
-// $Id: regex.hh,v 1.1 2000/07/08 17:57:53 logic Exp $
+// $Id: regex.hh,v 1.2 2000/07/16 23:01:43 logic Exp $
 //
 
-#ifndef regex
-#define regex regex
+#ifndef REGEX
+#define REGEX REGEX
 
-#include "../version_info.hh"
 #include <string>
 #include <regex.h>
 #define REGEXP_MAXERRLEN	255
