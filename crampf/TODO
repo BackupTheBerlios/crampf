@@ -30,3 +30,4 @@ KNOWN BUGS
 	* When loop is set to infinitive and the playlist (or the playercommand)
 	      is invalid the program hangs in an endless loop (don't know how to
 	      handle this probably).
+	* doesn't compile with gcc 2.95.3 (but works with egcs 2.91.66)
