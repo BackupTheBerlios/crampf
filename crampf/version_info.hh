@@ -1,10 +1,10 @@
 //
-// $Id: version_info.hh,v 1.6 2000/03/19 07:18:46 logic Exp $
+// $Id: version_info.hh,v 1.7 2000/03/19 09:00:57 logic Exp $
 //
 
 #ifndef VERSION
 
-#define VERSION         "0.05a"
+#define VERSION         "0.06a"
 
 #ifdef DIST
 #define RELEASENAME     "alpha testrelease"
