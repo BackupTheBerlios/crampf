@@ -19,6 +19,9 @@ libcmds_a_SOURCES=addpath.cc autocommand.cc calldef.cc case.cc		\
 		  source.cc status.cc titlewidth.cc unify.cc		\
 		  version.cc vol.cc write.cc
 
+noinst_SCRIPTS=commands.sh
+EXTRA_DIST=commands.sh
+BUILT_SOURCES=commands.hh
 
 commands.hh:	commands.sh
 	./commands.sh

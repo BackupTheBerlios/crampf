@@ -1,6 +1,6 @@
 bin_PROGRAMS=crampf
 
-SUBDIRS=commands util
+SUBDIRS=commands util cb
 
 noinst_HEADERS=autocmd.hh command.hh commandmap.hh commands.hh	\
     	       config.h config.hh crampf.hh debug.hh file.hh	\

@@ -1,5 +1,5 @@
 REQUIREMENTS
-	To use crampf you some of the following programs installed:
+	To use crampf you need some of the following programs installed:
 	    * a simple console based mp3-player (e.g. amp, mpg123, etc. defaults
 		to amp)
 	    * mp3info (I use version 0.2.16) for id3-tags, time and bitrate
