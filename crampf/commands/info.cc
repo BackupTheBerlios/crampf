@@ -10,6 +10,7 @@
 #include "../playlist.hh"
 #include "info.hh"
 #include "../config.h"
+#include <malloc.h>
 
 #ifdef LIBID3TAG
 #include "id3tag.h"
@@ -38,35 +39,40 @@ const char* get_frame_description( struct id3_frame *frame )
 void show_frame( struct id3_frame *frame )
 {
       if( !frame ) return;
-      int i,a;
-      char descr[512], buf[8192];
-      id3_latin1_t *chr;
+      int i,a,f=0;
+#define MAX_CONTENT 8192
+      char descr[512], content[MAX_CONTENT];
+      id3_latin1_t *frptr[8192];
       id3_length_t l;
       /* snprintf( descr, 512, "%4s %-12s:", frame->id, get_frame_description( frame ) ); */
       snprintf( descr, 512, "%-9s:", get_frame_description( frame ) );
       for( i=0; i<frame->nfields; i++ ){
 	  switch( frame->fields[i].type ){
 	      case ID3_FIELD_TYPE_STRING:
-		  chr = id3_ucs4_latin1duplicate( id3_field_getstring( frame->fields+i ) );
-		  if( chr && chr[0] ) printf( "%s %s\n", descr, chr );
+		  frptr[f] = id3_ucs4_latin1duplicate( id3_field_getstring( frame->fields+i ) );
+		  if( frptr[f] && frptr[f][0] )
+		      snprintf( content, MAX_CONTENT, "%s", frptr[f++] );
 		  break;
 	      case ID3_FIELD_TYPE_STRINGFULL:
-		  chr = id3_ucs4_latin1duplicate( id3_field_getfullstring( frame->fields+i ) );
-		  if( chr && chr[0] ) printf( "%s %s\n", descr, chr );
+		  frptr[f] = id3_ucs4_latin1duplicate( id3_field_getfullstring( frame->fields+i ) );
+		  if( frptr[f] && frptr[f][0] )
+		      snprintf( content, MAX_CONTENT, "%s", frptr[f++] );
 		  break;
 	      case ID3_FIELD_TYPE_STRINGLIST:
-		  for( a=0; a<id3_field_getnstrings( frame->fields+i); a++ )
-		      sprintf( buf, "%s%s ", buf, id3_ucs4_latin1duplicate(
-				  id3_field_getstrings( frame->fields+i, a ) ) );
-		  if( strlen( buf ) > a ) printf( "%s %s\n", descr, buf );
-		  buf[0] = '\0';
+		  for( a=0; a<id3_field_getnstrings( frame->fields+i); a++ ){
+		      frptr[f] = id3_ucs4_latin1duplicate( id3_field_getstrings( \
+				  frame->fields+i, a ) );
+		      if( frptr[f] && frptr[f][0] )
+			  snprintf( content, MAX_CONTENT-strlen(content),
+				  "%s%s ", content, frptr[f++] );
+		  }
 		  break;
 	      case ID3_FIELD_TYPE_INT8:
 	      case ID3_FIELD_TYPE_INT16:
 	      case ID3_FIELD_TYPE_INT24:
 	      case ID3_FIELD_TYPE_INT32:
 		  a = id3_field_getint( frame->fields+i );
-		  if( a != -1 ) printf( "%s %d\n", descr, a );
+		  if( a != -1 ) snprintf( content, MAX_CONTENT, "%d", a );
 		  break;
 	      case ID3_FIELD_TYPE_LANGUAGE:
 	      case ID3_FIELD_TYPE_FRAMEID:
@@ -80,6 +86,19 @@ void show_frame( struct id3_frame *frame )
 	      default: /* printf( "unknown tag type %d", frame->fields[i].type ) */ ;
 	  }
 	  // printf( "field type: %d\n", frame->fields[i].type );
+	  /* FIXME id3_ucs4_t != (id3_ucs4_t) id3_latin1_t;
+	  if( strncmp( ID3_FRAME_GENRE, frame->id, 4 ) == 0 ){
+	      id3_ucs4_t buf[8192];
+	      for(a=0;i<strlen(content);i++)
+		  buf[i] = (id3_latin1_t)(content[i]+127);
+	      frptr[f] = id3_ucs4_latin1duplicate( id3_genre_name( buf ) );
+	      if( frptr[f] && frptr[f][0] )
+		  snprintf( content, MAX_CONTENT, "%s", frptr[f++] );
+	  }
+	  */
+	  if( strlen( content ) > a ) printf( "%s %s\n", descr, content );
+	  while(f-->0)
+	      free(frptr[f]);
       }
 }
 
