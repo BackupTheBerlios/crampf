@@ -106,7 +106,13 @@ void player_playerstop(int status)
   if (player_sigignore)
     return;
   //printf("starting next song\n");
-  ++(*plist);
+  try {
+    ++(*plist);
+  } catch( string error )
+  {
+    printf( "%s\n", error.c_str() );
+    exit( 0 );
+  }
   player_play();
 }
 
