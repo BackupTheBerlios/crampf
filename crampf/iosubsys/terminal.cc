@@ -49,7 +49,7 @@ TermInput::TermInput() : InputObject( "terminal" )
       hotkeys[' '] = std::string( "next" );
       hotkeys['\n'] = std::string( "samedir" );
       hotkeys['\t'] = std::string( "samedir 2" );
-      hotkeys['\e'] = std::string( "quit" );
+      //hotkeys['\e'] = std::string( "quit" );
 }
 
 TermInput::~TermInput()
