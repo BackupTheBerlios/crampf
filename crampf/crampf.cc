@@ -17,6 +17,9 @@ int main(int argc, char** argv)
   plist->addPath(opts->mp3SearchPaths);
   plist->positiveFilter(opts->positiveFilter);
   plist->negativeFilter(opts->negativeFilter);
+  if (opts->randomOrder) {
+    plist->shuffle();
+  }
   /*
   for (Playlist::iterator it = plist->begin();
       it != plist->end(); it++)

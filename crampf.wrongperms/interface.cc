@@ -271,6 +271,6 @@ Interface::detectSoundCard()
 
 Interface::showstatus()
 {
-  printf("[%d/%d] - %s\n",plist->pos()+1,plist->size(),
+  printf("\n[%d/%d] - %s\n",plist->pos()+1,plist->size(),
       (*(*plist)).title().c_str());
 }

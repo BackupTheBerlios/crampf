@@ -6,6 +6,8 @@
 #include <string.h>
 #include <vector>
 #include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
 #include <sys/stat.h>
 #include <unistd.h>
 #include "playlist.hh"
@@ -83,6 +85,18 @@ Playlist::negativeFilter(vector<string> flt)
   for (vector<string>::iterator it = flt.begin();
       it != flt.end(); it++) {
     negativeFilter(*it);
+  }
+}
+
+void
+Playlist::shuffle()
+{
+  srand(time(NULL));
+  for (int i=0; i<this->size(); i++) {
+    Track h = (*this)[i];
+    int x = rand()%this->size();
+    (*this)[i] = (*this)[x];
+    (*this)[x] = h;
   }
 }
 
